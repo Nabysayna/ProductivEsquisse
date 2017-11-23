@@ -1,0 +1,26 @@
+#currentUser {
+    background-color: transparent !important ;
+    border-color: transparent !important;
+    color : #337ab7 !important;
+}
+#currentUser:hover{  
+    border-color: transparent !important;
+    color : orange !important ;
+}
+
+
+#disconnect-btn{
+	background-color: transparent;
+}
+
+#disconnect-btn:hover{
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+#disconnect-btn:active{
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}

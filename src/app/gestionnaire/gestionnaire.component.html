@@ -1,0 +1,73 @@
+<div id="page-wrapper">
+	<div class="row" >
+        <div class="col-sm-12">
+            <h1 class="page-header">Gestionnaire</h1> 
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 3rem;">
+                    <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+						<div class="col-sm-3 col-xs-6"><a class="activeatag active" href="#traitement" data-toggle="tab" ><input type="button" value="Traitement" class="btn btn-primary" /></a></div>
+						<div class="col-sm-3 col-xs-6"><a class="activeatag" href="#recherche" data-toggle="tab"><input type="button" value="Recherche" class="btn btn-primary" /></a></div>
+	          
+	               </div>
+	            
+	</div>
+  <div class="tab-content">
+	<div class="tab-pane" id="recherche">
+	<form class="form-inline">
+		<div class="form-group">
+			<label >numero transaction :</label>
+			<input name="id" [(ngModel)]="id" type="text" class="form-control" />
+		</div>
+		<input type="button" class="btn btn-success" (click)="chercher()" value="chercher" />
+	</form>
+	<table class="table table-condensed table-striped" *ngIf="bool">
+		
+		<tr>
+			<th>service</th>
+			<th>montant</th>
+			<th>annuler</th>
+			<th>editer</th>
+		</tr>
+		<tr>
+			<td>{{service}}</td>
+			<td>{{montant}}</td>
+			<td><input type="button" value="annuler" class="btn btn-danger" /></td>
+			<td><input type="button" value="editer" class="btn btn-success" /></td>
+		</tr>
+	</table>
+   </div>
+  <div class="tab-pane fade in active" id="traitement">
+	<div class="row" >
+        <div class="col-sm-12">
+            <h1 class="page-header">Operation en cour de traitement</h1> 
+        </div>
+    </div>
+	<table class="table">
+  <thead>
+	 <tr>
+      <th scope="col" colspan="2">
+		  <div class="form-group row">
+			<label for="recherchegestionoperation" class="col-sm-2 col-form-label">Recherche</label>
+			<div class="col-sm-8">
+			  <input type="text" class="form-control" id="recherchegestionoperation" name="recherchegestionoperation" placeholder="Recherche" [(ngModel)]="filterQueryGestion"> {{filterQueryGestion}}
+			</div>
+		  </div>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Service</th>
+    </tr>
+   
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listgestionnaireoperation">
+      <th>1</th>
+      <td>{{item.service}}</td>
+    </tr>
+  </tbody>
+</table>
+   </div>
+ </div>
+</div>

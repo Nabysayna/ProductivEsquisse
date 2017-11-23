@@ -1,0 +1,52 @@
+
+<!-- <div class="col-lg-12" >
+                        <div class="panel">
+                        <div class="panel-heading">
+                            CONSULTER LES DEMANDES DE PRÊT
+                        </div>
+                        
+                         <div class="col-sm-6 col-xs-12" >
+                                           >
+                                            
+                    
+                    
+                    </div>
+                    </div>
+                </div>    
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div> -->
+
+
+<div id="page-wrapper">
+    <div class="row" >
+        <div class="col-sm-12">
+            <h4 class="page-header">Les demandes de prêts</h4> 
+               
+	            
+
+            <div class="tab-content">
+
+             	 							<div *ngFor="let demande of consulterpret">
+                                            Un prêt de {{demande.montantdemande}}.FCFA a été demandé.
+                                            </div>
+
+	        </div>
+
+	
+        </div>
+    </div>	
+
+</div>
+
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div> 
+
+
+
+
+
+

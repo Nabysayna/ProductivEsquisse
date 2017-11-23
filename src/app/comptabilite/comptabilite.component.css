@@ -1,0 +1,36 @@
+
+.loader .ball-pulse-rise > div {
+   background-color: #337ab7 !important ;
+}
+
+
+.nav-pills
+{
+    padding-bottom: 30px;
+    margin-left: 200px;
+}
+.tab-content
+{
+
+    border-right: 2px dotted #f8f8f8;
+    
+}
+
+.blockcaisse{
+	border : 1px solid blue ;
+	margin-bottom: 1rem ;
+	padding: 0.5rem ;
+}
+
+.colored-caisse{
+	background-color:#f8f8f8;
+}
+
+.boutonspersonnalisation{
+	margin-bottom: 2rem;
+}
+
+#validcharge{
+	margin-left: 1rem ;
+}
+

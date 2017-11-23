@@ -1,0 +1,94 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Status des réclamations</h1>
+        </div>
+    </div>
+  
+    <div class="row">
+	    <div class="col-xs-12 col-md-12 col-lg-12">
+	        <div class="row">
+	            <div class="col-xs-6">
+	            	<label class="label-control">Recherche:</label>
+	            	<input class="form-control" [(ngModel)]="filterQuery"/>
+	            </div>
+	            <div class="col-xs-2">
+	                <label class="label-control">Nombre de ligne</label>
+	                <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+	                    <option [ngValue]="5">5</option>
+	                    <option [ngValue]="10">10</option>
+	                    <option [ngValue]="25">25</option>
+	                    <option [ngValue]="50">50</option>
+	                </select>
+	            </div>
+	            <div class="col-xs-4">
+	                <div class="row">
+	                    <label class="col-xs-12 label-control">Trier par</label>
+	                </div>
+	                <div class="col-xs-6">
+	                    <div class="row">
+	                        <select class="form-control input-sm" [(ngModel)]="sortBy">
+	                            <option ngValue="datereclamation">Date réclamation</option>
+	                            <option ngValue="pdv">Pdv</option>
+	                            <option ngValue="typeservice">Type de service</option>
+	                            <option [ngValue]="sortByWordLength">Etat</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                <div class="col-xs-6">
+	                    <div class="row">
+	                        <select class="form-control input-sm" [(ngModel)]="sortOrder">
+	                            <option ngValue="asc">Ascendant</option>
+	                            <option ngValue="desc">Descendant</option>
+	                            <option ngValue="badValue">Bad value</option>
+	                        </select>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="panel panel-default table-responsive">
+	            <table class="table table-striped" [mfData]="adminmultipdvReclamation | dataFilterAdminmultipdvStatusReclamation : filterQuery" #mf="mfDataTable"
+	                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+	                <thead>
+	                <tr>
+	                    <th><mfDefaultSorter by="datereclamation">Date de reclamation</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter by="pdv">Pdv</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter by="adresse">Adresse</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter by="telephone">Telephone</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter by="typeservice">Type de service</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter by="reclamation">Message</mfDefaultSorter></th>
+	                    <th><mfDefaultSorter [by]="sortByWordLength">Etat</mfDefaultSorter></th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <tr *ngFor="let item of mf.data">
+	                    <td>{{item.datereclamation.date | date}}</td>
+	                    <td>{{item.pdv}}</td>
+	                    <td>{{getAdress(item.adresse)}}</td>
+	                    <td>{{item.telephone}}</td>
+	                    <td>{{item.typeservice}}</td>
+	                    <td class="text-center">
+	                    	<button type="button" class="btn btn-danger" popover="{{item.reclamation}}" popoverTitle="Réclamation" triggers="focus">
+							  	voir
+							</button>
+	                    </td>
+	                    <td>{{item.etatreclamation==1?'Régle':'En attente..'}}</td>
+	                </tr>
+	                </tbody>
+	                <tfoot>
+	                <tr>
+	                    <td colspan="5">
+	                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50]"></mfBootstrapPaginator>
+	                    </td>
+	                </tr>
+	                </tfoot>
+	            </table>
+	        </div>
+	    </div>
+	</div>
+            
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>

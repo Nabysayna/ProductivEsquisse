@@ -1,0 +1,12 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Status Map Pdv</h1>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="adminmultipdvListmap">
+	    <app-geomap-component [markers]="adminmultipdvListmap" [centermap]="centermap"></app-geomap-component>
+	</div>
+            
+</div>

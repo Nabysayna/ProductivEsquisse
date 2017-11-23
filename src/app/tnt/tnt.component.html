@@ -1,0 +1,488 @@
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            TNT BY EXCAF
+
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" id="tnt-options">
+              <li class="active"><a href="#home-pills" data-toggle="tab" (click)="reinitialiserVariables();verifierNumInputValide = true">Nouvel Abonnement</a></li>
+              <li><a id="elec" href="#profile-pills" data-toggle="tab" (click)="listerAbonnements()">Suivis Abonnements </a></li>
+
+              <li><a href="#vente-decodeur" id="vdec" data-toggle="tab" (click)="reinitialiserVariables()">Vente Décodeur</a></li>
+              <li><a href="#vente-deco-liste" id="vdecolist" data-toggle="tab" (click)="listerVenteDeco()">Suivi Vente Décodeur</a></li>
+
+              <li><a href="#vente-carte" id="vcart" data-toggle="tab" (click)="reinitialiserVariables()">Vente Carte</a></li>
+              <li><a href="#vente-carte-liste" id="vcartlist" data-toggle="tab" (click)="listerVenteCarte()">Suivi Vente Carte</a></li>
+
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade col-sm-6 col-xs-12 in active" id="home-pills">
+                    <div class="row" *ngIf="this.verifierNumInputValide" >
+                        <form name="validVerifierNum" (ngSubmit)="validVerifierNum()" #verifiernum="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                            <label for="verifiernuminput"> Numéro chip, Numéro carte ou Téléphone </label>
+                            <div class="col-md-8">
+                                <input type="number" [(ngModel)]="this.verifierNumInput" name="verifiernuminput" id="verifiernuminput"  class="form-control" placeholder="Numéro du chip ou de la carte" required autofocus>
+                            </div>
+                            <div class="col-md-4">
+                                <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!verifiernum.form.valid">Vérifier</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row" *ngIf="!this.verifierNumInputValide" >
+                        <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                            <h4>NOUVEL ABONNEMENT</h4>
+                        </fieldset>
+                        <form (ngSubmit)="showmodalabonnement()" #nabon="ngForm" autocomplete="on">
+
+                            <label for="noma">Nom client</label>
+                            <input type="text" [(ngModel)]="this.noma" name="noma" id="noma"  class="form-control" placeholder="nom client" required autofocus>
+
+                            <label for="prenoma">Prénom client</label>
+                            <input type="text" [(ngModel)]="this.prenoma" name="prenoma" id="prenoma"  class="form-control" placeholder="prénom client" required >
+
+                            <label for="tela">Téléphone client</label>
+                            <input type="number" [(ngModel)]="this.telNewClient"   name="telNewClient" id="telNewClient" class="form-control" placeholder="téléphone client" required>
+
+                            <label for="nchip">Numéro chip</label>
+                            <input type="number" [(ngModel)]="this.nchipNewClient"   name="nchipNewClient" id="nchipNewClient" class="form-control" placeholder="numéro chip" required>
+
+                            <label for="ncarte">Numéro carte</label>
+                            <input type="number" [(ngModel)]="this.ncarteNewClient"   name="ncarteNewClient" id="ncarteNewClient" class="form-control" placeholder="numéro carte" required>
+
+
+                            <label for="nbm">Nombre de mois</label>
+                            <input type="number" [(ngModel)]="this.nbm"   name="nbm" id="nbm" class="form-control" placeholder="nombre de mois" required>
+
+
+                            <label for="tbouquet">Type de bouquet</label>
+                            <select class="form-control" name="tbouquet" id="tbouquet" [(ngModel)]="this.tbouquet" style="margin-bottom: 2rem;margin-left: 1rem;" required>
+                                <option>Maanaa</option>
+                                <option>Boul khool</option>
+                                <option>Maanaa + Boul khool</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-success" [disabled]="!nabon.form.valid">Abonner</button>
+                            <button type="reset" class="btn btn-danger" (click)="this.verifierNumInputValide=true" >Annuler</button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="profile-pills">
+
+                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | datafilter : filtre" #mfabo="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="orderByDate" [(mfSortOrder)]="sortDateOrder" style="width: 100%;">
+                                <thead>
+
+                                    <tr>
+                                        <th colspan="5" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                      <th><mfDefaultSorter by="date_abonnement">Date Abonnement</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="n_chip">N_Chip</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="n_carte">N_Carte</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="duree">Durée</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="id_typeabonnement">Type Bouquet</mfDefaultSorter></th>
+                                      <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+<!--                                       <th><mfDefaultSorter by="etat">Etat</mfDefaultSorter></th> -->
+                                   </tr>
+
+                                </thead>
+                                <tbody *ngIf="this.retourTntWS" >
+                                <tr *ngFor="let abonnement of mfabo.data">
+                                  <td>{{abonnement.date_abonnement}}</td>
+                                  <td>{{abonnement.prenom}}</td>
+                                  <td>{{abonnement.nom}}</td>
+                                  <td>{{abonnement.tel}}</td>
+                                  <td>{{abonnement.n_chip}}</td>
+                                  <td>{{abonnement.n_carte}}</td>
+                                  <td>{{abonnement.duree}}</td>
+
+                                  <td *ngIf="abonnement.id_typeabonnement==1">Maanaa</td>
+                                  <td *ngIf="abonnement.id_typeabonnement==2">Boul Khool</td>
+                                  <td *ngIf="abonnement.id_typeabonnement==3">Maanaa + Boul Khool</td>
+
+                                  <td>{{abonnement.montant}}</td>
+
+<!--                                   <td><p *ngIf="abonnement.etat==1">En cours...</p> <p *ngIf="abonnement.etat==0">Activé!</p> </td> -->
+
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="vente-decodeur">
+
+                    <fieldset>
+                        <h4>DECODEUR</h4>
+                    </fieldset>
+                    <form autocomplete="on">
+
+                      <div class="form-row">
+                        <div class="form-group col-sm-6">
+                          <label for="nomNewClientDeco" class="col-form-label">Nom du client</label>
+                          <input type="text" name="nomNewClientDeco" id="nomNewClientDeco" [(ngModel)]="this.nomNewClient"  class="form-control" placeholder="nom client" required autofocus>
+                        </div>
+                        <div class="form-group col-sm-6">
+                          <label for="prenomNewClientDeco" class="col-form-label">Prénom du client</label>
+                          <input type="text" name="prenomNewClientDeco" id="prenomNewClientDeco" [(ngModel)]="this.prenomNewClient"  class="form-control" placeholder="prénom client" required >
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-sm-6">
+                          <label for="telNewClientDeco" class="col-form-label">Téléphone du client</label>
+                          <input type="number" name="telNewClient" id="telNewClientDeco" [(ngModel)]="this.telNewClient" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                        <div class="form-group col-sm-6">
+                          <label for="regionNewClientDeco" class="col-form-label">Région du client</label>
+                          <input type="text" name="regionNewClient" id="regionNewClientDeco" [(ngModel)]="this.regionNewClient" class="form-control" placeholder="Région du client" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <label for="adresseNewClientDeco" class="col-sm-2 col-form-label">Adresse du client</label>
+                        <div class="col-sm-10">
+                          <textarea name="adresseNewClientDeco" style="margin-bottom: 2rem" id="adresseNewClientDeco" [(ngModel)]="this.adresseNewClient" class="form-control" placeholder="Adresse client" required rows="2"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-sm-4">
+                          <label for="cniNewClientDeco" class="col-form-label">Numéro CNI du client</label>
+                          <input type="text" name="cniNewClientDeco" id="cniNewClientDeco" [(ngModel)]="this.cniNewClient" class="form-control" placeholder="Numéro CNI" required>
+                        </div>
+                        <div class="form-group col-sm-4">
+                          <label for="nchipNewClientDeco" class="col-form-label">Numéro Chip du client</label>
+                          <input type="text" name="nchipNewClientDeco" id="nchipNewClientDeco" [(ngModel)]="this.nchipNewClient" class="form-control" placeholder="Numèro carte" required>
+                        </div>
+                        <div class="form-group col-sm-4">
+                          <label for="ncarteNewClientDeco" class="col-form-label">Numéro Carte du client</label>
+                          <input type="text" name="ncarteNewClientDeco" id="ncarteNewClientDeco" [(ngModel)]="this.ncarteNewClient" class="form-control" placeholder="Numèro carte" required>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <label for="ncarteNewClientDeco" class="col-form-label">Type</label>
+                        <select type="text" name="tbouquetNewClient" [(ngModel)]="this.tbouquetNewClient" class="form-control" style="margin-bottom: 3rem ; margin-left: 1rem ;" required>
+                          <option>Sans Abonnement</option>
+                          <option>+ 1 Mois</option>
+                          <option>+ 3 Mois</option>
+                        </select>
+                      </div>
+
+
+
+                        <button type="submit" class="btn btn-success" (click)="showmodaldecodeur()">Valider</button>
+<!--                         <button type="reset" class="btn btn-danger" >Annuler</button>
+ -->
+                    </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="vente-carte">
+                  <fieldset><h4>CARTE</h4></fieldset>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6">
+                      <label for="nomNewClient" class="col-form-label">Nom du client</label>
+                      <input type="text" name="nomNewClient" id="nomNewClient" [(ngModel)]="this.nomNewClient"  class="form-control" placeholder="nom client" required autofocus>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="prenomNewClient" class="col-form-label">Prénom du client</label>
+                      <input type="text" name="prenomNewClient" id="prenomNewClient" [(ngModel)]="this.prenomNewClient"  class="form-control" placeholder="prénom client" required >
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6">
+                      <label for="telNewClient" class="col-form-label">Téléphone du client</label>
+                      <input type="number" name="telNewClient" id="telNewClient" [(ngModel)]="this.telNewClient" class="form-control" placeholder="téléphone client" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="regionNewClient" class="col-form-label">Région du client</label>
+                      <input type="text" name="regionNewClient" id="regionNewClient" [(ngModel)]="this.regionNewClient" class="form-control" placeholder="Région client" required>
+                    </div>
+                  </div>
+                  <div class="form-row"  style="margin-top: 2rem">
+                    <div class="form-group col-sm-12">
+                      <label for="adresseNewClient" class="col-form-label">Adresse du client</label>
+                      <input type="text" name="adresseNewClient" id="adresseNewClient" [(ngModel)]="this.adresseNewClient" class="form-control" placeholder="Adresse client" required>
+                    </div>
+                  </div>
+                  <div class="form-row"  style="margin-top: 2rem">
+                    <div class="form-group col-sm-6">
+                      <label for="cniNewClient" class="col-form-label">Numéro CNI du client</label>
+                      <input type="text" name="cniNewClient" id="cniNewClient" [(ngModel)]="this.cniNewClient" class="form-control" placeholder="Numéro CNI" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="ncarteNewClient" class="col-form-label">Numéro Carte du client</label>
+                      <input type="text" name="ncarteNewClient" id="ncarteNewClient" [(ngModel)]="this.ncarteNewClient" class="form-control" placeholder="Numèro carte" required>
+                    </div>
+                  </div>
+                  <div class="row" style="text-align: center">
+                    <button type="submit" class="btn btn-success" (click)="modalcarte.show()">Valider</button>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="vente-deco-liste">
+
+                     <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | decodatafilter : filtreDeco" #mfdec="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtreDeco"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="numerochip">N_Chip</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="numerocarte">N_Carte</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prix">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="typedebouquet">Type Bouquet</mfDefaultSorter></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="this.retourTntWS">
+                                    <tr *ngFor="let decodeur of mfdec.data">
+                                        <td>{{decodeur.prenom}}</td>
+                                        <td>{{decodeur.nom}}</td>
+                                        <td>{{decodeur.tel}}</td>
+                                        <td>{{decodeur.numerochip}}</td>
+                                        <td>{{decodeur.numerocarte}}</td>
+                                        <td>{{decodeur.prix}}</td>
+                                        <td>{{decodeur.typedebouquet}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                     </table>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="vente-carte-liste">
+
+                     <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | carddatafilter : filtreCarte" #mfcart="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtreCarte"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="numerocarte">N_Carte</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prix">Montant</mfDefaultSorter></th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="this.retourTntWS">
+                                    <tr *ngFor="let carte of mfcart.data">
+                                        <td>{{carte.prenom}}</td>
+                                        <td>{{carte.nom}}</td>
+                                        <td>{{carte.tel}}</td>
+                                        <td>{{carte.numerocarte}}</td>
+                                        <td>{{carte.prix}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                     </table>
+                </div>
+
+                <div class="col-sm-6 col-xs-12" *ngIf="erreur" style="padding-top: 7rem ; color: #337ab7">
+                    <h5>Votre requête n'a pas pu être traitée.</h5> <h5 style="color : red">{{errorMessage}}</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- /.panel-body -->
+    </div>
+
+    <!-- /.panel -->
+
+</div>
+<div bsModal #modalabonnement="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modalabonnement.hide();">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Confirmation Détails Abonnement</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Nom client : {{ this.noma}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Prènom client : {{this.prenoma}} </label>
+						 </div>     
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telNewClient}}</label>
+						 </div>
+						 <div class="form-group"> 
+							 <label >Numero chip : {{this.nchipNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numero carte : {{this.ncarteNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label > Nombre de mois : {{this.nbm}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label > Type bouquet : {{this.tbouquet}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label > C.N.I : {{this.cni}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="validnabon()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="modalabonnement.hide();" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modaldecodeur="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modaldecodeur.hide();">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Confirmation vente Décodeur</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Nom client : {{ this.nomNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Prènom client : {{this.prenomNewClient}} </label>
+						 </div>
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label > Adresse client : {{this.adresseNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numero chip : {{this.nchipNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numero carte : {{this.ncarteNewClient}}</label>
+						 </div>
+						 
+						 <div class="form-group">
+							 <label > Type bouquet : {{this.tbouquet}}</label>
+						 </div>
+						 
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="vendreDecodeur()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="modaldecodeur.hide();" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modalcarte="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modalcarte.hide();">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Confirmation vente carte</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Nom client : {{ this.nomNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Prènom client : {{this.prenomNewClient}} </label>
+						 </div>
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label > Adresse client : {{this.adresseNewClient}}</label>
+						 </div>
+						 <div class="form-group"> 
+							 <label >Numero chip : {{this.nchipNewClient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numero carte : {{this.ncarteNewClient}}</label>
+						 </div>
+						 
+						 <div class="form-group">
+							 <label > C.N.I : {{this.cniNewClient}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="vendreCarte()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="modalcarte.hide();" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>

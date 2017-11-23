@@ -1,0 +1,103 @@
+
+body {
+    padding-top: 3rem !important;
+}
+
+.icon-bar{
+    background-color : white !important;
+    width: 100% ;
+}
+
+#page-wrapper{
+    padding-top: 3rem; 
+    margin-top:25px;
+}
+
+#haut {
+   padding-left: 35rem;
+   background-color: #f8f8f8;
+   width: 100%;
+  border-color: #e7e7e7;
+}
+
+#haut li:first-child {
+  /* margin-left: 35rem; */
+}
+
+#haut li {
+   margin-left: 10rem;
+    font-size: larger;
+    text-transform: uppercase;
+
+}
+
+#haut a{
+    min-width: 13rem ;
+    text-align: center ;
+}
+#haut a:hover{
+    background-color: #337ab7 !important ;
+    color: white ;
+}
+
+#gauche {
+    margin-bottom: 30rem;
+
+}
+#gauche li{
+    margin-bottom: 15rem;
+    font-size: larger;
+}
+
+
+
+#wrapper{
+	background-color: white ;
+	height: 100%;
+}
+
+#page-wrapper{
+	height: 100%;
+}
+
+#navbHead{
+	background-color: #f8f8f8 !important ;
+    border-color: #f8f8f8;
+	width : 100%;
+    margin-top: 15px;
+}
+
+
+#side-menu a{
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+#side-menu a:hover{
+    background-color: #e7e7e7;
+    border-color: #f8f8f8;
+}
+
+#leftsidemenu{
+    margin-top: 0 ;
+}
+
+#routeContainDisplayer{
+    margin-top: 3rem ;
+}
+
+@media screen and (max-width:480px) {
+    
+    #haut {
+       margin-left: 0px;
+    }
+    .navbar-header{
+        background-color: #337ab7 ;
+        color : white ;
+    }
+
+    .navbar-header button{
+        margin-right: 4rem ;
+        border : 0px ;
+    }
+}

@@ -1,0 +1,111 @@
+
+body {
+    padding-top: 3rem !important;
+}
+
+.icon-bar{
+    background-color : white !important;
+    width: 100% ;
+}
+
+#page-wrapper{
+    padding-top: 3rem;
+    margin-left: 0px !important;
+}
+
+#haut {
+   padding-left: 35rem;
+   background-color: #f8f8f8;
+   width: 100%;
+  border-color: #e7e7e7;
+}
+
+#haut li:first-child {
+  /* margin-left: 35rem; */
+}
+
+#haut li {
+   margin-left: 10rem;
+    font-size: larger;
+    text-transform: uppercase;
+
+}
+
+#haut a{
+    min-width: 13rem ;
+    text-align: center ;
+}
+#haut a:hover{
+    background-color: #337ab7 !important ;
+    color: white ;
+}
+
+#gauche {
+    margin-bottom: 30rem;
+
+}
+#gauche li{
+    margin-bottom: 15rem;
+    font-size: larger;
+}
+
+#wrapper{
+    background-color: white ;
+    height: 100%;
+}
+
+
+
+#page-wrapper{
+    height: 100%;
+}
+
+#navbHead{
+    background-color: #337ab7 !important ;
+    border-color: #0F70B7;
+    color : white;
+    width : 100%;
+}
+
+#navbHead a{
+    background-color: #337ab7;
+    border-color: #e7e7e7;
+    color : white;
+}
+#navbHead a:hover{  
+    background-color: #fff;
+    border-color: #337ab7;
+    color : #337ab7 !important ;
+}
+
+#side-menu a{
+    background-color: #337ab7;
+    border-color: #e7e7e7;
+    color : white;
+}
+
+#side-menu a:hover{
+    background-color: #fff;
+    border-color: #337ab7;
+    color : #337ab7 !important ;
+}
+
+#leftsidemenu{
+    margin-top: 0 ;
+    height: 70rem;
+/*    background:  url(/assets/bga.png)   ; */
+    background-color: #337ab7 !important; 
+}
+
+#routeContainDisplayer{
+    margin-top: 3rem ;
+}
+
+@media screen and (max-width:640px) {
+ 
+ #leftsidemenu{
+    height:100%;
+ }
+   
+}
+       

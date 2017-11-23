@@ -1,0 +1,141 @@
+<div id="page-wrapper" class="text-center">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">Monitoring Deposit</h1>
+            <div class="panel panel-primary  table-responsive" style="margin-top: 8rem">
+                <div class="panel-heading">
+                    <h3>Bilan Déposit</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row"  *ngIf="monitoringAdminpdvDeposit">
+                        <div class="col-sm-3">
+                            <p><strong>Deposit de base</strong></p>
+                            <p><strong>{{ currencyFormat(monitoringAdminpdvDeposit.depositinitial) }}</strong>FCFA</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p><strong>Etat Déposit</strong></p>
+                            <p><strong>{{ currencyFormat(monitoringAdminpdvDeposit.etatdeposit - monitoringAdminpdvDeposit.commission)}}</strong>FCFA</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p><strong>Commission</strong></p>
+                            <p><strong>{{ currencyFormat(monitoringAdminpdvDeposit.commission) }}</strong>FCFA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary  table-responsive" style="margin-top: 5rem;">
+                <div class="panel-heading">
+                    <h3>Retrait IBAN</h3>
+                </div>
+                <div class="panel-body">
+                    <div *ngIf="ibanExcessif" class="alert">Le Montant que vous demandé est supèrieur au solde de votre deposit. Veuiller revoir la saisie!</div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button class="btn btn-success" (click)="this.selectdemanretrait=true">Demander un retrait</button>
+                        </div>
+                        <div class="col-sm-3" *ngIf="selectdemanretrait">
+                            <input name="montant" type="number" placeholder="Entrez le montant à retirer" [(ngModel)]="montant" style="margin-top: 0 !important" class="form-control" required="" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-success" *ngIf="selectdemanretrait" [disabled]="!montant" (click)="validerdmde()" >Valider</button>
+                        </div>
+
+                        <h2 class="alert" *ngIf="euppna"> Vous ne pouvez retirer un montant supèrieur à votre déposit</h2>
+                        <div class="col-sm-3">
+                            <button class="btn btn-success" (click)="showdepositeModal()">Faire un deposite</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div bsModal #depositeModal="bs-modal"  class="modal fade in" >
+	<div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				  <p class="modal-title">DEPOSIT</p>
+			  </div>
+			  <div class="modal-body container">
+				 <div class="row">
+					 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+						 
+							 <div class="form-group">
+								<label>montant du deposit :</label>
+							    <input type="number" [(ngModel)]="montants" min="0" placeholder="montant" class="form-control" />
+							 </div>
+							 <div class="form-group">
+								 <label>Agent :</label>
+								 <select  [(ngModel)]="agent" class="form-control" (change)="chargerAgent()" >
+									 <option>--choisir un agent--</option>
+									 <option value="naby">naby ndiaye</option>
+									 <option value="maguet">maguette</option>
+									 <option value="ndiago">khady ndiago</option>
+									 <option value="rasta">rasta</option>
+								 </select>	
+							 </div>			
+					  </div>
+					  <div class="col-sm-offset-2 col-lg-3 col-md-3 col-sm-3 col-sm-3">
+						  <img style="width:150px;height:150px" src="assets/tnt.png" alt="photo de l'agent" />
+					  </div> 
+				 </div>
+				  <input type="button" value="valider" (click)="showdechargeModal()" class="btn btn-success" />
+			      <input type="button" value="annuler" class="btn btn-danger"  />
+			  </div>
+			   
+			  <div class="modal-footer">
+				  <input type="button" value="fermer" (click)="hidedepositeModal()" class="btn btn-danger" />
+			  </div>
+			</div>
+    </div>
+</div>
+<!-- modal deposit -->
+<div bsModal #dechargeModal="bs-modal"  class="modal fade in" >
+	<div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				  <div class="row">
+				     <img class="col-lg-3 ol-md-3 col-sm-3 col-xs-3" style="width:100px" src="assets/bbs.png" alt="logo bbs" />
+				     <img class="pull-right col-lg-3 ol-md-3 col-sm-3 col-xs-3" style="width:100px" src="assets/bbs.png" alt="photo de l'agent" />
+				  </div>
+				  <p style="background-color:red" class="modal-title"><b style="position:absolute;left:275px">DECHARGE</b></p><br>
+			  </div>
+			  <div class="modal-body row">
+				  <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10" >
+					  
+						<p>
+							 Nous certifions,<br>
+							 BBS Invest Sarl au capital de 7 000 000 FCFA, dont le siége social est situé aux HLM GRAND MEDINE Villa 159,immatriculé au registre du commerce sous le numero -SN DKR 2014 -NINEA : 004999978,
+							 representé ici par {{agent}} en sa qualite de conseiller commercial(e), déclarons avoir reçu la somme de {{montants}} FCFA, de........... representé par Mme/Mlle/Mr ..............
+							 <br><br>
+							 Ce montant perçu en guise de caution,permet au point de vente d'utiliser les services proposée par la plateforme SENTOOL mise à la diposition par BBS Invest .
+							 <br><br>
+							 en foi de quoi, cette présente décharge à été établie pour servir et valoir ce que de droit .
+							 <br><br>
+							 NB :Merci d'envoyer une copie de cette presente décharge a l'adresse e-mail suivante :bbsinvest@bbstvnet.com pour un rechargement effectif .
+							 <br>
+							  Fait a Dakar le ................... en deux exemplaire.<br>
+							 <span class="row">
+								 <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><b>Le point de Vente </b></span>
+								 <span class="col-lg-2 ol-md-2 col-sm-2 col-xs-2 pull-right"><b>BBS Invest</b></span>
+							 </span>
+						</p>
+						
+						 <input type="button" (click)="validerdeposite()" value="valider" class="btn btn-success form-control" />
+						 <input type="button" value="annuler" class="btn btn-danger form-control"  />
+				  </div>
+				 
+			  </div>
+			  <div class="modal-footer">
+				  <input type="button" value="fermer" (click)="hidedechargeModal()" class="btn btn-danger" />
+			  </div>
+			</div>
+    </div>
+</div>
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>
+
+

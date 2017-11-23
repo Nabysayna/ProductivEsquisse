@@ -1,0 +1,149 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
+    </div>
+    <div class="row" *ngIf="adminpdvDashboardNbreReclVente">
+        <div class="col-sm-4">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminpdvDashboardNbreReclVente.nbreclamations}}</div>
+                            <div>Nouvelles Réclamations!</div>
+                        </div>
+                    </div>
+                </div>
+<!--                 <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left"><a [routerLink]="['/accueiladmpdv', 'statusreclamation']" >Voir Details</a></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+ -->
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">10</div>
+                            <div>Articles vendus en local!</div>
+                        </div>
+                    </div>
+                </div>
+<!--                 <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left"><a [routerLink]="['/accueiladmpdv', 'statuspdv']" >Voir Details</a></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+ -->
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminpdvDashboardNbreReclVente.nbarticlesvendus}}</div>
+                            <div>Articles vendus ecom!</div>
+                        </div>
+                    </div>
+                </div>
+<!--                 <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">Voir Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel panel-heading">
+                    <label class="btn btn-danger" (click)="estcheckPerformance('journee')">La journée</label>&nbsp;
+                    <label class="btn btn-danger" (click)="estcheckPerformance('semaine')" >La semaine</label>&nbsp;
+                    <label class="btn btn-danger" (click)="estcheckPerformance('mois')" >Le mois</label>
+                    <h3>Performances des points de vente {{ typeperformance }}.</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="panel panel-default table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Pdv</th>
+                                            <th>Telephone</th>
+                                            <th>Recette</th>
+                                            <th>Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of adminpdvDashboardPerformancepdv; let i = index ">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{item.fullname}}</td>
+                                            <td>{{item.telephone}}</td>
+                                            <td>{{currencyFormat(item.montanttotal)}}</td>
+                                            <td class="text-center"><button type="button"  (click)="estdetailPerformance(item)" class="btn btn-danger">Détail</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7" *ngIf="detailperformancepdv">
+                            <h3><strong>{{ performancepdv.fullname }}</strong></h3>
+                            <div class="panel panel-default table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Service</th>
+                                            <th>Traitement</th>
+                                            <th>Montant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of detailperformancepdv; let i = index ">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{item.operateur}}</td>
+                                            <td>{{item.traitement}}</td>
+                                            <td>{{currencyFormat(item.montant)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>
+
+
+

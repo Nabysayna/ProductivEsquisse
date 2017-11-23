@@ -1,0 +1,160 @@
+<div class="row">
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            ADMINISTRATEUR COURSIERS
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->  
+            <ul class="nav nav-pills">
+                <li><a id="elec" href="#dispatchDelivering" data-toggle="tab" (click)="chargerCommandesDeliver('dispatchDelivering')">Commandes à récupérer chez fournisseur</a>
+                </li>
+                <li><a href="#dispatchReception" (click)="chargerCommandesRecep('dispatchReception')" data-toggle="tab">Commandes à Livrer</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="dispatchDelivering">
+                         
+                             <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="mergedTabs |filtrezonesupplier : zone |filtresouszonesupplier : souszone" #listCmdswtg="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                               
+                                <thead> 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                        <th colspan="2" style="padding-right: 3rem ;">
+                                        <label style="padding-left: 4rem; margin-right: 5rem;">COURSIER <select class="form-control input-sm" [(ngModel)]="coursier" >
+                                            <option></option>
+                                            <option *ngFor="let coursier of coursiers" [ngValue]="coursier">{{coursier.prenom}} &nbsp;{{coursier.nom}}</option>                                         
+                                            </select>
+                                        </label>
+                                        <button class="btn btn-success" (click)="assignerfourn()">Assigner</button>
+                                        </th>
+                                        <th colspan="2" style="padding-right: 3rem ; text-align: center ;"> 
+                                            <label>Zone <select class="form-control input-sm" [(ngModel)]="zone" >
+                                                <option></option>
+                                                <option *ngFor="let zone of zones">{{zone}}</option>
+                                                </select>
+                                            </label>
+                                            <label>Sous-zone <select class="form-control input-sm" [(ngModel)]="souszone" >
+                                                <option></option>
+                                                <option *ngFor="let souszone of getSousZonesSupplier()">{{souszone}}</option>
+                                                </select>
+                                            </label>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><mfDefaultSorter by="index">#</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="index">Désign. Commande</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Désign. Article</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="dateCommande">Date Commande</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="fullName">Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="address">Adresse Fournisseur</mfDefaultSorter></th>
+                                   </tr>                           
+                                </thead>
+
+                                    <tbody *ngIf="mergedTabs">
+                                        <tr *ngFor="let articlecmd of listCmdswtg.data;  let i = index; ">
+                                        <td><input type="checkbox" #checkbox (change)="checkThisCmdFromSupp(checkbox.checked,articlecmd.cmdid,articlecmd.article.idarticle,articlecmd.article)" ></td>
+                                            <td>{{ "CMD-"+articlecmd.cmdid.toString() }}</td>
+                                            <td>{{ "ART-"+articlecmd.article.idarticle.toString() }}</td>
+                                            <td>{{articlecmd.dateCommande}}</td>
+                                            <td>{{articlecmd.fullName}}</td>
+                                            <td>{{articlecmd.tel}}</td>
+                                            <td>{{articlecmd.article.address}}</td>
+                                        </tr>
+                                    </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                        
+                   
+                </div>
+
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="dispatchReception">  
+
+                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="commandearecup |pipeCommande:filtre |filtrezonepdr : zone |filtresouszonepdr : souszone" #cal="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                               <thead>
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                        <th colspan="2" style="padding-right: 3rem ;">
+                                        <label style="padding-left: 4rem; margin-right: 5rem;">COURSIER <select class="form-control input-sm" type="number" [(ngModel)]="coursier" >
+                                            <option></option>
+                                            <option *ngFor="let coursier of coursiers" [ngValue]="coursier">{{coursier.prenom}} &nbsp;{{coursier.nom}}</option>
+                                            </select>
+                                        </label>
+                                        <button class="btn btn-success" (click)="assignerpdr()">Assigner</button>
+                                        </th>
+                                        <th colspan="2" style="padding-right: 3rem ; text-align: center ;"> 
+                                            <label>Zone <select class="form-control input-sm" [(ngModel)]="zone">
+                                                <option></option>
+                                                <option *ngFor="let zone of zones">{{zone}}</option>
+                                                </select>
+                                            </label>
+                                            <label>Sous-zone <select class="form-control input-sm" [(ngModel)]="souszone">
+                                                <option></option>
+                                                <option *ngFor="let souszone of getSousZonesRecPoint()">{{souszone}}</option>
+                                                </select>
+                                            </label>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th><mfDefaultSorter by="index">#</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="dateCommande">Date Commande</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="fullName">Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="address">Adresse de livraison</mfDefaultSorter></th>
+                                   </tr>
+                                </thead>
+
+                                <tbody *ngIf="this.commandearecup">
+                                <tr *ngFor="let commandearecup of cal.data">
+                                    <td><input type="checkbox" #checkbox (change)="checkThisCmdToPdR(checkbox.checked,commandearecup.id,commandearecup)" ></td>
+                                        <td>{{commandearecup.montant}}</td>
+                                        <td>{{commandearecup.dateCommande}}</td>
+                                        <td>{{commandearecup.fullName}}</td>
+                                        <td>{{commandearecup.tel}}</td>
+                                        <td>{{getAdressLivraison(commandearecup.pointderecuperation)}}</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>             
+                 </div>
+            </div>
+
+        </div>
+
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+ </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>

@@ -1,0 +1,59 @@
+fieldset h4{
+    text-align: center;
+    color : white;
+    background-color : #F39200;
+    padding: 1rem;
+    border-radius: 12rem 0rem 12rem 12rem;
+    width: 85rem;
+
+}
+
+input{
+    margin-top : 1rem !important;
+}
+
+
+#elec{
+    margin-left: 100px;
+}
+.nav-pills
+{
+    margin-bottom: 3rem ;
+}
+.tab-content
+{
+
+    border-right: 2px dotted #ccc;
+
+}
+
+.panel{
+	border-style: hidden ;
+}
+
+.panel-heading{
+	font-size: -webkit-xxx-large ! important;
+	color : white !important;
+    background-color: #36A9E0 !important;
+	margin-bottom: 3rem ;
+}
+
+.tab-content .panel-heading{
+    text-align: center;
+    color : white;
+    font-size: x-large !important;
+    background-color: orange !important;
+    padding: 1.7rem !important;
+    border-radius: 12rem 0rem 12rem 12rem;
+    width: 85rem;
+}
+
+#elec{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#descrip{
+    min-height: 150px;
+}
+

@@ -1,0 +1,133 @@
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            EXPRESSO
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->  
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#home-pills" data-toggle="tab">Cash In</a>
+                </li>
+                <li><a id="elec" href="#profile-pills" data-toggle="tab">Cash Out </a>
+                </li>
+                <li><a href="#messages-pills" data-toggle="tab">Agent Top Up</a>
+                </li>
+                <li><a href="#f-pills" data-toggle="tab">My Account</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade col-sm-6 col-xs-12 in active" id="home-pills">
+                <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>FORMULAIRE CASH IN</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validcashin()" #cashin="ngForm" autocomplete="on">
+
+                        <label for="telephone">Téléphone destinataire</label>
+                        <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephone" class="form-control" placeholder="téléphone destinataire" required>
+
+                        <label for="montant">Montant à envoyer</label>
+                        <input type="number" [(ngModel)]="this.montant"   name="montant" id="montant" class="form-control" placeholder="montant à envoyer" required>
+
+                        <label for="idclient">Id client</label>
+                        <input type="string" [(ngModel)]="this.idclient"   name="idclient" id="idclient" class="form-control" placeholder="id client" required>
+
+                        <label for="passwordc">Mot de passe client</label>
+                        <input type="string" [(ngModel)]="this.passwordc"   name="passwordc" id="passwordc" class="form-control" placeholder="mot de passe client" required>
+
+                        <button type="submit" class="btn btn-success" [disabled]="!cashin.form.valid">Envoyer</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!cashin.form.valid" >Annuler</button>
+
+                          </form>
+                   
+                </div>
+                <div class="tab-pane fade col-sm-6 col-xs-12" id="profile-pills">
+                <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>FORMULAIRE CASH OUT</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validcashout()" #cashout="ngForm" autocomplete="on">
+
+                        <label for="telephonec">Téléphone client</label>
+                        <input type="number" [(ngModel)]="this.telephonec"   name="telephonec" id="telephonec" class="form-control" placeholder="téléphone client" required>
+
+                        <label for="montantd">Montant à débiter</label>
+                        <input type="number" [(ngModel)]="this.montantd"   name="montantd" id="montantd" class="form-control" placeholder="montant à débiter" required>
+
+                        <label for="idclientc">Id client</label>
+                        <input type="string" [(ngModel)]="this.idclientc"   name="idclientc" id="idclientc" class="form-control" placeholder="id client" required>
+
+                        <label for="passwordco">Mot de passe client</label>
+                        <input type="string" [(ngModel)]="this.passwordco"   name="passwordco" id="passwordco" class="form-control" placeholder="mot de passe client" required>
+
+
+                        <button type="submit" class="btn btn-success" [disabled]="!cashout.form.valid">Envoyer</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!cashout.form.valid" >Annuler</button>
+
+                    </form>
+                   
+                </div>
+
+
+                <div class="tab-pane fade col-sm-6 col-xs-12" id="messages-pills">
+                <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>FORMULAIRE AGENT TOP UP</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validagenttopup()" #agenttopup="ngForm" autocomplete="on">
+
+                        <label for="tel">Téléphone destinataire</label>
+                        <input type="number" [(ngModel)]="this.tel"   name="tel" id="tel" class="form-control" placeholder="téléphone destinataire" required>
+
+                        <label for="mnt">Montant à envoyer</label>
+                        <input type="number" [(ngModel)]="this.mnt"   name="mnt" id="mnt" class="form-control" placeholder="montant à envoyer" required>
+
+                        <label for="idc">Id client</label>
+                        <input type="string" [(ngModel)]="this.idc"   name="idc" id="idc" class="form-control" placeholder="id client" required>
+
+                        <label for="mdp">Mot de passe client</label>
+                        <input type="string" [(ngModel)]="this.mdp"   name="mdp" id="mdp" class="form-control" placeholder="mot de passe client" required>
+
+
+                        <button type="submit" class="btn btn-success" [disabled]="!agenttopup.form.valid">Envoyer</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!agenttopup.form.valid" >Annuler</button>
+        			
+                    </form>
+                   
+                </div>
+
+                <div class="tab-pane fade col-sm-6 col-xs-12" id="f-pills">
+                 <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>FORMULAIRE MY ACCOUNT</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validmyaccount()" #myaccount="ngForm" autocomplete="on">
+
+                        <label for="idcl">Id client</label>
+                        <input type="string" [(ngModel)]="this.idcl"   name="idcl" id="idcl" class="form-control" placeholder="id client" required>
+
+                        <label for="pwd">Mot de passe client</label>
+                        <input type="string" [(ngModel)]="this.pwd"   name="pwd" id="pwd" class="form-control" placeholder="mot de passe client" required>
+
+
+                        <button type="submit" class="btn btn-success" [disabled]="!myaccount.form.valid">Envoyer</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!myaccount.form.valid" >Annuler</button>
+                    
+                    </form>
+                   
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- /.panel-body -->
+    </div>
+
+    <!-- /.panel -->
+
+</div>
+
+
+

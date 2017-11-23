@@ -1,0 +1,170 @@
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            ADMINISTRATION DES COMMERCIAUX
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->  
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#home-pills" data-toggle="tab">Fichier</a>
+                </li>
+                <li><a id="elec" href="#profile-pills" data-toggle="tab">Rendez-vous</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="home-pills">
+	                <div class="panel-body">
+
+	                	  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="operateurs|filtrefichier:filtre" #fopad="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                <thead>
+                                 <label>Zone <select class="form-control input-sm" >
+		                            <option *ngFor="let zones of zone">{{zones}}</option>
+		                            <!-- <option >Pikine</option>
+		                            <option >Rufisque</option>
+		                            <option >Yoff</option>
+		                            <option >Guédiawaye</option>
+		                            <option >Parcelles</option> -->
+		                            </select>
+		                         </label>
+ 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                      		<label style="padding-left: 4rem; margin-right: 5rem;">COMMERCIAUX <select class="form-control input-sm" [(ngModel)]="commerciaux" >
+                                            <option *ngFor="let commercial of commerciaux">{{commercial.prenom}} &nbsp;{{commercial.nom}}</option>
+                                            </select> <!-- <select class="form-control input-sm" [(ngModel)]="operateurs">
+				                             <option *ngFor="let commerciaux of fopad.data >{{commerciaux.nom}} &nbsp;{{commerciaux.prenom}}   </option>
+                                            </select> -->
+		                         		</label>
+		                         		<button class="btn btn-success" (click)="assigner()">Assigner</button>
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <th><mfDefaultSorter >Choisir</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="nom">Nom Opérateur</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prenom">Prénom Opérateur</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="adr">Adresse</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="qualification">Qualification</mfDefaultSorter></th>
+                                   </tr>
+                            
+                                </thead>
+                                <tbody *ngIf="this.operateurs">
+                                <tr *ngFor="let operateurs of fopad.data">
+                                    <input type="checkbox" class="form-control" [(ngModel)]="operateurs.choix">
+                                    <td>{{operateurs.nom}}</td>
+                                    <td>{{operateurs.prenom}}</td>
+                                    <td>{{operateurs.telephone}}</td>
+                                    <td>{{operateurs.adresse}}</td>
+                                    <td>
+                                   <select class="form-control input-sm" >
+			                            <option >Promesse</option>
+			                            <option >Injoignable</option>
+			                            <option >Voyage</option>
+			                            <option >Insatisfait</option>
+			                            <option >Assistance technique</option>
+			                            <option >RV</option>
+       		                        </select>
+       		                        </td>
+
+
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+	                           
+	                          
+	                 </div>
+                       
+               
+                   
+                   
+                </div>
+	                <div class="tab-pane fade col-sm-12 col-xs-12" id="profile-pills">
+	                  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="rvoperateurs|filtrefichier:filtre" #fopa="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                <thead>
+                                 <label>Zone <select class="form-control input-sm" >
+		                            <option *ngFor="let zones of zone">{{zones}}</option>
+                                    <!-- <option >Pikine</option>
+                                    <option >Rufisque</option>
+                                    <option >Yoff</option>
+                                    <option >Guédiawaye</option>
+                                    <option >Parcelles</option> -->
+		                            </select>
+		                         </label>
+ 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                      		
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <th><mfDefaultSorter by="nom">Nom Opérateur</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prenom">Prénom Opérateur</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="adr">Adresse</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Nom & Prénom Agent</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Etat</mfDefaultSorter></th>
+                                   </tr>
+                            
+                                </thead>
+                                <tbody *ngIf="this.rvoperateurs">
+                                <tr *ngFor="let rvoperateurs of fopa.data">
+                                    <td>{{rvoperateurs.nom}}</td>
+                                    <td>{{rvoperateurs.prenom}}</td>
+                                    <td>{{rvoperateurs.tel}}</td>
+                                    <td>{{rvoperateurs.adr}}</td>
+       		                        <td>{{rvoperateurs.nomag}}</td>
+       		                        <td>{{rvoperateurs.etat}}</td>
+
+
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+	                           
+	               
+	                           
+	                            
+	                </div>
+
+
+
+        <!-- /.panel-body -->
+    		</div>
+
+    <!-- /.panel -->
+
+		</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>
+

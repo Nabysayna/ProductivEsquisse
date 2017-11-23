@@ -1,0 +1,93 @@
+<div class="row" id="ecomhome" >
+
+      <h1 style="color : #337ab7 ;">E-Commerce</h1>
+
+
+  <div class="col-sm-4 extremite">
+  	<a class="btn ecomBtn" href="#ecomcatalogue" (click)="initialize()" data-toggle="tab">Catalogue</a>
+  </div>
+
+  <div class="col-sm-4" >
+    <a class="btn ecomBtn" href="#prisecom" (click)="initialize()" data-toggle="tab">Prendre une commande</a>
+  </div>
+
+  <div class="col-sm-4 extremite">
+  	<a class="btn ecomBtn" href="#ecomespaceperso" (click)="initialize()" data-toggle="tab" >Espace Perso</a>
+  </div>
+
+    <div class="row tab-content">
+
+    	<div class="row tab-pane fade col-sm-12 col-xs-12 in active" id="ecomcatalogue">
+        	<app-catalogue></app-catalogue>
+    	</div>
+
+	    <div class="row tab-pane fade col-sm-12 col-xs-12" id="ecomespaceperso">
+        	<app-espace-perso></app-espace-perso>
+	    </div>
+
+      <div class="row tab-pane fade col-sm-offset-1 col-sm-10 col-xs-12" style="margin-top: 3rem ; background-color:#f8f8f8;" id="prisecom">
+
+          <div class="row" *ngIf="!inforecvd&&!postcmd">
+            <div class="col-sm-3 col-xs-12" style="text-align: right; padding-top : 1.5rem ;">
+                      <label class=" control-label">Code du client </label>
+            </div>
+
+            <div class="col-sm-6 col-xs-12" style="text-align: center;">
+                  <input type="text" [(ngModel)]="codecmd"   name="codecmd" id="codecmd" class="form-control" placeholder="Code passé au client après commande." required>
+            </div>
+            <div class="col-sm-3 col-xs-12" style="text-align: left; padding-top : 1rem ;">
+                  <button class="btn btn-success" (click)="recupInfosCmd()"  >
+                  Valider</button>
+            </div>
+          </div>
+        </div>
+
+          <div class="col-sm-12 col-xs-12" *ngIf="inforecvd&&!postcmd" >
+            <h2 style="text-align: center ; color: #337ab7">Détails Commandes</h2>
+
+                <div class="col-sm-3 col-xs-12" style="text-align: right; padding-top : 1.5rem ;">
+                          <label class=" control-label" style="font-weight: normal">Prénom client : <b>{{prenom}}</b></label>
+                </div>
+                <div class="col-sm-3 col-xs-12" style="text-align: right; padding-top : 1.5rem ;">
+                          <label class=" control-label" style="font-weight: normal">Nom client : <b>{{nom}}</b></label>
+                </div>
+                <div class="col-sm-3 col-xs-12" style="text-align: right; padding-top : 1.5rem ;">
+                          <label class=" control-label" style="font-weight: normal">Net à payer : <b>{{montant}}</b></label>
+                </div>
+
+                <div class="col-sm-2 col-xs-12" style="text-align: left;">
+                      <button class="btn btn-success" style="margin-left: 3rem;" (click)="prendreCommande()"  >
+                      Prendre la commande</button>
+                </div>
+
+
+          </div>
+
+          <div class="col-sm-12 col-xs-12" *ngIf="postcmd" >
+            <h2 style="text-align: center ; color: #337ab7">La commande a bien été enregistrée et un code de suivi a été envoyé au client. Merci!</h2>
+          </div>
+       </div>
+
+</div>
+
+<div bsModal #childModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content" >
+        <div class="modal-header">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+          </button>
+            <h4 class="modal-title" id="myModalLabel">Détails de la commande.</h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+
+
+      </div>
+     </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>

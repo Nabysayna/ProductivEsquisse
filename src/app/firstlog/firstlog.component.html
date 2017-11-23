@@ -1,0 +1,44 @@
+<div id="authcomponent">
+
+    <div class="row" style="text-align: center ; padding-top: 4rem ; ">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+           <h1 style="font-family:sans-serif; ;font-weight: bolder;font-style: italic;">Changer votre Mot de pass avant de continuer</h1>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-sm-2 col-md-2" >
+        </div>
+
+        <div class="col-sm-8 col-md-8 col-xs-12" id="over-account-wall" style="height: 0rem !important;" >
+
+            <div class="account-wall" >
+                <h4 *ngIf="notMatching==true" style="margin-left: 3rem ;" class="badge">Les valeurs que vous avez saisies pour le nouveau mot de pass ne correspondent pas. Veuillez reprendre la saisie.</h4>
+                <h4 *ngIf="wrongCurrrentPwd==true" style="margin-left: 6rem ;" class="badge"> La valeur saisie pour le mot de pass actuel n'est pas correcte.</h4>
+
+                <form class="form-signin" (ngSubmit)="modifierPwd()" #heroForm="ngForm">
+
+                    <input type="password" [(ngModel)]="this.pwdactuel" name="pwdactuel" id="pwdactuel"  class="form-control" placeholder="Mot de pass actuel" required autofocus>
+
+                    <input type="password" [(ngModel)]="this.newpwd" name="newpwd" id="newpwd"  class="form-control" placeholder="Nouveau mot de pass" required autofocus>
+
+                    <input type="password" [(ngModel)]="this.confirmpdw"   name="confirmpdw" id="confirmpdw" class="form-control" placeholder="Confirmer nouveau Mot de pass" required>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!heroForm.form.valid" >
+                        Valider</button>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>

@@ -1,0 +1,69 @@
+
+.loader .ball-pulse-rise > div {
+   background-color: #337ab7 !important ;
+}
+
+
+.nav-pills
+{
+    padding-bottom: 30px;
+    margin-left: 200px;
+}
+.tab-content
+{
+
+    border-right: 2px dotted #f8f8f8;
+    
+}
+
+.blockcaisse{
+	border : 1px solid blue ;
+	margin-bottom: 1rem ;
+	padding: 0.5rem ;
+}
+
+.colored-caisse{
+	background-color:#f8f8f8;
+}
+
+.boutonspersonnalisation{
+	margin-bottom: 2rem;
+}
+
+.activeatag.active {
+	padding: 1rem ;
+	background-color: #286090 ;
+	border-radius: 4px 4px 4px 4px ;
+	color : white;
+	text-decoration: none;
+}
+
+.activeatag:visited{
+	padding: 1rem ;
+	background-color: transparent !important;
+	color : #286090;
+	border-radius: 4px 4px 4px 4px ;
+	text-decoration: none;
+}
+
+
+.activeatag:active {
+	padding: 1rem ;
+	background-color: #286090 ;
+	border-radius: 4px 4px 4px 4px ;
+	color : white;
+	text-decoration: none;
+}
+
+.activeatag:focus {
+	padding: 1rem ;
+	background-color: #286090 ;
+	border-radius: 4px 4px 4px 4px ;
+	color : white;
+	text-decoration: none;
+}
+
+#validcharge{
+	margin-left: 1rem ;
+}
+

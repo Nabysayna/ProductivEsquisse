@@ -1,0 +1,27 @@
+
+img{
+	width: 19rem;
+}
+.card{
+	width: 20rem !important;
+	margin-bottom : 2rem !important ; 
+	margin-right : 1rem ; 
+}
+
+.arriere-plan{
+	opacity: 0.3 ;
+	z-index: 0;
+}
+
+
+#infosclient{
+	background-color: white ;
+	position: absolute;
+	top: 10% ;
+	left: 20%;
+    width: 48rem;
+    padding: 2rem;
+	z-index: 1000;
+	border : 1px solid block;
+	box-shadow: 1px 1px 1px 1px ;
+}

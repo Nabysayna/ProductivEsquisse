@@ -1,0 +1,44 @@
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+
+     <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+        <div class="navbar-collapse" id="navbHead">
+                <app-navbar-top></app-navbar-top> 
+            <ul id="haut" class="nav navbar-nav navbar-center  top-nav in">
+                 <li role="presentation"  ><a [routerLink]="['/accueilcoursier', 'GESTIONREPORTING']" >GESTION REPORTING</a></li>
+                <li id="med" role="presentation"  ><a [routerLink]="['/accueilcoursier', 'DEMANDEPRET']" >DEMANDE DE PRET</a></li>
+                <li role="presentation"  ><a [routerLink]="['/accueilcoursier', 'E-COMMERCE']" >E-COMMERCE</a></li>
+            </ul>
+        </div>        
+        <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu">
+
+            <div class="sidebar-nav navbar-collapse">
+                <ul id="gauche" class="nav in" id="side-menu">
+                    <li *ngFor="let api of registredAPIs" >
+                        <a [routerLink]="['/accueilcoursier', api]">{{api}}</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper" >
+        <div class="row" id="routeContainDisplayer">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+    <!-- /#page-wrapper -->
+
+
+
+
+
+

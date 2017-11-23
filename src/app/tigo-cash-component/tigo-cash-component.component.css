@@ -1,0 +1,24 @@
+fieldset h4{
+    text-align: center;
+	color : white;
+    background-color : #F39200;
+    padding: 1rem;
+    border-radius: 12rem 0rem 12rem 12rem;
+    width: 85rem;
+
+}
+
+.loader .ball-pulse-rise > div {
+   background-color: #337ab7 !important ;
+}
+
+.panel{
+	border-style: hidden ;
+}
+
+.panel-heading{
+	font-size: -webkit-xxx-large ! important;
+	color : white !important;
+	background-color: #36A9E0 !important;
+	margin-bottom: 3rem ;
+}

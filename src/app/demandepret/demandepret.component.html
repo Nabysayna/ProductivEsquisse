@@ -1,0 +1,25 @@
+
+<div class="col-lg-12" >
+                        <div class="panel">
+                        <div class="panel-heading">
+                            DEMANDE DE PRÊT
+                        </div>
+                        
+                         <div class="col-sm-6 col-xs-12" >
+                                           <div *ngFor="let demande of demandepret">
+                                            Le montant demandé doit être inférieur à  {{demande.plafond}}.FCFA  
+                                            </div>
+                                            <input type="number" [(ngModel)]="montantdemande"   name="montantdemande" id="montantdemande" class="form-control" placeholder="Montant demandé" required>
+                                            <button (click)="demandeprt()" id="validcharge"  class="btn btn-success" >Demander</button>
+                                            <button  class="btn btn-danger" type="reset" >Annuler</button>
+                    
+                    
+                    </div>
+                    </div>
+                </div>    
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>
+
+

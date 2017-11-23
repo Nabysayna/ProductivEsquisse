@@ -1,0 +1,189 @@
+.form-signin
+
+{
+
+    max-width: 330px;
+
+    padding: 15px;
+
+    margin: 0 auto;
+
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox
+
+{
+
+    margin-bottom: 10px;
+
+}
+
+.form-signin .checkbox
+
+{
+
+    font-weight: normal;
+
+}
+
+.form-signin .form-control
+
+{
+
+    position: relative;
+
+    font-size: 16px;
+
+    height: auto;
+
+    padding: 10px;
+
+    -webkit-box-sizing: border-box;
+
+    -moz-box-sizing: border-box;
+
+    box-sizing: border-box;
+
+}
+
+.form-signin .form-control:focus
+
+{
+
+    z-index: 2;
+
+}
+
+.form-signin input[type="text"]
+
+{
+
+    margin-bottom: -1px;
+
+    border-bottom-left-radius: 0;
+
+    border-bottom-right-radius: 0;
+
+}
+
+.form-signin input[type="password"]
+
+{
+
+    margin-bottom: 10px;
+
+    border-top-left-radius: 0;
+
+    border-top-right-radius: 0;
+
+}
+
+.account-wall
+
+{
+    background-image: url('/assets/bga.png') ;
+
+    margin-top: 0px;
+
+    padding: 40px 0px 20px 0px;
+
+    background-color: #f7f7f7;
+
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.login-title
+
+{
+
+    color: #555;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    display: block;
+
+}
+
+.figcontainer{    
+  display: block;
+}
+
+.figcontainer .btn{    
+    color: #fff;
+}
+
+.figureatag{
+    text-decoration: none ;
+    color: #fff;
+}
+
+.figureatag:hover{
+    text-decoration: none ;
+    color: #fff;
+}
+
+.circle {
+  display: inline-block;
+  background: white;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  margin: 0;
+  background: radial-gradient(circle at 1rem 1rem, #0F70B7, #000);
+}
+
+.circlesub{
+  display: inline-block;
+  background: white;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  margin: 0;
+  background: radial-gradient(circle at 1rem 1rem, #0FFFFF, #000);
+}
+
+.navbar-default{
+  background-color: white ;
+  border-bottom: 1px solid #0F70B7 ;
+}
+
+
+
+#form{
+  margin-top: 4rem ;
+}
+
+#inscription div img{
+  margin-top: 12rem ;
+}
+
+
+#over-account-wall{
+  height: 70rem !important;
+}
+
+#authcomponent{
+}
+
+#nav img{
+  max-height: 6rem ;
+}
+
+#nav input{
+  padding: 0.7rem;
+}
+
+
+#form select, label{
+  margin-left: 1rem ;
+}
+
+
+

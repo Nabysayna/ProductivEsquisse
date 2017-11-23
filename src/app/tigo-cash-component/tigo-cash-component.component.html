@@ -1,0 +1,459 @@
+
+  
+  <!--<div style="position: absolute ; left: 25%; top:25%; min-width: 70% ; min-height: 50% ;text-align: -webkit-center; padding-top: 10%; z-index:1000; opacity: 0.1; ">
+    
+    CETTE PAGE EST EN DEVELOPPEMENT !
+      <div class="loader">
+        <div class="loader-inner ball-pulse-rise">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+
+    </div>-->
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">TIGOCASH</div>
+        <div class="panel-body">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#depottigocash" data-toggle="tab" (click)="reinitialiser()">Depot</a>
+                </li>
+                <li><a href="#retraittigocash" (click)="reinitialiser()" data-toggle="tab">Retrait</a></li>
+                <li><a href="#payertranfert" (click)="reinitialiser()" data-toggle="tab">Payer un transfert</a></li>
+                <li><a href="#envoyerargent" (click)="reinitialiser()" data-toggle="tab">Envoyer de l'argent</a></li>
+                <li><a href="#vendreizi" (click)="reinitialiser()" data-toggle="tab">Vendre IZI</a></li>
+                <li><a href="#inscription" (click)="reinitialiser()" data-toggle="tab">Inscrire un client</a></li> 
+            </ul>
+            <!-- Tab panes  -->
+            <div class="tab-content">
+
+              <h2>TigoCash sera bientôt disponible</h2>
+
+<!--               <div class="col-sm-6 col-xs-12" *ngIf="erreur" style="padding-top: 7rem ; color: #337ab7">
+                <h5>Désolé! Votre requête n'a pas pu être traitée.</h5> <h5 style="color : red">{{errorMessage}}</h5>
+              </div>
+
+               <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="depottigocash">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>Depot</h4>
+                    </fieldset>
+                    <form (ngSubmit)="showmodaldepot()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Téléphone client</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Montant à recharger</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantrechargementespece" class="form-control" placeholder="montant à recharger" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success">Valider</button>
+                        <button type="reset" class="btn btn-danger" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+               <div class="tab-pane fade col-sm-12 col-xs-12" id="retraittigocash">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>Retrait</h4>
+                    </fieldset>
+                    <form (ngSubmit)="showmodalretrait()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Téléphone client</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Montant à recharger</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantrechargementespece" class="form-control" placeholder="montant à recharger" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success">Valider</button>
+                        <button type="reset" class="btn btn-danger" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+               <div class="tab-pane fade col-sm-12 col-xs-12" id="payertranfert">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>Payer un transfert</h4>
+                    </fieldset>
+                    <form (ngSubmit)="showmodalpaiment()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Numero de reference</label>
+                        <div class="col-sm-8 form-inline">
+                          <input type="number" [(ngModel)]="this.reference"   name="reference" id="telephonerechargementespece" class="form-control" placeholder="Numero de reference" required>
+                          <button type="submit" class="btn btn-success" >Chercher</button>
+                        </div>
+                      </div>
+                      <p *ngIf="messagepayertransfert" class="alert alert-danger">Numero incorrect</p>
+                      <div *ngIf="donneepayertransfert" class="row text-center">
+						  <p class="alert alert-success">{{this.donneetransfert}}</p><br>
+                        <button type="submit" class="btn btn-success" >Valider</button>
+                        <button type="reset" (click)="reinitialiser()" class="btn btn-danger">Annuler</button>
+                      </div>
+                    </form>
+                </div>
+               <div class="tab-pane fade col-sm-12 col-xs-12" id="envoyerargent">
+                  <div class="row">
+					  <div class="col-lg-5">
+							<form  #rechargementespece="ngForm" autocomplete="on">
+							 <fieldset>
+								 <legend>information expediteur</legend>
+							  <div class="form-group row">
+								
+								<div class="col-sm-8 form-group form-inline">
+								  <label>Montant</label>
+								  <input type="text" [(ngModel)]="this.montant"   name="montant" id="telephonerechargementespece" class="form-control" placeholder="Montant" required>
+								</div>
+								<div class="col-sm-8 form-group">
+								  <label>Prenom</label>
+								  <input type="text" [(ngModel)]="this.prenomExpediteur"   name="prenom" id="telephonerechargementespece" class="form-control" placeholder="Prenom" required>
+								</div>
+								<div class="col-sm-8 form-group">
+								  <label>Nom</label>
+								  <input type="text" [(ngModel)]="this.nomExpediteur"   name="nom" id="telephonerechargementespece" class="form-control" placeholder="Nom" required>
+								</div>
+								<div class="col-sm-8 form-group">
+								  <label>Telephone</label>
+								  <input type="text" [(ngModel)]="this.telephoneExpediteur"   name="telephoneExpediteur" id="telephonerechargementespece" class="form-control" placeholder="Telephone" required>
+								</div>
+							  </div>
+							  </fieldset>
+							</form>
+                    </div>
+                    <div class="col-lg-offset-2 col-lg-5">
+						   <form (ngSubmit)="showmodalenvoi()" #rechargementespece="ngForm" autocomplete="on">
+							 <fieldset>
+								 <legend>information beneficiaire</legend>
+							  <div class="form-group row">
+								
+								<div class="col-sm-8 form-group">
+								  <label>Prenom</label>
+								  <input type="text" [(ngModel)]="this.prenomBeneficiaire"   name="prenom" id="telephonerechargementespece" class="form-control" placeholder="Prenom" required>
+								</div>
+								<div class="col-sm-8 form-group">
+								  <label>Nom</label>
+								  <input type="text" [(ngModel)]="this.nomBeneficiaire"   name="nom" id="telephonerechargementespece" class="form-control" placeholder="Nom" required>
+								</div>
+								<div class="col-sm-8 form-group">
+								  <label>Telephone</label>
+								  <input type="text" [(ngModel)]="this.telephoneBeneficiaire"   name="telephoneBeneficiaire" id="telephonerechargementespece" class="form-control" placeholder="Telephone" required>
+								</div>
+							  </div>
+							 </fieldset>
+							</form>
+                    </div>
+                    
+                   </div>
+                   <div class="row text-center">
+								<button type="submit" (click)="showmodalenvoi()" class="btn btn-success">Valider</button>
+								<button type="reset" class="btn btn-danger"  >Annuler</button>
+					 </div>
+                </div>
+             <div class="tab-pane fade col-sm-12 col-xs-12" id="vendreizi">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4></h4>
+                    </fieldset>
+                    <form (ngSubmit)="showmodalvendreizi()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        
+                        <div class="col-sm-8">
+						 <label>Numero client</label>
+                          <input type="number" [(ngModel)]="this.telephoneBeneficiaire"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                        <div class="col-sm-8">
+						 <label>Montant</label>
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="telephonerechargementespece" class="form-control" placeholder="téléphone montant" required>
+                        </div>
+                      </div>
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" >Valider</button>
+                        <button type="reset" class="btn btn-danger"  >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+             <div class="tab-pane fade col-sm-12 col-xs-12" id="inscription">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4></h4>
+                    </fieldset>
+                    <form (ngSubmit)="showmodalinscription()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        
+                        <div class="col-sm-8">
+						 <label>Numero client</label>
+                          <input type="number" [(ngModel)]="this.telephoneBeneficiaire"   name="telephone"  class="form-control" placeholder="téléphone client" required>
+                        </div>
+                        <div class="col-sm-8">
+						 <label>Prenom</label>
+                          <input type="text" [(ngModel)]="this.prenom"   name="prenom"  class="form-control" placeholder="prenom clienr" required>
+                        </div>
+                        <div class="col-sm-8">
+						 <label>Nom</label>
+                          <input type="text" [(ngModel)]="this.nom" name="nom"  class="form-control" placeholder="nom client" required>
+                        </div>
+                        <div class="col-sm-8">
+						<div class="form-group">
+							 <label>type de piece</label>
+								<select class="form-control" [(ngModel)]="this.typepiece" name="typepiece">
+									<option value="1">carte national d'identite</option>
+									<option value="2">passport</option>
+								</select>
+                         </div>
+                        </div>
+                        <div class="col-sm-8">
+						 <label>numero piece</label>
+                          <input type="text" [(ngModel)]="this.numeropiece"   name="montant" id="telephonerechargementespece" class="form-control" placeholder="téléphone montant" required>
+                        </div>
+                      </div>
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" >Valider</button>
+                        <button type="reset" class="btn btn-danger" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+ -->
+
+           </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>
+
+<!-- Les Modal -->
+
+
+<!-- Modal depot -->
+<div bsModal #modaldepot="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodaldepot()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telephone}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.montant}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="depot()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodaldepot()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+<!-- Modal retrait -->
+<div bsModal #modalretrait="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalretrait()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telephone}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.montant}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="retrait()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalretrait()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+<div bsModal #modalinscription="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalinscription()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Telephone client : {{this.telephone}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >prenom : {{this.prenom}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >nom : {{this.nom}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >type piece : {{this.typepiece}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numero piece : {{this.numeropiece}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="inscription()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalinscription()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+<!-- Modal payer un transfert -->
+<div bsModal #modalpaiment="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalpaiment()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Numero de reference : {{this.reference}}</label>
+							 
+						 </div>
+						 
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="Chercher" (click)="verifnumeroreference()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalpaiment()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+<div bsModal #modalvendreizi="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalvendreizi()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Numero client : {{this.telephone}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Montant  : {{this.montant}}</label>
+						 </div>
+						 
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="izi()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalvendreizi()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+<div bsModal #modalenvoi="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      
+		     <div class="modal-body">
+		       <div>
+				 <div class="col-lg-4">
+					 <form class="form">
+						 <fieldset>
+							 <legend>Expediteur</legend>
+							 <div class="form-group">
+								 <label >Montant : {{this.montant}}</label>
+							 </div>
+							 <div class="form-group">
+								 <label >prenom : {{this.prenomExpediteur}}</label>
+							 </div>
+							 <div class="form-group">
+								 <label >nom : {{this.nomExpediteur}}</label>
+							 </div>
+							 <div class="form-group">
+								 <label >Telephone : {{this.telephoneExpediteur}}</label>
+							 </div>
+						 </fieldset>
+					 </form>
+					
+				 </div>
+				 <div class="col-lg-offset-2 col-lg-4">
+					  <form class="form">
+						 <fieldset>
+							 <legend>Beneficiaire</legend>
+							
+							 <div class="form-group">
+								 <label >prenom : {{this.prenomBeneficiaire}}</label>
+							 </div>
+							 <div class="form-group">
+								 <label >nom : {{this.nomBeneficiaire}}</label>
+							 </div>
+							 <div class="form-group">
+								 <label >Telephone : {{this.telephoneBeneficiaire}}</label>
+							 </div>
+						 </fieldset>
+					 </form>
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="envoiyerargent()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalenvoi()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+</div>
+

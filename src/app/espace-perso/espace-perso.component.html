@@ -1,0 +1,367 @@
+ <div class="panel-body">
+
+	<div class="row">
+		<div class="col-sm-2">
+			<a href="#ajout" class="btn" (click)="showAddChildModal()" type="button" data-toggle="tab">Ajouter</a>
+		</div>
+
+		<div class="col-sm-3">
+			<a href="#waitingCmd" (click)="chargerCommandes('toReceive')" class="btn " type="button" data-toggle="tab">Commandes Attendues</a>
+		</div>	
+
+		<div class="col-sm-3">
+			<a href="#cmdToDeliver" (click)="chargerCommandes('toDeliver')" class="btn " type="button" data-toggle="tab">Commandes à Livrer</a>
+		</div>	
+
+		<div class="col-sm-2">
+			<a href="#articles" class="btn " type="button" data-toggle="tab">Mes Articles</a>
+		</div>	
+
+		<div class="col-sm-2">
+			<a href="#ventes" class="btn " (click)="chargerVentes()" type="button" data-toggle="tab">Mes Ventes</a>
+		</div>
+
+	</div>
+
+	<div class="tab-content">
+
+		<div class="row tab-pane fade in active" id="articles">
+		<input type="search" class="form-control input-sm" 
+	  	   [(ngModel)]="this.filtre"
+	       [typeahead]="this.listarticles"
+	       typeaheadOptionField="designation"
+	       typeaheadGroupField="prix"
+	        placeholder="Rechercher" aria-controls="dataTables-example">
+
+		    <tbody>
+		    <tr *ngFor="let ligneArticle of filtrerCatalogue()" >
+		        <td *ngFor="let article of ligneArticle">
+		        <div class="card" >
+
+				  <img class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.nomImg}}"  alt="Card image cap" width="200" height="200">
+
+				<input type="file"  *ngIf="this.modif==article.nomImg" (change)="fileChange($event)" placeholder="Uploader Image" accept=".png,.jpg">
+
+			   <div class="card-block" style="text-align: center ;">
+				    <h4 class="card-title">{{article.designation}}</h4>
+				    <input type="text" *ngIf="this.modif==article.nomImg" [(ngModel)]="article.designation">
+				    <p class="card-text">Prix:{{article.prix}}.FCFA</p>
+				    <input type="number" *ngIf="this.modif==article.nomImg" [(ngModel)]="article.prix">
+
+				    <button  class="btn btn-success" *ngIf="this.modifart!='record'+article.nomImg"  type="button"(click)="modifArticle(article)">Modifier</button>
+				    <button  class="btn btn-success" *ngIf="this.modifart=='record'+article.nomImg" type="button"(click)="enregArticle(article)">Enregistrer</button>
+				    <button  class="btn btn-danger" type="button" *ngIf="this.modifart!='record'+article.nomImg" (click)="deleteArticle(article)" >Supprimer </button>
+				    <button  class="btn btn-danger" type="button" *ngIf="this.modifart=='record'+article.nomImg" (click)="annulArticle()" >Annuler </button>
+
+				  </div>
+				</div>
+				</td>
+
+		    </tr>
+		    </tbody>                          
+	    </div>
+
+			<div class="row tab-pane col-sm-12 col-xs-12 fade" id="waitingCmd">
+                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="listeCommande | pipeCommande : filtre" #listCmdswtg="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="designation" [(mfSortOrder)]="asc" style="width: 100%;">
+                                <thead>
+ 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th><mfDefaultSorter by="index">#</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="dateCommande">Date Commande</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="fullName">Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone Client</mfDefaultSorter></th>
+                                        <th>Réception</th>
+                                   </tr>
+                            
+                                </thead>
+                                <tbody *ngIf="this.listeCommande" >
+	                                <tr *ngFor="let commande of listCmdswtg.data ; let i = index; ">
+	                                    <td>{{i+1}}</td>
+	                                    <td>{{commande.montant}}</td>
+	                                    <td>{{commande.dateCommande}}</td>
+	                                    <td>{{commande.fullName}}</td>
+	                                    <td>{{commande.tel}}</td>
+	                                    <td>
+	                                    	<button *ngIf="!receivedCmd(commande.id)" class="btn btn-success" (click)="receptionner(commande.id)">Reception</button>
+	                                    	<span *ngIf="receivedCmd(commande.id)"><i class="fa fa-check" aria-hidden="true"></i></span>
+	                                    </td>
+	                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>         
+		    </div>
+
+			<div class="row tab-pane col-sm-12 col-xs-12 fade" id="cmdToDeliver">
+                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="listeCommande | pipeCommande : filtre | suppliedarticles : smart" #listCmdsincoming="mfDataTable"  [(mfSortBy)]="designation" [(mfSortOrder)]="asc" style="width: 100%;">
+                                <thead>
+ 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th><mfDefaultSorter by="index">#</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="dateCommande">Date Commande</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="fullName">Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone Client</mfDefaultSorter></th>
+                                        <th>Réception</th>
+                                   </tr>
+                            
+                                </thead>
+                                <tbody *ngIf="this.listeCommande" >
+	                                <tr *ngFor="let commande of listCmdsincoming.data ; let i = index; ">
+	                                    <td>{{i+1}}</td>
+	                                    <td>{{commande.montant}}</td>
+	                                    <td>{{commande.dateCommande.date.substring(0,19)}}</td>
+	                                    <td>{{commande.prenomclient + " "+ commande.nomclient}}</td>
+	                                    <td>{{commande.telephoneclient}}</td>
+	                                    <td>
+	                                    	<button *ngIf="!cmdFournis(commande.id)" class="btn btn-success" (click)="fournir(commande.id)">Fourni</button>
+	                                    	<span *ngIf="cmdFournis(commande.id)"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+	                                    	<button  class="btn btn-success" (click)="showChildModal(commande.orderedArticles)">Détails</button>
+
+	                                    </td>
+	                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>         
+		    </div>
+
+
+		<div class="row tab-pane col-sm-6 col-xs-12 fade" id="ventes">
+			<div class="panel-body">
+
+                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="listeVentes" #listVentes="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="id" [(mfSortOrder)]="asc" style="width: 100%;">
+                                <thead>
+ 
+                                    <tr>
+                                        <th colspan="3" style="padding-right: 3rem ;">
+                                            Rechercher :
+                                            <input class="form-control" [(ngModel)]="filtre"/>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th><mfDefaultSorter by="id">Désignation</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prixUnitaire">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="quantite">Détails</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="dateCommande">Date Vente</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="fullName">Client</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="tel">Téléphone Client</mfDefaultSorter></th>
+                                    </tr>
+                            
+                                </thead>
+                                <tbody *ngIf="this.listVentes" >
+	                                <tr *ngFor="let vente of listVentes.data">
+	                                    <td>VCL{{vente.id}}</td>
+	                                    <td>{{vente.montant}}</td>
+	                                    <td> <button class="btn btn-success">Détails</button><!-- {{vente.infovente}} --></td>
+	                                    <td>{{vente.datevente}}</td>
+	                                    <td> --- </td>
+	                                    <td> --- </td>
+	                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10]" ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>         
+    
+	        </div>
+               
+	    </div>
+
+	<div bsModal #childModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		 <div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Détails de la commande.</h4>
+		      </div>
+		      <div class="modal-body" style="height : 37rem">
+
+
+			    <div *ngIf="orderedArticles">
+				    <div class="col-sm-4 col-xs-12" *ngFor="let article of detailsCurrentCommande()| selfprovidedfilter : smart" >
+				        <div class="card" >
+						  <img class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.imagelink}}"  alt="Card image cap" width="200" height="200">
+
+					   	  <div class="card-block" style="text-align: center ;">
+						    <h4 class="card-title">{{article.designation}}</h4>
+						    <p class="card-text">Prix Unitaire:{{article.prix}}.FCFA</p>
+						    <p class="card-text">Nombre d'articles commandés:{{article.qte}}</p>
+						  </div>
+						</div>
+				    </div>
+			    </div>                          
+
+     		
+	     	  </div>
+			</div>			
+		</div>			
+	</div>			
+
+	<div bsModal #codevalModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="laebcodevalid" aria-hidden="true">
+		 <div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Réception commande</h4>
+		      </div>
+		      <div class="modal-body">
+				<input type="number" [(ngModel)]="coderecept"   name="coderecept" id="coderecept" class="form-control" placeholder="code de suivi du client" required>
+	     	  </div>
+			</div>			
+		</div>			
+	</div>			
+
+
+	<div bsModal #addChildModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		 <div class="modal-dialog modal-lg">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hideAddChildModal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre d'ajout.</h4>
+		      </div>
+		      <div class="modal-body" style="height : 37rem">
+
+				<div  class="col-sm-12 col-xs-12" style="margin-bottom:1rem" *ngIf="addtype==''">		
+					 <a class="btn btn-success" type="button" (click)="addtype='venteecom'">Article E-commerce</a>
+					  <a type="reset" class="btn btn-success"  (click)="addtype='ptiteannonce'">Petite Annonce</a>
+     		    </div>
+
+		      	<div  *ngIf="addtype=='venteecom'">		      		
+					<div  class="col-sm-12 col-xs-12 badge" *ngIf="prixa&&prixa!=0" style="margin-bottom:1rem">		
+						<div  class="col-sm-3 col-xs-12">		
+						Prix de base : {{prixa}}
+						</div>		
+						<div  class="col-sm-3 col-xs-12">		
+						Prix affiché : {{prixa - customerReduct}}
+						</div>		
+						<div  class="col-sm-3 col-xs-12">		
+						Part  partenaires : {{ roundedValueOf(prixa*tauxreduc(prixa)*0.5) }}
+						</div>		
+						<div  class="col-sm-3 col-xs-12">		
+						Réduction client :  {{customerReduct}}
+						</div>		
+					</div>		
+
+					<div class="col-sm-4 col-xs-12">
+ 					   <img class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{newImage}}"  alt="Card image cap" width="200" height="200">
+					   <input type="file" (change)="fileChange($event)" placeholder="Uploader Image" accept=".png,.jpg">
+
+
+ 					</div>			
+
+					<div class="col-sm-6 col-xs-12">
+
+		                <select *ngIf="categoriea!='Autre'" class="form-control input-sm" style="margin-left: 1rem ;" [(ngModel)]="categoriea" >
+		                    <option >--- Catégorie ---</option>
+		                    <option *ngFor="let categorie of categories">{{categorie}}</option>
+		                    <option >Autre</option>
+		                </select>		
+						<input type="text" *ngIf="categoriea=='Autre'" class="form-control input-sm" placeholder="Entrez la catégorie de l'article" required>
+
+						<input type="text" [(ngModel)]="this.designationa"   name="designationa" id="designationa" class="form-control" placeholder="designation de l'article" required>
+
+						<input type="text" [(ngModel)]="this.descriptiona"   name="descriptiona" id="descriptiona" class="form-control" placeholder="Petite description de l'article" required>
+
+			            <input type="number" style="display : initial; max-width: 19rem;" [(ngModel)]="this.prixa"   name="prixa" id="prixa" class="form-control" placeholder="prix de l'article" required><button (click)="reduirePrix(prixa)" class="btn btn-success">Appliquer tarif réductionnel</button>
+
+			            <input type="number" [(ngModel)]="this.stocka"   name="stocka" id="stocka" class="form-control" placeholder="Quantité en stock" required>	            
+
+						 <a class="btn btn-success" type="button" (click)="ajouter()">Ajouter</a>
+
+						  <a type="reset" class="btn btn-danger"  (click)="annuler()">Annuler</a>
+					</div>		
+				</div>		
+				 <div  *ngIf="addtype=='ptiteannonce'">
+
+					<div class="col-sm-4 col-xs-12">
+ 					   <img class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{newImage}}"  alt="Card image cap" width="200" height="200">
+					   <input type="file" (change)="fileChange($event)" placeholder="Uploader Image" accept=".png,.jpg">
+
+
+ 					</div>			
+
+					<div class="col-sm-6 col-xs-12" >
+
+		                <select *ngIf="categoriepta!='Autre'" class="form-control input-sm" style="margin-left: 1rem ;" [(ngModel)]="categoriepta" >
+		                    <option>--- Catégorie ---</option>
+		                    <option *ngFor="let categorie of categories">{{categorie}}</option>
+		                    <option>Location voitures</option>
+		                    <option>Immobilier</option>
+		                    <option>Autre</option>
+		                </select>		
+						<input type="text" *ngIf="categoriepta=='Autre'" class="form-control input-sm" placeholder="Entrez la catégorie de l'annonce" required>
+
+						<input type="text" [(ngModel)]="this.designationpta"   name="designationa" id="designationa" class="form-control" placeholder="designation de l'annonce" required>
+
+						<input type="text" [(ngModel)]="this.descriptionpta"   name="descriptiona" id="descriptiona" class="form-control" placeholder="Petite description de l'annonce" required>
+
+			            <input type="number" style="display : initial; max-width: 15rem;" [(ngModel)]="this.prixpta"   name="prixa" id="prixa" class="form-control" placeholder="prix de l'article" required>  <input type="number" style="display : initial; max-width: 19rem;" [(ngModel)]="this.telpta"   name="prixa" id="tela" class="form-control" placeholder="Téléphone Annonceur" required>
+
+			            <input type="number" [(ngModel)]="this.stockpta"   name="stocka" id="stocka" class="form-control" placeholder="Quantité en stock" required>	            
+
+						 <a class="btn btn-success" type="button" (click)="ajouterpta()">Ajouter</a>
+
+						  <a type="reset" class="btn btn-danger"  (click)="annuler()">Annuler</a>
+					</div>		
+				</div>	
+
+	     	  </div>
+
+			  </div>			
+		   </div>			
+		<div *ngIf="this.loading">
+		    <app-loader></app-loader>    
+		</div>
+
+	</div>			
+
+
+</div>			
+
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>
+
+<!--GNING bamba-->

@@ -1,0 +1,299 @@
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">POSTE-CASH</div>
+        <div class="panel-body">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#rechargementespece-pills" data-toggle="tab" (click)="reinitialiser()">Rechargement Espece</a>
+                </li>
+                <!--<li><a href="#retraitespece-pills" (click)="reinitialiser()" data-toggle="tab">Retrait Espece</a>
+                </li>-->
+                <li><a href="#achatjula-pills" (click)="reinitialiser()" data-toggle="tab">Achat Jula</a>
+                </li>
+                <li><a href="#reglementsenelec-pills" (click)="reinitialiser()" data-toggle="tab">Réglement Senelec</a>
+                </li>
+                <li><a href="#achatcodewoyofal-pills" (click)="reinitialiser()" data-toggle="tab">Achat Code Woyofal</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <div class="col-sm-6 col-xs-12" *ngIf="erreur" style="padding-top: 7rem ; color: #337ab7">
+                <h5>Désolé! Votre requête n'a pas pu être traitée.</h5> <h5 style="color : red">{{errorMessage}}</h5>
+              </div>
+
+              <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="rechargementespece-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4> RECHARGEMENT ESPECE</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validrechargementespece()" #rechargementespece="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Téléphone client</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Montant à recharger</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantrechargementespece" class="form-control" placeholder="montant à recharger" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="!rechargementespece.form.valid">Valider</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!rechargementespece.form.valid" >Annuler</button>
+                      </div>
+                    </form>
+                    </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="retraitespece-pills">
+
+                  <div class="row"  style="margin-top: 2rem">
+                    <div>
+                      <button type="button" class="btn btn-info" (click)="isselectretraitespeceaveccarte = true; selectretraitespeceaveccarte();">Retrait sans carte</button>
+                      <button type="button" class="btn btn-info" (click)="isselectretraitespeceaveccarte = false; selectretraitespeceaveccarte();">Retrait avec carte</button>
+                    </div>
+
+                    <div style="margin-top: 2rem" *ngIf="isselectretraitespeceaveccarte">
+                      <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4> Sans carte</h4>
+                      </fieldset>
+                      <form (ngSubmit)="validateretraitespece()" #retraitespece="ngForm" autocomplete="on">
+
+                        <div class="form-group row">
+                          <label for="telephoneretraitespece" class="col-sm-3 col-form-label">Téléphone client</label>
+                          <div class="col-sm-8">
+                            <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephoneretraitespece" class="form-control" placeholder="téléphone client" required>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="montantretraitespece" class="col-sm-3 col-form-label">Montant</label>
+                          <div class="col-sm-8">
+                            <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantretraitespece" class="form-control" placeholder="montant à retirer" required>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="codevalidation" class="col-sm-3 col-form-label">Code de validation</label>
+                          <div class="col-sm-8">
+                            <input type="number" [(ngModel)]="this.codevalidation"   name="codevalidation" id="codevalidation" class="form-control" placeholder="Code de validation" required>
+                          </div>
+                        </div>
+
+                        <div class="row text-center">
+                          <button type="submit" class="btn btn-success" [disabled]="!retraitespece.form.valid">Valider</button>
+                          <button type="reset" class="btn btn-danger" [disabled]="!retraitespece.form.valid" >Annuler</button>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div style="margin-top: 2rem" *ngIf="!isselectretraitespeceaveccarte">
+                      <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4> Avec carte</h4>
+                      </fieldset>
+                      <form (ngSubmit)="attentecodevalidationretraitespeceaveccarte()" #attentevalidateretraitespece="ngForm" autocomplete="on">
+
+                        <div class="form-group row">
+                          <label for="telephoneretraitespeceattentevalid" class="col-sm-3 col-form-label">Téléphone client</label>
+                          <div class="col-sm-8">
+                            <input type="number" [(ngModel)]="this.telephone"   name="telephoneretraitespeceattentevalid" id="telephoneretraitespeceattentevalid" class="form-control" placeholder="téléphone client" required>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="montantretraitespeceattentevalid" class="col-sm-3 col-form-label">Montant</label>
+                          <div class="col-sm-8">
+                            <input type="number" [(ngModel)]="this.montant"   name="montantretraitespeceattentevalid" id="montantretraitespeceattentevalid" class="form-control" placeholder="montant à retirer" required>
+                          </div>
+                        </div>
+
+                        <div class="row text-center">
+                          <button data-toggle="modal" data-target="#myModalCodeValidation" type="submit" class="btn btn-success" [disabled]="!attentevalidateretraitespece.form.valid">Valider</button>
+                          <button type="reset" class="btn btn-danger" [disabled]="!attentevalidateretraitespece.form.valid" >Annuler</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class=" tab-pane fade col-sm-12 col-xs-12" id="achatjula-pills" >
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4> ACHAT JULA</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validateachatjula()" #achatjula="ngForm" autocomplete="on">
+
+                      <div class="form-group row">
+                        <label for="nb_carte" class="col-sm-3 col-form-label">Nombre de carte</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.nb_carte"   name="nb_carte" id="nb_carte" class="form-control" placeholder="nombre de carte" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="mt_carte" class="col-sm-3 col-form-label">Montant Carte</label>
+                        <div class="col-sm-8">
+                          <select class="form-control input-sm" name="mt_carte" id="mt_carte" [(ngModel)]="mt_carte" required style="margin-bottom: 1rem; margin-left: 1rem;">
+                            <option>2000</option>
+                            <option>5000</option>
+                            <option>10000</option>
+                            <option>25000</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="!achatjula.form.valid">Valider</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!achatjula.form.valid" >Annuler</button>
+                      </div>
+
+                    </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="reglementsenelec-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>REGLEMENT SENELEC</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validatedetailfacturesenelec()" #reglementsenelec="ngForm" autocomplete="on">
+
+                      <div class="form-group row">
+                        <label for="police" class="col-sm-3 col-form-label">Numéro de police</label>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="this.police"   name="police" id="police" class="form-control" placeholder="numéro de police " required>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="num_facture" class="col-sm-3 col-form-label">Numéro de facture</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.num_facture"   name="num_facture" id="num_facture" class="form-control" placeholder="numéro de facture " required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button class="btn btn-success"   data-toggle="modal" data-target="#myModalPostSenec" type="submit" [disabled]="!reglementsenelec.form.valid">Envoyer</button>
+                        <button class="btn btn-danger" [disabled]="!reglementsenelec.form.valid" type="reset">Annuler</button>
+                      </div>
+
+                    </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcodewoyofal-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>ACHAT CODE WOYOFAL</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validateachatcodewoyofal()" #achatcodewoyofal="ngForm" autocomplete="on">
+
+                      <div class="form-group row">
+                        <label for="montantachatcodewoyofal" class="col-sm-3 col-form-label">Montant d'achat</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantachatcodewoyofal" class="form-control" placeholder="montant d'achat" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="compteur" class="col-sm-3 col-form-label">Numéro du compteur</label>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="this.compteur"   name="compteur" id="compteur" class="form-control" placeholder="numéro du compteur" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button class="btn btn-success" type="submit" [disabled]="!achatcodewoyofal.form.valid" >Valider</button>
+                        <button class="btn btn-danger" [disabled]="!achatcodewoyofal.form.valid" type="reset">Annuler</button>
+                      </div>
+
+                    </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcredittelephone-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h4>ACHAT CREDIT TELEPHONIQUE</h4>
+                    </fieldset>
+                    <form (ngSubmit)="validachatcredittelephonique()" #achatcredittelephoniq="ngForm" autocomplete="on">
+
+                      <div class="form-group row">
+                        <label for="telephoneachatcredittelephone" class="col-sm-3 col-form-label">Numéro téléphone</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephoneachatcredittelephone" class="form-control" placeholder="numéro de téléphone" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="montantachatcredittelephone" class="col-sm-3 col-form-label">Montant d'achat</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantachatcredittelephone" class="form-control" placeholder="montant d'achat" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="!achatcredittelephoniq.form.valid">Valider</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!achatcredittelephoniq.form.valid" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>
+
+<!-- Les Modal -->
+<div class="modal fade" id="myModalPostSenec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="detailfacturepostcash">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Détail facture</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="detailfacturepostcash.errorCode=='0'">
+          <p>Erreur de saisie</p>
+          <p>Veuillez-reverifier les données saisie</p>
+        </div>
+        <div *ngIf="!detailfacturepostcash.errorCode">
+          <p><strong>Police: {{detailfacturepostcash.police}}</strong></p>
+          <p><strong>Numéro de facture: {{detailfacturepostcash.numeroFacture}}</strong></p>
+          <p><strong>Client: {{detailfacturepostcash.nom_client}}</strong></p>
+          <p><strong>Montant: {{detailfacturepostcash.montant}}</strong></p>
+          <p><strong>Date Echeance: {{detailfacturepostcash.dateEcheance}}</strong></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="idmodalfermePostSenec" data-dismiss="modal" #closeBtnModalPostSenec>Annuler</button>
+        <button *ngIf="!detailfacturepostcash.errorCode" type="button" class="btn btn-success" (click)="validatereglementsenelec()">Valider paiement</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal code validation -->
+<div class="modal fade" id="myModalCodeValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabelCodeValidation" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="detailcodevalidateretraitespece">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabelCodeValidation">Code de validation</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="detailcodevalidateretraitespece.errorCode != '0'">
+          <p>Erreur de saisie</p>
+          <p>Veuillez-reverifier les données saisie</p>
+        </div>
+        <div *ngIf="detailcodevalidateretraitespece.errorCode == '0'">
+            <input type="text" [(ngModel)]="this.codevalidation"   name="detailcodevalidation" id="detailcodevalidation" class="form-control" placeholder="code validation" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="idmodalfermeCodeValidation" data-dismiss="modal" #closeBtnModalCodeValidation>Annuler</button>
+        <button type="button"  class="btn btn-success" [disabled]="!codevalidation" (click)="validateretraitespeceaveccarte()">Valider retrait</button>
+      </div>
+    </div>
+  </div>
+</div>

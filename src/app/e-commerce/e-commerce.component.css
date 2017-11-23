@@ -1,0 +1,32 @@
+td, th{
+    padding-left: 3rem ;
+    padding-right: 3rem ;
+}
+
+.extremite{
+	text-align: center ;
+}
+
+.ecomBtn{
+	margin-top: 0.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    background-color: #337ab7;
+    color: white;
+    border: 1px solid #337ab7;
+}
+
+.ecomBtn:hover{
+    background-color: white;
+    color: #337ab7;
+}
+
+#ecomhome{
+	margin-left: 2rem; 
+}
+
+#cmdInformer{
+    padding-left: 30%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

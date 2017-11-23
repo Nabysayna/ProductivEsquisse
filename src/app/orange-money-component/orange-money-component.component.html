@@ -1,0 +1,375 @@
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            
+            <h2>OrangeMoney</h2>
+
+        </div>
+        <!-- /.panel-heading -->
+
+        <div class="cover"></div>
+
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <div id="om-options">
+                <a href="#depot" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialise()"  data-toggle="tab">Depôt </a>
+                
+                <a href="#retrait" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialise()" data-toggle="tab">Retrait </a>
+                
+                <a href="#retraitcode" (click)="reinitialiseRcode()" data-toggle="tab">Retrait avec code</a>
+
+                <a href="#retraitinter" (click)="reinitialise()" data-toggle="tab">Retrait sur compte </a>
+                
+                <a href="#achatcred" style="padding-left: 1rem; padding-right: 1rem;" (click)="reinitialise()" data-toggle="tab">Vente crédit</a>
+                
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="depot">
+                        <h2>Dépôt</h2>
+                        <h3 *ngIf="depotreussi"  class="alert alert-success">Depot reussi!</h3>
+                        <h3 *ngIf="echecdepot" class="alert alert-danger">Echec de l'operation reessayer plus tard SVP!</h3>
+                        
+                        <form name="transnat" (ngSubmit)="ajout()" #formdepot="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+							<div class="form-inline">
+							 <label>Numéro du client  :</label>
+                             <input autocomplete="off" type="text" (keyup)="verifNumber($event)" autocomplete="off" pattern="[0-9]*" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" autofocus>
+                             <p *ngIf="mag1" style="color:red">numero incorrect</p>
+                            </div>
+                            <div class="form-inline">
+							 <label>Montant transfert :</label>
+                             <input type="text" autocomplete="off" (keyup)="verifMontant($event)" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                             <p *ngIf="mag2" style="color:red">montant incorrect</p>
+                            </div>
+                            <button style="margin-top: 1rem;"   type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="retrait">
+                        <h2>Retrait sur compte principal</h2>
+                        <h3 *ngIf="retraitreussi" class="alert alert-success">Retrait reussi!</h3>
+                        <h3 *ngIf="echecretrait" class="alert alert-success">Echec de l'operation reussi!</h3>
+                        <form name="transnat" (ngSubmit)="retirermodal()" #formretrait="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+						  <div class="form-inline">
+							<label>Numéro du client :</label>
+                            <input type="text" autocomplete="off" (keyup)="verifNumber($event)" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                          </div>
+                          <div class="form-inline">
+							<label>Montant à retirer :</label>
+                            <input type="text" autocomplete="off" (keyup)="verifMontant($event)" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                          </div>
+                            <button style="margin-top: 1rem;"  type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="transnat">
+                        <h2>Transfert National</h2>
+                        <h3 *ngIf="transintreussi" class="alert alert-success">Operation reussi!</h3>
+                        <h3 *ngIf="echectransint" class="alert alert-success">Echec de l'operation reussi!</h3>
+                        <form name="transnat" (ngSubmit)="transferer('national')" #formtransnat="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                           <div class="form-inline"> 
+							<label>Numéro du client</label>
+                            <input type="text" autocomplete="off" (keyup)="verifNumber($event)" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                           </div>
+                           <div class="form-inline">
+							<label>Montant du transefert</label>
+                            <input type="text" autocomplete="off" (keyup)="verifMontant($event)" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                           </div>
+                            <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="transint">
+                        <h2>Transfert International</h2>
+                        <h3 *ngIf="transintreussi" class="alert alert-success">Operation reussi!</h3>
+                        <h3 *ngIf="echectransint" class="alert alert-success">Echec de l'operation reussi!</h3>
+                        <form name="transnat" (ngSubmit)="transferer('international')" #formtransint="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                           <div class="form-inline">
+							<label>Montant du tranfert</label>
+                            <input type="text" autocomplete="off" (keyup)="verifNumber($event)" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                           </div>
+                           <div class="form-inline">
+                            <input type="text" autocomplete="off" (keyup)="verifMontant($event)" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                           </div>
+                            <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+                </div>
+
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcred">
+
+                         <h2>Achat crédit</h2>
+                         <h4>La vente de crédit sera bientôt disponible.</h4>
+
+<!--                         <form name="transnat" (ngSubmit)="showmodalventecredit()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                            <input type="string" autocomplete="off" (keyup)="verifNumber($event)" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+
+                            <input type="string" autocomplete="off" (keyup)="verifMontant($event)" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+
+                            <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+                
+ -->
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="retraitinter">
+
+                        <h2>Retrait sur compte de Reception</h2>
+
+                        <h4>Le retrait sur compte de reception international sera bientôt disponible.</h4> 
+
+<!--                         <form name="transnat" (ngSubmit)="showmodalretraitinter()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                            <input type="text" [(ngModel)]="this.numclient" autocomplete="off" (keyup)="verifNumber($event)" id="numclient" name="this.numclient" class="form-control" placeholder="Numéro du client" required autofocus>
+
+                            <input type="text" [(ngModel)]="this.mnt" autocomplete="off" (keyup)="verifMontant($event)" id="mnttrans" name="this.mnt"  class="form-control" placeholder="Montant du transfert" required autofocus>
+
+                            <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                        </form>
+ -->                
+                </div>
+
+
+                <div class="tab-pane fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="retraitcode">
+
+
+                        <h2>Retrait avec code</h2>
+                        <h4>Le retrait avec code  sera bientôt disponible.</h4> 
+
+<!--                         <h3 *ngIf="retraitcodereussi" class="alert alert-success">Retrait reussi!</h3>
+                        <form name="transnat" (ngSubmit)="showmodalretraitcode()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;" class="">
+                          
+                           <div class="form-inline row">
+							<label style="padding:1.5em" class="col-lg-5">Code de retrait :</label>
+                            <input type="text" [(ngModel)]="this.coderetrait" autocomplete="off" (keyup)="verifcode($event)" id="numclient" name="coderetrait"  class="form-control col-lg-5" placeholder="Code de retrait" required >
+                           </div>
+                           <div class="form-inline row">
+							<label class="col-lg-5">Prénom :</label>
+                            <input type="text" [(ngModel)]="this.prenom" autocomplete="off" (keyup)="veriprenomnom()" name="prenom"  id="numclient"  class="form-control col-lg-5" placeholder="Prenom du client" required >
+                           </div>
+                           <div class="form-inline row">
+							<label style="padding:1.5em" class="col-lg-5">Nom :</label>
+                            <input type="text" [(ngModel)]="this.nom" (keyup)="veriprenomnom()" id="mnttrans" name="nom"  class="form-control col-lg-5 " placeholder="Nom du transfert" required >
+                           </div>
+                           <div class="form-inline row">
+							<label style="padding:1.5em" class="col-lg-5">Date de naissance :</label>
+                            <input type="text" [(ngModel)]="this.date" name="date" autocomplete="off" (keyup)="verifdate($event)" id="numclient"  class="form-control col-lg-5" placeholder="Exemple : 03041900" required >
+                           </div>
+                           <div class="form-inline row">
+							<label style="padding:1.5em" class="col-lg-5">Numéro de piece d'identite :</label>
+                            <input type="text" [(ngModel)]="this.cni" (keyup)="verifcni($event)" autocomplete="off" name="cni"  id="mnttrans"  class="form-control col-lg-5" placeholder="Numero d'identite du client" required >
+                           </div>
+                           <div>
+							<label>Numéro Client</label>
+							<input type="string" (keyup)="veriftel($event)" autocomplete="off" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+
+                           </div>
+                            <button style="margin: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot3">Valider</button>
+                            <button style="margin: 1rem;" type="submit" (click)="reinitialiserformRcode()" class="btn btn-danger" >annuler</button>
+                        </form>
+ -->                        
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div bsModal #addChildModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hideAddChildModal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >numero client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="deposer()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hideAddChildModal()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+	  
+
+<!--
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="detailcodevalidateretraitespece">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabelCodeValidation">Code de validation</h4>
+      </div>
+      <div class="modal-body">
+       
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="idmodalfermeCodeValidation" data-dismiss="modal" #closeBtnModalCodeValidation>Annuler</button>
+        <button type="button"  class="btn btn-success" [disabled]="!codevalidation" (click)="validateretraitespeceaveccarte()">Valider retrait</button>
+      </div>
+    </div>
+  </div>
+  -->
+  
+</div>
+<div bsModal #modalretraitcode="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalretraitcode()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >code de retrait : {{this.coderetrait}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >prenom : {{this.prenom}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >nom : {{this.nom}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >date : {{this.date}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >telephone : {{this.numclient}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="retraitAvecCode()" class="btn btn-success" />
+				  <input type="button" value="annuler" (click)="hidemodalretraitcode()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modalretrait="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalretrait()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >numero client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="retirer()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalretrait()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modalretraitinter="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalretraitinter()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >numero client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="retraitCpteRecep()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalretraitinter()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modalventecredit="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="hidemodalventecredit()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >numero client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >montant : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="acheterCredit()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="hidemodalventecredit()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>

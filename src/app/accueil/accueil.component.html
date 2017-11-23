@@ -1,0 +1,59 @@
+<div id="wrapper">
+
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: transparent !important; border-style: hidden ;" role="navigation">
+
+        <div  id="navbHead" >
+                <app-navbar-top></app-navbar-top>
+        </div>
+        <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
+            <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
+                <ul id="gauche" class="nav in" id="side-menu">
+                  <li *ngFor="let api of registredAPIs" ><a [routerLink]="['/accueil', api]"> <img src="assets/menuticker.png" />{{api}}</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" > <img src="assets/menuticker.png" />GESTION REPORTING</a></li>
+                  <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" > <img src="assets/menuticker.png" />E-COMMERCE</a></li>
+                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" > <img src="assets/menuticker.png" />Guide d'utilisation</a></li>
+                  <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+
+            <div id="encours" style="text-align: center ; padding-top: 2.5rem ;">
+
+              <h3 style="color: orange ; font-weight: 600 ;">En cours ...</h3>
+
+              <div  (click)="finprocess(item,item.dataI)"  [ngStyle]="{'background-color':item.etats.color}" *ngFor="let item of process"    class="row pendingTask" [popover]="popTemplate" popoverTitle="{{item.data.nom}}" triggers="mouseenter:mouseleave">
+
+                <div  class="{{item.etats.load}}" style="text-align: end ;">
+                  <i *ngIf="item.etats.etat&&item.etats.color=='green'" class="fa fa-check fa-2x" aria-hidden="true"></i>
+                  <i *ngIf="item.etats.etat&&item.etats.color=='red'" class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                </div>
+
+                <div>
+                  {{item.data.nom}}
+                </div> 
+
+              </div>
+
+              <ng-template #popTemplate>...</ng-template>
+             </div>
+
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper" class="row" style="padding-top: 3rem;">
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" id="routeContainDisplayer">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+
+</div>
+    <!-- /#page-wrapper -->
+
+
+
+
+
+

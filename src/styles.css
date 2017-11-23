@@ -1,0 +1,52 @@
+
+html{
+	background-color: white ;
+}
+
+input{	 
+	margin: 1rem !important;
+}
+
+body{
+	padding-top: 0rem !important ;
+	overflow-x: hidden;
+}
+
+/*a{
+	color : white !important;
+}
+
+
+a:hover{
+	background-color : white ;
+	color : #337ab7 !important;
+}
+
+td{	
+	background-color : white !important;
+}
+*/
+.bg
+{ 
+	background-color: white;
+}
+
+.tab-pane h3{
+	padding: 1rem !important;
+}
+
+/*.panel{
+	border-style: hidden ;
+}
+
+.panel-heading{
+	font-size: -webkit-xxx-large ! important;
+	color : white !important;
+	background-color: #337ab7 !important;
+	margin-bottom: 3rem ;
+}
+
+/*.panel-body{
+	background-color : #337ab7 !important;
+}
+*/
