@@ -1,11 +1,13 @@
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Status des réclamations</h1>
+        <div class="col-sm-12">
+          <div class="panel-heading" style="background-color: #337ab7; color: white">
+            <h1>Status des réclamations</h1>
+          </div>
         </div>
     </div>
-  
-    <div class="row">
+
+    <div class="row" style="margin-top: 5rem;">
 	    <div class="col-xs-12 col-md-12 col-lg-12">
 	        <div class="row">
 	            <div class="col-xs-6">
@@ -51,13 +53,13 @@
 	                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
 	                <thead>
 	                <tr>
-	                    <th><mfDefaultSorter by="datereclamation">Date de reclamation</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="pdv">Pdv</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="adresse">Adresse</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="telephone">Telephone</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="typeservice">Type de service</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="reclamation">Message</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter [by]="sortByWordLength">Etat</mfDefaultSorter></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Date de réclamation</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Pdv</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Adresse</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Telephone</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Type de service</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Message</p></th>
+	                    <th><p class="adminmultipdvReclamationBorder">Etat</p></th>
 	                </tr>
 	                </thead>
 	                <tbody>
@@ -86,9 +88,9 @@
 	        </div>
 	    </div>
 	</div>
-            
+
 </div>
 
 <div *ngIf="this.loading">
-    <app-loader></app-loader>    
+    <app-loader></app-loader>
 </div>

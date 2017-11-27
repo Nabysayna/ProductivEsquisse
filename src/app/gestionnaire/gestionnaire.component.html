@@ -1,16 +1,18 @@
 <div id="page-wrapper">
 	<div class="row" >
         <div class="col-sm-12">
-            <h1 class="page-header">Gestionnaire</h1> 
+          <div class="panel-heading" style="background-color: #337ab7; color: white">
+            <h1>Gestionnaire</h1>
+          </div>
         </div>
     </div>
     <div class="row" style="margin-bottom: 3rem;">
                     <div class="col-sm-offset-1 col-sm-10 col-xs-12">
 						<div class="col-sm-3 col-xs-6"><a class="activeatag active" href="#traitement" data-toggle="tab" ><input type="button" value="Traitement" class="btn btn-primary" /></a></div>
 						<div class="col-sm-3 col-xs-6"><a class="activeatag" href="#recherche" data-toggle="tab"><input type="button" value="Recherche" class="btn btn-primary" /></a></div>
-	          
+
 	               </div>
-	            
+
 	</div>
   <div class="tab-content">
 	<div class="tab-pane" id="recherche">
@@ -22,7 +24,7 @@
 		<input type="button" class="btn btn-success" (click)="chercher()" value="chercher" />
 	</form>
 	<table class="table table-condensed table-striped" *ngIf="bool">
-		
+
 		<tr>
 			<th>service</th>
 			<th>montant</th>
@@ -40,7 +42,7 @@
   <div class="tab-pane fade in active" id="traitement">
 	<div class="row" >
         <div class="col-sm-12">
-            <h1 class="page-header">Operation en cour de traitement</h1> 
+            <h1 class="page-header">Operation en cour de traitement</h1>
         </div>
     </div>
 	<table class="table">
@@ -56,10 +58,10 @@
       </th>
     </tr>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Service</th>
+      <th scope="col"><p class="adminpdvgestionnaireBorder">#</p></th>
+      <th scope="col"><p class="adminpdvgestionnaireBorder">Service</p></th>
     </tr>
-   
+
   </thead>
   <tbody>
     <tr *ngFor="let item of listgestionnaireoperation">

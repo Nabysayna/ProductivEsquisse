@@ -13,7 +13,7 @@
 {
 
     border-right: 2px dotted #f8f8f8;
-    
+
 }
 
 .blockcaisse{
@@ -67,3 +67,10 @@
 	margin-left: 1rem ;
 }
 
+
+p.adminpdvcrmBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
+}

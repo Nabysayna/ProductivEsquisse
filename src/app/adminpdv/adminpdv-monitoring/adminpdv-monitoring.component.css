@@ -1,3 +1,54 @@
 #page-wrapper{
     border-style: hidden ;
 }
+
+
+/*
+.cover{
+  border : 2px solid #36A9E0 ;
+  z-index: 0 ;
+  position: relative;
+  top : -8rem ;
+  width: 88rem ;
+  height: 10rem ;
+}
+*/
+div.monitorindepositetatadminpdvCover{
+  z-index: 0;
+  border : 2px solid #36A9E0 ;
+  height: 100px;
+  position: relative;
+  top: -150px;
+
+}
+
+p.monitorindepositetatadminpdvBorder {
+  z-index: 3;
+  position: relative;
+  border-radius: 10px 0 10px 10px;
+  background-color: #337ab7;
+  color: white;
+  height:50px;
+  line-height:50px;
+  text-align:center; /* centrage horizontal */
+}
+
+div.monitorindepositetatadminpdvTitle {
+  z-index: 3;
+  position: relative;
+  border-radius: 30px 0 10px 30px;
+  background-color: #f39200;
+  color: white;
+  text-align:center; /* centrage horizontal */
+  width: 95%;
+}
+
+strong.monitorindepositetatadminpdvNbre {
+  color: #f39200;
+  text-align:center; /* centrage horizontal */
+}
+strong.monitorindepositetatadminpdvText {
+  vertical-align:middle;
+  display:inline-block;
+  line-height:25px; /* on rétablit le line-height */
+}
