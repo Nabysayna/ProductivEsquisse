@@ -1,12 +1,18 @@
 <div class="col-sm-12">
     <div class="panel panel-default">
-        <div class="panel-heading">POSTE-CASH</div>
+        <div class="panel-heading">
+
+          <h2>POSTECASH</h2>
+
+        </div>
+
+        <div class="cover"></div>
+
         <div class="panel-body">
-            <ul class="nav nav-pills">
+
+<!--             <ul class="nav nav-pills">
                 <li class="active"><a href="#rechargementespece-pills" data-toggle="tab" (click)="reinitialiser()">Rechargement Espece</a>
                 </li>
-                <!--<li><a href="#retraitespece-pills" (click)="reinitialiser()" data-toggle="tab">Retrait Espece</a>
-                </li>-->
                 <li><a href="#achatjula-pills" (click)="reinitialiser()" data-toggle="tab">Achat Jula</a>
                 </li>
                 <li><a href="#reglementsenelec-pills" (click)="reinitialiser()" data-toggle="tab">Réglement Senelec</a>
@@ -14,6 +20,18 @@
                 <li><a href="#achatcodewoyofal-pills" (click)="reinitialiser()" data-toggle="tab">Achat Code Woyofal</a>
                 </li>
             </ul>
+ -->
+            <div id="om-options">
+                <a href="#rechargementespece-pills" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialiser()"  data-toggle="tab">Rechargement Espece</a>
+                
+                <a href="#achatjula-pills" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialiser()" data-toggle="tab">Achat Jula</a>
+                
+                <a href="#reglementsenelec-pills" (click)="reinitialiser()" data-toggle="tab">Réglement Senelec</a>
+
+                <a href="#achatcodewoyofal-pills" (click)="reinitialiser()" data-toggle="tab">Achat Code Woyofal</a>
+                                
+            </div>
+
             <!-- Tab panes -->
             <div class="tab-content">
 
@@ -23,7 +41,7 @@
 
               <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="rechargementespece-pills">
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
-                        <h4> RECHARGEMENT ESPECE</h4>
+                        <h2> Rechargement Espèce</h2>
                     </fieldset>
                     <form (ngSubmit)="validrechargementespece()" #rechargementespece="ngForm" autocomplete="on">
                       <div class="form-group row">
@@ -119,7 +137,7 @@
 
                 <div class=" tab-pane fade col-sm-12 col-xs-12" id="achatjula-pills" >
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
-                        <h4> ACHAT JULA</h4>
+                        <h2> Achat JULA</h2>
                     </fieldset>
                     <form (ngSubmit)="validateachatjula()" #achatjula="ngForm" autocomplete="on">
 
@@ -152,7 +170,7 @@
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="reglementsenelec-pills">
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
-                        <h4>REGLEMENT SENELEC</h4>
+                        <h2>Règlement SENELEC</h2>
                     </fieldset>
                     <form (ngSubmit)="validatedetailfacturesenelec()" #reglementsenelec="ngForm" autocomplete="on">
 
@@ -180,7 +198,7 @@
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcodewoyofal-pills">
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
-                        <h4>ACHAT CODE WOYOFAL</h4>
+                        <h2>Achat Code Woyofal</h2>
                     </fieldset>
                     <form (ngSubmit)="validateachatcodewoyofal()" #achatcodewoyofal="ngForm" autocomplete="on">
 
@@ -208,7 +226,7 @@
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcredittelephone-pills">
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
-                        <h4>ACHAT CREDIT TELEPHONIQUE</h4>
+                        <h2>ACHAT CREDIT TELEPHONIQUE</h2>
                     </fieldset>
                     <form (ngSubmit)="validachatcredittelephonique()" #achatcredittelephoniq="ngForm" autocomplete="on">
 
