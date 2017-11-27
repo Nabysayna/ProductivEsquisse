@@ -60,8 +60,12 @@ export class GestionreportingComponent implements OnInit {
      this.loading = true ;
      this.gestionreportingServiceWeb.servicepoint(this.token).then(serviceptserviceList => {
         this.servicepoint = serviceptserviceList;
-        console.log(this.servicepoint);
+
+        this.gestionreportingServiceWeb.gestionreporting(this.token).then(gestreportserviceList => {
+        this.gestionreporting = gestreportserviceList;
+  //      console.log(this.gestionreporting);
         this.loading = false ;
+        });
      });
   }
 
@@ -98,7 +102,7 @@ export class GestionreportingComponent implements OnInit {
         this.loading = false ;
       });
 
-      }
+  }
 
       validCharge(){
        this.loading = true ;
@@ -176,6 +180,10 @@ export class GestionreportingComponent implements OnInit {
       this.caisseEtat.etat =1;
       this.caisseEtat.soldeFermet = this.caisseEtat.soldeOuvert;
     });
+  }
+
+  trimer(infosclient) : string{
+    return infosclient.replace('R', '') ;
   }
 
   enregistrerassurance(){}

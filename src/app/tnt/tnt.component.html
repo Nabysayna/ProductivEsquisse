@@ -2,15 +2,19 @@
 <div class="col-sm-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            TNT BY EXCAF
+            <h2>TNT BY EXCAF</h2>
 
         </div>
+
+        <div class="cover"></div>
+
         <!-- /.panel-heading -->
         <div class="panel-body">
             <!-- Nav tabs -->
-            <ul class="nav nav-pills" id="tnt-options">
-              <li class="active"><a href="#home-pills" data-toggle="tab" (click)="reinitialiserVariables();verifierNumInputValide = true">Nouvel Abonnement</a></li>
-              <li><a id="elec" href="#profile-pills" data-toggle="tab" (click)="listerAbonnements()">Suivis Abonnements </a></li>
+<!--             <ul class="nav nav-pills" id="tnt-options">
+              <li class="active"><a href="#home-pills" data-toggle="tab" (click)="reinitialiserVariables();verif
+
+              data-toggle="tab" (click)="listerAbonnements()">Suivis Abonnements </a></li>
 
               <li><a href="#vente-decodeur" id="vdec" data-toggle="tab" (click)="reinitialiserVariables()">Vente Décodeur</a></li>
               <li><a href="#vente-deco-liste" id="vdecolist" data-toggle="tab" (click)="listerVenteDeco()">Suivi Vente Décodeur</a></li>
@@ -18,13 +22,30 @@
               <li><a href="#vente-carte" id="vcart" data-toggle="tab" (click)="reinitialiserVariables()">Vente Carte</a></li>
               <li><a href="#vente-carte-liste" id="vcartlist" data-toggle="tab" (click)="listerVenteCarte()">Suivi Vente Carte</a></li>
 
-            </ul>
+            </ul> 
+-->
+
+            <div id="om-options">
+                <a href="#home-pills" style="" (click)="reinitialiserVariables();verifierNumInputValide = true"  data-toggle="tab">Nouvel Abonnement</a>
+                
+                <a href="#profile-pills" style="" (click)="listerAbonnements()" data-toggle="tab">Suivi Abonnements</a>
+                
+                <a href="#vente-decodeur" (click)="reinitialiserVariables()" data-toggle="tab">Vente Décodeur</a>
+
+                <a href="#vente-deco-liste" (click)="listerVenteDeco()" data-toggle="tab">Suivi Vente Décodeur</a>
+                
+                <a href="#vente-carte" style="" (click)="reinitialiserVariables()" data-toggle="tab">Vente Carte</a>
+
+                <a href="#vente-carte-liste" style="" (click)="listerVenteCarte()" data-toggle="tab">Suivi Vente Carte</a>
+                
+            </div>
+
 
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade col-sm-6 col-xs-12 in active" id="home-pills">
                     <div class="row" *ngIf="this.verifierNumInputValide" >
-                        <form name="validVerifierNum" (ngSubmit)="validVerifierNum()" #verifiernum="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <form name="validVerifierNum" (ngSubmit)="validVerifierNum()" #verifiernum="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem; text-align: -webkit-left;">
                             <label for="verifiernuminput"> Numéro chip, Numéro carte ou Téléphone </label>
                             <div class="col-md-8">
                                 <input type="number" [(ngModel)]="this.verifierNumInput" name="verifiernuminput" id="verifiernuminput"  class="form-control" placeholder="Numéro du chip ou de la carte" required autofocus>
@@ -78,7 +99,7 @@
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="profile-pills">
 
-                 <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | datafilter : filtre" #mfabo="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="orderByDate" [(mfSortOrder)]="sortDateOrder" style="width: 100%;">
+<!--                  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | datafilter : filtre" #mfabo="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="orderByDate" [(mfSortOrder)]="sortDateOrder" style="width: 100%;">
                                 <thead>
 
                                     <tr>
@@ -97,7 +118,7 @@
                                       <th><mfDefaultSorter by="duree">Durée</mfDefaultSorter></th>
                                       <th><mfDefaultSorter by="id_typeabonnement">Type Bouquet</mfDefaultSorter></th>
                                       <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
-<!--                                       <th><mfDefaultSorter by="etat">Etat</mfDefaultSorter></th> -->
+                                      <th><mfDefaultSorter by="etat">Etat</mfDefaultSorter></th>
                                    </tr>
 
                                 </thead>
@@ -117,8 +138,6 @@
 
                                   <td>{{abonnement.montant}}</td>
 
-<!--                                   <td><p *ngIf="abonnement.etat==1">En cours...</p> <p *ngIf="abonnement.etat==0">Activé!</p> </td> -->
-
                                 </tr>
                                 </tbody>
                                 <tfoot>
@@ -130,7 +149,65 @@
                                 </tfoot>
 
                             </table>
-                </div>
+ -->                
+                            <div class="row">
+
+                              <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | datafilter : filtre" #mfabo="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="orderByDate" [(mfSortOrder)]="sortDateOrder" style="width: 100%;">
+                                <thead>
+
+                                <tr>
+                                  <th colspan="5" style="padding-right: 3rem ;">
+                                    Rechercher :
+                                    <input class="form-control" [(ngModel)]="filtre"/>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <th><mfDefaultSorter by="date_abonnement">Date Abonnement</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="tel">Téléphone</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="n_chip">N_Chip</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="n_carte">N_Carte</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="duree">Durée</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="id_typeabonnement">Type Bouquet</mfDefaultSorter></th>
+                                  <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                  <th>Etat</th>
+                                </tr>
+
+                                </thead>
+                                <tbody *ngIf="this.retourTntWS" >
+                                <tr *ngFor="let abonnement of mfabo.data" [ngStyle]="{'color': 'white', 'background-color': abonnement.etatactivation?'green':'red'}">
+                                  <td>{{abonnement.date_abonnement}}</td>
+                                  <td>{{abonnement.prenom}}</td>
+                                  <td>{{abonnement.nom}}</td>
+                                  <td>{{abonnement.tel}}</td>
+                                  <td>{{abonnement.n_chip}}</td>
+                                  <td>{{abonnement.n_carte}}</td>
+                                  <td>{{abonnement.duree}}</td>
+
+                                  <td *ngIf="abonnement.id_typeabonnement==1">Maanaa</td>
+                                  <td *ngIf="abonnement.id_typeabonnement==2">Boul Khool</td>
+                                  <td *ngIf="abonnement.id_typeabonnement==3">Maanaa + Boul Khool</td>
+
+                                  <td>{{abonnement.montant}}</td>
+                                  <td>{{abonnement.etatactivation?'Activé':'En cours'}}</td>
+
+                                  <!--                                   <td><p *ngIf="abonnement.etat==1">En cours...</p> <p *ngIf="abonnement.etat==0">Activé!</p> </td> -->
+
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                  <td colspan="5">
+                                    <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                  </td>
+                                </tr>
+                                </tfoot>
+
+                              </table>
+                            </div>
+
+                    </div>
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="vente-decodeur">
 
@@ -417,7 +494,7 @@
 						 </div>
 						 
 						 <div class="form-group">
-							 <label > Type bouquet : {{this.tbouquet}}</label>
+							 <label > Type bouquet : {{this.tbouquetNewClient}}</label>
 						 </div>
 						 
 					 </form>
@@ -458,9 +535,6 @@
 						 </div>
 						 <div class="form-group">
 							 <label > Adresse client : {{this.adresseNewClient}}</label>
-						 </div>
-						 <div class="form-group"> 
-							 <label >Numero chip : {{this.nchipNewClient}}</label>
 						 </div>
 						 <div class="form-group">
 							 <label >Numero carte : {{this.ncarteNewClient}}</label>

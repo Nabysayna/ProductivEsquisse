@@ -1,12 +1,15 @@
 <div class="col-sm-12">
     <div class="panel panel-default">
         <div class="panel-heading" >
-            GESTION & REPORTING
+            <h2>Gestion & Reporting </h2>
         </div>
+
+        <div class="cover"></div>
+
         <!-- /.panel-heading -->
         <div class="panel-body">
             <!-- Nav tabs -->
-            <ul class="nav nav-pills">
+<!--             <ul class="nav nav-pills">
                 <li class="active"><a href="#historique" data-toggle="tab" (click)="histop()">Historique des Opérations</a>
                 </li>
                 <li><a id="elec" href="#charges" data-toggle="tab">Dépenses</a>
@@ -18,27 +21,44 @@
                 <li><a id="elec" href="#approvisionnement"  (click)="etatcaisse()" data-toggle="tab">Caisse</a>
                 </li>
             </ul>
+ -->
+
+            <div id="om-options">
+                <a href="#historique" style="padding-left: 4rem; padding-right: 4rem;" (click)="histop()"  data-toggle="tab">Historique des Opérations</a>
+                
+                <a href="#charges" style="padding-left: 4rem; padding-right: 4rem;" data-toggle="tab">Dépenses</a>
+                
+                <a href="#ventes"  data-toggle="tab">Recettes</a>
+
+                <a href="#reclamation" data-toggle="tab">Réclamations</a>
+
+                <a href="#approvisionnement" (click)="etatcaisse()" data-toggle="tab">Caisse</a>
+                                
+            </div>
+
+
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="historique">
                     <div class="panel panel-default">
                         <fieldset>
-                            <h4>Historique Opérations</h4>
+                            <h2>Historique Opérations</h2>
                         </fieldset>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="gestionreporting|filtregestionreporting:filtre" #fho="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                           <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="gestionreporting|filtregestionreporting:filtre" #fho="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%; margin-top: 4rem ;">
                                         <thead>
                                             <tr>
                                                 <th colspan="3" style="padding-right: 3rem ;">
                                                     Rechercher :
-                                                    <input class="form-control" [(ngModel)]="filtre"/>
+                                                    <input class="form-control" name="filtre" id="filtre" [(ngModel)]="filtre"/>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
+                                                <th><mfDefaultSorter by="dateoperation.date">Date</mfDefaultSorter></th>
                                                 <th><mfDefaultSorter by="operateur">Service</mfDefaultSorter></th>
                                                 <th><mfDefaultSorter by="traitement">Traitement</mfDefaultSorter></th>
                                                 <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                                <th><mfDefaultSorter by="infoclient">Client</mfDefaultSorter></th>
                                            </tr>
                                     
                                         </thead>
@@ -48,6 +68,10 @@
                                             <td>{{gestionreporting.operateur}}</td>
                                             <td>{{gestionreporting.traitement}}</td>
                                             <td>{{currencyFormat(gestionreporting.montant)}}</td>
+                                            <td> 
+                                                <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a> 
+                                                <a *ngIf="gestionreporting.operateur!='orangemoney'"> --- </a> 
+                                            </td>
                                         </tr>
                                         </tbody>
                                         <tfoot>
@@ -69,7 +93,7 @@
                 <div class="tab-pane fade" id="charges">
                         <div class="panel">
                         <fieldset >
-                            <h4>Enregistrer une dépense</h4>
+                            <h2>Enregistrer une dépense</h2>
                         </fieldset>
                         
                          <div class="col-sm-12 col-xs-12" >
@@ -90,10 +114,10 @@
                 <div class="tab-pane fade" id="ventes">
                     <div class="panel">
                         <fieldset >
-                            <h4>Enregistrer une Recette</h4>
+                            <h2>Enregistrer une Recette</h2>
                         </fieldset>
                         
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-12 col-xs-12" style="margin-top: 4rem ;">
                                            
                                <div  class="col-sm-3 col-xs-12" style="margin-top: -1rem;"> <label>Service </label><select class="form-control input-sm" [(ngModel)]="servicevente" >
                                <option>---Faites un choix---</option>
@@ -105,7 +129,7 @@
                                 <option>---Faites un choix---</option>
                                 <option  *ngFor="let designation of getDesignations()">{{ designation }}</option>
                                 </select>
-                             </div>
+                                </div>
                                <div class="col-sm-3 col-xs-12" style="margin-top: -2rem;"> <label>Quantité</label><input type="number" [(ngModel)]="quantite"   name="qte" id="qte" class="form-control" placeholder="quantité" required></div>
 
                                 <div class="col-sm-3 col-xs-12" style="margin-top: 1rem;" *ngIf="servicevente.toLowerCase()!='assurance'"><button id="validcharge" class="btn  btn-primary btn-block" type="submit" (click)="validvente()">Valider</button>
@@ -131,7 +155,7 @@
                 <div class="tab-pane fade" id="reclamation">
                     <div class="panel">
                         <fieldset >
-                            <h4>Réclamation</h4>
+                            <h2>Réclamation</h2>
                         </fieldset>
                         <div class="col-sm-12 col-xs-12" >
                                            <div class="col-sm-3 col-xs-12" style="margin-left: -2rem;"><input type="text" [(ngModel)]="sujet"   name="sujet" id="sujet" class="form-control"  placeholder="Motif réclamation" required></div> 
@@ -152,7 +176,7 @@
                 <div class="tab-pane fade" id="approvisionnement">
                     <div class="panel">
                         <fieldset >
-                            <h4>Etat de la caisse</h4>
+                            <h2>Etat de la caisse</h2>
                         </fieldset>
                         <div class="col-sm-12 col-xs-12" *ngIf="caisseEtat">
                             <h3>Solde caisse : {{currencyFormat(caisseEtat.soldeFermet)}}.FCFA </h3>

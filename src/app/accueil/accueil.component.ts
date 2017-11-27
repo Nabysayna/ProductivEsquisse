@@ -41,7 +41,7 @@ export class AccueilComponent implements OnInit {
     setInterval(()=>{
      
     if(sessionStorage.getItem('curentProcess')!="" && sessionStorage.getItem('curentProcess')!=undefined){
-      let infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':''};
+      let infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':'', 'errorCode':'*'};
       let sesion={'data':JSON.parse(sessionStorage.getItem('curentProcess')),'etats':infoOperation,'dataI':''};
      // var newprocess={'operation':sesion.operation,'montant':sesion.montant,'num':sesion.num};
       
@@ -76,7 +76,6 @@ export class AccueilComponent implements OnInit {
         
         case 2:{
              var operation=sesion.data.operation;
-                 console.log("Orange Money was choosen and operateur is :"+operateur) ;
 
               switch(operation){
                 case 1:{
@@ -106,8 +105,6 @@ export class AccueilComponent implements OnInit {
 
        case 4:{
              var operation=sesion.data.operation;
-
-             console.log("TNT was choosen and OPERATEUR IS :"+operateur) ;
 
              switch(operation){
               case 1:{
@@ -153,6 +150,7 @@ export class AccueilComponent implements OnInit {
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
+               objet.etats.errorCode='0'; 
             }
            
            setTimeout(()=>{
@@ -163,33 +161,39 @@ export class AccueilComponent implements OnInit {
                    objet.etats.etat=true;
                    objet.etats.load='terminated';
                    objet.etats.color='green';
-                   clearInterval(periodicVerifier) ;
                 }
-                if(donnee=='0'){
-                   objet.etats.etat=true;
-                   objet.etats.load='terminated';
-                   objet.etats.color='red';
-                   clearInterval(periodicVerifier) ;
+                else{
+                  if(donnee!='-1'){
+                     objet.etats.etat=true;
+                     objet.etats.load='terminated';
+                     objet.etats.color='red'; 
+                     objet.etats.errorCode=donnee; 
+                   }else{
+                        var periodicVerifier = setInterval(()=>{
+                        this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
+                          var donnee=rep._body.trim().toString();
+                          console.log("Inside verifier depot : "+donnee) ;
+                          if(donnee=='1'){
+                             objet.etats.etat=true;
+                             objet.etats.load='terminated';
+                             objet.etats.color='green';
+                             clearInterval(periodicVerifier) ;
+                          }
+                          else{
+                            if(donnee!='-1'){
+                             objet.etats.etat=true;
+                             objet.etats.load='terminated';
+                             objet.etats.color='red';
+                             objet.etats.errorCode=donnee; 
+                             clearInterval(periodicVerifier) ;
+                            }
+                          }
+                        });
+                        },2000);
+                   } 
                 }
               });
-              var periodicVerifier = setInterval(()=>{
-              this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
-                var donnee=rep._body.trim().toString();
-                console.log("Inside verifier depot : "+donnee) ;
-                if(donnee=='1'){
-                   objet.etats.etat=true;
-                   objet.etats.load='terminated';
-                   objet.etats.color='green';
-                   clearInterval(periodicVerifier) ;
-                }
-                if(donnee=='0'){
-                   objet.etats.etat=true;
-                   objet.etats.load='terminated';
-                   objet.etats.color='red';
-                   clearInterval(periodicVerifier) ;
-                }
-              });
-              },2000);
+
            },5000);
       }
       else{
@@ -209,6 +213,8 @@ export class AccueilComponent implements OnInit {
     if (this.repeatedInLastFifteen('om-retrait', requete)==1)
            requete = requete+'R' ;
 
+        console.log("WE SENT "+requete) ;
+
     this.omService.requerirControllerOM(requete).then( resp => {
       if (resp.status==200){
 
@@ -218,6 +224,7 @@ export class AccueilComponent implements OnInit {
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
+           objet.etats.errorCode='0'; 
         }
 
            setTimeout(()=>{
@@ -231,32 +238,39 @@ export class AccueilComponent implements OnInit {
                    objet.etats.color='green';
                    clearInterval(periodicVerifier) ;
                 }
-                if(donnee=='0'){
+                else{
+                  if(donnee!='-1'){
                    objet.etats.etat=true;
                    objet.etats.load='terminated';
                    objet.etats.color='red';
+                   objet.etats.errorCode=donnee; 
                    clearInterval(periodicVerifier) ;
+                  }else{
+                      var periodicVerifier = setInterval(()=>{
+                      this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
+                        var donnee=rep._body.trim().toString();
+                        console.log("Inside verifier retrait: "+donnee) ;
+                        if(donnee=='1'){
+                           objet.etats.etat=true;
+                           objet.etats.load='terminated';
+                           objet.etats.color='green';
+                           clearInterval(periodicVerifier) ;
+                        }
+                        else{
+                          if(donnee!='-1'){
+                           objet.etats.etat=true;
+                           objet.etats.load='terminated';
+                           objet.etats.color='red';
+                           objet.etats.errorCode=donnee; 
+                           clearInterval(periodicVerifier) ;
+                          }
+                        }
+                      });
+                      },2000);
+                  }
                 }
               });
 
-              var periodicVerifier = setInterval(()=>{
-              this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
-                var donnee=rep._body.trim().toString();
-                console.log("Inside verifier retrait: "+donnee) ;
-                if(donnee=='1'){
-                   objet.etats.etat=true;
-                   objet.etats.load='terminated';
-                   objet.etats.color='green';
-                   clearInterval(periodicVerifier) ;
-                }
-                if(donnee=='0'){
-                   objet.etats.etat=true;
-                   objet.etats.load='terminated';
-                   objet.etats.color='red';
-                   clearInterval(periodicVerifier) ;
-                }
-              });
-              },2000);
            },20000);
       }
       else{
@@ -377,20 +391,70 @@ export class AccueilComponent implements OnInit {
 
 
   acheterCredit(objet:any){
+
     let requete = "5/"+objet.data.numclient+"/"+objet.data.montant;
- 
+
+    if (this.repeatedInLastFifteen('om-vente-credit', requete)==1)
+           requete = requete+'R' ;
+
     this.omService.requerirControllerOM(requete).then( resp => {
       if (resp.status==200){
-        if (resp._body=='1'){
-          objet.etats.etat=true;
-          objet.etats.load='terminated';
-          objet.etats.color='green';
-         // this.process[objet.id]=objet;
-        }
+
+            if(resp._body.trim()=='0'){
+               objet.etats.etat=true;
+               objet.etats.load='terminated';
+               objet.etats.color='red';
+            }
+           
+           setTimeout(()=>{
+              this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
+                var donnee=rep._body.trim().toString();
+                console.log("Inside verifier depot : "+donnee) ;
+                if(donnee=='1'){
+                   objet.etats.etat=true;
+                   objet.etats.load='terminated';
+                   objet.etats.color='green';
+                }
+                else{
+                  if(donnee!='-1'){
+                     objet.etats.etat=true;
+                     objet.etats.load='terminated';
+                     objet.etats.color='red'; 
+                     objet.etats.errorCode=donnee; 
+                   }else{
+                        var periodicVerifier = setInterval(()=>{
+                        this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
+                          var donnee=rep._body.trim().toString();
+                          console.log("Inside verifier depot : "+donnee) ;
+                          if(donnee=='1'){
+                             objet.etats.etat=true;
+                             objet.etats.load='terminated';
+                             objet.etats.color='green';
+                             clearInterval(periodicVerifier) ;
+                          }
+                          else{
+                            if(donnee!='-1'){
+                             objet.etats.etat=true;
+                             objet.etats.load='terminated';
+                             objet.etats.color='red';
+                             objet.etats.errorCode=donnee; 
+                             clearInterval(periodicVerifier) ;
+                            }
+                          }
+                        });
+                        },2000);
+                   } 
+                }
+              });
+
+           },5000);
       }
-      else
+      else{
         console.log("error") ; 
-    }) ;
+        
+        }
+    });
+
   }
 
 
@@ -528,27 +592,22 @@ export class AccueilComponent implements OnInit {
 
 
   finprocess(etat:any,imprime:any){
-     if(etat.etats.etat==true){     
-       if(etat.data.operateur==1){
-        
-			 sessionStorage.setItem('dataImpression', JSON.stringify(imprime));
-			 this.router.navigate(['accueil']);
-			 setTimeout(()=>this.router.navigate(['accueil/impression']),100);
-		 
-		 }
+     if(etat.etats.etat==true){ 
 
-	   if(etat.data.operateur==4){
-	       sessionStorage.setItem('dataImpression', JSON.stringify(imprime));
-		   this.router.navigate(['accueil']);
-		   setTimeout(()=>this.router.navigate(['accueil/impression']),100);
-	   }
-	   this.process.splice(etat.etats.id,1);
-     for (let i=0 ; i<this.process.length ; i++){
-      if(this.process[i].etats.id > etat.etats.id)
-        this.process[i].etats.id = this.process[i].etats.id - 1 ;
-     }
-	   console.log(etat.etats.id);
-	  }
+       if(etat.data.operateur!=2 && etat.etats.color=='green'){
+        
+  			 sessionStorage.setItem('dataImpression', JSON.stringify(imprime));
+  			 this.router.navigate(['accueil']);
+  			 setTimeout(()=>this.router.navigate(['accueil/impression']),100);
+        }
+  		 
+     	   this.process.splice(etat.etats.id,1);
+         for (let i=0 ; i<this.process.length ; i++){
+          if(this.process[i].etats.id > etat.etats.id)
+            this.process[i].etats.id = this.process[i].etats.id - 1 ;
+         }
+    	   console.log(etat.etats.id);
+    }
   }
 
 
@@ -558,7 +617,7 @@ export class AccueilComponent implements OnInit {
 
   validnabon(objet:any){
 
-    this.tntCaller.abonner(objet.data.token, objet.data.prenom,objet.data.nom, objet.data.tel,objet.data.cni, objet.data.chip, objet.data.chip, objet.data.duree, objet.data.typedebouquet).then( response =>
+    this.tntCaller.abonner(objet.data.token, objet.data.prenom,objet.data.nom, objet.data.tel,objet.data.cni, objet.data.chip, objet.data.carte, objet.data.duree, objet.data.typedebouquet).then( response =>
       {
 
         let typedebouquet = "" ;
@@ -605,6 +664,7 @@ export class AccueilComponent implements OnInit {
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
+           objet.etats.errorCode='0'; 
       }
 
       });
@@ -616,7 +676,7 @@ export class AccueilComponent implements OnInit {
 
    vendreDecodeur(objet:any){
  
-    this.tntCaller.vendreDecodeur('2455668745', objet.data.prenom,objet.data.nomclient,objet.data.tel, objet.data.adresse, objet.data.region, objet.data.cni,objet.data.chip,objet.data.carte, objet.data.duree, objet.data.typedebouquet, objet.data.prix).then( response =>
+    this.tntCaller.vendreDecodeur('2455668745', objet.data.prenom,objet.data.nomclient,objet.data.tel, objet.data.adresse, objet.data.region, objet.data.cni,objet.data.chip,objet.data.carte, objet.data.duree, objet.data.typedebouquet, objet.data.montant).then( response =>
       {
         if(response=="ok"){
 
@@ -643,9 +703,10 @@ export class AccueilComponent implements OnInit {
           objet.etats.color='green';
           
         }else{
-           objet.etats.etat=false;
+           objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
+           objet.etats.errorCode='0'; 
         }
 
       }); 
@@ -678,9 +739,10 @@ export class AccueilComponent implements OnInit {
           objet.etats.color='green';
         }
         else{
-           objet.etats.etat=false;
+           objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
+           objet.etats.errorCode='0'; 
         }
     });
   }
@@ -719,6 +781,37 @@ export class AccueilComponent implements OnInit {
   }
 
 /****************************************************************************************************/
+
+
+  retrieveOperationInfo(item : any) : string{
+
+/* OM */
+     if(item.data.operateur==2 ){
+
+        if (item.etats.errorCode=='0')
+          return "Vous n'êtes pas autorisé à effectuer cette opèration." ;
+
+        if (item.etats.errorCode=='-2')
+          return "Le client a atteint le nombre maximum de transactions par jour en tant que beneficiaire" ;
+        if (item.etats.errorCode=='-3')
+          return "Le solde du compte du client ne lui permet pas d'effectuer cette opèration" ;
+        if (item.etats.errorCode=='-4')
+          return "Le beneficiaire a atteint le montant maximum autorisé par mois" ;
+        if (item.etats.errorCode=='-5')
+          return "Le montant maximum cumulé de transactions par semaine en tant que beneficiaire a ete atteint par le client" ;
+        if (item.etats.errorCode=='-6')
+          return "Le destinataire n'est pas un client orangemoney" ;
+    }
+
+     if(item.data.operateur==4 ){
+
+        if (item.etats.errorCode=='0')
+          return "Vous n'êtes pas autorisé à effectuer cette opèration." ;
+    }
+
+
+  }
+
 
 
 }
