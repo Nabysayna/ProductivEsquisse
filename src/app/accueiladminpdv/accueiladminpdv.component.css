@@ -25,7 +25,7 @@
     border-color: #e7e7e7;
     color : white;
 }
-#navbHead a:hover{  
+#navbHead a:hover{
     color : #F39200 !important ;
 }
 
@@ -54,14 +54,17 @@
     width: 23.5rem ;
     margin-top: 0 ;
 /*    height: 70rem;*/
-    background-color: white !important; 
+    background-color: white !important;
 }
 
 @media screen and (max-width:640px) {
- 
+
  #leftsidemenu{
     height:100%;
  }
-   
+
 }
 
+a > i{
+  color: #337ab7;
+}
