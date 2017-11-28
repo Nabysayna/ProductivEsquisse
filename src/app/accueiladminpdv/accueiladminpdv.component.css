@@ -51,6 +51,7 @@
 }
 
 #leftsidemenu{
+  margin-left: 1rem;
     width: 23.5rem ;
     margin-top: 0 ;
 /*    height: 70rem;*/

@@ -1,9 +1,10 @@
 
 html{
 	background-color: white ;
+  font-weight: bold;
 }
 
-input{	 
+input{
 	margin: 1rem !important;
 }
 
@@ -22,12 +23,12 @@ a:hover{
 	color : #337ab7 !important;
 }
 
-td{	
+td{
 	background-color : white !important;
 }
 */
 .bg
-{ 
+{
 	background-color: white;
 }
 

@@ -1,18 +1,15 @@
 <div id="page-wrapper">
     <div class="row" >
         <div class="col-sm-12">
-          <div class="panel-heading" style="background-color: #337ab7; color: white ; margin-bottom: 5rem">
+          <div class="panel-heading adminpdvcrmTitle" style="margin-bottom: 2rem">
             <h1>Gestion Clientèle</h1>
           </div>
 
 	            <div class="row" style="margin-bottom: 3rem;">
                     <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-	                <div class="col-sm-3 col-xs-6"><a class="activeatag active" href="#portefeuille" data-toggle="tab" (click)="prtflle()">Portefeuille</a>
-	                </div>
+	                <div class="col-sm-3 col-xs-6"><a class="activeatag active" href="#portefeuille" data-toggle="tab" (click)="prtflle()">Portefeuille</a></div>
 	                <div class="col-sm-3 col-xs-6"><a class="activeatag" href="#suivi" data-toggle="tab">Suivi</a></div>
-
 	                <div class="col-sm-3 col-xs-6"><a class="activeatag" href="#prospection" data-toggle="tab" (click)="prospect()">Prospection</a></div>
-
 	                <div class="col-sm-3 col-xs-6"><a class="activeatag" href="#suivicommande" data-toggle="tab" (click)="commandes()">Suivi Commandes</a></div>
 	               </div>
 
@@ -30,7 +27,7 @@
 		                                    <tr>
 		                                        <th colspan="3" style="padding-right: 3rem ;">
 		                                            Rechercher :
-		                                            <input class="form-control" [(ngModel)]="filtre"/>
+		                                            <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
 		                                        </th>
 				                            </tr>
 		                                    <tr>
@@ -42,7 +39,7 @@
 
 		                                </thead>
 		                                <tbody *ngIf="this.portefeuille">
-		                                <tr *ngFor="let portefeuille of fpf.data">
+		                                <tr *ngFor="let portefeuille of fpf.data" style="color: #337ab7;">
 		                                    <td>{{portefeuille.prenom}}</td>
                                         <td>{{portefeuille.nom}}</td>
 		                                    <td>{{portefeuille.telephone}}</td>
@@ -78,30 +75,30 @@
 			                                    <tr>
 			                                        <th colspan="3" style="padding-right: 3rem ;">
 			                                            Rechercher :
-			                                            <input class="form-control" [(ngModel)]="filtre"/>
+			                                            <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
 			                                        </th>
 			                                        <th colspan="2" style="padding-right: 3rem ;">
 							                           <button  class="btn btn-primary" (click)="showChildModal('relancegroupe','')">Envoyer sms</button>
 			                                        </th>
 					                            </tr>
 			                                    <tr>
-			                                    	 <th><mfDefaultSorter by="index">Choisir</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="telephone">Téléphone</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="nomservice">Service</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="echeance">Echéance</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter >Action</mfDefaultSorter></th>
+			                                    	 <th><p class="adminpdvcrmBorder">Choisir</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Nom</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Prénom</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Téléphone</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Service</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Echéance</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Action</p></th>
 			                                   </tr>
 
 			                                </thead>
 			                                <tbody *ngIf="this.relance">
-			                                <tr *ngFor="let relance of frla.data ; let i = index ">
+			                                <tr *ngFor="let relance of frla.data ; let i = index " style="color: #337ab7;">
 			                                	<td>
 			                                	<input type="checkbox" #checkbox (change)="checkThisForRelance(checkbox.checked,relance,i)">
 			                                	</td>
-			                                    <td>{{ relance.nom }}</td>
 			                                    <td>{{ relance.prenom }}</td>
+                                        <td>{{ relance.nom }}</td>
 			                                    <td>{{ relance.telephone }}</td>
 			                                    <td>{{relance.nomservice}}</td>
 			                                    <td>{{relance.echeance.date}}</td>
@@ -147,27 +144,27 @@
 			                                    <tr>
 			                                        <th colspan="3" style="padding-right: 3rem ;">
 			                                            Rechercher :
-			                                            <input class="form-control" [(ngModel)]="filtre"/>
+			                                            <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
 			                                        </th>
 					                            </tr>
 	  		                                    <tr>
-   		                                    	    <th><mfDefaultSorter by="index">Choisir</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="telephone">Téléphone</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="periofidel">Périodicité/Fidélité</mfDefaultSorter></th>
-			                                        <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
+                                              <th><p class="adminpdvcrmBorder">Choisir</p></th>
+                                              <th><p class="adminpdvcrmBorder">Prénom</p></th>
+                                              <th><p class="adminpdvcrmBorder">Nom</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Téléphone</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Périodicité/Fidélité</p></th>
+			                                        <th><p class="adminpdvcrmBorder">Service</p></th>
 
 			                                   </tr>
 
 			                                </thead>
 			                                <tbody *ngIf="this.promotion">
-			                                <tr *ngFor="let promotion of fpr.data ; let i = index ">
+			                                <tr *ngFor="let promotion of fpr.data ; let i = index "  style="color: #337ab7;">
 			                                	<td>
 			                                	<input type="checkbox" #checkboxprom (change)="checkThisForPromo(checkboxprom.checked,promotion,i)">
 			                                	</td>
+                                        <td>{{promotion.prenom}}</td>
 			                                    <td>{{promotion.nom}}</td>
-			                                    <td>{{promotion.prenom}}</td>
 			                                    <td>{{promotion.telephone}}</td>
 			                                    <td>{{promotion.periofidel}}</td>
 			                                    <td>{{promotion.service}}</td>
@@ -198,23 +195,22 @@
 	                                <tr>
 	                                    <th colspan="3" style="padding-right: 3rem ;">
 	                                        Rechercher :
-	                                        <input class="form-control" [(ngModel)]="filtre"/>
+	                                        <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
 	                                    </th>
 		                            </tr>
 	                                <tr>
-	                                    <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
-	                                    <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
-	                                    <th><mfDefaultSorter by="telephone">Téléphone</mfDefaultSorter></th>
-	                                    <th><mfDefaultSorter by="infovente">Détail</mfDefaultSorter></th>
-	                                    <th><mfDefaultSorter >Action</mfDefaultSorter></th>
-
+                                      <th><p class="adminpdvcrmBorder">Prénom</p></th>
+	                                    <th><p class="adminpdvcrmBorder">Nom</p></th>
+	                                    <th><p class="adminpdvcrmBorder">Téléphone</p></th>
+	                                    <th><p class="adminpdvcrmBorder">Détail</p></th>
+	                                    <th><p class="adminpdvcrmBorder">Action</p></th>
 	                               </tr>
 
 	                            </thead>
 	                            <tbody *ngIf="this.prospection">
-	                            <tr *ngFor="let prospection of fprs.data">
-	                                <td>{{prospection.nom}}</td>
+	                            <tr *ngFor="let prospection of fprs.data"  style="color: #337ab7;">
 	                                <td>{{prospection.prenom}}</td>
+                                  <td>{{prospection.nom}}</td>
 	                                <td>{{prospection.telephone}}</td>
 	                                <td><button type="button" class="btn btn-primary" popover="retrait d'argent" popoverTitle="Détails" triggers="focus">Détails</button></td>
 	                                <td><button  class="btn btn-primary" (click)="showChildModal('single',prospection.telephone)">SMS</button>
@@ -239,23 +235,22 @@
 					                                <thead>
 					                                    <tr>
 					                                        <th colspan="3" style="padding-right: 3rem ;">
-					                                            Rechercher :
-					                                            <input class="form-control" [(ngModel)]="filtre"/>
+					                                            Rechercher : <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
 					                                        </th>
 							                            </tr>
 					                                    <tr>
-					                                        <th><mfDefaultSorter by="nomclient">Nom</mfDefaultSorter></th>
-					                                        <th><mfDefaultSorter by="prenomclient">Prénom</mfDefaultSorter></th>
-					                                        <th><mfDefaultSorter by="pointderecuperation">Point de récupération</mfDefaultSorter></th>
-					                                        <th><mfDefaultSorter by="montantcommande">Montant de la commande</mfDefaultSorter></th>
-					                                        <th><mfDefaultSorter by="detail">Détails</mfDefaultSorter></th>
-					                                        <th><mfDefaultSorter by="etat">Etat</mfDefaultSorter></th>
+					                                        <th><p class="adminpdvcrmBorder">Nom</p></th>
+					                                        <th><p class="adminpdvcrmBorder">Prénom</p></th>
+					                                        <th><p class="adminpdvcrmBorder">Point de récupération</p></th>
+					                                        <th><p class="adminpdvcrmBorder">Montant de la commande</p></th>
+					                                        <th><p class="adminpdvcrmBorder">Détails</p></th>
+					                                        <th><p class="adminpdvcrmBorder">Etat</p></th>
 
 					                                   </tr>
 
 					                                </thead>
 					                                <tbody *ngIf="this.suivicommande">
-					                                <tr *ngFor="let suivicommande of fsc.data">
+					                                <tr *ngFor="let suivicommande of fsc.data"  style="color: #337ab7;">
 					                                    <td>{{suivicommande.nomclient}}</td>
 					                                    <td>{{suivicommande.prenomclient}}</td>
 					                                    <td>{{getAddressRecup(suivicommande.pointderecuperation)}}</td>

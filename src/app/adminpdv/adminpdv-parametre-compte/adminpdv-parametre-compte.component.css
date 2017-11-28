@@ -2,9 +2,26 @@
     border-style: hidden ;
 }
 
-p.adminpdvparametrecompteBorder {
+p.adminpdvparametrecompteBorder, button.adminpdvparametrecompteBorder {
   border-radius: 10px 0 10px 10px;
   background-color: #f39200;
   color: white;
   text-align: center;
 }
+
+select.adminpdvparametrecompteBorder, textarea.adminpdvparametrecompteBorder, input.adminpdvparametrecompteBorder {
+  border-radius: 10px 0 10px 10px !important;
+  border: 2px solid #337ab7;
+}
+
+div.adminpdvparametrecompteTitle{
+  background-color: #337ab7;
+  color: white;
+  text-align: center;
+}
+
+label.adminpdvparametrecompteText{
+  color: #f39200;
+  text-align: center;
+}
+
