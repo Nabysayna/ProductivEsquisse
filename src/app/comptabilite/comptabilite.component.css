@@ -1,6 +1,6 @@
 
 .loader .ball-pulse-rise > div {
-   background-color: #337ab7 !important ;
+   background-color: #f39200 !important ;
 }
 
 
@@ -8,7 +8,9 @@
 {
     padding-bottom: 30px;
     margin-left: 200px;
+  color: white;
 }
+
 .tab-content
 {
 
@@ -45,7 +47,9 @@
 .activeatag {
   padding: 1rem ;
   border-color: #f39200;
+  background-color: #f39200;
   border-radius: 10px 0 10px 10px;
+  color: white;
 }
 
 .activeatag:visited{
