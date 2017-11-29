@@ -51,17 +51,17 @@
 	                </thead>
 	                <tbody>
 	                <tr *ngFor="let item of mf.data"  style="color: #337ab7; text-align: center">
-	                    <td>{{item.datereclamation.date | date}}</td>
-	                    <td>{{item.pdv}}</td>
-	                    <td>{{getAdress(item.adresse)}}</td>
-	                    <td style="color: #f39200;">{{item.telephone}}</td>
-	                    <td style="color: #f39200;">{{item.typeservice}}</td>
-	                    <td class="text-center">
-	                    	<button type="button" class="btn adminmultipdvReclamationButton" popover="{{item.reclamation}}" popoverTitle="Réclamation" triggers="focus">
-							  	voir
-							</button>
-	                    </td>
-	                    <td>{{item.etatreclamation==1?'Régle':'En attente..'}}</td>
+                    <td>{{item.datereclamation.date | date}}</td>
+                    <td>{{item.pdv}}</td>
+                    <td>{{getAdress(item.adresse)}}</td>
+                    <td style="color: #f39200;">{{item.telephone}}</td>
+                    <td style="color: #f39200;">{{item.typeservice}}</td>
+                    <td class="text-center">
+                      <button type="button" class="btn adminmultipdvReclamationButton" popover="{{item.reclamation}}" popoverTitle="Réclamation" triggers="focus">
+                          voir
+                      </button>
+                    </td>
+                    <td>{{item.etatreclamation==1?'Régle':'En attente..'}}</td>
 	                </tr>
 	                </tbody>
 	                <tfoot>

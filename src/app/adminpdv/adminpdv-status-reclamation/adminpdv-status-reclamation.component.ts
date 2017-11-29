@@ -15,20 +15,20 @@ export class AdminpdvStatusReclamationComponent implements OnInit {
   public sortOrder = "asc";
 
   public adminmultipdvReclamation: any;
-	loading = false ;
+  loading = false ;
 
-	constructor(private adminpdvServiceWeb: AdminpdvServiceWeb) { }
+  constructor(private adminpdvServiceWeb: AdminpdvServiceWeb) { }
 
   ngOnInit() {
     this.loading = true ;
     this.adminpdvServiceWeb.historiquereclamation('azrrtt').then(adminmultipdvServiceWebList => {
-      console.log(adminmultipdvServiceWebList.response); 
-      this.adminmultipdvReclamation = adminmultipdvServiceWebList.response; 
+      console.log(adminmultipdvServiceWebList.response);
+      this.adminmultipdvReclamation = adminmultipdvServiceWebList.response;
       this.loading = false ;
     });
   }
 
-	public toInt(num: string) {
+  public toInt(num: string) {
     return +num;
   }
 
