@@ -3,11 +3,11 @@ import { Location }               from '@angular/common';
 
 
 @Component({
-  selector: 'app-impression',
-  templateUrl: 'impression.component.html',
-  styleUrls: ['impression.component.css']
+  selector: 'app-impressionadminpdv',
+  templateUrl: 'impressionadminpdv.component.html',
+  styleUrls: ['impressionadminpdv.component.css']
 })
-export class ImpressionComponent implements OnInit {
+export class ImpressionadminpdvComponent implements OnInit {
 
     formvisible = '' ;
 
@@ -26,7 +26,7 @@ export class ImpressionComponent implements OnInit {
 
   print(): void {
     let printContents, popupWin;
-    printContents = document.getElementById(this.dataImpression.apiservice+'recuimpression'+this.dataImpression.service).innerHTML;
+    printContents = document.getElementById(this.dataImpression.apiservice+'recuimpressionadminpdv'+this.dataImpression.service).innerHTML;
     popupWin = window.open('', '_blank', 'left=0,top=0,height=800,width=800,innerheight=800,innerwidth=1000');
     popupWin.document.open();
     popupWin.document.write(`

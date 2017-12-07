@@ -61,6 +61,7 @@ import { AdminpdvparametrecompteComponent } from './adminpdv/adminpdv-parametre-
 import {ImpressionComponent} from "./impression/impression.component";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
+import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 
   //
 
@@ -181,6 +182,7 @@ const appRoutes: Routes = [
                     { path: '', component: AdminpdvDashboardComponent },
                     {path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
                     {path: 'gestionnaire', component: GestionnaireComponent},
+                    {path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
 
                 ]
             }

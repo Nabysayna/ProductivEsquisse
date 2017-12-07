@@ -204,6 +204,9 @@ import { FirstlogComponent } from './firstlog/firstlog.component';
 import {FiltreexploitationaveccommissionPipe} from "./pipes/filtreexploitationaveccommission.pipe";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
+import {UtilService} from "./services/util.service";
+import {CrmDoorServiceWeb} from "./webServiceClients/CrmDoor/crmdoor.service";
+import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 
 
 
@@ -233,7 +236,11 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
     GestionreportingComponent,
     SoldecompteComponent,
     RecusComponent,
+
     ImpressionComponent,
+    ImpressionadminpdvComponent,
+
+
     PostcashComponent,
 
     AdminmultipdvDashboardComponent,
@@ -248,7 +255,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
     AdminpdvMonitoringComponent,
     AdminpdvStatusReclamationComponent,
     AdminpdvparametrecompteComponent,
-    
+
 
     GeomapComponentComponent,
     LoaderComponent,
@@ -321,7 +328,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
     FiltresouszonesupplierPipe,
     FiltrezonesupplierPipe,
     FirstlogComponent,
-    
+
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
@@ -391,7 +398,11 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
       GestionreportingServiceWeb,
       AuthenticationService,
       CrmServiceWeb,
-      DemandepretServiceWeb
+      DemandepretServiceWeb,
+
+      CrmDoorServiceWeb,
+
+      UtilService,
   ],
   bootstrap: [AppComponent]
 })
