@@ -53,7 +53,7 @@
             <div class="row"  style="margin-top: 1rem" *ngIf="listedeposit">
               <table class="table table-hover">
                 <thead>
-                <tr>
+                <tr style="text-align: center">
                   <th scope="col">Date demande</th>
                   <th scope="col">Montant dépot</th>
                   <th scope="col">Representant BBS</th>
@@ -64,9 +64,9 @@
                 <tbody>
                 <tr *ngFor="let item of listedeposit; let i = index " style="color: #337ab7; font-weight: bold;">
                   <td scope="row">{{item.datedemande}}</td>
-                  <td>{{currencyFormat(item.montantdemande)}}</td>
+                  <td style="text-align: right">{{currencyFormat(item.montantdemande)}}</td>
                   <td>{{item.representantbbs}}</td>
-                  <td>{{item.etatdemande}} <span *ngIf="item.etatdemande==0" class="pull-right" (click)="imprimerdecharge(item)"><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Imprimer décharge" ><i class="fa fa-print"></i></button></span></td>
+                  <td style="text-align: left">{{item.etatdemande}} <span *ngIf="item.etatdemande==0" class="pull-right" (click)="imprimerdecharge(item)"><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Imprimer décharge" ><i class="fa fa-print"></i></button></span></td>
                   <td style="text-align: center;">
                     <button type="button" class="btn btn-success btn-circle btn-sm" (click)="showapercudechargeModal(item)" title="Voir decharge"><i class="fa fa-search-plus"></i></button>
                   </td>
