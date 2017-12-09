@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthentificationServiceWeb } from '../../webServiceClients/Authentification/authentification.service';
 import { Router } from '@angular/router';
+
+import { AuthentificationServiceWeb } from '../../webServiceClients/Authentification/authentification.service';
+import { UtilServiceWeb } from '../../webServiceClients/utils/Util.service' ;
+
 import * as sha1 from 'js-sha1';
 
 @Component({
@@ -11,14 +14,27 @@ import * as sha1 from 'js-sha1';
 export class NavbarTopComponent implements OnInit {
   authentiService: AuthentificationServiceWeb;
   token : string = JSON.parse(sessionStorage.getItem('currentUser')).baseToken ;
+  message : string ='' ;
 
 	currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-  constructor(private router: Router) { 
+  constructor(private router: Router, private utilService : UtilServiceWeb) {
     this.authentiService = new AuthentificationServiceWeb();
   }
 
-  ngOnInit() {}
-  
+  ngOnInit() {
+    this.retrieveAlerteMessage() ;
+  }
+
+  retrieveAlerteMessage(){
+    var periodicVerifier = setInterval(()=>{
+    this.utilService.consulterLanceurDalerte().then(rep =>{
+      var donnee=rep._body.trim().toString();
+      if (donnee!='-')
+        this.message=donnee ;
+    });
+    },5000);
+  }
+
   deconnexion(){
   	this.authentiService.deconnecter(this.token).then( response => {
   	 if (response==1){

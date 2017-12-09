@@ -2,6 +2,7 @@ import { Component, OnInit ,ViewChild } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
 import { AdminpdvServiceWeb } from '../../webServiceClients/Adminpdv/adminpdv.service';
+import {UtilService} from "../../services/util.service";
 
 
 @Component({
@@ -18,17 +19,21 @@ export class AdminpdvMonitoringComponent implements OnInit {
   selectdemanretrait=false;
   montant:number;
   ibanExcessif = false ;
+  infoscc :  any ;
+  infoscom :  any ;
 
-  constructor(private adminpdvServiceWeb: AdminpdvServiceWeb) { }
+  constructor(private adminpdvServiceWeb: AdminpdvServiceWeb,  private _utilService:UtilService) { }
 
   ngOnInit() {
     this.adminpdvServiceWeb.bilandeposit('azrrtt').then(adminpdvServiceWebList => {
       this.monitoringAdminpdvDeposit = adminpdvServiceWebList.response; 
     });
+
+    this.getInfosCC() ;
   }
 
     validerdmde(){
-      this.selectdemanretrait = false;
+      this.selectdemanretrait = false; 
       if (this.monitoringAdminpdvDeposit.etatdeposit < this.montant){
         this.ibanExcessif = true ;
         return 1 ;
@@ -41,6 +46,24 @@ export class AdminpdvMonitoringComponent implements OnInit {
       });
 
     }
+
+  getInfosCC(){
+    this._utilService.recupererInfosCC()
+      .subscribe(
+        data => {
+          this.infoscc = data;
+//          console.log(JSON.stringify(this.infoscc)) ;
+          this.infoscom = this.infoscc.response.infocommerciaux ;
+        },
+        error => alert(error),
+        () => {}
+      );
+  }
+
+  envoyerLaRequete(){
+    
+    this.hidedepositeModal() ;
+  }
 
   currencyFormat(somme) : String{
     return Number(somme).toLocaleString() ;
@@ -59,9 +82,6 @@ export class AdminpdvMonitoringComponent implements OnInit {
  
   public hidedepositeModal():void {
     this.depositeModal.hide();
-   /* this.categoriea = "--- Catégorie ---" ;
-    this.addtype = '' ;
-    this.prixa = 0 ;*/
   }
   public chargeAgent(){
      var ag=this.agent.split('/');

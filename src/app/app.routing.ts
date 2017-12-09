@@ -34,6 +34,7 @@ import { MoneyGramComponentComponent } from './money-gram-component/money-gram-c
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
 import { PostcashComponent } from './postcash/postcash.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
+import { WizallComponent } from './wizall/wizall.component';
 import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 import { CrmComponent } from './crm/crm.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -71,9 +72,10 @@ const appRoutes: Routes = [
            children:[
                 {path: '', component: ECommerceComponent},
                 {path: 'MONEYGRAM', component: SoapserverComponent},
-    			      {path: 'ORANGE MONEY', component: OrangeMoneyComponentComponent},
+    			      {path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
                 {path: 'POSTECASH', component: PostcashComponent},
-                {path: 'TIGO CASH', component: TigoCashComponentComponent},
+                {path: 'TIGOCASH', component: TigoCashComponentComponent},
+                {path: 'WIZALL', component: WizallComponent},
                 {path: 'ADMINCOURSIER', component: AdmincoursierComponent},
                 {path: 'CRM', component: CrmComponent},
                 {path: 'DASHBOARD', component: DashboardComponent},

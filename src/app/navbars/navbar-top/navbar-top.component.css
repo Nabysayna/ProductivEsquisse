@@ -1,3 +1,8 @@
+marquee{
+    color: black;
+    width: 70rem !important;
+}
+
 #currentUser {
     background-color: transparent !important ;
     border-color: transparent !important;

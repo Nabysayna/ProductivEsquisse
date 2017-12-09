@@ -69,6 +69,9 @@ import {DemandepretServiceWeb} from './webServiceClients/Demandepret/demandepret
 import {CrmServiceWeb} from './webServiceClients/Crm/crm.service';
 
 import {OrangeMoneyService} from './webServiceClients/Orangemoney/orangemoney.service';
+import {UtilServiceWeb} from './webServiceClients/utils/Util.service';
+
+import {UtilService} from "./services/util.service";
 
 
 /*-----------------*/
@@ -116,7 +119,7 @@ import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-mul
 import { AdmincoursierComponent } from './admincoursier/admincoursier.component';
 
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
-import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
+import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component'; 
 import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 import { MoneyGramComponentComponent } from './money-gram-component/money-gram-component.component';
 import { RyaComponentComponent } from './rya-component/rya-component.component';
@@ -204,6 +207,7 @@ import { FirstlogComponent } from './firstlog/firstlog.component';
 import {FiltreexploitationaveccommissionPipe} from "./pipes/filtreexploitationaveccommission.pipe";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
+import { WizallComponent } from './wizall/wizall.component';
 
 
 
@@ -325,6 +329,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
+    WizallComponent,
   ],
   imports: [
     BrowserModule,
@@ -359,6 +364,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
       CashOutService,
       CashInService,
       OrangeMoneyService,
+      UtilServiceWeb,
       SoldeService,
       RetraitEspeceService,
       AchatCreditTelService,
@@ -391,6 +397,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
       GestionreportingServiceWeb,
       AuthenticationService,
       CrmServiceWeb,
+      UtilService,
       DemandepretServiceWeb
   ],
   bootstrap: [AppComponent]

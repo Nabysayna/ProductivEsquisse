@@ -70,10 +70,7 @@
 								 <label>Agent :</label>
 								 <select  [(ngModel)]="agent" class="form-control" (change)="chargerAgent()" >
 									 <option>--choisir un agent--</option>
-									 <option value="naby">naby ndiaye</option>
-									 <option value="maguet">maguette</option>
-									 <option value="ndiago">khady ndiago</option>
-									 <option value="rasta">rasta</option>
+									 <option *ngFor="let commercial of infoscom">{{commercial.prenom}} {{commercial.nom}}</option>
 								 </select>	
 							 </div>			
 					  </div>
@@ -81,8 +78,8 @@
 						  <img style="width:150px;height:150px" src="assets/tnt.png" alt="photo de l'agent" />
 					  </div> 
 				 </div>
-				  <input type="button" value="valider" (click)="showdechargeModal()" class="btn btn-success" />
-			      <input type="button" value="annuler" class="btn btn-danger"  />
+				  <input type="button" value="valider" (click)="envoyerLaRequete()" class="btn btn-success" />
+			      <input type="button" value="annuler" class="btn btn-danger"  (click)="hidedepositeModal()"/>
 			  </div>
 			   
 			  <div class="modal-footer">

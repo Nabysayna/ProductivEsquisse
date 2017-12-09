@@ -1,0 +1,99 @@
+
+label{
+    color : #36A9E0;
+    text-transform : capitalize ;
+}
+
+.tab-content{
+    position: relative;
+    left: 2rem;
+}
+
+.form-inline{
+    text-align:center;
+}
+
+.loader .ball-pulse-rise > div {
+   background-color: #337ab7 !important ;
+}
+
+.panel{
+	border-style: hidden ;
+}
+
+.panel-heading{
+	font-size: -webkit-xxx-large ! important;
+	color : white !important;
+	background-color: transparent !important;
+	margin-bottom: 3rem ;
+    border-style : hidden ;
+    text-align: -webkit-center ;
+    position: relative ;
+    z-index : 1 ;
+}
+
+.panel-heading h2{
+    background-color: #36A9E0 !important;
+    width : 68rem ;
+    padding: 2rem ;
+    z-index: 1 ;
+}   
+
+.panel-body{
+    position: relative;
+    top: -6rem;
+}
+
+.cover{
+    border : 2px solid #36A9E0 ;
+    z-index: 0 ;
+    position: relative;
+    top : -8rem ;
+    width: 88rem ;
+    height: 10rem ;
+}
+
+.tab-content h2{
+    text-align: center;
+    color : white;
+    background-color : #F39200;
+    padding: 2.5rem;
+    border-radius: 2rem 0rem 2rem 2rem;
+    width: 82rem;
+}
+
+#om-options{
+    position: relative;
+    top: -4.7rem;
+}
+
+#om-options a{
+    border-radius: 1rem 0rem 1rem 1rem;
+    padding: 1.3rem;
+    color : #F39200 ;
+    margin-right: 2rem ;
+    background-color: white ;
+    border : 2px solid #F39200;
+}
+
+#om-options a:hover{
+    color : white ;
+    background-color: #36A9E0 ;
+    text-decoration: none ;
+}
+
+#om-options a:focus{
+    color : white ;
+    background-color: #36A9E0 ;
+    text-decoration: none ;
+}
+
+#om-options li:last-child{
+/*	margin-top: 2rem ; */
+}
+
+#paiefact select{
+	margin-left: 1rem ;
+}
+
+

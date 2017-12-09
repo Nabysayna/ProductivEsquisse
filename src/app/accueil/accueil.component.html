@@ -18,7 +18,8 @@
             </div>
             <!-- /.sidebar-collapse -->
 
-            <div id="encours" style="text-align: center ; padding-top: 2.5rem ;">
+<!--             <div id="encours" style="text-align: center ; padding-top: 2.5rem ;"> -->
+            <div id="encours" style="text-align: center ; padding-top: 5.5rem ;">
 
               <h3 style="color: orange ; font-weight: 600 ;">En cours ...</h3>
 
@@ -49,6 +50,20 @@
                           <div>Montant : {{item.data.montant}}</div><br>
                           <div>Numéro Client :{{item.data.numclient}}</div><br>
                         </div>
+                        <div *ngIf="item.data.operation==3">
+                          <div>Code Retrait: {{item.data.coderetrait}}</div><br>
+                          <div>Prènom : {{item.data.prenom}}</div><br>
+                          <div>Nom : {{item.data.nomclient}}</div><br>
+                          <div>Date De Naiss. : {{item.data.date}}</div><br>
+                          <div>N° CNI :{{item.data.cni}}</div><br>
+                          <div>Numéro Client :{{item.data.num}}</div><br>
+                          <div>Montant:{{item.data.montant}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==5">
+                          <div>Montant : {{item.data.montant}}</div><br>
+                          <div>Numéro Client :{{item.data.numclient}}</div><br>
+                        </div>
+
                     </div>
 
                     <!-- TNT -->
@@ -93,6 +108,35 @@
                       </div>
 
                   </div>
+
+
+                    <!-- OM -->
+                    <div *ngIf="item.data.operateur==5">
+
+                      <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
+                           {{retrieveOperationInfo(item)}}
+                      </div>
+
+                        <div *ngIf="item.data.operation==1">
+                          <div>Montant : {{item.data.montant}}</div><br>
+                          <div>Numéro Client :{{item.data.num}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==2">
+                          <div>Montant : {{item.data.montant}}</div><br>
+                          <div>Numéro Client :{{item.data.num}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==3">
+                          <div>Montant:{{item.data.montant}}</div><br>
+                          <div>Réfèrence Client: {{item.data.refclient}}</div><br>
+                          <div>Réfèrence Facture : {{item.data.refFacture}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==4">
+                          <div>Montant:{{item.data.montant}}</div><br>
+                          <div>Police: {{item.data.police}}</div><br>
+                          <div>Numéro Facture : {{item.data.numfacture}}</div><br>
+                        </div>
+
+                    </div>
 
 
                  </ng-template>

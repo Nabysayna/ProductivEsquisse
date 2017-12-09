@@ -100,17 +100,22 @@
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcred">
 
                          <h2>Achat crédit</h2>
-                         <h4>La vente de crédit sera bientôt disponible.</h4>
 
+<!--                         
                         <form name="transnat" (ngSubmit)="showmodalventecredit()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
-                            <input type="string" autocomplete="off" (keyup)="verifNumber($event)" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
-
-                            <input type="string" autocomplete="off" (keyup)="verifMontant($event)" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
-
-                            <button style="margin-top: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+              <div class="form-inline">
+               <label>Numéro du client  :</label>
+                             <input autocomplete="off" type="text" (keyup)="verifNumber($event)" autocomplete="off" pattern="[0-9]*" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" autofocus>
+                             <p *ngIf="mag1" style="color:red">numero incorrect</p>
+                            </div>
+                            <div class="form-inline">
+               <label>Montant du crédit:</label>
+                             <input type="text" autocomplete="off" (keyup)="verifMontant($event)" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                             <p *ngIf="mag2" style="color:red">montant incorrect</p>
+                            </div>
+                            <button style="margin-top: 1rem;"   type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
                         </form>
-                
-
+ -->
                 </div>
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="retraitinter">
@@ -134,10 +139,10 @@
 
 
                         <h2>Retrait avec code</h2>
-                        <h4>Le retrait avec code  sera bientôt disponible.</h4> 
+<!--                          <h4>Le retrait avec code  sera bientôt disponible.</h4>   -->
 
-<!--                         <h3 *ngIf="retraitcodereussi" class="alert alert-success">Retrait reussi!</h3>
-                        <form name="transnat" (ngSubmit)="showmodalretraitcode()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;" class="">
+                          <h3 *ngIf="retraitcodereussi" class="alert alert-success">Retrait reussi!</h3>
+                        <form name="transnat" (ngSubmit)="showmodalretraitcode()" #formretraitcode="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;" class="">
                           
                            <div class="form-inline row">
 							<label style="padding:1.5em" class="col-lg-5">Code de retrait :</label>
@@ -159,15 +164,20 @@
 							<label style="padding:1.5em" class="col-lg-5">Numéro de piece d'identite :</label>
                             <input type="text" [(ngModel)]="this.cni" (keyup)="verifcni($event)" autocomplete="off" name="cni"  id="mnttrans"  class="form-control col-lg-5" placeholder="Numero d'identite du client" required >
                            </div>
-                           <div>
-							<label>Numéro Client</label>
-							<input type="string" (keyup)="veriftel($event)" autocomplete="off" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
-
+                           <div class="form-inline row">
+                							<label style="padding:1.5em" class="col-lg-5">Numéro Client</label>
+                							<input type="string" (keyup)="veriftel($event)" autocomplete="off" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control col-lg-5" placeholder="Numéro du client" required autofocus>
                            </div>
-                            <button style="margin: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot3">Valider</button>
+
+                           <div class="form-inline row">
+                              <label style="padding:1.5em" class="col-lg-5">Montant retrait</label>
+                              <input type="number" autocomplete="off" [(ngModel)]="this.mnt" name="montantretrait" id="montantretrait"  class="form-control col-lg-5" placeholder="Montant à retirer" required autofocus>
+                           </div>
+
+                            <button style="margin: 1rem;" type="submit" class="btn btn-success" [disabled]="!buttondepot3||!formretraitcode.form.valid">Valider</button>
                             <button style="margin: 1rem;" type="submit" (click)="reinitialiserformRcode()" class="btn btn-danger" >annuler</button>
                         </form>
- -->                        
+ 
 
                 </div>
 
@@ -243,20 +253,26 @@
 				 <div>
 					 <form class="form">
 						 <div class="form-group">
-							 <label >code de retrait : {{this.coderetrait}}</label>
+							 <label >Code de retrait : {{this.coderetrait}}</label>
 						 </div>
 						 <div class="form-group">
-							 <label >prenom : {{this.prenom}}</label>
+							 <label >Prénom : {{this.prenom}}</label>
 						 </div>
 						 <div class="form-group">
-							 <label >nom : {{this.nom}}</label>
+							 <label >Nom : {{this.nom}}</label>
 						 </div>
 						 <div class="form-group">
-							 <label >date : {{this.date}}</label>
+							 <label >Date De Naissance: {{this.date}}</label>
 						 </div>
-						 <div class="form-group">
-							 <label >telephone : {{this.numclient}}</label>
-						 </div>
+             <div class="form-group">
+               <label >Numéro CNI : {{this.cni}}</label>
+             </div>
+             <div class="form-group">
+               <label >Numéro Client : {{this.numclient}}</label>
+             </div>
+             <div class="form-group">
+               <label >Montant : {{this.mnt}}</label>
+             </div>
 					 </form>
 					
 				 </div>
@@ -361,7 +377,7 @@
 				 </div>
 		     </div>
 		     <div class="modal-footer">
-				  <input type="button" value="valider" (click)="acheterCredit()" class="btn btn-success" />
+				  <input type="button" value="valider" (click)="acheterCredit();hidemodalventecredit()" class="btn btn-success" />
 				  <input type="button" value="fermer" (click)="hidemodalventecredit()" class="btn btn-danger" />
 		     </div>
 		  </div> 
