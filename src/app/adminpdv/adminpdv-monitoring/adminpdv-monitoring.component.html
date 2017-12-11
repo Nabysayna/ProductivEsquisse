@@ -53,7 +53,7 @@
             <div class="row"  style="margin-top: 1rem" *ngIf="listedeposit">
               <table class="table table-hover">
                 <thead>
-                <tr style="text-align: center">
+                <tr style="text-align: right">
                   <th scope="col">Date demande</th>
                   <th scope="col">Montant dépot</th>
                   <th scope="col">Representant BBS</th>
@@ -62,13 +62,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of listedeposit; let i = index " style="color: #337ab7; font-weight: bold;">
+                <tr *ngFor="let item of listedeposit; let i = index " [ngStyle]="{'color': 'black', 'background-color': item.accepteur=='attente'?'red':(item.accepteur!='attente' && item.etatdemande==0)?'orange':(item.etatdemande==1)?'blue':(item.etatdemande==2)?'pink':'green'}">
                   <td scope="row">{{item.datedemande}}</td>
                   <td style="text-align: right">{{currencyFormat(item.montantdemande)}}</td>
                   <td>{{item.representantbbs}}</td>
-                  <td style="text-align: left">{{item.etatdemande}} <span *ngIf="item.etatdemande==0" class="pull-right" (click)="imprimerdecharge(item)"><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Imprimer décharge" ><i class="fa fa-print"></i></button></span></td>
+                  <td style="text-align: left">{{item.statusetatdemande}} <span *ngIf="item.etatdemande==1" class="pull-right" (click)="imprimerdecharge(item)"><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Imprimer décharge" ><i class="fa fa-print"></i></button></span></td>
                   <td style="text-align: center;">
-                    <button type="button" class="btn btn-success btn-circle btn-sm" (click)="showapercudechargeModal(item)" title="Voir decharge"><i class="fa fa-search-plus"></i></button>
+                    <button *ngIf="item.etatdemande!=0" type="button" class="btn btn-success btn-circle btn-sm" (click)="showapercudechargeModal(item)" title="Voir decharge"><i class="fa fa-search-plus"></i></button>
                   </td>
                 </tr>
                 </tbody>
@@ -94,24 +94,17 @@
               <label>montant du deposit :</label>
               <input type="number" [(ngModel)]="montantdeposit" min="0" placeholder="montant" class="form-control" />
             </div>
-            <div class="form-group">
-              <label>Agent :</label>
-              <select name="agentcommercial"  id="agentcommercial" [(ngModel)]="id_agentcommercial" class="form-control" (change)="chargercommercial()">
-                <option  [attr.value]="-1">--choisir un agent--</option>
-                <option *ngFor="let agent of mesagentcommerciaux"  [attr.value]="agent.id">{{agent.prenom}} {{agent.nom}}</option>
-              </select>
-            </div>
           </div>
           <div class="col-sm-offset-1 col-xs-3">
             <img style="width:150px;height:150px" src="assets/bbs.png"  class="img-responsive" alt="photo de l'agent" />
           </div>
         </div>
         <div>
-          Demande de dépot de {{ montantdeposit?currencyFormat(montantdeposit):'?' }}FCFA  retiré par  {{ agentcommercial?agentcommercial.prenom+" "+agentcommercial.nom:'?'}}
+          Vous voulez faire un dépot de {{ montantdeposit?currencyFormat(montantdeposit):'?' }} FCFA
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" [disabled]="agentcommercial==undefined || montantdeposit==undefined || montantdeposit<1" (click)="validerdeposite()" class="btn btn-success pull-left">valider</button>
+        <button type="button" [disabled]="montantdeposit==undefined || montantdeposit<1" (click)="validerdeposite()" class="btn btn-success pull-left">valider</button>
         <button type="button" (click)="hidedepositeModal()" class="btn btn-danger">fermer</button>
       </div>
     </div>

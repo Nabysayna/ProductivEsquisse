@@ -29,12 +29,10 @@ import { AccueiladmincommercialComponent } from './accueiladmincommercial/accuei
 import { AccueiladmincoursierComponent } from './accueiladmincoursier/accueiladmincoursier.component';
 import { AdmincommercialComponent } from './admincommercial/admincommercial.component';
 import { AccueilAdminMultiPdvComponent } from './accueil-admin-multi-pdv/accueil-admin-multi-pdv.component';
-import { RyaComponentComponent } from './rya-component/rya-component.component';
 import { MoneyGramComponentComponent } from './money-gram-component/money-gram-component.component';
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
 import { PostcashComponent } from './postcash/postcash.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
-import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 import { CrmComponent } from './crm/crm.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
@@ -42,7 +40,6 @@ import { JoniJoniComponentComponent } from './joni-joni-component/joni-joni-comp
 import { DemandepretComponent } from './demandepret/demandepret.component';
 import { GestionreportingComponent } from './gestionreporting/gestionreporting.component';
 import { SoldecompteComponent } from './soldecompte/soldecompte.component';
-import { RecusComponent } from './recus/recus.component';
 import { ExpressoComponent } from './expresso/expresso.component';
 import { TntComponent } from './tnt/tnt.component';
 import { SoapserverComponent } from './soapserver/soapserver.component';
@@ -85,7 +82,6 @@ const appRoutes: Routes = [
                 {path: 'EXPRESSO', component: ExpressoComponent},
                 {path: 'TNT BY EXCAF', component: TntComponent},
                 {path: 'SOLDE DU COMPTE', component: SoldecompteComponent},
-                {path: 'RECUS/:id', component: RecusComponent},
                 {path: 'impression', component: ImpressionComponent},
                 {path: 'Guide_utilisation', component: GuideUserCaisseComponent},
                 {path: 'gestionnaire', component: GestionnaireComponent},

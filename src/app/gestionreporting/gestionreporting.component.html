@@ -25,15 +25,15 @@
 
             <div id="om-options">
                 <a href="#historique" style="padding-left: 4rem; padding-right: 4rem;" (click)="histop()"  data-toggle="tab">Historique des Opérations</a>
-                
+
                 <a href="#charges" style="padding-left: 4rem; padding-right: 4rem;" data-toggle="tab">Dépenses</a>
-                
+
                 <a href="#ventes"  data-toggle="tab">Recettes</a>
 
                 <a href="#reclamation" data-toggle="tab">Réclamations</a>
 
                 <a href="#approvisionnement" (click)="etatcaisse()" data-toggle="tab">Caisse</a>
-                                
+
             </div>
 
 
@@ -60,7 +60,7 @@
                                                 <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
                                                 <th><mfDefaultSorter by="infoclient">Client</mfDefaultSorter></th>
                                            </tr>
-                                    
+
                                         </thead>
                                         <tbody *ngIf="this.gestionreporting">
                                         <tr *ngFor="let gestionreporting of fho.data">
@@ -68,9 +68,9 @@
                                             <td>{{gestionreporting.operateur}}</td>
                                             <td>{{gestionreporting.traitement}}</td>
                                             <td>{{currencyFormat(gestionreporting.montant)}}</td>
-                                            <td> 
-                                                <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a> 
-                                                <a *ngIf="gestionreporting.operateur!='orangemoney'"> --- </a> 
+                                            <td>
+                                                <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a>
+                                                <a *ngIf="gestionreporting.operateur!='orangemoney'"> --- </a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -95,9 +95,9 @@
                         <fieldset >
                             <h2>Enregistrer une dépense</h2>
                         </fieldset>
-                        
+
                          <div class="col-sm-12 col-xs-12" >
-                                           <div class="col-sm-3 col-xs-12"><input type="text" [(ngModel)]="libelleCharge"   name="libelle" id="libelle" class="form-control"  placeholder="Libelle charge" required></div> 
+                                           <div class="col-sm-3 col-xs-12"><input type="text" [(ngModel)]="libelleCharge"   name="libelle" id="libelle" class="form-control"  placeholder="Libelle charge" required></div>
                                             <div class="col-sm-3 col-xs-12"><input type="number" [(ngModel)]="montantCharge"   name="montant" id="montant" class="form-control" placeholder="Montant de la dépense" required></div>
                                            <div class="col-sm-3 col-xs-12">
                                             <select class="form-control input-sm" [(ngModel)]="service" style="margin-top: 1rem;" >
@@ -107,24 +107,24 @@
                                             </div>
 
                                             <div class="col-sm-3 col-xs-12"><button (click)="validCharge()" id="validcharge" class="btn btn-primary btn-block" >Ajouter</button></div>
-                    
+
                     </div>
                     </div>
-                </div>    
+                </div>
                 <div class="tab-pane fade" id="ventes">
                     <div class="panel">
                         <fieldset >
                             <h2>Enregistrer une Recette</h2>
                         </fieldset>
-                        
+
                         <div class="col-sm-12 col-xs-12" style="margin-top: 4rem ;">
-                                           
+
                                <div  class="col-sm-3 col-xs-12" style="margin-top: -1rem;"> <label>Service </label><select class="form-control input-sm" [(ngModel)]="servicevente" >
                                <option>---Faites un choix---</option>
                                 <option  *ngFor="let srv of servicepoint">{{srv.nom}}</option>
                                 </select>
                                 </div>
-                                <div  class="col-sm-3 col-xs-12" style="margin-top: -1rem;"> <label>Désignation  
+                                <div  class="col-sm-3 col-xs-12" style="margin-top: -1rem;"> <label>Désignation
                                 </label><select class="form-control input-sm" [(ngModel)]="designation" >
                                 <option>---Faites un choix---</option>
                                 <option  *ngFor="let designation of getDesignations()">{{ designation }}</option>
@@ -142,23 +142,23 @@
                                            <div class="col-sm-3 col-xs-12"><label style="margin-left: 2rem;">
                                            </label><input type="text" [(ngModel)]="noma"   name="noma" id="noma" class="form-control" placeholder="Nom du client ..." required>
                                            <div>
-                                           <label style="margin-left: 2rem;">Date début assurance </label><input type="date" [(ngModel)]="datedebut"   name="datedebut" id="datedebut" class="form-control"  placeholder="date début assurance" required>                                            
+                                           <label style="margin-left: 2rem;">Date début assurance </label><input type="date" [(ngModel)]="datedebut"   name="datedebut" id="datedebut" class="form-control"  placeholder="date début assurance" required>
                                            </div></div>
                                             <div class="col-sm-3 col-xs-12"><label style="margin-left: 2rem;">
                                             </label><input type="string" [(ngModel)]="telephonea"   name="telephonea" id="telephonea" class="form-control" placeholder="Téléphone du client ..." required>
                                             <div><button style="margin-top: 4.5rem; margin-left: 1rem;" (click)="validvente()" id="enregistrerassurance" class="btn btn-primary btn-block" >Enregistrer</button></div></div>
-                    
+
                     </div>
                     </div>
                 </div>
-                      
+
                 <div class="tab-pane fade" id="reclamation">
                     <div class="panel">
                         <fieldset >
                             <h2>Réclamation</h2>
                         </fieldset>
                         <div class="col-sm-12 col-xs-12" >
-                                           <div class="col-sm-3 col-xs-12" style="margin-left: -2rem;"><input type="text" [(ngModel)]="sujet"   name="sujet" id="sujet" class="form-control"  placeholder="Motif réclamation" required></div> 
+                                           <div class="col-sm-3 col-xs-12" style="margin-left: -2rem;"><input type="text" [(ngModel)]="sujet"   name="sujet" id="sujet" class="form-control"  placeholder="Motif réclamation" required></div>
                                            <div class="col-sm-3 col-xs-12">
                                             <select class="form-control input-sm" [(ngModel)]="nomservice" style="margin-top: 1rem;" >
                                             <option>--Choisir le service concerné--</option>
@@ -166,11 +166,11 @@
 
                                             </select>
                                             </div>
-                                            <textarea type="text" [(ngModel)]="message"   name="descrip" id="descrip" class="form-control" placeholder="description de votre réclamation" required></textarea> 
+                                            <textarea type="text" [(ngModel)]="message"  rows="5" name="descrip" id="descrip" class="form-control" placeholder="description de votre réclamation" required></textarea>
                                             <div class="col-sm-3 col-xs-12"><button style="margin-top: 2rem;" (click)="validreclamation()" id="validerreclamation" class="btn btn-primary btn-block" >Envoyer</button></div>
-                    
+
                     </div>
-                    
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="approvisionnement">
@@ -184,10 +184,10 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
   </div>
 
   <div *ngIf="this.loading">
-    <app-loader></app-loader>    
+    <app-loader></app-loader>
 </div>

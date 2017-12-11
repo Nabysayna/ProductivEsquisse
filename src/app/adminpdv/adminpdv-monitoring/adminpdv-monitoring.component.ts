@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy ,ViewChild } from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
@@ -18,17 +18,19 @@ export class AdminpdvMonitoringComponent implements OnInit {
   selectdemanretrait=false;
   loading = false ;
   public monitoringAdminpdvDeposit: any;
-  public agentcommercial:any;
-  public id_agentcommercial:number;
   public montantdeposit:number;
-  mesagentcommerciaux:any;
   agentcc:any;
   montant:number;
   ibanExcessif = false ;
   listedeposit:any[] = [];
   viewonedetaildeposit:any;
+  killsetinterval:any;
 
   dataImpression:any;
+
+  @ViewChild('depositeModal') public depositeModal:ModalDirective;
+  @ViewChild('dechargeModal') public dechargeModal:ModalDirective;
+  @ViewChild('apercudechargeModal') public apercudechargeModal:ModalDirective;
 
   constructor(private route:ActivatedRoute, private router: Router, private adminpdvServiceWeb: AdminpdvServiceWeb, private _crmdoorServiceWeb: CrmDoorServiceWeb, private _utilService:UtilService) { }
 
@@ -36,9 +38,16 @@ export class AdminpdvMonitoringComponent implements OnInit {
     console.log('monitoring deposit');
     this.adminpdvServiceWeb.bilandeposit('azrrtt').then(adminpdvServiceWebList => {
       this.monitoringAdminpdvDeposit = adminpdvServiceWebList.response;
-
       this.getEtatDepot();
     });
+    this.killsetinterval = setInterval(() => {
+      this.getEtatDepot();
+      console.log('step');
+    }, 10000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.killsetinterval);
   }
 
   validerdmde(){
@@ -60,35 +69,43 @@ export class AdminpdvMonitoringComponent implements OnInit {
     return Number(somme).toLocaleString() ;
   }
 
-    clickeddemanderetrait(){
+  clickeddemanderetrait(){
       this.selectdemanretrait = true;
     }
 
-    @ViewChild('depositeModal') public depositeModal:ModalDirective;
-  @ViewChild('dechargeModal') public dechargeModal:ModalDirective;
-  @ViewChild('apercudechargeModal') public apercudechargeModal:ModalDirective;
-
-    public getEtatDepot(){
+  public getEtatDepot(){
       this._crmdoorServiceWeb.getEtatDemandeDepot('infosup').then(adminpdvServiceWebList => {
         if(adminpdvServiceWebList.errorCode==0){
+          let newdepot = false;
           this.listedeposit = adminpdvServiceWebList.response.map(function (opt) {
+            if ( (newdepot==false && opt.etatdemande==0) || (newdepot==false && opt.etatdemande==1) ){
+              newdepot = true;
+            }
+            console.log('-------------test--------------');
             return {
               datedemande: opt.datedemande.date.split('.')[0],
               montantdemande: opt.montantdemande,
-              representantbbs: JSON.parse(opt.accepteur).prenom+" "+JSON.parse(opt.accepteur).nom,
-              etatdemande: opt.etatdemande
+              accepteur: opt.accepteur,
+              representantbbs: (opt.accepteur=='attente' || opt.etatdemande==0)?'attente':JSON.parse(opt.accepteur).prenom+" "+JSON.parse(opt.accepteur).nom,
+              etatdemande: opt.etatdemande,
+              statusetatdemande: opt.etatdemande==0?'En cours de traitement':opt.etatdemande==1?'En cours de validation':opt.etatdemande==2?'chargement deposit':'Validé',
             }
           });
+          if (!newdepot){
+            clearInterval(this.killsetinterval);
+          }
+
         }
       });
     }
 
-    public getInitDeposit(){
+  public getInitDeposit(){
     this._utilService.recupererInfosCC()
       .subscribe(
         data => {
-          this.mesagentcommerciaux = data.response.infocommerciaux;
-          this.agentcc = data.response.infocc;
+          console.log(data);
+          console.log('-------');
+          this.agentcc = data.response;
         },
         error => alert(error),
         () => {
@@ -111,8 +128,6 @@ export class AdminpdvMonitoringComponent implements OnInit {
 
   public showdepositeModal():void {
     this.montantdeposit=undefined;
-    this.agentcommercial=undefined;
-    this.id_agentcommercial=undefined;
     this.getInitDeposit();
     this.depositeModal.show();
     console.log('showdepositeModal')
@@ -122,17 +137,14 @@ export class AdminpdvMonitoringComponent implements OnInit {
     console.log('hidedepositeModal')
   }
   public validerdeposite(){
-    this._crmdoorServiceWeb.validerDemandeDepot(this.montantdeposit, JSON.stringify(this.agentcc), JSON.stringify(this.agentcommercial)).then(adminpdvServiceWebList => {
+    this._crmdoorServiceWeb.validerDemandeDepot(this.montantdeposit, JSON.stringify(this.agentcc), 'attente').then(adminpdvServiceWebList => {
       console.log(adminpdvServiceWebList);
       if(adminpdvServiceWebList.errorCode == 0){
-        this.demndedeposit({infocc:this.agentcc, infocom:this.agentcommercial, date:adminpdvServiceWebList.result});
+        this.demndedeposit({infocc:this.agentcc, infocom:'attente', date:adminpdvServiceWebList.result});
       }
     });
     this.hidedepositeModal();
     console.log('validerdeposite')
-  }
-  public chargercommercial(){
-    this.agentcommercial = this.mesagentcommerciaux.filter(opt  =>  opt.id==this.id_agentcommercial)[0];
   }
 
   public showdechargeModal():void {
@@ -155,20 +167,6 @@ export class AdminpdvMonitoringComponent implements OnInit {
     this.apercudechargeModal.hide();
     console.log('hideapercudechargeModal')
   }
-  /*
-  public showdechargeModal():void {
-    console.log(this.agentcommercial);
-    console.log(this.montantdeposit);
-    this.dechargeModal.show();
-    console.log('showdechargeModal')
-  }
-  public hidedechargeModal():void {
-    this.dechargeModal.hide();
-    this.montantdeposit=undefined;
-    this.agentcommercial=undefined;
-    console.log('hidedechargeModal')
-  }
-*/
 
   imprimerdecharge(decharge:any){
     this.dataImpression = {

@@ -117,9 +117,7 @@ import { AdmincoursierComponent } from './admincoursier/admincoursier.component'
 
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
-import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 import { MoneyGramComponentComponent } from './money-gram-component/money-gram-component.component';
-import { RyaComponentComponent } from './rya-component/rya-component.component';
 import { CrmComponent } from './crm/crm.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
@@ -127,17 +125,9 @@ import { JoniJoniComponentComponent } from './joni-joni-component/joni-joni-comp
 import { DemandepretComponent } from './demandepret/demandepret.component';
 import { GestionreportingComponent } from './gestionreporting/gestionreporting.component';
 import { SoldecompteComponent } from './soldecompte/soldecompte.component';
-import { RecusComponent } from './recus/recus.component';
 import { ImpressionComponent } from './impression/impression.component';
 import { PostcashComponent } from './postcash/postcash.component';
 import { LoaderComponent } from './loader/loader.component';
-
-import { LineChartComponent } from './graphs/line-chart/line-chart.component';
-import { BarChartComponent } from './graphs/bar-chart/bar-chart.component';
-import { DoughnutChartComponent } from './graphs/doughnut-chart/doughnut-chart.component';
-import { RadarChartComponent } from './graphs/radar-chart/radar-chart.component';
-import { PieChartComponent } from './graphs/pie-chart/pie-chart.component';
-import { PolarAreaChartComponent } from './graphs/polar-area-chart/polar-area-chart.component';
 import { ExpressoComponent } from './expresso/expresso.component';
 import { TntComponent, DataToArray } from './tnt/tnt.component';
 import { SoapserverComponent } from './soapserver/soapserver.component';
@@ -223,9 +213,7 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
     AccueilComponent,
     OrangeMoneyComponentComponent,
     TigoCashComponentComponent,
-    WesternUnionComponentComponent,
     MoneyGramComponentComponent,
-    RyaComponentComponent,
     CrmComponent,
     DashboardComponent,
     ECommerceComponent,
@@ -235,7 +223,6 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
     DemandepretComponent,
     GestionreportingComponent,
     SoldecompteComponent,
-    RecusComponent,
 
     ImpressionComponent,
     ImpressionadminpdvComponent,
@@ -260,12 +247,6 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
     GeomapComponentComponent,
     LoaderComponent,
     NavbarTopComponent,
-    BarChartComponent,
-    LineChartComponent,
-    RadarChartComponent,
-    PieChartComponent,
-    PolarAreaChartComponent,
-    DoughnutChartComponent,
     ExpressoComponent,
     TntComponent,
     SoapserverComponent,
