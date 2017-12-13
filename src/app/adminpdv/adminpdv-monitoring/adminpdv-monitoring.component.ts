@@ -23,6 +23,8 @@ export class AdminpdvMonitoringComponent implements OnInit {
   montant:number;
   ibanExcessif = false ;
   listedeposit:any[] = [];
+  public listedepositsvalide:any[] = [];
+  public listedepositsencours:any[] = [];
   viewonedetaildeposit:any;
   killsetinterval:any;
 
@@ -31,6 +33,8 @@ export class AdminpdvMonitoringComponent implements OnInit {
   @ViewChild('depositeModal') public depositeModal:ModalDirective;
   @ViewChild('dechargeModal') public dechargeModal:ModalDirective;
   @ViewChild('apercudechargeModal') public apercudechargeModal:ModalDirective;
+  @ViewChild('apercuPhotoComModal') public apercuPhotoComModal:ModalDirective;
+  @ViewChild('voirplusdedemandeModal') public voirplusdedemandeModal:ModalDirective;
 
   constructor(private route:ActivatedRoute, private router: Router, private adminpdvServiceWeb: AdminpdvServiceWeb, private _crmdoorServiceWeb: CrmDoorServiceWeb, private _utilService:UtilService) { }
 
@@ -91,6 +95,8 @@ export class AdminpdvMonitoringComponent implements OnInit {
               statusetatdemande: opt.etatdemande==0?'En cours de traitement':opt.etatdemande==1?'En cours de validation':opt.etatdemande==2?'chargement deposit':'Validé',
             }
           });
+          this.listedepositsencours = this.listedeposit.filter(opt => opt.etatdemande!=3);
+          this.listedepositsvalide = this.listedeposit.filter(opt => opt.etatdemande==3);
           if (!newdepot){
             clearInterval(this.killsetinterval);
           }
@@ -183,6 +189,24 @@ export class AdminpdvMonitoringComponent implements OnInit {
     sessionStorage.setItem('dataImpression', JSON.stringify(this.dataImpression));
     this.router.navigate(['accueiladmpdv/impressionadminpdv']);
   }
+
+  public showapercuPhotoComModal():void {
+    this.apercuPhotoComModal.show();
+  }
+  public hideapercuPhotoComModal():void {
+    this.apercuPhotoComModal.hide();
+    console.log('hideapercuPhotoComModal')
+  }
+
+  public showvoirplusdedemandeModal():void {
+    this.voirplusdedemandeModal.show();
+  }
+  public hidevoirplusdedemandeModal():void {
+    this.voirplusdedemandeModal.hide();
+    console.log('hidevoirplusdedemandeModal')
+  }
+
+
 
 
 }
