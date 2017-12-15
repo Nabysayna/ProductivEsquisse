@@ -197,6 +197,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
 import {UtilService} from "./services/util.service";
 import {CrmDoorServiceWeb} from "./webServiceClients/CrmDoor/crmdoor.service";
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
+import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
 
 
 
@@ -236,6 +237,7 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
     AdminmultipdvStatusPdvComponent,
     AdminmultipdvStatusReclamationComponent,
     AdminmultipdvUpdateCautionComponent,
+    AdminmultipdvCreditationCCComponent,
 
     AdminpdvAidedecisionComponent,
     AdminpdvDashboardComponent,

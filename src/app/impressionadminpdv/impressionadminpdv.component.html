@@ -1,16 +1,28 @@
 <div id="page-wrapper" class="text-center">
   <div class="panel-heading" *ngIf="dataImpression.apiservice=='adminpdv' && dataImpression.service=='faireundepot'">
     <div class="panel panel-default"  id="adminpdvrecuimpressionadminpdvfaireundepot">
-      <img src="../../assets/bbs.png" class="img-rounded"   height="100"/>
-      <h2 style="text-align: center"> DECHARGE </h2>
-    </div>
-    <div class="panel-heading">
-      <p align="right" >
-        <strong>Entreprise:</strong> {{ operateur.nometps }}<br>
-        <strong>Superviseur:</strong> {{ operateur.prenom }} {{ operateur.nom }}<br>
-        <strong>Service clientèle:</strong><br>
-        77 226 12 27 - 77 398 18 31 - 77 398 18 58.<br>
-      </p>
+      <div class="page-header">
+        <img src="../../assets/bbs.png" class="img-rounded" height="40"/>
+        <h4 style="text-align: center "> DECHARGE </h4>
+      </div>
+      <div class="panel-body">
+        <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10" >
+          <p style="text-align: justify">
+            <span style="margin-left: 20px;">Nous certifions,</span><br>
+            BBS Invest Sarl au Capital de 7 000 000 FCFA, dont le siége social est situé à OUEST FOIRE EN FACE CICES IMMEUBLE FORUM, immatriculé au registre du commerce sous le numero -SN DKR 2014 -NINEA : 004999978,
+            representé ici par ---- en sa qualité de conseiller commercial(e), déclarons avoir reçu la somme de -------- FCFA, de ------- representé par Mme/Mlle/Mr ..........................<br>
+            Ce montant perçu en guise de caution,permet au point de vente d'utiliser les services<br>Proposée par la plateforme SENTOOL mise à la diposition par BBS Invest .
+            <br><br>
+            <span style="margin-left: 20px;">En foi de quoi, cette présente décharge à été établie pour servir et valoir ce que de droit.</span>
+            <br>
+            <!--<br>
+            <u style="font-weight: bold">NB </u> : Merci d'envoyer une copie de cette présente décharge à l'adresse e-mail suivant <u style="font-weight: bold">bbsinvest@bbstvnet.com</u> pour en rechargement effectif.
+            <br>-->
+          </p>
+          <p style="text-align: right">Fait à Dakar le ----------- </p>
+          <p style="text-align: right">En deux exemplaires</p>
+        </div>
+      </div>
     </div>
   </div>
 

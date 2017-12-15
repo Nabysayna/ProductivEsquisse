@@ -175,14 +175,12 @@ export class AdminpdvMonitoringComponent implements OnInit {
   }
 
   imprimerdecharge(decharge:any){
+    console.log(decharge);
     this.dataImpression = {
       apiservice:'adminpdv',
       service:'faireundepot',
       infotransaction:{
-        client:{
-          transactionBBS: 'Id BBS',
-          montant:decharge.montantdemande,
-        },
+        client:decharge,
       },
     };
     console.log(this.dataImpression);

@@ -59,6 +59,7 @@ import {ImpressionComponent} from "./impression/impression.component";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
+import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
 
   //
 
@@ -96,6 +97,7 @@ const appRoutes: Routes = [
                     { path: 'monitoring', component: AdminmultipdvMonitoringComponent },
                     { path: 'statuspdv', component: AdminmultipdvStatusPdvComponent },
                     { path: 'statusreclamation', component: AdminmultipdvStatusReclamationComponent },
+                    { path: 'crediterccc', component: AdminmultipdvCreditationCCComponent  },
                     { path: 'demanderetrait', component: AdminmultipdvDemandeRetraitComponent },
                     { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent }
                 ]
