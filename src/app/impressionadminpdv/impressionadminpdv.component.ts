@@ -22,6 +22,8 @@ export class ImpressionadminpdvComponent implements OnInit {
   ngOnInit():void {
     this.dataImpression = JSON.parse(sessionStorage.getItem('dataImpression'));
     this.operateur = JSON.parse(sessionStorage.getItem('currentUser'));
+    console.log(this.operateur);
+    console.log(this.dataImpression);
   }
 
   print(): void {
@@ -46,5 +48,6 @@ export class ImpressionadminpdvComponent implements OnInit {
   backClicked() {
     this._location.back();
   }
+
 
 }
