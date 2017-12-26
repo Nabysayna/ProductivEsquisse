@@ -46,7 +46,6 @@ import { EFinancierService} from './tnt/tntservices';
 
 
 
-import { UserPdvService }    from './services/userPdv.service';
 import { PostCashService }    from './services/postCash.service';
 import { AdminpdvDashboardService }    from './services/adminpdv-dashboard.service';
 import { AdminpdvMonitoringService }    from './services/adminpdv-monitoring.service';
@@ -363,7 +362,6 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
       AuthGuard,
       AuthGuardcais,
       AuthGuardsup,
-      UserPdvService,
       PostCashService,
       AdminpdvDashboardService,
       AdminpdvMonitoringService,
