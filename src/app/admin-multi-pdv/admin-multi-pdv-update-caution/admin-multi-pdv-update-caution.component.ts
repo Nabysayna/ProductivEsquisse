@@ -13,16 +13,16 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
-	public filterQuery = "";
-    public rowsOnPage = 10;
-    public sortBy = "adminpdv";
-    public sortOrder = "desc";
+  public filterQuery = "";
+  public rowsOnPage = 10;
+  public sortBy = "adminpdv";
+  public sortOrder = "desc";
 
-    public adminmultipdvMajcaution: AdminmultipdvMajcaution[];
-    loading = false ;
+  public adminmultipdvMajcaution: AdminmultipdvMajcaution[];
+  loading = false ;
 
-    inputCaution: number;
-    majcaution:AdminmultipdvMajcaution;
+  inputCaution: number;
+  majcaution:AdminmultipdvMajcaution;
   constructor(private adminmultipdvServiceWeb: AdminmultipdvServiceWeb) { }
 
   ngOnInit() {
@@ -38,12 +38,13 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
             adminpdv:elt.adminpdv,
             adresse: JSON.parse(elt.adresse).address,
             cautioninitiale:elt.cautioninitiale,
+            date_last_deposit:elt.date_last_deposit.date.split('.')[0],
             idcaution:elt.idcaution,
             montantconsomme:elt.montantconsomme,
             telephone:elt.telephone
           }
         })
-        //console.log(this.adminmultipdvMajcaution);
+        console.log(this.adminmultipdvMajcaution);
       }
       else{
         this.adminmultipdvMajcaution = [];

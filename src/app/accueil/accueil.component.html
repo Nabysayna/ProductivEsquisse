@@ -8,11 +8,11 @@
         <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
             <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
                 <ul id="gauche" class="nav in" id="side-menu">
-                  <li *ngFor="let api of registredAPIs" ><a [routerLink]="['/accueil', api]"> <img src="assets/menuticker.png" />{{api}}</a></li>
-                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" > <img src="assets/menuticker.png" />GESTION REPORTING</a></li>
+                  <li *ngFor="let api of registredAPIs; let i = index" ><a [routerLink]="['/accueil', api]"> <img src="assets/icoservice-{{i+1}}.png" />{{api}}</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" ><i class="fa fa-calculator fa-2x pull-left"></i> GESTION REPORTING</a></li>
                   <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
-                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" > <img src="assets/menuticker.png" />E-COMMERCE</a></li>
-                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" > <img src="assets/menuticker.png" />Guide d'utilisation</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
+                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" ><i class="fa fa-book fa-2x pull-left"></i> Guide d'utilisation</a></li>
                   <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
 
               <div>
                 {{item.data.nom}}
-                </div> 
+                </div>
 
                  <ng-template #popTemplate>
                     <!-- OM -->

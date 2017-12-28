@@ -56,17 +56,16 @@ export class GestionreportingComponent implements OnInit {
   	) {}
 
   ngOnInit() {
-
-     this.loading = true ;
+    this.histop();
+/*     this.loading = true ;
      this.gestionreportingServiceWeb.servicepoint(this.token).then(serviceptserviceList => {
         this.servicepoint = serviceptserviceList;
 
         this.gestionreportingServiceWeb.gestionreporting(this.token).then(gestreportserviceList => {
-        this.gestionreporting = gestreportserviceList;
-  //      console.log(this.gestionreporting);
-        this.loading = false ;
+          this.gestionreporting = gestreportserviceList;
+          this.loading = false ;
         });
-     });
+     });*/
   }
 
   getDesignations(){
@@ -104,21 +103,18 @@ export class GestionreportingComponent implements OnInit {
 
   }
 
-      validCharge(){
+  validCharge(){
        this.loading = true ;
        this.gestionreportingServiceWeb.ajoutdepense(this.token,this.libelleCharge, this.service, this.montantCharge).then(gestionreportingServiceWeb => {
-       // console.log(gestionreportingServiceWeb);
         this.loading = false ;
-
        });
 
-        this.libelleCharge = "" ;
-        this.service = "" ;
-        this.montantCharge = 0 ;
+      this.libelleCharge = "" ;
+      this.service = "" ;
+      this.montantCharge = 0 ;
+  }
 
-      }
-
-      validreclamation(){
+  validreclamation(){
 
         this.loading = true ;
        this.gestionreportingServiceWeb.reclamation(this.token,this.sujet, this.nomservice, this.message).then(gestionreportingServiceWeb => {
@@ -133,7 +129,7 @@ export class GestionreportingComponent implements OnInit {
 
       }
 
-      validvente(){
+  validvente(){
          this.loading = true ;
          if(this.servicevente.toLowerCase()=='assurance'.toLowerCase())
          {

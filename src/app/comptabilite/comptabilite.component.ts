@@ -342,8 +342,19 @@ export class ComptabiliteComponent implements OnInit {
           service: type.service,
         }
       });
+      this.loading = false ;
+    }).then( type => {
+      this.bilanexploitationaveccommission = [
+        {service:'tnt', cashin:0, cashout:0, commission:0},
+        {service:'postcash', cashin:0, cashout:0, commission:0},
+        {service:'wizall', cashin:0, cashout:0, commission:0},
+        {service:'orngemoney', cashin:0, cashout:0, commission:0},
+        {service:'Total', cashin:0, cashout:0, commission:0},
+      ];
       this.exploitationbilan = this.exploitationaveccommission;
       this.exploitationbilan.forEach(type => {
+        this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+        this.bilanexploitationaveccommission[4].commission+=type.commission;
         if(type.service == 'TNT'){
           this.bilanexploitationaveccommission[0].cashin+=type.mnt;
           this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -362,13 +373,12 @@ export class ComptabiliteComponent implements OnInit {
           }
           else{
             this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+            this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+            this.bilanexploitationaveccommission[4].cashin-=type.mnt;
           }
           this.bilanexploitationaveccommission[3].commission+=type.commission;
         }
       });
-      console.log("-----3---------");
-      console.log(this.bilanexploitationaveccommission);
-      this.loading = false ;
     });
   }
 
@@ -390,8 +400,19 @@ export class ComptabiliteComponent implements OnInit {
             service: type.service,
           }
         });
-        this.exploitationbilan = this.exploitationaveccommission
+        this.loading = false ;
+      }).then( type => {
+        this.bilanexploitationaveccommission = [
+          {service:'tnt', cashin:0, cashout:0, commission:0},
+          {service:'postcash', cashin:0, cashout:0, commission:0},
+          {service:'wizall', cashin:0, cashout:0, commission:0},
+          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'Total', cashin:0, cashout:0, commission:0},
+        ];
+        this.exploitationbilan = this.exploitationaveccommission;
         this.exploitationbilan.forEach(type => {
+          this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+          this.bilanexploitationaveccommission[4].commission+=type.commission;
           if(type.service == 'TNT'){
             this.bilanexploitationaveccommission[0].cashin+=type.mnt;
             this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -410,13 +431,12 @@ export class ComptabiliteComponent implements OnInit {
             }
             else{
               this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashin-=type.mnt;
             }
             this.bilanexploitationaveccommission[3].commission+=type.commission;
           }
         });
-        console.log("-----3---------");
-        console.log(this.bilanexploitationaveccommission);
-        this.loading = false ;
       });
     }
     else {
@@ -456,8 +476,19 @@ export class ComptabiliteComponent implements OnInit {
             service: type.service,
           }
         });
-        this.exploitationbilan = this.exploitationaveccommission
+        this.loading = false ;
+      }).then( type => {
+        this.bilanexploitationaveccommission = [
+          {service:'tnt', cashin:0, cashout:0, commission:0},
+          {service:'postcash', cashin:0, cashout:0, commission:0},
+          {service:'wizall', cashin:0, cashout:0, commission:0},
+          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'Total', cashin:0, cashout:0, commission:0},
+        ];
+        this.exploitationbilan = this.exploitationaveccommission;
         this.exploitationbilan.forEach(type => {
+          this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+          this.bilanexploitationaveccommission[4].commission+=type.commission;
           if(type.service == 'TNT'){
             this.bilanexploitationaveccommission[0].cashin+=type.mnt;
             this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -476,13 +507,12 @@ export class ComptabiliteComponent implements OnInit {
             }
             else{
               this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashin-=type.mnt;
             }
             this.bilanexploitationaveccommission[3].commission+=type.commission;
           }
         });
-        console.log("-----3---------");
-        console.log(this.bilanexploitationaveccommission);
-        this.loading = false ;
       });
     }
     else {
@@ -523,8 +553,19 @@ export class ComptabiliteComponent implements OnInit {
               service: type.service,
             }
           });
-          this.exploitationbilan = this.exploitationaveccommission
+          this.loading = false ;
+        }).then( type => {
+          this.bilanexploitationaveccommission = [
+            {service:'tnt', cashin:0, cashout:0, commission:0},
+            {service:'postcash', cashin:0, cashout:0, commission:0},
+            {service:'wizall', cashin:0, cashout:0, commission:0},
+            {service:'orngemoney', cashin:0, cashout:0, commission:0},
+            {service:'Total', cashin:0, cashout:0, commission:0},
+          ];
+          this.exploitationbilan = this.exploitationaveccommission;
           this.exploitationbilan.forEach(type => {
+            this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+            this.bilanexploitationaveccommission[4].commission+=type.commission;
             if(type.service == 'TNT'){
               this.bilanexploitationaveccommission[0].cashin+=type.mnt;
               this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -543,13 +584,12 @@ export class ComptabiliteComponent implements OnInit {
               }
               else{
                 this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+                this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+                this.bilanexploitationaveccommission[4].cashin-=type.mnt;
               }
               this.bilanexploitationaveccommission[3].commission+=type.commission;
             }
           });
-          console.log("-----3---------");
-          console.log(this.bilanexploitationaveccommission);
-          this.loading = false ;
         });
       }
       else {
@@ -569,7 +609,6 @@ export class ComptabiliteComponent implements OnInit {
           this.loading = false ;
         });
       }
-
     }
   }
 
@@ -590,8 +629,19 @@ export class ComptabiliteComponent implements OnInit {
             service: type.service,
           }
         });
-        this.exploitationbilan = this.exploitationaveccommission
+        this.loading = false ;
+      }).then( type => {
+        this.bilanexploitationaveccommission = [
+          {service:'tnt', cashin:0, cashout:0, commission:0},
+          {service:'postcash', cashin:0, cashout:0, commission:0},
+          {service:'wizall', cashin:0, cashout:0, commission:0},
+          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'Total', cashin:0, cashout:0, commission:0},
+        ];
+        this.exploitationbilan = this.exploitationaveccommission;
         this.exploitationbilan.forEach(type => {
+          this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+          this.bilanexploitationaveccommission[4].commission+=type.commission;
           if(type.service == 'TNT'){
             this.bilanexploitationaveccommission[0].cashin+=type.mnt;
             this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -610,13 +660,12 @@ export class ComptabiliteComponent implements OnInit {
             }
             else{
               this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+              this.bilanexploitationaveccommission[4].cashin-=type.mnt;
             }
             this.bilanexploitationaveccommission[3].commission+=type.commission;
           }
         });
-        console.log("-----3---------");
-        console.log(this.bilanexploitationaveccommission);
-        this.loading = false ;
       });
     }
     else {
@@ -642,7 +691,6 @@ export class ComptabiliteComponent implements OnInit {
     console.log(iscommission);
     if(this.selectionintervalledateinit && this.selectionintervalleddatefinal){
       this.loading = true ;
-
       this.selectionintervalle = this.selectionintervalledateinit+" "+this.selectionintervalleddatefinal;
       if(iscommission == 0){
         this.comptabiliteServiceWeb.exploitationaveccommission(idpdv, "intervalle", this.selectionintervalle).then(adminmultipdvServiceWeb => {
@@ -658,8 +706,19 @@ export class ComptabiliteComponent implements OnInit {
               service: type.service,
             }
           });
-          this.exploitationbilan = this.exploitationaveccommission
+          this.loading = false ;
+        }).then( type => {
+          this.bilanexploitationaveccommission = [
+            {service:'tnt', cashin:0, cashout:0, commission:0},
+            {service:'postcash', cashin:0, cashout:0, commission:0},
+            {service:'wizall', cashin:0, cashout:0, commission:0},
+            {service:'orngemoney', cashin:0, cashout:0, commission:0},
+            {service:'Total', cashin:0, cashout:0, commission:0},
+          ];
+          this.exploitationbilan = this.exploitationaveccommission;
           this.exploitationbilan.forEach(type => {
+            this.bilanexploitationaveccommission[4].cashin+=type.mnt;
+            this.bilanexploitationaveccommission[4].commission+=type.commission;
             if(type.service == 'TNT'){
               this.bilanexploitationaveccommission[0].cashin+=type.mnt;
               this.bilanexploitationaveccommission[0].commission+=type.commission;
@@ -678,13 +737,12 @@ export class ComptabiliteComponent implements OnInit {
               }
               else{
                 this.bilanexploitationaveccommission[3].cashout+=type.mnt;
+                this.bilanexploitationaveccommission[4].cashout+=type.mnt;
+                this.bilanexploitationaveccommission[4].cashin-=type.mnt;
               }
               this.bilanexploitationaveccommission[3].commission+=type.commission;
             }
           });
-          console.log("-----3---------");
-          console.log(this.bilanexploitationaveccommission);
-          this.loading = false ;
         });
       }
       else {

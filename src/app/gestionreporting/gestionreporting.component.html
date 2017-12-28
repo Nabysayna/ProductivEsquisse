@@ -3,25 +3,10 @@
         <div class="panel-heading" >
             <h2>Gestion & Reporting </h2>
         </div>
-
         <div class="cover"></div>
-
         <!-- /.panel-heading -->
         <div class="panel-body">
             <!-- Nav tabs -->
-<!--             <ul class="nav nav-pills">
-                <li class="active"><a href="#historique" data-toggle="tab" (click)="histop()">Historique des Opérations</a>
-                </li>
-                <li><a id="elec" href="#charges" data-toggle="tab">Dépenses</a>
-                </li>
-                <li><a id="elec" href="#ventes" data-toggle="tab">Recettes</a>
-                </li>
-                <li><a id="elec" href="#reclamation" data-toggle="tab">Réclamations</a>
-                </li>
-                <li><a id="elec" href="#approvisionnement"  (click)="etatcaisse()" data-toggle="tab">Caisse</a>
-                </li>
-            </ul>
- -->
 
             <div id="om-options">
                 <a href="#historique" style="padding-left: 4rem; padding-right: 4rem;" (click)="histop()"  data-toggle="tab">Historique des Opérations</a>
@@ -33,55 +18,47 @@
                 <a href="#reclamation" data-toggle="tab">Réclamations</a>
 
                 <a href="#approvisionnement" (click)="etatcaisse()" data-toggle="tab">Caisse</a>
-
             </div>
 
 
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="historique">
                     <div class="panel panel-default">
-                        <fieldset>
-                            <h2>Historique Opérations</h2>
-                        </fieldset>
+                        <fieldset><h2>Historique Opérations</h2></fieldset>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="gestionreporting|filtregestionreporting:filtre" #fho="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%; margin-top: 4rem ;">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3" style="padding-right: 3rem ;">
-                                                    Rechercher :
-                                                    <input class="form-control" name="filtre" id="filtre" [(ngModel)]="filtre"/>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th><mfDefaultSorter by="dateoperation.date">Date</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="operateur">Service</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="traitement">Traitement</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="infoclient">Client</mfDefaultSorter></th>
-                                           </tr>
-
-                                        </thead>
-                                        <tbody *ngIf="this.gestionreporting">
-                                        <tr *ngFor="let gestionreporting of fho.data">
-                                            <td>{{gestionreporting.dateoperation.date.substring(0,19)}}</td>
-                                            <td>{{gestionreporting.operateur}}</td>
-                                            <td>{{gestionreporting.traitement}}</td>
-                                            <td>{{currencyFormat(gestionreporting.montant)}}</td>
-                                            <td>
-                                                <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a>
-                                                <a *ngIf="gestionreporting.operateur!='orangemoney'"> --- </a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="4">
-                                                    <mfBootstrapPaginator ></mfBootstrapPaginator>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-
+                           <table width="100%" class="table table-responsive table-striped" [mfData]="gestionreporting|filtregestionreporting:filtre" #fho="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%; margin-top: 4rem ;">
+                                <thead>
+                                    <tr>
+                                        <th><mfDefaultSorter by="dateoperation.date">Date</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="operateur">Service</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="traitement">Traitement</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="infoclient">Client</mfDefaultSorter></th>
+                                    </tr>
+                                    <tr>
+                                      <th colspan="4"><label class="label-control">Recherche:</label><input class="form-control" [(ngModel)]="filtre"/></th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="this.gestionreporting">
+                                <tr *ngFor="let gestionreporting of fho.data">
+                                    <td>{{gestionreporting.dateoperation.date.substring(0,19)}}</td>
+                                    <td>{{gestionreporting.operateur}}</td>
+                                    <td>{{gestionreporting.traitement}}</td>
+                                    <td>{{currencyFormat(gestionreporting.montant)}}</td>
+                                    <td>
+                                        <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a>
+                                        <a *ngIf="gestionreporting.operateur!='orangemoney'"> --- </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
 
                             <div class="col-sm-3 col-xs-3" ><button class=" btn btn-primary btn-block"  OnClick="javascript:window.print()">Imprimer</button></div>
@@ -90,6 +67,7 @@
                         <!-- /.panel-body -->
                     </div>
                 </div>
+
                 <div class="tab-pane fade" id="charges">
                         <div class="panel">
                         <fieldset >
@@ -106,11 +84,12 @@
                                             </select>
                                             </div>
 
-                                            <div class="col-sm-3 col-xs-12"><button (click)="validCharge()" id="validcharge" class="btn btn-primary btn-block" >Ajouter</button></div>
+                                            <div class="col-sm-3 col-xs-12"><button (click)="validCharge()" id="validcharge1" class="btn btn-primary btn-block" >Ajouter</button></div>
 
                     </div>
                     </div>
                 </div>
+
                 <div class="tab-pane fade" id="ventes">
                     <div class="panel">
                         <fieldset >
@@ -173,6 +152,7 @@
 
                     </div>
                 </div>
+
                 <div class="tab-pane fade" id="approvisionnement">
                     <div class="panel">
                         <fieldset >
