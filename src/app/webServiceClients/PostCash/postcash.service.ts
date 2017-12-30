@@ -48,6 +48,7 @@ export class PostCashWebService {
     });
   }
 
+
   public rechargementespece(tel_destinataire : string, montant : string): Promise<any>  {
     var method:string = 'rechargementespece';
     var parameters:{}[] = [];
@@ -79,7 +80,7 @@ export class PostCashWebService {
         var reponse:any = JSON.parse(response['retraitespeceResponse'].return.$);
         resolve(reponse) ;
       });
-    });
+    });   
   }
 
   public achatcodewoyofal(montant : string, compteur : string): Promise<any>  {
@@ -93,7 +94,7 @@ export class PostCashWebService {
 
     return new Promise( (resolve, reject) => {
       this.soapService.post(method, parameters, 'achatcodewoyofalResponse').then(response=>{
-
+        console.log(response) ;
         if (typeof response['achatcodewoyofalResponse'].return.$ == "undefined"  || response['achatcodewoyofalResponse'].return.$ == null){
           resolve(JSON.stringify({errorCode:"12",errorMessage:"Erreur de connexion au serveur"}) ) ;
         }
@@ -171,6 +172,43 @@ export class PostCashWebService {
       });
     });
   }
+
+  public rechargerapido(tel_destinataire : string, montant : string, badge : string): Promise<any>  {
+    var method:string = 'RechargeBadgeRapido';
+    var parameters:{}[] = [];
+    var reEspParams = {token:this.token, telephone: tel_destinataire, montant: montant, badge: badge} ;
+    var params:{}[] = [] ;
+    params["params"] = reEspParams ;
+
+    parameters['RechargeBadgeRapido xmlns="urn:postcashwsdl#"'] = params;
+
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'RechargeBadgeRapidoResponse').then(response=>{
+        console.log(response) ;
+        var reponse:any = JSON.parse(response['RechargeBadgeRapidoResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
+  }
+
+  public payeroolusolar(tel_destinataire : string, numcompte : string, montant : string): Promise<any>  {
+    var method:string = 'PaiementOoluSolar';
+    var parameters:{}[] = [];
+    var reEspParams = {token:this.token, tel: tel_destinataire, numcompte: numcompte, mtt: montant} ;
+    var params:{}[] = [] ;
+    params["params"] = reEspParams ;
+
+    parameters['PaiementOoluSolar xmlns="urn:postcashwsdl#"'] = params;
+
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'PaiementOoluSolarResponse').then(response=>{
+        console.log(response) ;
+        var reponse:any = JSON.parse(response['PaiementOoluSolarResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
+  }
+
 
   public histotransactmarchand(date_debut: string, date_fin: string): Promise<any>  {
     var method:string = 'histotransactmarchand';

@@ -133,9 +133,21 @@
                 <div class="panel panel-heading">
                     <label class="btn btn-danger" (click)="estcheckPerformance('journee')">La journée</label>&nbsp;
                     <label class="btn btn-danger" (click)="estcheckPerformance('semaine')" >La semaine</label>&nbsp;
-                    <label class="btn btn-danger" (click)="estcheckPerformance('mois')" >Le mois</label>
+                  <label class="btn btn-danger" (click)="estcheckPerformance('mois')" >Le mois</label>
+                  <label class="btn btn-danger" (click)="estcheckPerformance('annee')" >L'année</label>
+                  <label class="btn btn-danger" (click)="estcheckPerformance('tous')" >Tous</label>
+                    <h3>Nombre d'opèrations {{ typeperformance }} : {{nbreOp}}.</h3>
                     <h3>Performances des superviseurs par lot {{ typeperformance }}.</h3>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-3 legends"><div style="width : 2rem ; height: 1rem ; background-color : red"></div> recette infèrieure à 25 000</div>
+                    <div class="col-sm-3 legends"><div style="width : 2rem ; height: 1rem ; background-color : yellow"></div> recette entre 25 000 et 50 000</div>
+                    <div class="col-sm-3 legends"><div style="width : 2rem ; height: 1rem ; background-color : green"></div> recette entre 50 000 et 100 000</div>
+                    <div class="col-sm-3 legends"><div style="width : 2rem ; height: 1rem ; background-color : orange"></div> recette supérieure 100 000</div>
+                </div>
+
+
                 <div class="panel-body">
                     <div style="display: block" *ngIf="datasets">
                         <canvas baseChart
@@ -185,7 +197,7 @@
                             </div>
                         </div>
                         <div class="panel panel-default"  style="background-color: white">
-                            <table class="table table-striped" [mfData]="performancesadminclasserbylotbydate | datafilterAdminmultperformance : filterQuery" #mf="mfDataTable"
+                            <table class="table table-striped table-responsive" [mfData]="performancesadminclasserbylotbydate | datafilterAdminmultperformance : filterQuery" #mf="mfDataTable"
                                    [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                                 <thead>
                                 <tr>
@@ -218,11 +230,12 @@
                     <div class="col-xs-12 col-sm-7" *ngIf="performanceadminpdv && detailperformancepdv">
                         <h3>{{performanceadminpdv.fullname}}</h3>
                         <div class="panel panel-default">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-responsive">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Gérant</th>
+                                      <th>Date opération</th>
+                                      <th>Gérant</th>
                                         <th>Telephone</th>
                                         <th>Operateur</th>
                                         <th>Traitement</th>
@@ -232,7 +245,8 @@
                                 <tbody>
                                     <tr *ngFor="let pdv of detailperformancepdv; let i = index ">
                                         <td>{{i + 1}}</td>
-                                        <th>{{pdv.fullname}}</th>
+                                      <th>{{pdv.dateoperation}}</th>
+                                      <th>{{pdv.fullname}}</th>
                                         <th>{{pdv.telephone}}</th>
                                         <td>{{pdv.operateur}}</td>
                                         <td>{{pdv.traitement}}</td>

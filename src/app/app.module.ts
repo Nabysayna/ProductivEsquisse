@@ -71,7 +71,6 @@ import {CrmServiceWeb} from './webServiceClients/Crm/crm.service';
 import {OrangeMoneyService} from './webServiceClients/Orangemoney/orangemoney.service';
 import {UtilServiceWeb} from './webServiceClients/utils/Util.service';
 
-import {UtilService} from "./services/util.service";
 
 
 /*-----------------*/
@@ -208,6 +207,11 @@ import {FiltreexploitationaveccommissionPipe} from "./pipes/filtreexploitationav
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
 import { WizallComponent } from './wizall/wizall.component';
+import {UtilService} from "./services/util.service";
+import {CrmDoorServiceWeb} from "./webServiceClients/CrmDoor/crmdoor.service";
+import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
+import { CommissionnementComponent } from './commissionnement/commissionnement.component';
+import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 
 
 
@@ -237,7 +241,11 @@ import { WizallComponent } from './wizall/wizall.component';
     GestionreportingComponent,
     SoldecompteComponent,
     RecusComponent,
+
     ImpressionComponent,
+    ImpressionadminpdvComponent,
+
+
     PostcashComponent,
 
     AdminmultipdvDashboardComponent,
@@ -252,7 +260,7 @@ import { WizallComponent } from './wizall/wizall.component';
     AdminpdvMonitoringComponent,
     AdminpdvStatusReclamationComponent,
     AdminpdvparametrecompteComponent,
-    
+
 
     GeomapComponentComponent,
     LoaderComponent,
@@ -325,11 +333,13 @@ import { WizallComponent } from './wizall/wizall.component';
     FiltresouszonesupplierPipe,
     FiltrezonesupplierPipe,
     FirstlogComponent,
-    
+
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
     WizallComponent,
+    CommissionnementComponent,
+    ChallengeresultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -397,8 +407,9 @@ import { WizallComponent } from './wizall/wizall.component';
       GestionreportingServiceWeb,
       AuthenticationService,
       CrmServiceWeb,
+      DemandepretServiceWeb,
+      CrmDoorServiceWeb,
       UtilService,
-      DemandepretServiceWeb
   ],
   bootstrap: [AppComponent]
 })

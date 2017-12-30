@@ -17,7 +17,7 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
     public rowsOnPage = 10;
     public sortBy = "adminpdv";
     public sortOrder = "desc";
-
+    public categoriepoint='---' ;
     public adminmultipdvMajcaution: AdminmultipdvMajcaution[];
     loading = false ;
 
@@ -38,12 +38,13 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
             adminpdv:elt.adminpdv,
             adresse: JSON.parse(elt.adresse).address,
             cautioninitiale:elt.cautioninitiale,
+            date_last_deposit:elt.date_last_deposit.date.split('.')[0],
             idcaution:elt.idcaution,
             montantconsomme:elt.montantconsomme,
             telephone:elt.telephone
           }
         })
-        //console.log(this.adminmultipdvMajcaution);
+        console.log(this.adminmultipdvMajcaution);
       }
       else{
         this.adminmultipdvMajcaution = [];
@@ -71,11 +72,12 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
 
   public validermaj(item):void {
     this.loading = true ;
-    this.adminmultipdvServiceWeb.modifymajcaution('azrrtt', this.majcaution.idcaution, this.inputCaution).then(adminmultipdvServiceWebList => {
+    this.adminmultipdvServiceWeb.modifymajcaution('azrrtt', this.majcaution.idcaution, this.inputCaution, this.categoriepoint).then(adminmultipdvServiceWebList => {
       console.log(adminmultipdvServiceWebList);
       this.closeModal();
       this.loading = false ;
       this.listmajcautions();
+      this.categoriepoint = '---' ;
     });
   }
 

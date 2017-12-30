@@ -18,6 +18,8 @@ import { AdminmultipdvStatusPdvComponent } from './admin-multi-pdv/admin-multi-p
 import { AdminmultipdvStatusReclamationComponent } from './admin-multi-pdv/admin-multi-pdv-status-reclamation/admin-multi-pdv-status-reclamation.component';
 import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-multi-pdv-update-caution/admin-multi-pdv-update-caution.component';
 
+import { CommissionnementComponent } from './commissionnement/commissionnement.component';
+
 
 import { ManagerComponent } from './manager/manager.component';
 import { AuthComponentComponent } from './auth-component/auth-component.component';
@@ -56,12 +58,14 @@ import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
 import { ConsulterpretComponent } from './consulterpret/consulterpret.component';
 import { FirstlogComponent } from './firstlog/firstlog.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
+import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 
 
 import { AdminpdvparametrecompteComponent } from './adminpdv/adminpdv-parametre-compte/adminpdv-parametre-compte.component';
 import {ImpressionComponent} from "./impression/impression.component";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
+import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 
   //
 
@@ -71,8 +75,10 @@ const appRoutes: Routes = [
     { path: 'accueil', component: AccueilComponent, canActivate: [AuthGuardcais],
            children:[
                 {path: '', component: ECommerceComponent},
+                {path: 'commissionnement', component: CommissionnementComponent},
+                {path: 'challenge', component: ChallengeresultsComponent },
                 {path: 'MONEYGRAM', component: SoapserverComponent},
-    			      {path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
+    			{path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
                 {path: 'POSTECASH', component: PostcashComponent},
                 {path: 'TIGOCASH', component: TigoCashComponentComponent},
                 {path: 'WIZALL', component: WizallComponent},
@@ -172,6 +178,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 children: [
+                    { path: 'challenge', component: ChallengeresultsComponent },
+                    { path: 'commissionnement', component: CommissionnementComponent },
                     { path: 'dashboard', component: AdminpdvDashboardComponent },
                     { path: 'monitoring', component: AdminpdvMonitoringComponent },
                     { path: 'parametrecompte', component: AdminpdvparametrecompteComponent },
@@ -183,6 +191,7 @@ const appRoutes: Routes = [
                     { path: '', component: AdminpdvDashboardComponent },
                     {path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
                     {path: 'gestionnaire', component: GestionnaireComponent},
+                    {path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
 
                 ]
             }

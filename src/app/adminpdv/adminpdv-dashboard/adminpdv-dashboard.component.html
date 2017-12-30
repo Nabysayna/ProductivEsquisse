@@ -1,16 +1,20 @@
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <h1 class="page-header">Dashboard</h1>
+<div id="page-wrapper" class="text-center">
+
+    <div class="row" style="margin-bottom: 1rem ; ">
+      <div class="col-sm-12" style="margin-top: -8rem ;">
+        <div class="panel-heading" style="background-color: #337ab7; color: white">
+          <h1>Dashboard</h1>
         </div>
+      </div>
     </div>
-    <div class="row" *ngIf="adminpdvDashboardNbreReclVente">
+
+    <div class="row" *ngIf="adminpdvDashboardNbreReclVente" style="margin-bottom: 3rem ;  margin-top: 19rem ;">
         <div class="col-sm-4">
-            <div class="panel panel-green">
+            <div class="panel adminpdvDashboardNbreReclVente">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-3x"></i>
+                            <i class="fa fa-microphone fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{adminpdvDashboardNbreReclVente.nbreclamations}}</div>
@@ -18,117 +22,113 @@
                         </div>
                     </div>
                 </div>
-<!--                 <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left"><a [routerLink]="['/accueiladmpdv', 'statusreclamation']" >Voir Details</a></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
- -->
             </div>
         </div>
-
         <div class="col-sm-4">
-            <div class="panel panel-red">
+            <div class="panel adminpdvDashboardNbreReclVente">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-check-circle-o fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">{{adminpdvDashboardNbreReclVente.nboperations}}</div>
+                          <div>Opérations effectuées!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel adminpdvDashboardNbreReclVente">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
                             <i class="fa fa-shopping-cart fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">10</div>
-                            <div>Articles vendus en local!</div>
+                          <div class="huge">{{adminpdvDashboardNbreReclVente.nbarticlesvendus}}</div>
+                          <div>Articles vendus ecom!</div>
                         </div>
                     </div>
                 </div>
-<!--                 <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left"><a [routerLink]="['/accueiladmpdv', 'statuspdv']" >Voir Details</a></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
- -->
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{adminpdvDashboardNbreReclVente.nbarticlesvendus}}</div>
-                            <div>Articles vendus ecom!</div>
-                        </div>
-                    </div>
-                </div>
-<!--                 <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">Voir Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a> -->
             </div>
         </div>
     </div>
 
+    <div class="row" style="margin-bottom: 3rem ;">
+      <div class="col-sm-12">
+        <div class="panel"  style="border: none;">
+          <div class="panel-heading adminpdvDashboardTitle center-block" style="margin-top: 8rem">
+            <h4><i class="fa fa-bar-chart-o fa-fw"></i>Niveau d'activité par Service</h4>
+          </div>
+          <div class="panel-body" *ngIf="adminpdvDashboardNbreReclVente && adminpdvDashboardNbreReclVente.activitesoperateur">
+            <canvas baseChart  class="table-responsive"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [legend]="true"
+                    [chartType]="'line'"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-12 col-xs-12">
-            <div class="panel panel-primary">
-                <div class="panel panel-heading">
-                    <label class="btn btn-danger" (click)="estcheckPerformance('journee')">La journée</label>&nbsp;
-                    <label class="btn btn-danger" (click)="estcheckPerformance('semaine')" >La semaine</label>&nbsp;
-                    <label class="btn btn-danger" (click)="estcheckPerformance('mois')" >Le mois</label>
+            <div class="panel" style="border: none; margin-top: 0rem ">
+                <div class="panel-heading  adminpdvDashboardTitle center-block">
+                    <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('journee')">La journée</label>&nbsp;
+                    <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('semaine')" >La semaine</label>&nbsp;
+                    <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('mois')" >Le mois</label>
+                    <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('annee')" >L'année</label>
+                    <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('tous')" >All</label>
                     <h3>Performances des points de vente {{ typeperformance }}.</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-5">
-                            <div class="panel panel-default table-responsive">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="panel panel-default table-responsive" style="margin-top: 0">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Pdv</th>
-                                            <th>Telephone</th>
-                                            <th>Recette</th>
-                                            <th>Option</th>
+                                            <th><p class="adminpdvDashboardBorder">#</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Pdv</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Téléphone</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Recette</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Option</p></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of adminpdvDashboardPerformancepdv; let i = index ">
+                                        <tr *ngFor="let item of adminpdvDashboardPerformancepdv; let i = index " style="color: #337ab7; text-align: center">
                                             <td>{{i + 1}}</td>
                                             <td>{{item.fullname}}</td>
                                             <td>{{item.telephone}}</td>
-                                            <td>{{currencyFormat(item.montanttotal)}}</td>
+                                            <td style="text-align: right">{{currencyFormat(item.montanttotal)}}</td>
                                             <td class="text-center"><button type="button"  (click)="estdetailPerformance(item)" class="btn btn-danger">Détail</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-7" *ngIf="detailperformancepdv">
+                        <div class="col-xs-12 col-sm-6" *ngIf="detailperformancepdv">
                             <h3><strong>{{ performancepdv.fullname }}</strong></h3>
                             <div class="panel panel-default table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Service</th>
-                                            <th>Traitement</th>
-                                            <th>Montant</th>
+                                            <th><p class="adminpdvDashboardBorder">#</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Service</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Traitement</p></th>
+                                            <th><p class="adminpdvDashboardBorder">Montant</p></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of detailperformancepdv; let i = index ">
+                                        <tr *ngFor="let item of detailperformancepdv; let i = index " style="color: #337ab7; text-align: center">
                                             <td>{{i + 1}}</td>
                                             <td>{{item.operateur}}</td>
                                             <td>{{item.traitement}}</td>
-                                            <td>{{currencyFormat(item.montant)}}</td>
+                                            <td style="text-align: right">{{currencyFormat(item.montant)}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,7 +142,7 @@
 </div>
 
 <div *ngIf="this.loading">
-    <app-loader></app-loader>    
+    <app-loader></app-loader>
 </div>
 
 

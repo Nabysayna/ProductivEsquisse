@@ -13,8 +13,9 @@ import { TigoCashService } from '../webServiceClients/Tigocash/tigocash.service'
 })
 export class AccueilComponent implements OnInit {
   process=[];
-  quinzeMinutes = 900000;	
-  registredAPIs : string [] = ['POSTECASH', 'ORANGEMONEY', 'TIGOCASH', 'WIZALL', 'TNT BY EXCAF'] ;
+   quinzeMinutes = 900000; 
+//  quinzeMinutes = 15000;	
+  registredAPIs : string [] = ['POSTECASH', 'ORANGEMONEY', 'TIGOCASH', 'TNT BY EXCAF'] ;
   //registredAPIs : string [] = ['POSTECASH', 'TNT BY EXCAF'] ;
   authorisedToUseCRM = false ;
   load="loader";
@@ -27,6 +28,10 @@ export class AccueilComponent implements OnInit {
 
 
   ngOnInit() {
+    
+    localStorage.removeItem('om-depot') ;
+    localStorage.removeItem('om-retrait') ;
+
     if (!sessionStorage.getItem('currentUser')) 
        this.router.navigate(['']);  
     this.processus(); 
@@ -167,8 +172,14 @@ export class AccueilComponent implements OnInit {
 
     let requete = "1/"+objet.data.montant+"/"+objet.data.num ;  
 
-    if (this.repeatedInLastFifteen('om-depot', requete)==1)
-           requete = requete+'R' ;
+    if (this.repeatedInLastFifteen('om-depot', requete)==1){
+      objet.etats.etat=true;
+      objet.etats.load='terminated';
+      objet.etats.color='red';
+      objet.etats.errorCode='r'; 
+      return 0 ;
+    }
+
 
     this.omService.requerirControllerOM(requete).then( resp => {
       if (resp.status==200){
@@ -244,10 +255,13 @@ export class AccueilComponent implements OnInit {
    retirer(objet:any){
     let requete = "2/"+objet.data.numclient+"/"+objet.data.montant ;    
 
-    if (this.repeatedInLastFifteen('om-retrait', requete)==1)
-           requete = requete+'R' ;
-
-        console.log("WE SENT "+requete) ;
+    if (this.repeatedInLastFifteen('om-retrait', requete)==1){
+      objet.etats.etat=true;
+      objet.etats.load='terminated';
+      objet.etats.color='red';
+      objet.etats.errorCode='r'; 
+      return 0 ;    
+    }
 
     this.omService.requerirControllerOM(requete).then( resp => {
       if (resp.status==200){
@@ -809,7 +823,8 @@ export class AccueilComponent implements OnInit {
 /******************************************************************************************************/
 
   repeatedInLastFifteen(operation : any, incomingRequest : any) : number{
-    let today = Date.now() ;
+
+    let today = Number( Date.now() ) ;
     let omOps = [] ;
     console.log(localStorage.getItem(operation)) ;
 
@@ -821,12 +836,16 @@ export class AccueilComponent implements OnInit {
       for (let i=0 ; i<omOps.length ; i++){
         if (omOps[i].requete==incomingRequest){
           let ilYa15Minutes = today - this.quinzeMinutes;
-          omOps[i].tstamp = today ;
-          omOps[i].requete = incomingRequest ;
-          localStorage.setItem(operation, JSON.stringify(omOps) );            
-          if (omOps[i].tstamp>=ilYa15Minutes){
+          
+          let diff =  today - omOps[i].tstamp  ;
+
+//          console.log("Diff vaut "+diff) ;
+
+          if (  diff < this.quinzeMinutes ){
             return 1 ;
           }else{
+            omOps[i].tstamp = today ;
+            localStorage.setItem(operation, JSON.stringify(omOps) );            
             return 0;
           }
         }
@@ -835,7 +854,6 @@ export class AccueilComponent implements OnInit {
       localStorage.setItem(operation, JSON.stringify(omOps) );            
       return 0 ;
     }
-
   }
 
 /****************************************************************************************************/
@@ -845,6 +863,9 @@ export class AccueilComponent implements OnInit {
 
 /* OM */
      if(item.data.operateur==2 ){
+
+        if (item.etats.errorCode=='r')
+          return "Vous venez d'effectuer la même opèration sur le même numéro." ;
 
         if (item.etats.errorCode=='0')
           return "Vous n'êtes pas autorisé à effectuer cette opèration." ;
@@ -867,7 +888,7 @@ export class AccueilComponent implements OnInit {
           return "Le client a atteint le nombre maximum de transactions par mois en tant que beneficiaire" ;
 
 //        if (item.etats.errorCode=='-10')
- //         return "Votre n'a pas pu être traitée. Vérifiez la conformité des informations saisies!" ;
+ //         return "Votre requête n'a pas pu être traitée. Vérifiez la conformité des informations saisies!" ;
 
         if (item.etats.errorCode=='-12')
           return "Service actuellement indisponible. Veuillez réessayer plus tard." ;
@@ -886,6 +907,10 @@ export class AccueilComponent implements OnInit {
 
   }
 
+
+  annulerOperation(){
+    console.log("Opèration annulée ...") ;
+  }
 
 
 }

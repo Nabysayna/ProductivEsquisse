@@ -5,6 +5,15 @@
         </div>
     </div>
 
+
+    <div class="row">
+      <div class="col-sm-3 legends"><div style="width : 4rem ; height: 2rem ; background-color : blue"></div> Caution init nulle</div>
+      <div class="col-sm-4 legends"><div style="width : 4rem ; height: 2rem ; background-color : red"></div> Caution <i class="fa fa-angle-left" aria-hidden="true"></i> à 25% de la caution init</div>
+      <div class="col-sm-5 legends"><div style="width : 4rem ; height: 2rem ; background-color : green"></div> Caution entre 25 et 50% de la caution init</div>
+      <br/>
+    </div>
+
+
     <div class="row">
 	    <div class="col-xs-12 col-md-12 col-lg-12">
 	        <div class="row">
@@ -49,6 +58,7 @@
 	                </div>
 	            </div>
 	        </div>
+
 	        <div class="panel panel-default table-responsive">
 	            <table class="table table-striped" [mfData]="adminmultipdvMajcaution | dataFilterAdminmultipdvUpdateCaution : filterQuery" #mf="mfDataTable"
 	                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
@@ -59,20 +69,22 @@
 	                    <th><mfDefaultSorter by="telephone">Telephone</mfDefaultSorter></th>
 	                    <th><mfDefaultSorter by="adresse">Adresse</mfDefaultSorter></th>
 	                    <th><mfDefaultSorter by="cautioninitiale">Caution initiale</mfDefaultSorter></th>
-	                    <th><mfDefaultSorter by="montantconsomme">Etat actuel</mfDefaultSorter></th>
+                      <th><mfDefaultSorter by="date_last_deposit">Date update</mfDefaultSorter></th>
+                      <th><mfDefaultSorter by="montantconsomme">Etat actuel</mfDefaultSorter></th>
 	                    <th><mfDefaultSorter [by]="sortByWordLength">Option</mfDefaultSorter></th>
 	                </tr>
 	                </thead>
 	                <tbody>
-	                <tr *ngFor="let item of mf.data; let i = index ">
+	                <tr *ngFor="let item of mf.data; let i = index " [ngStyle]="{'color': 'white', 'background-color': item.cautioninitiale==0?'blue':((item.montantconsomme*100)/item.cautioninitiale)<25?'red':((item.montantconsomme*100)/item.cautioninitiale)>=25 && ((item.montantconsomme*100)/item.cautioninitiale)<50?'yellow':'green'}">
 	                    <td>{{ i + 1  }}</td>
 	                    <td>{{item.adminpdv}}</td>
 	                    <td>{{item.telephone}}</td>
 	                    <td>{{item.adresse}}</td>
 	                    <td>{{item.cautioninitiale}}</td>
-	                    <td>{{item.montantconsomme}}</td>
+                      <td>{{item.date_last_deposit}}</td>
+                      <td>{{item.montantconsomme}}</td>
 	                    <td class="text-center">
-	                    	<button type="button" class="btn btn-danger" (click)="maj(item)" data-toggle="modal" data-target="#myModal">Mettre à jour</button>
+	                    	<button type="button" class="btn btn-warning btn-sm" (click)="maj(item)" data-toggle="modal" data-target="#myModal">Mettre à jour</button>
 	                    </td>
 	                </tr>
 	                </tbody>
@@ -100,7 +112,14 @@
             </div>
             <div class="modal-body">
             	<label for="inputCaution">Nouvelle caution</label>
-          		<input id="inputCaution" name="inputCaution" type="number" placeholder="Nouvelle caution" class="form-control" required [(ngModel)]="inputCaution" #Caution="ngModel">
+          		<input id="inputCaution" name="inputCaution" type="number" min="0" placeholder="Nouvelle caution" class="form-control" required [(ngModel)]="inputCaution" #Caution="ngModel">
+
+            	<label for="inputCaution">Catégorie du point (si concerné par la Promo)</label>
+          		<select class="form-control input-sm" [(ngModel)]="categoriepoint">
+          			<option>1</option>
+          			<option>2</option>
+          			<option>3</option>
+          		</select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="idmodalferme" data-dismiss="modal" #closeBtn>Annuler</button>

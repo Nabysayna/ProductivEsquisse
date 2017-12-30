@@ -1,5 +1,10 @@
 .routedisplayer{
     margin-left: 2rem ;
+    margin-top: -83rem ;
+}
+
+.navbar-default{
+    background-color: transparent; 
 }
 
 #wrapper > .navbar{
@@ -8,12 +13,14 @@
 
 
 #wrapper{
-	background-color: white ;
+	background-color: transparent ;
 	height: 100%;
 }
 
+
+
 #navbHead{
-	background-color: white !important ;
+	background-color: transparent !important ;
     border-color: transparent;
     border-style : hidden;
     color : white;
@@ -25,7 +32,7 @@
     border-color: #e7e7e7;
     color : white;
 }
-#navbHead a:hover{  
+#navbHead a:hover{
     color : #F39200 !important ;
 }
 
@@ -45,23 +52,42 @@
 
 
 #side-menu a:hover{
-    background-color: #fff;
     border-color: #337ab7;
     color : #337ab7 !important ;
 }
 
+#side-menu li{
+    background-color: white ;
+}
+
+#side-menu li:first-child{
+ border-radius: 3rem 0 0 0 ;
+}
+
+#side-menu li:last-child{
+ background-color: white;
+ border-radius: 0 0 3rem 3rem ;
+}
+
+
 #leftsidemenu{
+  margin-left: 1rem;
     width: 23.5rem ;
     margin-top: 0 ;
 /*    height: 70rem;*/
-    background-color: white !important; 
+    background-color: white !important;
 }
 
+
 @media screen and (max-width:640px) {
- 
+
  #leftsidemenu{
     height:100%;
  }
-   
+
 }
 
+
+a > i{
+  color: #337ab7;
+}

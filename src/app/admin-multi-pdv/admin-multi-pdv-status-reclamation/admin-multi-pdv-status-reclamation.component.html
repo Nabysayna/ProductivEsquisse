@@ -67,19 +67,19 @@
 	                </tr>
 	                </thead>
 	                <tbody>
-	                <tr *ngFor="let item of mf.data">
+	                <tr *ngFor="let item of mf.data" [ngStyle]="{'color': 'white', 'background-color': item.etatreclamation==0?'orange':'green'}">
 	                    <td>{{item.datereclamation}}</td>
 	                    <td>{{item.adminpdv}}</td>
 	                    <td>{{item.pdv}}</td>
 	                    <td>{{item.telephone}}</td>
 	                    <td>{{item.adresse}}</td>
 	                    <td>{{item.typeservice}}</td>
-	                    <td class="text-center">
+	                    <td class="text-center" style="color: black">
 	                    	<button type="button" class="btn btn-danger" popover="{{item.reclamation}}" popoverTitle="Réclamation" triggers="focus">
 							  	voir
 							</button>
 	                    </td>
-	                    <td>{{item.etatreclamation==0?'Régle':'En cours'}}</td>
+	                    <td>{{item.etatreclamation==1?'Réglé':'En cours'}}</td>
 	                </tr>
 	                </tbody>
 	                <tfoot>

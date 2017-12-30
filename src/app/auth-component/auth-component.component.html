@@ -1,3 +1,4 @@
+
 <div>
     <nav id="nav" class="nav navbar-default" >
             <img src="assets/Logo-officiel-Sentool.png"/>
@@ -7,8 +8,6 @@
                     <input class="form-group form-control" type="password" [(ngModel)]="this.userPwd" required id="userPwd" name="userPwd" placeholder="password"/>
                     <button class="btn btn-success" [disabled]="!loginForm.valid"><i class="fa fa-check" style="color : white" aria-hidden="true"></i> Valider</button>
 
-<!--                   <i class="fa fa-check" style="color : white" aria-hidden="true"></i><input type="button" value="Valider" class="btn btn-success" type="submit" [disabled]="!loginForm.valid"/>
- -->
               </form>
 
             <form class="form form-inline pull-right" (ngSubmit)="authentificateBySMS()" #loginNextForm="ngForm" *ngIf="!phase1">
@@ -19,12 +18,19 @@
                 <input class="btn btn-success" value="Se connecter" type="button" type="submit" [disabled]="!loginNextForm.form.valid"  />
             </form>
 
-            <h1 style="color: white ; text-align: center ; margin-top: 7rem ; font-size: 10rem ;">SENTOOL</h1>
-            <h4 style="color: white ; text-align: center ; font-size: 3rem ;"> 
-                <a style="color: white ; cursor: pointer ;" (click)="diagnostiquer()">REINITIALISER <i class="fa fa-refresh" aria-hidden="true"></i> </a> 
-            </h4>
+            <div class="col-sm-6 col-md-6 col-xs-12" style="text-align: center;  margin-top: 7rem ;">
+               <video width="320" height="240" controls>
+                      <source src="nossssss.mp4" type="video/mp4">
+                </video>
+            </div>
 
-            <h2 style="color: white ; text-align: center ;">Souscrivez à la plateforme Sentool</h2>
+            <div class="col-sm-6 col-md-6 col-xs-12">
+                <h1 style="color: white ; text-align: center ; margin-top: 7rem ; font-size: 10rem ;">SENTOOL</h1>
+                <h4 style="color: white ; text-align: center ; font-size: 3rem ;"> 
+                    <a style="color: white ; cursor: pointer ;" (click)="diagnostiquer()">REINITIALISER <i class="fa fa-refresh" aria-hidden="true"></i> </a> 
+                </h4>
+                <h2 style="color: white ; text-align: center ;">Souscrivez à la plateforme Sentool</h2>
+            </div>
 
    </nav>
 
@@ -95,15 +101,11 @@
 
                     <div class="form-group form-inline  row" *ngIf="souszone">
                         <label class="col-sm-4" style="text-align: end ;"> Adresse exacte dans {{souszone}} </label>
-                        <!-- <div class="col-sm-8 form-control address" style="text-align: start ;"> -->
-                            <input name="adresse" class="col-sm-8 form-control address" style="text-align: start ;" required *ngIf="souszone" [(ngModel)]="adresse" type="text" placeholder="adresse exacte" />
-                        <!-- </div> -->
                     </div>
                     <div class="col-sm-12" style="text-align: center ;">
                         <button class="btn btn-success" style="border-radius: 2rem ; background-color: orange ; color : white ; border-style: hidden ;" [disabled]="!suscriptionForm .valid"><i class="fa fa-check" aria-hidden="true"></i> Valider</button>
                     </div>
-<!--                     <input   type="button"  (click)="inscrire()" [disabled]="!f.form.valid" class="btn btn-success btn-block"  value="valider" />
- -->             </form>
+             </form>
           </div>
     </div>
 

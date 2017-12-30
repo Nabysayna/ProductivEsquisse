@@ -1,15 +1,29 @@
 
 html{
 	background-color: white ;
+/*  font-weight: bold; */
 }
 
-input{	 
+input{
 	margin: 1rem !important;
 }
 
 body{
 	padding-top: 0rem !important ;
 	overflow-x: hidden;
+}
+
+button{
+	border-radius: 1rem 0 1rem 1rem !important;
+    background-color: #F39200 !important;
+}
+
+button:hover{
+	border-radius: 1rem 0 1rem 1rem !important;
+    background-color: #FFFFFF !important;
+    border-color: #F39200 !important;
+    color: #36A9E0 !important;
+    font-weight: bolder;
 }
 
 /*a{
@@ -22,23 +36,26 @@ a:hover{
 	color : #337ab7 !important;
 }
 
-td{	
+td{
 	background-color : white !important;
 }
 */
 .bg
-{ 
-	background-color: white;
+{
+	background-color: transparent;
 }
 
 .tab-pane h3{
 	padding: 1rem !important;
 }
 
-/*.panel{
-	border-style: hidden ;
+.panel{
+	background-color: transparent !important; 
+	margin-top: -18rem ;
 }
 
+
+/*
 .panel-heading{
 	font-size: -webkit-xxx-large ! important;
 	color : white !important;

@@ -6,6 +6,7 @@ export class UtilService {
 
 
   private link = "http://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
+//  private link = "http://localhost/backup-sb-admin/backend-SB-Admin-BS4-Angular-4/index.php";
   private headers = new Headers();
   private basetoken:any;
 
@@ -59,6 +60,14 @@ export class UtilService {
   recupererInfosCC(){
     let url = this.link+"/apifromsentool/initajoutdeposit";
     let datas = JSON.stringify({token:this.basetoken});
+    let params = 'params='+datas;
+    return this._http.post(url, params, {headers:this.headers})
+      .map(res => res.json());
+  }
+
+  demandedeposit(data:any){
+    let url = this.link+"/apifromsentool/demndedeposit";
+    let datas = JSON.stringify(data);
     let params = 'params='+datas;
     return this._http.post(url, params, {headers:this.headers})
       .map(res => res.json());

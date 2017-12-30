@@ -1,3 +1,6 @@
+td{
+  text-align: center;
+}
 
 .loader .ball-pulse-rise > div {
    background-color: #337ab7 !important ;
@@ -13,11 +16,11 @@
 {
 
     border-right: 2px dotted #f8f8f8;
-    
+
 }
 
 .blockcaisse{
-	border : 1px solid blue ;
+	border : 1px solid #f39200;
 	margin-bottom: 1rem ;
 	padding: 0.5rem ;
 }
@@ -32,34 +35,40 @@
 
 .activeatag.active {
 	padding: 1rem ;
-	background-color: #286090 ;
-	border-radius: 4px 4px 4px 4px ;
-	color : white;
+	background-color: #f39200;
+  border-radius: 10px 0 10px 10px;
+  color : white;
 	text-decoration: none;
+}
+
+.activeatag {
+  padding: 1rem ;
+  border-color: #f39200;
+  border-radius: 10px 0 10px 10px;
 }
 
 .activeatag:visited{
 	padding: 1rem ;
 	background-color: transparent !important;
-	color : #286090;
-	border-radius: 4px 4px 4px 4px ;
-	text-decoration: none;
+	color : #f39200;
+  border-radius: 10px 0 10px 10px;
+  text-decoration: none;
 }
 
 
 .activeatag:active {
 	padding: 1rem ;
-	background-color: #286090 ;
-	border-radius: 4px 4px 4px 4px ;
-	color : white;
+	background-color: #f39200 ;
+  border-radius: 10px 0 10px 10px;
+  color : white;
 	text-decoration: none;
 }
 
 .activeatag:focus {
 	padding: 1rem ;
-	background-color: #286090 ;
-	border-radius: 4px 4px 4px 4px ;
-	color : white;
+	background-color: #f39200 ;
+  border-radius: 10px 0 10px 10px;
+  color : white;
 	text-decoration: none;
 }
 
@@ -67,3 +76,53 @@
 	margin-left: 1rem ;
 }
 
+
+p.adminpdvcrmBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
+}
+
+p.adminpdvcrmBorder, button.adminpdvcrmBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
+}
+
+select.adminpdvcrmBorder, textarea.adminpdvcrmBorder, input.adminpdvcrmBorder {
+  border-radius: 10px 0 10px 10px !important;
+  border: 2px solid #337ab7;
+}
+
+/*a.adminpdvcrmBorderButton {
+  border-radius: 10px 0 10px 10px !important;
+  border: 2px solid #f39200;
+}*/
+
+div.adminpdvcrmTitle{
+  background-color: #337ab7;
+  color: white;
+  text-align: center;
+}
+
+label.adminpdvparametrecompteText{
+  color: #f39200;
+  text-align: center;
+}
+
+th.adminpdvcrmTitleTable, mfDefaultSorter.adminpdvcrmTitleTable{
+  color: white;
+  text-align: center;
+  border-radius: 10px 0 10px 10px !important;
+  background-color: #f39200;
+  border: 2px solid #f39200;
+}
+
+
+
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
+}

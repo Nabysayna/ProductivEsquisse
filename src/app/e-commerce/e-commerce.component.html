@@ -1,9 +1,9 @@
 <div class="row" id="ecomhome" >
 
-      <h1 style="color : #337ab7 ;">E-Commerce</h1>
+<!--      <h1 style="color : #337ab7 ;">E-Commerce</h1>
 
 
-  <div class="col-sm-4 extremite">
+   <div class="col-sm-4 extremite">
   	<a class="btn ecomBtn" href="#ecomcatalogue" (click)="initialize()" data-toggle="tab">Catalogue</a>
   </div>
 
@@ -14,6 +14,30 @@
   <div class="col-sm-4 extremite">
   	<a class="btn ecomBtn" href="#ecomespaceperso" (click)="initialize()" data-toggle="tab" >Espace Perso</a>
   </div>
+ -->
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+        
+        <h2>E-Commerce</h2>
+
+    </div>
+
+    <div class="cover"></div>
+
+  <div class="panel-body">
+
+    <div id="om-options">
+        <a style="padding-left: 4rem; padding-right: 4rem;" href="#ecomcatalogue" (click)="initialize()" data-toggle="tab">Catalogue</a>
+        
+        <a  style="padding-left: 4rem; padding-right: 4rem;" href="#prisecom" (click)="initialize()" data-toggle="tab">Prendre une commande</a>
+        
+        <a  href="#ecomespaceperso" (click)="initialize()" data-toggle="tab" >Espace Perso</a> 
+
+    </div>
+
+
 
     <div class="row tab-content">
 
@@ -68,6 +92,8 @@
           </div>
        </div>
 
+    </div>
+  </div>
 </div>
 
 <div bsModal #childModal="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

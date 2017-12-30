@@ -189,4 +189,22 @@ export class CatalogueComponent implements OnInit {
     this.typeaheadNoResults = this.typeaheadLoading = false;
   }
 
+  getFormatted( designation) : string {
+    if(designation.length>16)
+      return designation.substring(0, 13)+'...' ;
+
+    return designation ;
+  }
+
+  @ViewChild('viewMore') public addChildModal:ModalDirective;
+ 
+  public showAddChildModal():void {
+    this.addChildModal.show();
+  }
+ 
+  public hideAddChildModal():void {
+    this.addChildModal.hide();
+  }
+
+
 }

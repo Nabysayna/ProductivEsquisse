@@ -70,6 +70,7 @@ label{
 .tab-content{
     position: relative;
     left: 2rem;
+    top: 14rem;
 }
 
 .form-inline{
@@ -163,3 +164,8 @@ label{
 
 
 
+@media only screen and (max-width: 500px) {
+    #om-options{
+        width: max-content !important;
+    }
+}  

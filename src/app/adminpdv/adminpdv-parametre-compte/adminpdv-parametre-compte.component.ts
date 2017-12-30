@@ -17,7 +17,7 @@ export class AdminpdvparametrecompteComponent implements OnInit {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
-	public filterQuery = "";
+  public filterQuery = "";
   public rowsOnPage = 10;
   public sortBy = "pdv";
   public sortOrder = "asc";
@@ -56,10 +56,7 @@ export class AdminpdvparametrecompteComponent implements OnInit {
 
     this.adminpdvServiceWeb.listuserpdv('azrrtt').then(adminpdvServiceWebList => {
       this.monitoringAdminpdvUserpdv = adminpdvServiceWebList.response;
-      console.log(this.monitoringAdminpdvUserpdv);
-      console.log('---------------------');
       this.getRegionNewCaissier();
-
     });
 
   }
@@ -71,7 +68,9 @@ export class AdminpdvparametrecompteComponent implements OnInit {
           this.regions = data;
         },
         error => alert(error),
-        () => {}
+        () => {
+          console.log('test init sentool')
+        }
       );
   }
   selectRegionNewCaissier(){
@@ -104,6 +103,10 @@ export class AdminpdvparametrecompteComponent implements OnInit {
   }
 
   private closeModal(): void {
+    this.iszones = false;
+    this.issouszones = false;
+    this.getRegionNewCaissier();
+
     this.errorConfirm = false;
     this.closeBtn.nativeElement.click();
     console.log('close');
@@ -124,7 +127,7 @@ export class AdminpdvparametrecompteComponent implements OnInit {
 
   public modif(item):void {
     this.modifuserpdv = item;
-     console.log(this.modifuserpdv);
+    console.log(this.modifuserpdv);
   }
 
   public validermodif():void {
@@ -143,7 +146,7 @@ export class AdminpdvparametrecompteComponent implements OnInit {
 
   }
 
- inscrire(){
+  inscrire(){
     let paramInscrpt = {'token': JSON.parse(sessionStorage.getItem("currentUser")).baseToken, 'prenom':this.prenom, 'nom':this.nom, 'email':this.email, 'telephone':this.telephone, 'nometps':this.nometps, 'nomshop':this.nomshop, adresse : JSON.stringify({'region':this.region, 'zone':this.zone, 'souszone':this.souszone, 'address':this.adresse}) } ;
     this.loading = true ;
     console.log( "Nouvel Inscrit : "+JSON.stringify(paramInscrpt) ) ;
@@ -169,8 +172,8 @@ export class AdminpdvparametrecompteComponent implements OnInit {
       }else
         this.existLogin = true ;
 
-     }) ;
- }
+    }) ;
+  }
 
   currencyFormat(somme) : String{
     return Number(somme).toLocaleString() ;

@@ -13,6 +13,9 @@ export class PostcashComponent implements OnInit {
     telephone:number;
     tel:number;
     montant:number;
+    compte: string;
+    badge: string;
+
     compteur:string;
     codevalidation:string;
     mt_carte:number;
@@ -329,5 +332,66 @@ export class PostcashComponent implements OnInit {
       }
     });
   }
+
+  validrechargementrapido(){
+    this.loading = true ;
+    console.log('00221'+this.telephone+'',''+this.montant, this.badge) ;
+
+    this.postcashwebservice.rechargerapido('00221'+this.telephone+'',''+this.montant, this.badge).then(postcashwebserviceList => {
+      this.loading = false ;
+/*
+      if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
+        this.dataImpression = {
+          apiservice:'postecash',
+          service:'rechargementespece',
+          infotransaction:{
+            client:{
+              transactionPostCash: postcashwebserviceList.transactionId,
+              transactionBBS: 'Id BBS',
+              telephone:'00221'+this.telephone,
+              montant:this.montant,
+            },
+
+          },
+        }
+        sessionStorage.setItem('dataImpression', JSON.stringify(this.dataImpression));
+        this.router.navigate(['accueil/impression']);
+      }else{
+        this.erreur = true ;
+        this.errorMessage = postcashwebserviceList.errorMessage;
+      }
+*/
+    });
+  }
+
+  payeroolusolar(){
+    this.loading = true ;
+
+    this.postcashwebservice.payeroolusolar('00221'+this.telephone+'', this.compte, ''+this.montant).then(postcashwebserviceList => {
+      this.loading = false ;
+      if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
+        this.dataImpression = {
+          apiservice:'postecash',
+          service:'rechargementespece',
+          infotransaction:{
+            client:{
+              transactionPostCash: postcashwebserviceList.transactionId,
+              transactionBBS: 'Id BBS',
+              telephone:'00221'+this.telephone,
+              montant:this.montant,
+            },
+
+          },
+        }
+        sessionStorage.setItem('dataImpression', JSON.stringify(this.dataImpression));
+        this.router.navigate(['accueil/impression']);
+      }else{
+        this.erreur = true ;
+        this.errorMessage = postcashwebserviceList.errorMessage;
+      }
+    });
+  }
+
+
 
 }

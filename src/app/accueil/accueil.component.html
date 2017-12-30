@@ -8,7 +8,11 @@
         <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
             <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
                 <ul id="gauche" class="nav in" id="side-menu">
-                  <li *ngFor="let api of registredAPIs" ><a [routerLink]="['/accueil', api]"> <img src="assets/menuticker.png" />{{api}}</a></li>
+<!--                   <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'commissionnement']" > <img src="assets/menuticker.png" />Commissionnement PROMO</a></li> -->
+
+                  <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'challenge']" > <img src="assets/menuticker.png" />Challenge</a></li>
+                  <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
+                  <li *ngFor="let api of registredAPIs"  ><a [routerLink]="['/accueil', api]"> <img src="assets/menuticker.png" />{{api}}</a></li>
                   <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" > <img src="assets/menuticker.png" />GESTION REPORTING</a></li>
                   <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
                   <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" > <img src="assets/menuticker.png" />E-COMMERCE</a></li>
@@ -19,9 +23,9 @@
             <!-- /.sidebar-collapse -->
 
 <!--             <div id="encours" style="text-align: center ; padding-top: 2.5rem ;"> -->
-            <div id="encours" style="text-align: center ; padding-top: 5.5rem ;">
+            <div id="encours" >
 
-              <h3 style="color: orange ; font-weight: 600 ;">En cours ...</h3>
+              <h3 style="color: orange ; font-weight: 600 ; background-color: white ;">En cours ...</h3>
 
               <div  (click)="finprocess(item,item.dataI)"  [ngStyle]="{'background-color':item.etats.color}" *ngFor="let item of process"    class="row pendingTask" [popover]="popTemplate" popoverTitle="{{item.data.nom}}" triggers="mouseenter:mouseleave">
 
@@ -32,7 +36,11 @@
 
               <div>
                 {{item.data.nom}}
-                </div> 
+              </div> 
+
+              <div>
+                <a (click)="annulerOperation() ;"> <i style="color: red" class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i> </a>
+              </div> 
 
                  <ng-template #popTemplate>
                     <!-- OM -->
@@ -151,6 +159,7 @@
 
     <div id="page-wrapper" class="row" style="padding-top: 3rem;">
         <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" id="routeContainDisplayer">
+<!--             <img src="assets/nabs.png" style="position: relative ; left: -88px; top: -154px; z-index: 1000 ; width: 48%;"/>-->
             <router-outlet></router-outlet>
         </div>
     </div>

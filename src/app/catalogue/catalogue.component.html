@@ -22,7 +22,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let ordered of orderedarticles; let i = index;" >
+							<tr *ngFor="let ordered of orderedarticles;let i=index;" >
 								<td class="cart_product">
 
 									<a><img src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{ordered.nomImg}}" alt="" height="150" ></a>
@@ -94,14 +94,14 @@
 					</div>
 					<div class="col-sm-3" *ngFor="let article of listarticles | filtrecataloguecommande : filterQuery | paginate: { itemsPerPage: 4, currentPage: p }" >
 	                    <div class="well well-sm">
-
+                            <h4 class="card-title">{{getFormatted(article.designation) }}</h4>
 	                        <img class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.nomImg}}" alt="Card image cap" height="200" width="200">
-	                        <div class="text-center">
-	                            <h4 class="card-title">{{article.designation}}</h4>
-								<p class="card-text">Prix:{{article.prix}}.FCFA</p>
-	                            <input name="Gender-{{i}}" (click)="selectionnerarticle(article)" type="checkbox">
-	                        </div>
 	                    </div>
+                        <div class="text-center">
+							<p class="card-text">{{article.prix}}.FCFA</p>
+<!--                             <input name="Gender-{{i}}" (click)="selectionnerarticle(article)" type="checkbox"> -->
+                            <a id="Gender-{{i}}" class="yeurr" (click)="showAddChildModal()"> voir</a>
+                        </div>
 	                </div>
 				</div>
 				<div class="row text-center">
@@ -116,42 +116,17 @@
     <app-loader></app-loader>    
 </div>
 
-<div bsModal #childModalCommand="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal #viewMore="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
       <div class="modal-header">
-          <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModalCommand()">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideAddChildModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Entrez vos informations</h4>
+          <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="commander()" #validercommande="ngForm" autocomplete="on">
-          <div class="form-group row">
-            <div class="form-group col-sm-4">
-              <label for="inputNom">Nom *</label>
-              <input id="inputNom" name="inputNom" [(ngModel)]="this.nom" type="text" placeholder="Votre nom" class="form-control" required>
-            </div>
-            <div class="form-group col-sm-8">
-              <label for="inputPrenom">Prenom *</label>
-              <input id="inputPrenom" name="inputPrenom" [(ngModel)]="this.prenom" type="text" placeholder="Votre prénom" class="form-control" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input id="inputEmail" name="inputEmail" [(ngModel)]="this.email" type="email" placeholder="Votre email" class="form-control">
-          </div>
-          <div class="form-group row">
-            <div class="form-group col-sm-8">
-              <label for="inputTel">Téléphone *</label>
-              <input id="inputTel" name="inputTel" [(ngModel)]="this.telephone" type="tel" placeholder="Votre téléphone" class="form-control" required>
-            </div>
-          </div>
-          <div class="form-group text-center">
-            <button type="button" class="btn btn-default" (click)="hideChildModalCommand()" style="margin-left: 2rem;">Retour</button>
-            <button type="submit" class="btn btn-success" [disabled]="!validercommande.form.valid">Valider</button>
-          </div>
-        </form>
+      		Coming soon ...
       </div>
     </div>
   </div>

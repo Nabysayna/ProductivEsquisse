@@ -1,18 +1,20 @@
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Paramétrage des comptes</h1>
+        <div class="col-sm-12">
+          <div class="panel-heading adminpdvparametrecompteTitle">
+            <h1>Paramétrage des comptes</h1>
+          </div>
         </div>
     </div>
 
     <div class="row">
-	    <div class="col-xs-12 col-md-12 col-lg-12">
+      <div class="col-xs-12 col-md-12 col-lg-12">
 
-	    	 <div style="margin-bottom: 2rem; margin: 0 auto; margin-top: 1rem; text-align: center; ">
-           <button class="btn btn-primary" data-toggle="modal" data-target="#modalNewCaissier" (click)="region='--Choix région--'; iszones=false; issouszones=false" style="background-color: #ea8f43; margin-bottom: 2rem; margin-top: 1rem; text-align: center;">Créer un compte Caissier</button>
+         <div style="margin-bottom: 2rem; margin: 0 auto; margin-top: 1rem; text-align: right; ">
+           <button class="btn adminpdvparametrecompteBorder" data-toggle="modal" data-target="#modalNewCaissier" style="background-color: #ea8f43; margin-bottom: 2rem; margin-top: 1rem; text-align: center;">Créer un compte Caissier</button>
          </div>
 
-        <div class="panel panel-default table-responsive">
+        <div class="panel panel-default table-responsive" style="margin-top: -7rem;">
           <table class="table table-striped" [mfData]="monitoringAdminpdvUserpdv | dataFilterAdminpdvparametrecompte : filterQuery" #mf="mfDataTable"
                  [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
@@ -21,32 +23,32 @@
                 <div class="form-group row">
                   <label for="inputlistecompte" class="col-sm-2 col-form-label">Recherche:</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputlistecompte" name="inputlistecompte" placeholder="Recherche caissier" [(ngModel)]="filterQuery"/>
+                    <input type="text" class="form-control adminpdvparametrecompteBorder" id="inputlistecompte" name="inputlistecompte" placeholder="Recherche caissier" [(ngModel)]="filterQuery"/>
                   </div>
                 </div>
               </th>
             </tr>
             <tr>
-              <th>#</th>
-              <th><mfDefaultSorter by="pdv">Caissier</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="login">Login</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="adresse">Adresse</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="telephone">Telephone</mfDefaultSorter></th>
-              <th>Option</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th><p class="adminpdvparametrecompteBorder">#</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Caissier</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Login</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Adresse</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Téléphone</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Option</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Status</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Action</p></th>
             </tr>
             </thead>
             <tbody *ngIf="monitoringAdminpdvUserpdv">
-              <tr *ngFor="let item of mf.data; let i = index ">
+              <tr *ngFor="let item of mf.data; let i = index " style="color: #337ab7; font-weight: bold;">
                 <td>{{ i + 1  }}</td>
                 <td>{{item.pdv}}</td>
                 <td>{{item.login}}</td>
                 <td>{{getAdress(item.adresse)}}</td>
                 <td>{{item.telephone}}</td>
-                <td><button type="button" class="btn btn-outline btn-warning" (click)="modif(item)" data-toggle="modal" data-target="#myModalModifUser">Modifier</button></td>
+                <td><button type="button" class="btn btn-outline adminpdvparametrecompteBorder" (click)="modif(item)" data-toggle="modal" data-target="#myModalModifUser">Modifier</button></td>
                 <td>{{item.isconnect?'Connecté':'Deconnecté'}}</td>
-                <td><button type="button" *ngIf="item.isconnect" class="btn btn-outline btn-danger" (click)="deconnexionsession(item,i)">Deconnecter</button></td>
+                <td><button type="button" *ngIf="item.isconnect" class="btn btn-outline adminpdvparametrecompteBorder" (click)="deconnexionsession(item,i)">Deconnecter</button></td>
               </tr>
             </tbody>
             <tfoot>
@@ -58,8 +60,8 @@
             </tfoot>
           </table>
         </div>
-	    </div>
-	</div>
+      </div>
+  </div>
 
 </div>
 
@@ -67,28 +69,28 @@
 <div class="modal fade" id="myModalModifUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabelModifUser" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content"  *ngIf="modifuserpdv">
-            <div class="modal-header">
+            <div class="modal-header adminpdvparametrecompteTitle">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabelModifUser">Modification du mot de passe de {{modifuserpdv.pdv}}</h4>
             </div>
             <div class="modal-body">
               <h5 *ngIf="errorConfirm==true" style="color: red">Les données que vous avez saisies ne correspondent pas! Veuillez reprendre la saisie.</h5>
               <div class="form-group row">
-                <label for="pwmodif" class="col-sm-4 col-form-label">Nouveau mot de passe</label>
+                <label for="pwmodif" class="col-sm-4 col-form-label adminpdvparametrecompteText">Nouveau mot de passe</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" placeholder="Entrer le nouveau mot de passe"  id="pwmodif" name="pwmodif" required [(ngModel)]="password" #Password="ngModel">
+                  <input type="password" class="form-control adminpdvparametrecompteBorder" placeholder="Entrer le nouveau mot de passe"  id="pwmodif" name="pwmodif" required [(ngModel)]="password" #Password="ngModel">
                 </div>
               </div>
               <div class="form-group row" [ngClass]="{'has-error': password!=confirmPassword && ConfirmPassword.valid, 'has-success': password==confirmPassword && Password.valid}">
-                <label for="confpwmodif" class="col-sm-4 col-form-label">Confirmer mot de passe</label>
+                <label for="confpwmodif" class="col-sm-4 col-form-label adminpdvparametrecompteText">Confirmer mot de passe</label>
                 <div class="col-sm-8">
-                  <input id="confpwmodif" name="confpwmodif" type="password" class="form-control" placeholder="Confirmer le nouveau mot de passe" required [(ngModel)]="confirmPassword" #ConfirmPassword="ngModel">
+                  <input id="confpwmodif" name="confpwmodif" type="password" class="form-control adminpdvparametrecompteBorder" placeholder="Confirmer le nouveau mot de passe" required [(ngModel)]="confirmPassword" #ConfirmPassword="ngModel">
                 </div>
               </div>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn btn-default" id="idmodalferme" data-dismiss="modal" #closeBtn>Annuler</button>
-                <button type="button" (click)="validermodif()" [disabled]="!Password.valid || !ConfirmPassword.valid" class="btn btn-primary">Valider</button>
+                <button type="button" class="btn adminpdvparametrecompteBorder" id="idmodalferme" data-dismiss="modal" #closeBtn>Annuler</button>
+                <button type="button" (click)="validermodif()" [disabled]="!Password.valid || !ConfirmPassword.valid" class="btn adminpdvparametrecompteBorder">Valider</button>
             </div>
         </div>
     </div>
@@ -96,96 +98,96 @@
 
 
 <div class="modal fade" id="modalNewCaissier" tabindex="-1" role="dialog" aria-labelledby="modalNewCaissier" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Création compte Caissier</h4>
-            </div>
-            <div class="modal-body">
-              <h5 *ngIf="existLogin==true" style="color: red">Le login que vous avez renseigné est dèja utilisé. Veuillez saisir un login different.</h5>
-			        <div class="row" id="inscription">
-			            <div id="form" class="col-sm-12 col-xs-12">
-			                <form #f="ngForm" name="form">
-                        <div class="form-row">
-                          <div class="form-group col-sm-6">
-                            <label for="prenomnewcaisse" class="col-form-label">Prénom</label>
-                            <input type="text" class="form-control" id="prenomnewcaisse" required [(ngModel)]="prenom" name="prenomnewcaisse" placeholder="prenom" >
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="nomnewcaisse" class="col-form-label">Nom</label>
-                            <input type="text" class="form-control" id="nomnewcaisse" [(ngModel)]="nom" required name="nomnewcaisse" placeholder="nom">
-                          </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-sm-6">
-                            <label for="emailnewcaisse" class="col-form-label">Login</label>
-                            <input type="text" class="form-control" id="emailnewcaisse" required [(ngModel)]="email" name="emailnewcaisse" placeholder="login" >
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="telephonenewcaisse" class="col-form-label">Téléphone</label>
-                            <input type="number" class="form-control" id="telephonenewcaisse" [(ngModel)]="telephone" required name="telephonenewcaisse" placeholder="telephone">
-                          </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-sm-6">
-                            <label for="entreprisenewcaisse" class="col-form-label">Nom entreprise</label>
-                            <input type="text" class="form-control" id="entreprisenewcaisse" required [(ngModel)]="nometps" name="entreprisenewcaisse" placeholder="nom entreprise" >
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="boutiquenewcaisse" class="col-form-label">Nom boutique en ligne</label>
-                            <input type="text" class="form-control" id="boutiquenewcaisse" [(ngModel)]="nomshop" name="boutiquenewcaisse" required placeholder="nom boutique en ligne">
-                          </div>
-                        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header adminpdvparametrecompteTitle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Création compte Caissier</h4>
+      </div>
+      <div class="modal-body">
+        <h5 *ngIf="existLogin==true" style="color: red">Le login que vous avez renseigné est dèja utilisé. Veuillez saisir un login different.</h5>
+        <div class="row" id="inscription">
+          <div id="form" class="col-sm-12 col-xs-12">
+            <form #f="ngForm" name="form">
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label for="prenomnewcaisse" class="col-form-label adminpdvparametrecompteText">Prénom</label>
+                  <input type="text" class="form-control adminpdvparametrecompteBorder" id="prenomnewcaisse" required [(ngModel)]="prenom" name="prenomnewcaisse" placeholder="prenom" >
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="nomnewcaisse" class="col-form-label adminpdvparametrecompteText">Nom</label>
+                  <input type="text" class="form-control adminpdvparametrecompteBorder" id="nomnewcaisse" [(ngModel)]="nom" required name="nomnewcaisse" placeholder="nom">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label for="emailnewcaisse" class="col-form-label adminpdvparametrecompteText">Login</label>
+                  <input type="text" class="form-control adminpdvparametrecompteBorder" id="emailnewcaisse" required [(ngModel)]="email" name="emailnewcaisse" placeholder="login" >
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="telephonenewcaisse" class="col-form-label adminpdvparametrecompteText">Téléphone</label>
+                  <input type="number" class="form-control adminpdvparametrecompteBorder" id="telephonenewcaisse" [(ngModel)]="telephone" required name="telephonenewcaisse" placeholder="telephone">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label for="entreprisenewcaisse" class="col-form-label adminpdvparametrecompteText">Nom entreprise</label>
+                  <input type="text" class="form-control adminpdvparametrecompteBorder" id="entreprisenewcaisse" required [(ngModel)]="nometps" name="entreprisenewcaisse" placeholder="nom entreprise" >
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="boutiquenewcaisse" class="col-form-label adminpdvparametrecompteText">Nom boutique en ligne</label>
+                  <input type="text" class="form-control adminpdvparametrecompteBorder" id="boutiquenewcaisse" [(ngModel)]="nomshop" name="boutiquenewcaisse" required placeholder="nom boutique en ligne">
+                </div>
+              </div>
 
-                        <div class="form-group row">
-                          <label for="regionnewcaisse" class="col-sm-3 col-form-label">Région</label>
-                          <div class="col-sm-9">
-                            <select class="form-control input-sm" id="regionnewcaisse" name="regionnewcaisse" required [(ngModel)]="region" (change)="selectRegionNewCaissier()">
-                              <option selected>--Choix région--</option>
-                              <option *ngFor="let region of regions">{{region.nom}}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group row" *ngIf="iszones && region!='&#45;&#45;Choix région&#45;&#45;'">
-                          <label for="zonenewcaisse" class="col-sm-3 col-form-label">Zones</label>
-                          <div class="col-sm-9">
-                            <select class="form-control input-sm" id="zonenewcaisse" name="zonenewcaisse" required [(ngModel)]="zone" (change)="selectZoneNewCaissier()">
-                              <option>&#45;&#45;Choix zone&#45;&#45;</option>
-                              <option  *ngFor="let zone of zones">{{zone.nom}}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group row" *ngIf="issouszones && zone!='&#45;&#45;Choix zone&#45;&#45;'">
-                          <label for="souszonenewcaisse" class="col-sm-3 col-form-label">Sous zones</label>
-                          <div class="col-sm-9">
-                            <select class="form-control input-sm" id="souszonenewcaisse" name="souszonenewcaisse" required [(ngModel)]="souszone">
-                              <option>&#45;&#45;Choix sous zone&#45;&#45;</option>
-                              <option  *ngFor="let souszone of souszones">{{souszone.nom}}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group row" *ngIf="issouszones && souszone!='&#45;&#45;Choix sous zone&#45;&#45;'">
-                          <label for="adressenewcaisse" class="col-sm-3 col-form-label">Adresse exacte</label>
-                          <div class="col-sm-9">
-                            <textarea class="form-control" id="adressenewcaisse" name="adressenewcaisse" required [(ngModel)]="adresse" placeholder="Adresse exacte" rows="3"></textarea>
-                          </div>
-                        </div>
+              <div class="form-group row">
+                <label for="regionnewcaisse" class="col-sm-3 col-form-label adminpdvparametrecompteText">Région</label>
+                <div class="col-sm-9">
+                  <select class="form-control input-sm adminpdvparametrecompteBorder" id="regionnewcaisse" name="regionnewcaisse" required [(ngModel)]="region" (change)="selectRegionNewCaissier()">
+                    <option selected>--Choix région--</option>
+                    <option *ngFor="let region of regions">{{region.nom}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="iszones && region!='&#45;&#45;Choix région&#45;&#45;'">
+                <label for="zonenewcaisse" class="col-sm-3 col-form-label adminpdvparametrecompteText">Zones</label>
+                <div class="col-sm-9">
+                  <select class="form-control input-sm adminpdvparametrecompteBorder" id="zonenewcaisse" name="zonenewcaisse" required [(ngModel)]="zone" (change)="selectZoneNewCaissier()">
+                    <option>&#45;&#45;Choix zone&#45;&#45;</option>
+                    <option  *ngFor="let zone of zones">{{zone.nom}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="issouszones && zone!='&#45;&#45;Choix zone&#45;&#45;'">
+                <label for="souszonenewcaisse" class="col-sm-3 col-form-label adminpdvparametrecompteText">Sous zones</label>
+                <div class="col-sm-9">
+                  <select class="form-control input-sm adminpdvparametrecompteBorder" id="souszonenewcaisse" name="souszonenewcaisse" required [(ngModel)]="souszone">
+                    <option>&#45;&#45;Choix sous zone&#45;&#45;</option>
+                    <option  *ngFor="let souszone of souszones">{{souszone.nom}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="issouszones && souszone!='&#45;&#45;Choix sous zone&#45;&#45;'">
+                <label for="adressenewcaisse" class="col-sm-3 col-form-label adminpdvparametrecompteText">Adresse exacte</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control adminpdvparametrecompteBorder" id="adressenewcaisse" name="adressenewcaisse" required [(ngModel)]="adresse" placeholder="Adresse exacte" rows="3"></textarea>
+                </div>
+              </div>
 
-                        <div class="modal-footer text-center" style="text-align: right; margin-top: 3rem">
-                          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal" #closeBtn>Annuler</button>
-                          <button type="button" class="btn btn-success btn-sm"  (click)="inscrire()" [disabled]="!f.form.valid || region=='--Choix région--'  || zone=='--Choix zone--'  || souszone=='--Choix sous zone--' || !adresse" >Valider</button>
-                        </div>
-			                </form>
-			            </div>
-			        </div>
-            </div>
+              <div class="modal-footer text-center" style="text-align: right; margin-top: 3rem">
+                <button type="button" class="btn btn-info btn-sm adminpdvparametrecompteBorder" data-dismiss="modal" #closeBtn>Annuler</button>
+                <button type="button" class="btn btn-success btn-sm adminpdvparametrecompteBorder"  (click)="inscrire()" [disabled]="!f.form.valid || region=='--Choix région--'  || zone=='--Choix zone--'  || souszone=='--Choix sous zone--' || !adresse" >Valider</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-	<div *ngIf="this.loading">
-	    <app-loader></app-loader>
-	</div>
+  <div *ngIf="this.loading">
+    <app-loader></app-loader>
+  </div>
 
 </div>
 

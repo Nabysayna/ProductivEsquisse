@@ -4,9 +4,11 @@ marquee{
 }
 
 #currentUser {
-    background-color: transparent !important ;
+/*    background-color: transparent !important ;*/
+    background-color: white !important ;
     border-color: transparent !important;
     color : #337ab7 !important;
+    font-weight: bolder;
 }
 #currentUser:hover{  
     border-color: transparent !important;

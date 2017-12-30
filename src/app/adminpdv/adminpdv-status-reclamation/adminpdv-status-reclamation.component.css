@@ -1,3 +1,22 @@
 #page-wrapper{
     border-style: hidden ;
 }
+
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
+}
+
+
+p.adminmultipdvReclamationBorder, button.adminmultipdvReclamationButton {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
+}
+
+select.adminmultipdvReclamationBorder, input.adminmultipdvReclamationBorder {
+  border-radius: 10px 0 10px 10px !important;
+  border: 2px solid #337ab7;
+}
+
