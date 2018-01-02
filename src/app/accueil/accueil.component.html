@@ -8,15 +8,19 @@
         <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
             <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
                 <ul id="gauche" class="nav in" id="side-menu">
+
 <!--                   <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'commissionnement']" > <img src="assets/menuticker.png" />Commissionnement PROMO</a></li> -->
 
-                  <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'challenge']" > <img src="assets/menuticker.png" />Challenge</a></li>
+<!--                   <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'challenge']" > <img src="assets/menuticker.png" />Challenge</a></li>
                   <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
                   <li *ngFor="let api of registredAPIs"  ><a [routerLink]="['/accueil', api]"> <img src="assets/menuticker.png" />{{api}}</a></li>
-                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" > <img src="assets/menuticker.png" />GESTION REPORTING</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" > <img src="assets/menuticker.png" />GESTION REPORTING</a></li> -->
+
+                  <li *ngFor="let api of registredAPIs; let i = index" ><a [routerLink]="['/accueil', api]"> <img src="assets/icoservice-{{i+1}}.png" />{{api}}</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" ><i class="fa fa-calculator fa-2x pull-left"></i> GESTION REPORTING</a></li>
                   <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
-                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" > <img src="assets/menuticker.png" />E-COMMERCE</a></li>
-                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" > <img src="assets/menuticker.png" />Guide d'utilisation</a></li>
+                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
+                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" ><i class="fa fa-book fa-2x pull-left"></i> Guide d'utilisation</a></li>
                   <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
                 </ul>
             </div>
@@ -36,11 +40,7 @@
 
               <div>
                 {{item.data.nom}}
-              </div> 
-
-              <div>
-                <a (click)="annulerOperation() ;"> <i style="color: red" class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i> </a>
-              </div> 
+                </div>
 
                  <ng-template #popTemplate>
                     <!-- OM -->

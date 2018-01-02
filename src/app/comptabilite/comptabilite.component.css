@@ -85,3 +85,10 @@ a{
     background-color: transparent !important;
     margin-top: -19rem !important;
 }
+
+th.comptabiliteBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
+}

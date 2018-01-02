@@ -1,25 +1,17 @@
 <div id="page-wrapper">
     <div class="row" >
         <div class="col-sm-12">
-          <div class="panel-heading" style="background-color: #337ab7; color: white ; margin-bottom: 5rem">
-            <h1>Comptabilité</h1>
-          </div>
+          <div class="panel-heading" style="background-color: #337ab7; color: white ; margin-bottom: 5rem"><h1>Comptabilité</h1></div>
+          <ul class="nav nav-pills">
+              <li class="activeatag active"><a href="#caisse" data-toggle="tab">Caisse</a></li>
+              <li class="activeatag"><a href="#journal" data-toggle="tab">Journal</a></li>
+              <li class="activeatag"><a href="#exploitations" (click)="listeruserexploitation()" data-toggle="tab">Exploitation</a></li>
+              <li class="activeatag"><a href="#personnalisation" data-toggle="tab">Personnalisation</a></li>
+          </ul>
 
-	            <ul class="nav nav-pills">
+          <div class="tab-content">
 
-	                <li class="activeatag active"><a href="#caisse" data-toggle="tab">Caisse</a>
-	                </li>
-	                <li class="activeatag"><a href="#journal" data-toggle="tab">Journal</a></li>
-
-	                <li class="activeatag"><a href="#exploitations" (click)="listeruserexploitation()" data-toggle="tab">Exploitation</a></li>
-
-	                <li class="activeatag"><a href="#personnalisation" data-toggle="tab">Personnalisation</a></li>
-
-	            </ul>
-
-            <div class="tab-content">
-
-			      <div class="tab-pane fade in active" id="caisse" >
+            <div class="tab-pane fade in active" id="caisse" >
                   <div class="row blockcaisse" *ngFor="let pdv of pdvCaisses; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}">
                       <div class="col-sm-3 col-xs-4">
                           <button style="background-color: transparent; border : none ;"  href="#vide" data-toggle="tab"> <label>{{pdv.prenom+" "+pdv.nom}} </label> </button>
@@ -39,462 +31,475 @@
                       <div id="videwhy">
                       </div>
                   </div>
-			      </div>
+              </div>
 
-              <div class="row tab-pane fade in" id="journal" >
+            <div class="row tab-pane fade in" id="journal" >
 
-		            <div class="row blockcaisse" *ngFor="let pdv of pdvCaisses; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
+                <div class="row blockcaisse" *ngFor="let pdv of pdvCaisses; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
+                  <div class="col-sm-3 col-xs-4">
+                     <button style="background-color: transparent; border : none ;"  href="#vide" data-toggle="tab"> <label>{{pdv.prenom+" "+pdv.nom}} </label> </button>
+                  </div>
+                  <div class="col-sm-3 col-xs-12">
+                     <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#listc" data-toggle="tab"  (click)="listercharges(i)">Lister Charges</button>
+                  </div>
+                  <div class="col-sm-3 col-xs-8">
+                    <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#ajout" data-toggle="tab"  (click)="ajoutercharges(i)">Ajouter Charge</button>
+                  </div>
+                   <div class="col-sm-3 col-xs-12">
+                             <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#listr" data-toggle="tab"  (click)="listerrevenus(i)">Lister Revenus</button>
+                  </div>
 
-				        <div class="col-sm-3 col-xs-4">
-			                <button style="background-color: transparent; border : none ;"  href="#vide" data-toggle="tab"> <label>{{pdv.prenom+" "+pdv.nom}} </label> </button>
-				        </div>
-				        <div class="col-sm-3 col-xs-12">
-	                         <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#listc" data-toggle="tab"  (click)="listercharges(i)">Lister Charges</button>
-				        </div>
-				        <div class="col-sm-3 col-xs-8">
-			                 <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#ajout" data-toggle="tab"  (click)="ajoutercharges(i)">
-			                 Ajouter Charge
-			                 </button>
-				        </div>
-				         <div class="col-sm-3 col-xs-12">
-	                         <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#listr" data-toggle="tab"  (click)="listerrevenus(i)">Lister Revenus</button>
-				        </div>
-
-	                    <div class="col-sm-12 col-xs-12 tab-content" *ngIf="i==estselectionne">
-
-                        <div id="vide"></div>
-
-                            <div id="listc"  class="tab-pane fade in" >
-                            <div class="panel-body">
+                  <div class="col-sm-12 col-xs-12 tab-content" *ngIf="i==estselectionne">
+                    <div id="vide"></div>
+                    <div id="listc"  class="tab-pane fade in" >
+                        <div class="panel-body">
                             <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrappe">
-                            	<div class="row">
-                            		<div class="col-sm-12">
-
-	                	  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="charges|filtrecharges:filtre" #fopad="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                <thead>
-                                    <tr>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="charges|filtrecharges:filtre" #fopad="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                    <thead>
+                                      <tr>
                                         <th colspan="3" style="padding-right: 3rem ;">
                                             Rechercher :
                                             <input class="form-control" [(ngModel)]="filtre"/>
                                         </th>
-		                            </tr>
-                                    <tr>
+                                      </tr>
+                                      <tr>
                                         <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
                                         <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
                                         <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
                                         <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
-                                   </tr>
-
-                                </thead>
-                                <tbody *ngIf="this.charges">
-                                <tr *ngFor="let charges of fopad.data">
-                                    <td>{{charges.dateajout.date | date}}</td>
-                                    <td>{{charges.libelle}}</td>
-                                    <td>{{currencyFormat(charges.montant)}}</td>
-                                    <td>{{charges.service}}</td>
-                                </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">
-                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-
-                            </table>
-			                        </div>
-			                    </div>
-			                </div>
-                        </div>
-                        </div>
-
-                              <div id="ajout" class="tab-pane fade in col-sm-6 col-xs-12">
-                                <form class="form-signin" (ngSubmit)="validerajoutercharges(pdv)" #chargeForm="ngForm">
-                                    <input type="text" [(ngModel)]="libelleCharge"   name="libelle" id="libelle" class="form-control"  placeholder="Libelle charge" required>
-                                    <input type="number" [(ngModel)]="montantCharge"   name="montant" id="montantajoutercharges" class="form-control" placeholder="Montant de la dépense" required>
-                                    <input type="text" [(ngModel)]="service"   name="service" id="serviceajoutercharges" class="form-control" placeholder="Service concerné" required>
-                                    <button id="validcharge" class="btn btn-primary btn-block" type="submit" [disabled]="!chargeForm.form.valid" >Enregister</button>
-                                </form>
-                        </div>
-
-                                <div id="listr" class="tab-pane fade in" >
-
-                                   <div class="panel-body">
-                                      <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrapp">
-                                        <div class="row text-center" style="margin-bottom: 2rem">
-                                          <button type="button" class="btn btn-primary btn-sm" (click)="isselectlisterrevenuautre = false; listerrevenustransfert(i)">Services avec commission</button>
-                                          <button type="button" class="btn btn-primary btn-sm" (click)="isselectlisterrevenuautre = true">Autres</button>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-sm-12" *ngIf="isselectlisterrevenuautre">
-                                            Liste des autres revenu
-	                	                        <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="revenus|filtrerevenus:filtre" #fopa="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                                <thead>
-                                                    <tr><th colspan="3" style="padding-right: 3rem ;"> Rechercher :<input class="form-control" [(ngModel)]="filtre"/></th></tr>
-                                                    <tr>
-                                                        <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
-                                                        <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
-                                                        <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
-                                                        <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
-                                                   </tr>
-                                                </thead>
-                                                <tbody *ngIf="this.revenus">
-                                                  <tr *ngFor="let revenus of fopa.data">
-                                                      <td>{{revenus.date.date | date}}</td>
-                                                      <td>{{revenus.libelle}}</td>
-                                                      <td>{{currencyFormat(revenus.montant)}}</td>
-                                                      <td>{{revenus.service}}</td>
-                                                  </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                  <tr><td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td></tr>
-                                                </tfoot>
-                                            </table>
-			                                    </div>
-                                          <div class="col-sm-12" *ngIf="!isselectlisterrevenuautre">
-                                            Liste revenu des services avec commission
-                                            <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="revenustransfert | filtrerevenus:filtre" #fopa="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="date" [(mfSortOrder)]="desc" style="width: 100%;">
-                                              <thead>
-                                              <tr>
-                                                <th colspan="5" style="padding-right: 3rem ;"> Rechercher :<input class="form-control" [(ngModel)]="filtre"/></th>
-                                              </tr>
-                                              <tr>
-                                                <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="frais">Frais</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="commission">Commission</mfDefaultSorter></th>
-                                                <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
-                                              </tr>
-                                              </thead>
-                                              <tbody *ngIf="this.revenus">
-                                              <tr *ngFor="let revenus of fopa.data">
-                                                <td>{{revenus.date.date}}</td>
-                                                <td>{{revenus.libelle}}</td>
-                                                <td>{{currencyFormat(revenus.montant)}}</td>
-                                                <td>{{currencyFormat(revenus.frais)}}</td>
-                                                <td>{{currencyFormat(revenus.commission)}}</td>
-                                                <td>{{revenus.service}}</td>
-                                              </tr>
-                                              </tbody>
-                                              <tfoot>
-                                              <tr><td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td></tr>
-                                              </tfoot>
-                                            </table>
-                                          </div>
-			                                </div>
-			                            </div>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-
-			    </div>
-
-			    <div class="row tab-pane fade in" id="exploitations">
-			        <div class="row blockcaisse" *ngFor="let pdv of usersExploitation; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
-                  <div class="col-sm-12 col-xs-12">
-                      <div class="row">
-                          <div class="col-sm-3 col-xs-12"><label>{{pdv.prenom+" "+pdv.nom}}</label></div>
-                          <div class="col-sm-9 col-xs-12">
-                            <button class="btn btn-success" (click)="listerexploitationaveccommission(i, i, 0)">Services avec commission</button>
-                            <button class="btn btn-success" (click)="listerexploitation(i, i, 1)">Autres</button>
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-12 col-xs-12" *ngIf="i==estselectionne && 0==estselectionfff">
-                          <div id="exp{{i}}" >
-                            <div class="panel-body">
-                              <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wra">
-                                <div class="row">
-                                  <div class="col-sm-12">
-                                    <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="exploitationaveccommission|filtreexploitationaveccommission:filtreaveccommission" #fopdac="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                      <thead>
-                                      <tr>
-                                        <th colspan="6" style="padding-right: 3rem ;">
-                                          <div class="row">
-                                            <div class="col-sm-5 col-xs-12">
-                                              Rechercher :
-                                              <input class="form-control" [(ngModel)]="filtreaveccommission"/>
-                                            </div>
-                                            <div class="col-sm-7 col-xs-12">
-                                              <div class="row">
-                                                <label class="btn btn-primary" (click)="estcheckModel('jour'); listerexploitationrecherche(pdv.idpdv,0);">Par Jour</label>&nbsp;
-                                                <label class="btn btn-primary" (click)="estcheckModel('annee'); listerexploitationrechercheannee(pdv.idpdv,0);">Par Année</label>&nbsp;
-                                                <label class="btn btn-primary" (click)="estcheckModel('intervalle'); listerexploitationrecherche(pdv.idpdv,0);">Par Intervalle</label>
-                                              </div>
-                                              <div class="row">
-                                                <div class="btn-group" *ngIf="checkModel.intervalle">
-                                                  de <input type="date" name="intervalledateinit" [(ngModel)]="selectionintervalledateinit" /> à <input type="date" name="intervalleddatefinal" [(ngModel)]="selectionintervalleddatefinal" />
-                                                  <button (click)="listerexploitationintervalle(pdv.idpdv, 0)" >rechercher</button>
-                                                </div>
-                                                <div class="form-group" *ngIf="checkModel.jour" >
-                                                  <input type="date" [(ngModel)]="selectionjour" name="jour" />
-                                                  <button (click)="listerexploitationparjour(pdv.idpdv, 0)" >rechercher</button>
-                                                </div>
-                                                <div class="form-group" *ngIf="checkModel.annee" >
-                                                  <select class="form-control" id="sel1b" [(ngModel)]="selectionannee">
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                    <option>2018</option>
-                                                    <option>2019</option>
-                                                    <option>2020</option>
-                                                    <option>2021</option>
-                                                    <option>2022</option>
-                                                  </select>
-                                                  <button (click)="listerexploitationrechercheannee(pdv.idpdv, 0)" >rechercher</button>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                          </div>
-                                        </th>
                                       </tr>
-                                      <tr>
-                                        <th><mfDefaultSorter by="dateajout">Date</mfDefaultSorter></th>
-                                        <th><mfDefaultSorter by="designation">Désignation</mfDefaultSorter></th>
-                                        <th><mfDefaultSorter by="mnt">Montant</mfDefaultSorter></th>
-                                        <th><mfDefaultSorter by="frais">Frais</mfDefaultSorter></th>
-                                        <th><mfDefaultSorter by="commission">Commission</mfDefaultSorter></th>
+                                    </thead>
+                                    <tbody *ngIf="this.charges">
+                                      <tr *ngFor="let charges of fopad.data">
+                                        <td>{{charges.dateajout.date | date}}</td>
+                                        <td>{{charges.libelle}}</td>
+                                        <td>{{currencyFormat(charges.montant)}}</td>
+                                        <td>{{charges.service}}</td>
                                       </tr>
-                                      </thead>
-                                      <tbody *ngIf="this.exploitationaveccommission">
-                                      <tr *ngFor="let exploitation of fopdac.data">
-                                        <td>{{exploitation.dateajout.date | date }}</td>
-                                        <td>{{exploitation.designation}}</td>
-                                        <td>{{currencyFormat(exploitation.mnt)}}</td>
-                                        <td>{{currencyFormat(exploitation.frais)}}</td>
-                                        <td>{{currencyFormat(exploitation.commission)}}</td>
-                                      </tr>
-                                      </tbody>
-                                      <tfoot>
+                                    </tbody>
+                                    <tfoot>
                                       <tr>
                                         <td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td>
                                       </tr>
+                                    </tfoot>
+
+                            </table>
+                              </div>
+                              </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div id="ajout" class="tab-pane fade in col-sm-6 col-xs-12">
+                      <form class="form-signin" (ngSubmit)="validerajoutercharges(pdv)" #chargeForm="ngForm">
+                          <input type="text" [(ngModel)]="libelleCharge"   name="libelle" id="libelle" class="form-control"  placeholder="Libelle charge" required>
+                          <input type="number" [(ngModel)]="montantCharge"   name="montant" id="montantajoutercharges" class="form-control" placeholder="Montant de la dépense" required>
+                          <input type="text" [(ngModel)]="service"   name="service" id="serviceajoutercharges" class="form-control" placeholder="Service concerné" required>
+                          <button id="validcharge" class="btn btn-primary btn-block" type="submit" [disabled]="!chargeForm.form.valid" >Enregister</button>
+                      </form>
+                    </div>
+
+                    <div id="listr" class="tab-pane fade in" >
+                      <div class="panel-body">
+                         <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrapp">
+                            <div class="row text-center" style="margin-bottom: 2rem">
+                               <button type="button" class="btn btn-primary btn-sm" (click)="isselectlisterrevenuautre = false; listerrevenustransfert(i)">Services avec commission</button>
+                               <button type="button" class="btn btn-primary btn-sm" (click)="isselectlisterrevenuautre = true">Autres</button>
+                            </div>
+                            <div class="row">
+                               <div class="col-sm-12" *ngIf="isselectlisterrevenuautre">
+                                   Liste des autres revenu
+                                   <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="revenus|filtrerevenus:filtre" #fopa="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                       <thead>
+                                          <tr><th colspan="3" style="padding-right: 3rem ;"> Rechercher :<input class="form-control" [(ngModel)]="filtre"/></th></tr>
+                                          <tr>
+                                             <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
+                                             <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
+                                             <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                             <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody *ngIf="this.revenus">
+                                          <tr *ngFor="let revenus of fopa.data">
+                                              <td>{{revenus.date.date | date}}</td>
+                                              <td>{{revenus.libelle}}</td>
+                                              <td>{{currencyFormat(revenus.montant)}}</td>
+                                              <td>{{revenus.service}}</td>
+                                          </tr>
+                                        </tbody>
+                                        <tfoot>
+                                          <tr><td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td></tr>
+                                        </tfoot>
+                                    </table>
+                               </div>
+                               <div class="col-sm-12" *ngIf="!isselectlisterrevenuautre">
+                                   Liste revenu des services avec commission
+                                   <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="revenustransfert | filtrerevenus:filtre" #fopa="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="date" [(mfSortOrder)]="desc" style="width: 100%;">
+                                      <thead>
+                                       <tr><th colspan="5" style="padding-right: 3rem ;"> Rechercher :<input class="form-control" [(ngModel)]="filtre"/></th></tr>
+                                       <tr>
+                                          <th><mfDefaultSorter by="date">Date</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="montant">Montant</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="frais">Frais</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="commission">Commission</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
+                                       </tr>
+                                       </thead>
+                                       <tbody *ngIf="this.revenus">
+                                       <tr *ngFor="let revenus of fopa.data">
+                                          <td>{{revenus.date.date}}</td>
+                                          <td>{{revenus.libelle}}</td>
+                                          <td>{{currencyFormat(revenus.montant)}}</td>
+                                          <td>{{currencyFormat(revenus.frais)}}</td>
+                                          <td>{{currencyFormat(revenus.commission)}}</td>
+                                          <td>{{revenus.service}}</td>
+                                       </tr>
+                                      </tbody>
+                                      <tfoot>
+                                        <tr><td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td></tr>
                                       </tfoot>
                                     </table>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="row tab-pane fade in" id="exploitations">
+                <div class="row blockcaisse" *ngFor="let pdv of usersExploitation; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12"><label>{{pdv.prenom+" "+pdv.nom}}</label></div>
+                            <div class="col-sm-9 col-xs-12">
+                              <button class="btn btn-success" (click)="listerexploitationaveccommission(i, i, 0)">Services avec commission</button>
+                              <button class="btn btn-success" (click)="listerexploitation(i, i, 1)">Autres</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-xs-12" *ngIf="i==estselectionne && 0==estselectionfff">
+                            <div id="exp{{i}}" >
+                              <div class="panel-body">
+                                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wra">
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="exploitationaveccommission|filtreexploitationaveccommission:filtreaveccommission" #fopdac="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                        <thead>
+                                        <tr>
+                                          <th colspan="6" style="padding-right: 3rem ;">
+                                            <div class="row">
+                                              <div class="col-sm-5 col-xs-12">
+                                                Rechercher :
+                                                <input class="form-control" [(ngModel)]="filtreaveccommission"/>
+                                              </div>
+                                              <div class="col-sm-7 col-xs-12">
+                                                <div class="row">
+                                                  <label class="btn btn-primary" (click)="estcheckModel('jour'); listerexploitationrecherche(pdv.idpdv,0);">Par Jour</label>&nbsp;
+                                                  <label class="btn btn-primary" (click)="estcheckModel('annee'); listerexploitationrechercheannee(pdv.idpdv,0);">Par Année</label>&nbsp;
+                                                  <label class="btn btn-primary" (click)="estcheckModel('intervalle'); listerexploitationrecherche(pdv.idpdv,0);">Par Intervalle</label>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="btn-group" *ngIf="checkModel.intervalle">
+                                                    de <input type="date" name="intervalledateinit" [(ngModel)]="selectionintervalledateinit" /> à <input type="date" name="intervalleddatefinal" [(ngModel)]="selectionintervalleddatefinal" />
+                                                    <button (click)="listerexploitationintervalle(pdv.idpdv, 0)" >rechercher</button>
+                                                  </div>
+                                                  <div class="form-group" *ngIf="checkModel.jour" >
+                                                    <input type="date" [(ngModel)]="selectionjour" name="jour" />
+                                                    <button (click)="listerexploitationparjour(pdv.idpdv, 0)" >rechercher</button>
+                                                  </div>
+                                                  <div class="form-group" *ngIf="checkModel.annee" >
+                                                    <select class="form-control" id="sel1b" [(ngModel)]="selectionannee">
+                                                      <option>2016</option>
+                                                      <option>2017</option>
+                                                      <option>2018</option>
+                                                      <option>2019</option>
+                                                      <option>2020</option>
+                                                      <option>2021</option>
+                                                      <option>2022</option>
+                                                    </select>
+                                                    <button (click)="listerexploitationrechercheannee(pdv.idpdv, 0)" >rechercher</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                          </th>
+                                        </tr>
+                                        <tr>
+                                          <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="bilanexploitationaveccommission" #fopdacbilan="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                            <thead>
+                                            <tr>
+                                              <th colspan="4" class="comptabiliteBorder"><h4>Bilan</h4></th>
+                                            </tr>
+                                            <tr>
+                                                <th><mfDefaultSorter by="service">Service</mfDefaultSorter></th>
+                                                <th><mfDefaultSorter by="cashin">Total Entrée</mfDefaultSorter></th>
+                                                <th><mfDefaultSorter by="cashout">Total Sortie</mfDefaultSorter></th>
+                                                <th><mfDefaultSorter by="commission">Total commissions</mfDefaultSorter></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody *ngIf="this.bilanexploitationaveccommission">
+                                              <tr *ngFor="let bilan of fopdacbilan.data">
+                                                <td>{{bilan.service}}</td>
+                                                <td>{{currencyFormat(bilan.cashin)}}</td>
+                                                <td>{{currencyFormat(bilan.cashout)}}</td>
+                                                <td>{{currencyFormat(bilan.commission)}}</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </tr>
+                                        <tr>
+                                          <th colspan="5" class="comptabiliteBorder"><h4>Détail</h4></th>
+                                        </tr>
+                                        <tr>
+                                          <th><mfDefaultSorter by="dateajout">Date</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="designation">Désignation</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="mnt">Montant</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="frais">Frais</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="commission">Commission</mfDefaultSorter></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody *ngIf="this.exploitationaveccommission">
+                                        <tr *ngFor="let exploitation of fopdac.data">
+                                          <td>{{exploitation.dateajout }}</td>
+                                          <td>{{exploitation.designation}}</td>
+                                          <td>{{currencyFormat(exploitation.mnt)}}</td>
+                                          <td>{{currencyFormat(exploitation.frais)}}</td>
+                                          <td>{{currencyFormat(exploitation.commission)}}</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                          <td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td>
+                                        </tr>
+                                        </tfoot>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-xs-12" *ngIf="i==estselectionne && 1==estselectionfff">
+                            <div id="exp{{i}}-a" >
+                              <div class="panel-body">
+                                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrap">
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="exploitation|filtreexploitation:filtre" #fopd="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                        <thead>
+                                        <tr>
+                                          <th colspan="6" style="padding-right: 3rem ;">
+                                            <div class="row">
+                                              <div class="col-sm-5 col-xs-12">
+                                                Rechercher :
+                                                <input class="form-control" [(ngModel)]="filtre"/>
+                                              </div>
+                                              <div class="col-sm-7 col-xs-12">
+                                                <div class="row">
+                                                  <label class="btn btn-primary" (click)="estcheckModel('jour'); listerexploitationrecherche(pdv.idpdv);">Par Jour</label>&nbsp;
+                                                  <label class="btn btn-primary" (click)="estcheckModel('annee'); listerexploitationrechercheannee(pdv.idpdv);">Par Année</label>&nbsp;
+                                                  <label class="btn btn-primary" (click)="estcheckModel('intervalle'); listerexploitationrecherche(pdv.idpdv);">Par Intervalle</label>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="btn-group" *ngIf="checkModel.intervalle">
+                                                    de <input type="date" name="intervalledateinit" [(ngModel)]="selectionintervalledateinit" /> à <input type="date" name="intervalleddatefinal" [(ngModel)]="selectionintervalleddatefinal" />
+                                                    <button (click)="listerexploitationintervalle(pdv.idpdv)" >rechercher</button>
+                                                  </div>
+                                                  <div class="form-group" *ngIf="checkModel.jour" >
+                                                    <input type="date" [(ngModel)]="selectionjour" name="jour" />
+                                                    <button (click)="listerexploitationparjour(pdv.idpdv)" >rechercher</button>
+                                                  </div>
+                                                  <div class="form-group" *ngIf="checkModel.annee" >
+                                                    <select class="form-control" id="sel1" [(ngModel)]="selectionannee">
+                                                      <option>2016</option>
+                                                      <option>2017</option>
+                                                      <option>2018</option>
+                                                      <option>2019</option>
+                                                      <option>2020</option>
+                                                      <option>2021</option>
+                                                      <option>2022</option>
+                                                    </select>
+                                                    <button (click)="listerexploitationrechercheannee(pdv.idpdv)" >rechercher</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                          </th>
+                                        </tr>
+                                        <tr>
+                                          <th><mfDefaultSorter by="dateajout">Date</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="designation">Désignation</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="stocki">Stock Initial</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="vente">Ventes</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="stockf">Stock Final</mfDefaultSorter></th>
+                                          <th><mfDefaultSorter by="mnt">Montant</mfDefaultSorter></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody *ngIf="this.exploitation">
+                                        <tr *ngFor="let exploitation of fopd.data">
+                                          <td>{{exploitation.dateajout }}</td>
+                                          <td>{{exploitation.designation}}</td>
+                                          <td>{{exploitation.stocki}}</td>
+                                          <td>{{exploitation.vente}}</td>
+                                          <td>{{exploitation.stockf}}</td>
+                                          <td>{{currencyFormat(exploitation.mnt)}}</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                          <td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td>
+                                        </tr>
+                                        </tfoot>
+                                      </table>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-sm-12 col-xs-12" *ngIf="i==estselectionne && 1==estselectionfff">
-                              <div id="exp{{i}}-a" >
-                                 <div class="panel-body">
-                                      <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrap">
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                              <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="exploitation|filtreexploitation:filtre" #fopd="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                                      <thead>
-                                                          <tr>
-                                                              <th colspan="6" style="padding-right: 3rem ;">
-                                                                  <div class="row">
-                                                                      <div class="col-sm-5 col-xs-12">
-                                                                          Rechercher :
-                                                                          <input class="form-control" [(ngModel)]="filtre"/>
-                                                                      </div>
-                                                                      <div class="col-sm-7 col-xs-12">
-                                                                          <div class="row">
-                                                                            <label class="btn btn-primary" (click)="estcheckModel('jour'); listerexploitationrecherche(pdv.idpdv);">Par Jour</label>&nbsp;
-                                                                            <label class="btn btn-primary" (click)="estcheckModel('annee'); listerexploitationrechercheannee(pdv.idpdv);">Par Année</label>&nbsp;
-                                                                            <label class="btn btn-primary" (click)="estcheckModel('intervalle'); listerexploitationrecherche(pdv.idpdv);">Par Intervalle</label>
-                                                                          </div>
-                                                                          <div class="row">
-                                                                              <div class="btn-group" *ngIf="checkModel.intervalle">
-                                                                                  de <input type="date" name="intervalledateinit" [(ngModel)]="selectionintervalledateinit" /> à <input type="date" name="intervalleddatefinal" [(ngModel)]="selectionintervalleddatefinal" />
-                                                                                  <button (click)="listerexploitationintervalle(pdv.idpdv)" >rechercher</button>
-                                                                              </div>
-                                                                              <div class="form-group" *ngIf="checkModel.jour" >
-                                                                                  <input type="date" [(ngModel)]="selectionjour" name="jour" />
-                                                                                  <button (click)="listerexploitationparjour(pdv.idpdv)" >rechercher</button>
-                                                                              </div>
-                                                                              <div class="form-group" *ngIf="checkModel.annee" >
-                                                                                <select class="form-control" id="sel1" [(ngModel)]="selectionannee">
-                                                                                  <option>2016</option>
-                                                                                  <option>2017</option>
-                                                                                  <option>2018</option>
-                                                                                  <option>2019</option>
-                                                                                  <option>2020</option>
-                                                                                  <option>2021</option>
-                                                                                  <option>2022</option>
-                                                                                </select>
-                                                                                <button (click)="listerexploitationrechercheannee(pdv.idpdv)" >rechercher</button>
-                                                                              </div>
-                                                                          </div>
-                                                                      </div>
-
-                                                                  </div>
-                                                              </th>
-                                                      </tr>
-                                                          <tr>
-                                                              <th><mfDefaultSorter by="dateajout">Date</mfDefaultSorter></th>
-                                                              <th><mfDefaultSorter by="designation">Désignation</mfDefaultSorter></th>
-                                                              <th><mfDefaultSorter by="stocki">Stock Initial</mfDefaultSorter></th>
-                                                              <th><mfDefaultSorter by="vente">Ventes</mfDefaultSorter></th>
-                                                              <th><mfDefaultSorter by="stockf">Stock Final</mfDefaultSorter></th>
-                                                              <th><mfDefaultSorter by="mnt">Montant</mfDefaultSorter></th>
-                                                         </tr>
-                                                      </thead>
-                                                      <tbody *ngIf="this.exploitation">
-                                                      <tr *ngFor="let exploitation of fopd.data">
-                                                          <td>{{exploitation.dateajout.date | date }}</td>
-                                                          <td>{{exploitation.designation}}</td>
-                                                          <td>{{exploitation.stocki}}</td>
-                                                          <td>{{exploitation.vente}}</td>
-                                                          <td>{{exploitation.stockf}}</td>
-                                                          <td>{{currencyFormat(exploitation.mnt)}}</td>
-                                                      </tr>
-                                                      </tbody>
-                                                      <tfoot>
-                                                          <tr>
-                                                              <td colspan="4"><mfBootstrapPaginator ></mfBootstrapPaginator></td>
-                                                          </tr>
-                                                      </tfoot>
-                                                  </table>
-                                         </div>
-                                     </div>
-                                 </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-			             </div>
                     </div>
                 </div>
+            </div>
 
-			    <div class="row tab-pane fade in" id="personnalisation">
-			         <div class="row blockcaisse" *ngFor="let pdv of pdvCaisses; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
+            <div class="row tab-pane fade in" id="personnalisation">
+                 <div class="row blockcaisse" *ngFor="let pdv of pdvCaisses; let i = index; let isOdd = odd" [ngClass]="{'colored-caisse' : !isOdd}" >
 
-				        <div class="col-sm-3 col-xs-6">
-                            <button style="background-color: transparent; border : none ;"  href="#vide" data-toggle="tab"> <label>{{pdv.prenom+" "+pdv.nom}} </label> </button>
-				        </div>
-				        <div class="boutonspersonnalisation">
-    				        <div class="col-sm-3 col-xs-12">
-    	                         <button style="margin-bottom: 1rem;"  class="btn btn-success"  href="#ajoutservice" data-toggle="tab"  (click)="ajouterservice(i)">Ajouter Service</button>
-    				        </div>
-    				        <div class="col-sm-3 col-xs-8">
-    			                 <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#modifservice" data-toggle="tab"  (click)="modifierservice(i)">Lister Service</button>
-    				        </div>
-				         </div>
+                  <div class="col-sm-3 col-xs-6">
+                              <button style="background-color: transparent; border : none ;"  href="#vide" data-toggle="tab"> <label>{{pdv.prenom+" "+pdv.nom}} </label> </button>
+                  </div>
+                  <div class="boutonspersonnalisation">
+                      <div class="col-sm-3 col-xs-12">
+                                 <button style="margin-bottom: 1rem;"  class="btn btn-success"  href="#ajoutservice" data-toggle="tab"  (click)="ajouterservice(i)">Ajouter Service</button>
+                      </div>
+                      <div class="col-sm-3 col-xs-8">
+                             <button style="margin-bottom: 1rem;" class="btn btn-success"  href="#modifservice" data-toggle="tab"  (click)="modifierservice(i)">Lister Service</button>
+                      </div>
+                   </div>
 
-	                    <div class="col-sm-12 col-xs-12 tab-content" *ngIf="i==estselectionne">
-
-
-                                    <div id="ajoutservice" class="row tab-pane fade in">
-				                 		<form style="margin-bottom: 2rem;" class="form-signin" (ngSubmit)="validerajouterservice(pdv)" #exploitationForm="ngForm">
-
-                                            <div class="row">
-                                                <div class="col-sm-3 col-xs-12 form-group input-group">
-                                                    <span class="input-group-addon">Nouveau Service</span>
-                                                    <input type="text" [(ngModel)]="service"   name="service" id="service" class="form-control"  placeholder="Nom du service" required>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-10 col-xs-12 form-group">
-                                                    <div *ngFor="let designation of designationsService; let i = index; "
-                                                        class="row" >
-
-                                                        <label  class="col-sm-1">Produit {{i+1}}</label>
-
-                                                        <input type="text" name="name-{{i}}" [(ngModel)]="designationsService[i].name" class="col-sm-3" placeholder="Désignation" required>
-
-                                                        <input type="number" name="stock-{{i}}" [(ngModel)]="designationsService[i].stock" class="col-sm-2" placeholder="Stock" required>
-
-                                                        <input type="number" name="prixachat-{{i}}" [(ngModel)]="designationsService[i].prixAchat" class="col-sm-2" placeholder="Prix Achat" required>
-
-                                                        <input type="number" name="prix-{{i}}" [(ngModel)]="designationsService[i].prixunitaire" class="col-sm-2" placeholder="Prix de vente" style="margin-left: -3rem ;" required>
-
-                                                    </div>
-                                                </div>
-                                                <button class="col-sm-2 btn btn-primary" name="autresdesignation" [disabled]="!exploitationForm.form.valid" (click)="ajouterdesignation()">Autre produit</button>
-                                            </div>
-                                            <div class="row text-center">
-                                                <button id="validservice" class="btn btn-primary" type="submit" [disabled]="!exploitationForm.form.valid" >Ajouter</button>
-                                            </div>
-
-								        </form>
-				       				 </div>
-
-                        <div id="modifservice" class="row tab-pane fade in" >
-                           <div class="col-sm-4 col-xs-12" >
+                        <div class="col-sm-12 col-xs-12 tab-content" *ngIf="i==estselectionne">
 
 
+                                      <div id="ajoutservice" class="row tab-pane fade in">
+                              <form style="margin-bottom: 2rem;" class="form-signin" (ngSubmit)="validerajouterservice(pdv)" #exploitationForm="ngForm">
 
-                              <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="supservice|filtresupservice:filtre" #foi="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="3" style="padding-right: 3rem ;">
-                                                Rechercher :
-                                                <input class="form-control" [(ngModel)]="filtre"/>
-                                            </th>
-    		                            </tr>
-                                        <tr>
-                                            <th><mfDefaultSorter by="services">Services</mfDefaultSorter></th>
-                                            <th><mfDefaultSorter >Action</mfDefaultSorter></th>
-                                       </tr>
+                                              <div class="row">
+                                                  <div class="col-sm-3 col-xs-12 form-group input-group">
+                                                      <span class="input-group-addon">Nouveau Service</span>
+                                                      <input type="text" [(ngModel)]="service"   name="service" id="service" class="form-control"  placeholder="Nom du service" required>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-10 col-xs-12 form-group">
+                                                      <div *ngFor="let designation of designationsService; let i = index; "
+                                                          class="row" >
 
-                                    </thead>
-                                    <tbody *ngIf="this.supservice">
-                                    <tr *ngFor="let supservice of foi.data; let j=index; ">
-                                        <td>{{supservice.services}}</td>
-                                        <td>
-                                            <button name="modif-{{j}}" type="button" (click)="modifyservice(j)">Modifier</button>
-                                            <button name="delete-{{j}}" type="button" (click)="deleteservice(supservice,pdv)">Supprimer</button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="4">
-                                                <mfBootstrapPaginator ></mfBootstrapPaginator>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
+                                                          <label  class="col-sm-1">Produit {{i+1}}</label>
 
-                                </table>
-                            </div>
-                            <div *ngIf="estselectionmods!=-1" class="col-sm-8 col-xs-12" >
-                                <form class="form-signin" (ngSubmit)="validermodifierservice(pdv)" #exploitationFormModif="ngForm">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-12 form-group input-group">
-                                            <span class="input-group-addon">Modification Service</span>
-                                            <input type="text" [(ngModel)]="service"   name="serviceModif" class="form-control"  placeholder="Nom du service" required>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-12 col-xs-12">
-                                            <div *ngFor="let designation of designationsService; let i = index; " class="row">
-                                                <!-- <label  class="col-sm-1">Produit {{i+1}}</label> -->
-                                                <input type="text" name="nameModif-{{i}}" [(ngModel)]="designationsService[i].name" class="col-sm-3" placeholder="Entre le produit" required>
-                                                <input type="number" name="stockModif-{{i}}" [(ngModel)]="designationsService[i].stock" class="col-sm-2" placeholder="nombre stock" required>
-                                                <input type="number" name="prixachat-{{i}}" [(ngModel)]="designationsService[i].prixAchat" class="col-sm-2" placeholder="Prix Achat produit" required>
-                                                <input type="number" name="prixModif-{{i}}" [(ngModel)]="designationsService[i].prixunitaire" class="col-sm-2" placeholder="prix unitaire" required>
-                                                <button type="button" (click)="effacerunedesignation(i)" class="btn btn-danger btn-circle">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <button class="col-sm-3 col-xs-12 btn btn-primary" name="autresdesignationModif" [disabled]="!exploitationFormModif.form.valid" (click)="ajouterdesignation()" >Ajouter désignation</button>
-                                    </div>
-                                    <div class="row text-center">
-                                        <button id="validservice1" class="btn btn-primary" type="submit" [disabled]="!exploitationFormModif.form.valid" >Enregistrer</button>
-                                        <button class="btn btn-primary" type="submit" (click)="estselectionmods=-1" >Annuler</button>
-                                    </div>
-                                </form>
-				        	</div>
-                        </div>
-			    </div>
+                                                          <input type="text" name="name-{{i}}" [(ngModel)]="designationsService[i].name" class="col-sm-3" placeholder="Désignation" required>
 
-			    </div>
+                                                          <input type="number" name="stock-{{i}}" [(ngModel)]="designationsService[i].stock" class="col-sm-2" placeholder="Stock" required>
+
+                                                          <input type="number" name="prixachat-{{i}}" [(ngModel)]="designationsService[i].prixAchat" class="col-sm-2" placeholder="Prix Achat" required>
+
+                                                          <input type="number" name="prix-{{i}}" [(ngModel)]="designationsService[i].prixunitaire" class="col-sm-2" placeholder="Prix de vente" style="margin-left: -3rem ;" required>
+
+                                                      </div>
+                                                  </div>
+                                                  <button class="col-sm-2 btn btn-primary" name="autresdesignation" [disabled]="!exploitationForm.form.valid" (click)="ajouterdesignation()">Autre produit</button>
+                                              </div>
+                                              <div class="row text-center">
+                                                  <button id="validservice" class="btn btn-primary" type="submit" [disabled]="!exploitationForm.form.valid" >Ajouter</button>
+                                              </div>
+
+                          </form>
+                         </div>
+
+                          <div id="modifservice" class="row tab-pane fade in" >
+                             <div class="col-sm-4 col-xs-12" >
 
 
-	        </div>
+
+                                <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="supservice|filtresupservice:filtre" #foi="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                                      <thead>
+                                          <tr>
+                                              <th colspan="3" style="padding-right: 3rem ;">
+                                                  Rechercher :
+                                                  <input class="form-control" [(ngModel)]="filtre"/>
+                                              </th>
+                                      </tr>
+                                          <tr>
+                                              <th><mfDefaultSorter by="services">Services</mfDefaultSorter></th>
+                                              <th><mfDefaultSorter >Action</mfDefaultSorter></th>
+                                         </tr>
+
+                                      </thead>
+                                      <tbody *ngIf="this.supservice">
+                                      <tr *ngFor="let supservice of foi.data; let j=index; ">
+                                          <td>{{supservice.services}}</td>
+                                          <td>
+                                              <button name="modif-{{j}}" type="button" (click)="modifyservice(j)">Modifier</button>
+                                              <button name="delete-{{j}}" type="button" (click)="deleteservice(supservice,pdv)">Supprimer</button>
+                                          </td>
+                                      </tr>
+                                      </tbody>
+                                      <tfoot>
+                                          <tr>
+                                              <td colspan="4">
+                                                  <mfBootstrapPaginator ></mfBootstrapPaginator>
+                                              </td>
+                                          </tr>
+                                      </tfoot>
+
+                                  </table>
+                              </div>
+                              <div *ngIf="estselectionmods!=-1" class="col-sm-8 col-xs-12" >
+                                  <form class="form-signin" (ngSubmit)="validermodifierservice(pdv)" #exploitationFormModif="ngForm">
+                                      <div class="row">
+                                          <div class="col-sm-6 col-xs-12 form-group input-group">
+                                              <span class="input-group-addon">Modification Service</span>
+                                              <input type="text" [(ngModel)]="service"   name="serviceModif" class="form-control"  placeholder="Nom du service" required>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="form-group col-sm-12 col-xs-12">
+                                              <div *ngFor="let designation of designationsService; let i = index; " class="row">
+                                                  <!-- <label  class="col-sm-1">Produit {{i+1}}</label> -->
+                                                  <input type="text" name="nameModif-{{i}}" [(ngModel)]="designationsService[i].name" class="col-sm-3" placeholder="Entre le produit" required>
+                                                  <input type="number" name="stockModif-{{i}}" [(ngModel)]="designationsService[i].stock" class="col-sm-2" placeholder="nombre stock" required>
+                                                  <input type="number" name="prixachat-{{i}}" [(ngModel)]="designationsService[i].prixAchat" class="col-sm-2" placeholder="Prix Achat produit" required>
+                                                  <input type="number" name="prixModif-{{i}}" [(ngModel)]="designationsService[i].prixunitaire" class="col-sm-2" placeholder="prix unitaire" required>
+                                                  <button type="button" (click)="effacerunedesignation(i)" class="btn btn-danger btn-circle">
+                                                      <i class="fa fa-times"></i>
+                                                  </button>
+                                              </div>
+                                          </div>
+                                          <button class="col-sm-3 col-xs-12 btn btn-primary" name="autresdesignationModif" [disabled]="!exploitationFormModif.form.valid" (click)="ajouterdesignation()" >Ajouter désignation</button>
+                                      </div>
+                                      <div class="row text-center">
+                                          <button id="validservice1" class="btn btn-primary" type="submit" [disabled]="!exploitationFormModif.form.valid" >Enregistrer</button>
+                                          <button class="btn btn-primary" type="submit" (click)="estselectionmods=-1" >Annuler</button>
+                                      </div>
+                                  </form>
+                    </div>
+                          </div>
+            </div>
+
+            </div>
 
 
+            </div>
+
+          </div>
         </div>
-    </div>
     </div>
 </div>
 

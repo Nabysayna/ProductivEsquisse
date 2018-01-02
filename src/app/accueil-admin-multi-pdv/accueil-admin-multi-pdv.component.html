@@ -28,10 +28,13 @@
 	                <li>
 	                    <a [routerLink]="['/accueiladmmpdv', 'statusreclamation']" ><i class="fa fa-dashboard fa-fw"></i> Statuts Réclamations</a>
 	                </li>
-	                <li>
-	                    <a [routerLink]="['/accueiladmmpdv', 'demanderetrait']" ><i class="fa fa-dashboard fa-fw"></i> Demande de Retrait</a>
-	                </li>
-	                <li>
+                  <li *ngIf="autoriserpourcettefonctionnalie">
+                    <a [routerLink]="['/accueiladmmpdv', 'crediterccc']" ><i class="fa fa-dashboard fa-fw"></i> Acrédité compte CC</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/accueiladmmpdv', 'demanderetrait']" ><i class="fa fa-dashboard fa-fw"></i> Demande de Retrait</a>
+                  </li>
+                  <li>
 	                    <a [routerLink]="['/accueiladmmpdv', 'updatecaution']" ><i class="fa fa-dashboard fa-fw"></i>Mise à jour cautions</a>
 	                </li>
 

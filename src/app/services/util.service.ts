@@ -4,9 +4,9 @@ import {Http, Headers} from "@angular/http";
 @Injectable()
 export class UtilService {
 
-
+  //private link = "https://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
   private link = "http://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
-//  private link = "http://localhost/backup-sb-admin/backend-SB-Admin-BS4-Angular-4/index.php";
+  //private link = "http://localhost/backup-sb-admin/backend-SB-Admin-BS4-Angular-4/index.php";
   private headers = new Headers();
   private basetoken:any;
 
@@ -68,6 +68,22 @@ export class UtilService {
   demandedeposit(data:any){
     let url = this.link+"/apifromsentool/demndedeposit";
     let datas = JSON.stringify(data);
+    let params = 'params='+datas;
+    return this._http.post(url, params, {headers:this.headers})
+      .map(res => res.json());
+  }
+
+  listcreditmanager(){
+    let url = this.link+"/apifromsentool/listcreditmanager";
+    let datas = JSON.stringify({token:this.basetoken, type:'me'});
+    let params = 'params='+datas;
+    return this._http.post(url, params, {headers:this.headers})
+      .map(res => res.json());
+  }
+
+  valideraacreditmanager(data:any){
+    let url = this.link+"/apifromsentool/ajoutcreditmanager";
+    let datas = JSON.stringify({token:this.basetoken, data:data});
     let params = 'params='+datas;
     return this._http.post(url, params, {headers:this.headers})
       .map(res => res.json());

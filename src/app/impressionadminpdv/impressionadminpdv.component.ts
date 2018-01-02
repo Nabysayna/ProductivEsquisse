@@ -22,6 +22,8 @@ export class ImpressionadminpdvComponent implements OnInit {
   ngOnInit():void {
     this.dataImpression = JSON.parse(sessionStorage.getItem('dataImpression'));
     this.operateur = JSON.parse(sessionStorage.getItem('currentUser'));
+    console.log(this.operateur);
+    console.log(this.dataImpression);
   }
 
   print(): void {
@@ -37,7 +39,7 @@ export class ImpressionadminpdvComponent implements OnInit {
                       
                   </style>
               </head>
-              <body onload="window.print();window.close()">${printContents}<br/><h4 style="text-align: center"><u>Le guichetier</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Le client</u></h4><br/><br/><br/><br/><br/><hr/><br/><p>${(new Date()).toLocaleDateString("fr-FR")}</p>${printContents}<br/><h4 style="text-align: center"><u>Le guichetier</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Le client</u></h4></body>
+              <body onload="window.print();window.close()">${printContents}<br/><h4 style="text-align: center"><u>Le point de vente</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Agent BBS</u></h4><br/><br/><br/><br/><br/><hr/><p>${(new Date()).toLocaleDateString("fr-FR")}</p>${printContents}<br/><h4 style="text-align: center"><u>Le point de vente</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Agent BBS</u></h4></body>
           </html>`
     );
     popupWin.document.close();
@@ -46,5 +48,6 @@ export class ImpressionadminpdvComponent implements OnInit {
   backClicked() {
     this._location.back();
   }
+
 
 }

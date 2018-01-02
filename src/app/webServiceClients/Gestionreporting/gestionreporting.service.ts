@@ -45,26 +45,63 @@ export class GestionreportingServiceWeb {
   }
 
 
-   public gestionreporting(token:string) : Promise<Gestionreporting[]> {
+  public reportingdate(token:string, idpdv: number, type: string, infotype: string): Promise<any>  {
+    var method:string = 'reportingdate';
+    var parameters:{}[] = [];
 
-             var method:string = 'gestionreporting';
-            var parameters:{}[] = [];
-            var reEspParams = {token:token} ;
+    var reEspParams = { token:token, idpdv: idpdv, type: type, infotype: infotype} ;
+    var params:{}[] = [] ;
+    params["params"] = reEspParams ;
 
-            parameters['gestionreporting xmlns="urn:gestionreportingwsdl#"'] = reEspParams;
+    parameters['reportingdate xmlns="urn:gestreportwsdl#"'] = params;
 
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'reportingdateResponse').then(response=>{
+        var reponse  = JSON.parse(response['reportingdateResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
 
-
-            return new Promise( (resolve, reject) => {
-              this.soapService.post(method, parameters, 'gestionreportingResponse').then(response=>{
-                var reponse:Gestionreporting[] = JSON.parse(response['gestionreportingResponse'].return.$);
-                resolve(reponse) ;
-              });
-            });
   }
 
+  public reimpression(token:string, idpdv: number, operation: string, infooperation: string): Promise<any>  {
+    var method:string = 'reimpression';
+    var parameters:{}[] = [];
 
-   public servicepoint(token:string) : Promise<Servicepoint[]> {
+    var reEspParams = { token:token, idpdv: idpdv, operation: operation, infooperation: infooperation} ;
+    var params:{}[] = [] ;
+    params["params"] = reEspParams ;
+
+    parameters['reimpression xmlns="urn:gestreportwsdl#"'] = params;
+
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'reimpressionResponse').then(response=>{
+        var reponse  = JSON.parse(response['reimpressionResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
+
+  }
+
+  public gestionreporting(token:string) : Promise<Gestionreporting[]> {
+
+    var method:string = 'gestionreporting';
+    var parameters:{}[] = [];
+    var reEspParams = {token:token} ;
+
+    parameters['gestionreporting xmlns="urn:gestionreportingwsdl#"'] = reEspParams;
+
+
+
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'gestionreportingResponse').then(response=>{
+        var reponse:Gestionreporting[] = JSON.parse(response['gestionreportingResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
+  }
+
+  public servicepoint(token:string) : Promise<Servicepoint[]> {
 
              var method:string = 'servicepoint';
             var parameters:{}[] = [];
@@ -140,7 +177,6 @@ export class GestionreportingServiceWeb {
     });
 
   }
-
 
   private envelopeBuilder(requestBody:string):string {
       return '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body>'+requestBody+'</soap:Body></soap:Envelope>' ;

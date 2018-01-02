@@ -186,7 +186,7 @@ export class AdminmultipdvDashboardComponent implements OnInit {
         this.performancesadminclasserbylotbydate = adminmultipdvServiceWebList.response;
       }
       else{
-       this.performancesadminclasserbylotbydate = [];
+        this.performancesadminclasserbylotbydate = [];
       }
       this.loading = false ;
     });
@@ -228,7 +228,7 @@ export class AdminmultipdvDashboardComponent implements OnInit {
         console.log(this.detailperformancepdv);
       }
       else{
-       this.detailperformancepdv = null;
+        this.detailperformancepdv = null;
       }
     });
   }

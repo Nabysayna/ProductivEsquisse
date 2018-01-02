@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import { Location }               from '@angular/common';
-
-import * as sha1 from 'js-sha1';
-import * as _ from "lodash";
-
+import { Router } from '@angular/router';
 import {GestionreportingServiceWeb, Gestionreporting, Servicepoint} from '../webServiceClients/Gestionreporting/gestionreporting.service';
-
-
 import { ComptabiliteServiceWeb } from '../webServiceClients/Comptabilite/comptabilite.service';
 
 
@@ -18,7 +13,6 @@ import { ComptabiliteServiceWeb } from '../webServiceClients/Comptabilite/compta
 })
 export class GestionreportingComponent implements OnInit {
 
-  public gestionreporting:Gestionreporting[];
   public servicepoint:Servicepoint[];
 
 
@@ -48,25 +42,16 @@ export class GestionreportingComponent implements OnInit {
     caisseEtat: any;
 
   constructor(
-     private location: Location,
-     private route:ActivatedRoute,
-  	 private gestionreportingServiceWeb:GestionreportingServiceWeb,
-     private comptabiliteServiceWeb:ComptabiliteServiceWeb
+      private router: Router,
+      private location: Location,
+      private route:ActivatedRoute,
+  	  private gestionreportingServiceWeb:GestionreportingServiceWeb,
+      private comptabiliteServiceWeb:ComptabiliteServiceWeb
 
   	) {}
 
   ngOnInit() {
-
-     this.loading = true ;
-     this.gestionreportingServiceWeb.servicepoint(this.token).then(serviceptserviceList => {
-        this.servicepoint = serviceptserviceList;
-
-        this.gestionreportingServiceWeb.gestionreporting(this.token).then(gestreportserviceList => {
-        this.gestionreporting = gestreportserviceList;
-  //      console.log(this.gestionreporting);
-        this.loading = false ;
-        });
-     });
+    this.histop();
   }
 
   getDesignations(){
@@ -93,32 +78,27 @@ export class GestionreportingComponent implements OnInit {
     return JSON.parse(design).name ;
   }
 
-  histop(){
+
+  depenseop(){
      this.loading = true ;
-
-        this.gestionreportingServiceWeb.gestionreporting(this.token).then(gestreportserviceList => {
-        this.gestionreporting = gestreportserviceList;
-        console.log(this.gestionreporting);
-        this.loading = false ;
-      });
-
+     this.gestionreportingServiceWeb.servicepoint(this.token).then(serviceptserviceList => {
+      this.servicepoint = serviceptserviceList;
+       this.loading = false ;
+     });
   }
 
-      validCharge(){
+  validCharge(){
        this.loading = true ;
        this.gestionreportingServiceWeb.ajoutdepense(this.token,this.libelleCharge, this.service, this.montantCharge).then(gestionreportingServiceWeb => {
-       // console.log(gestionreportingServiceWeb);
         this.loading = false ;
-
        });
 
-        this.libelleCharge = "" ;
-        this.service = "" ;
-        this.montantCharge = 0 ;
+      this.libelleCharge = "" ;
+      this.service = "" ;
+      this.montantCharge = 0 ;
+  }
 
-      }
-
-      validreclamation(){
+  validreclamation(){
 
         this.loading = true ;
        this.gestionreportingServiceWeb.reclamation(this.token,this.sujet, this.nomservice, this.message).then(gestionreportingServiceWeb => {
@@ -133,7 +113,7 @@ export class GestionreportingComponent implements OnInit {
 
       }
 
-      validvente(){
+  validvente(){
          this.loading = true ;
          if(this.servicevente.toLowerCase()=='assurance'.toLowerCase())
          {
@@ -187,6 +167,158 @@ export class GestionreportingComponent implements OnInit {
   }
 
   enregistrerassurance(){}
+
+  /************************************************************************************
+   ********************   PARTIE HISTORIQUE OPERATION   ****************************
+   ***********************************************************************************/
+
+  public gestionreporting:Gestionreporting[];
+  selectionjour:string;
+  selectionintervalledateinit:string;
+  selectionintervalleddatefinal:string;
+
+  historiquejour(){
+    this.selectionintervalledateinit = undefined;
+    this.selectionintervalleddatefinal = undefined;
+    this.gestionreportingServiceWeb.reportingdate(this.token,10, 'jour', this.selectionjour).then(gestreportserviceList => {
+      console.log('reportingdate jour');
+      this.gestionreporting = gestreportserviceList;
+      this.loading = false ;
+    });
+
+  }
+
+  historiqueintervalle(){
+    this.selectionjour = undefined;
+    this.gestionreportingServiceWeb.reportingdate(this.token,10, 'intervalle', this.selectionintervalledateinit+" "+this.selectionintervalleddatefinal).then(gestreportserviceList => {
+      console.log('reportingdate intervalle');
+      this.gestionreporting = gestreportserviceList;
+      this.loading = false ;
+    });
+  }
+
+  histop(){
+    this.loading = true ;
+    let datenow = ((new Date()).toJSON()).split("T",2)[0];
+    this.selectionjour = datenow;
+    this.gestionreportingServiceWeb.reportingdate(this.token,10, 'jour', this.selectionjour).then(gestreportserviceList => {
+      console.log('reportingdate init');
+      this.gestionreporting = gestreportserviceList;
+      this.loading = false ;
+    });
+  }
+
+  reimprimerhistop(operation){
+    this.gestionreportingServiceWeb.reimpression(this.token,10, JSON.stringify(operation), operation.operateur).then(gestreportserviceList => {
+      console.log('reimpression');
+      let getdataimpression = gestreportserviceList;
+      if(operation.operateur=="TNT"){
+        let dataImpression = null;
+        if(getdataimpression.typeoperation=="abonnement"){
+          let infos = JSON.parse(getdataimpression.infosoperation);
+          let typebouquet = "";
+          if (infos.id_typeabonnement==1){
+            typebouquet = "Maanaa";
+          }
+          if (infos.id_typeabonnement==2){
+            typebouquet = "Boul Khool";
+          }
+          if (infos.id_typeabonnement==3){
+            typebouquet = "Maanaa + Boul Khool";
+          }
+          dataImpression = {
+            apiservice:'tntreimpression',
+            service:'abonnement',
+            infotransaction:{
+              client:{
+                transactionBBS: getdataimpression.idoperation,
+                prenom:infos.prenom,
+                nom:infos.nom,
+                telephone:infos.tel,
+                carte: infos.n_carte,
+                chip:infos.n_chip,
+                typebouquet:typebouquet,
+                montant: infos.montant,
+                duree:infos.duree
+              },
+
+            },
+          }
+        }
+        if(getdataimpression.typeoperation=="decodeur"){
+          let infos = JSON.parse(getdataimpression.infosoperation);
+          console.log(infos);
+          /*let typebouquet = "";
+          if (infos.id_typeabonnement==1){
+            typebouquet = "Maanaa";
+          }
+          if (infos.id_typeabonnement==2){
+            typebouquet = "Boul Khool";
+          }
+          if (infos.id_typeabonnement==3){
+            typebouquet = "Maanaa + Boul Khool";
+          }
+          dataImpression = {
+            apiservice:'tntreimpression',
+            service:'decodeur',
+            infotransaction:{
+              client:{
+                transactionBBS: getdataimpression.idoperation,
+                prenom:infos.prenom,
+                nom:infos.nom,
+                telephone:infos.tel,
+                carte: infos.n_carte,
+                chip:infos.n_chip,
+                typebouquet:typebouquet,
+                montant: infos.montant,
+                duree:infos.duree
+              },
+
+            },
+          }*/
+        }
+        if(getdataimpression.typeoperation=="carte"){
+          let infos = JSON.parse(getdataimpression.infosoperation);
+          console.log(infos);
+          /*let typebouquet = "";
+           if (infos.id_typeabonnement==1){
+           typebouquet = "Maanaa";
+           }
+           if (infos.id_typeabonnement==2){
+           typebouquet = "Boul Khool";
+           }
+           if (infos.id_typeabonnement==3){
+           typebouquet = "Maanaa + Boul Khool";
+           }
+           dataImpression = {
+           apiservice:'tntreimpression',
+           service:'decodeur',
+           infotransaction:{
+           client:{
+           transactionBBS: getdataimpression.idoperation,
+           prenom:infos.prenom,
+           nom:infos.nom,
+           telephone:infos.tel,
+           carte: infos.n_carte,
+           chip:infos.n_chip,
+           typebouquet:typebouquet,
+           montant: infos.montant,
+           duree:infos.duree
+           },
+
+           },
+           }*/
+        }
+        sessionStorage.setItem('dataImpression', JSON.stringify(dataImpression));
+        this.router.navigate(['accueil/impression']);
+      }
+      if(operation.operateur=="POSTCASH"){
+        console.log('POSTCASH');
+      }
+
+    });
+  }
+
 
 }
 

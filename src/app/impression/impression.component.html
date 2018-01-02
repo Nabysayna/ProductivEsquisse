@@ -97,6 +97,43 @@
     </div>
   </div>
 
+  <div class="panel-heading" *ngIf="dataImpression.apiservice=='tntreimpression' && dataImpression.service=='abonnement'">
+    <div class="panel panel-default"  id="tntreimpressionrecuimpressionabonnement">
+      <div class="panel-heading">
+        <img src="../../assets/bbs.png" class="img-rounded"   height="100"/>
+        <p align="right" >
+          <strong>Entreprise:</strong> {{ operateur.nometps }}<br>
+          <strong>Guichetier(e):</strong> {{ operateur.prenom }} {{ operateur.nom }}<br>
+          <strong>Service clientèle:</strong><br>
+          77 226 12 27 - 77 398 18 31 - 77 398 18 58.<br>
+        </p>
+      </div>
+      <div class="panel-body">
+        Numéro Transaction Sentool: {{dataImpression.infotransaction.client.transactionBBS}}<br>
+        <table>
+          <tr class="text-uppercase">
+            <td>
+              Nom Client: {{dataImpression.infotransaction.client.nom}}<br>
+              Prénom Client: {{dataImpression.infotransaction.client.prenom}}<br>
+              Téléphone Client: {{dataImpression.infotransaction.client.telephone}}<br>
+            </td>
+            <td width="200px">&nbsp;&nbsp;</td>
+            <td>
+              Numéro Carte: {{dataImpression.infotransaction.client.carte}}<br>
+              Numéro Chip: {{dataImpression.infotransaction.client.chip}}<br>
+              Type bouquet: {{dataImpression.infotransaction.client.typebouquet}}<br>
+              Montant: {{dataImpression.infotransaction.client.montant}}<br>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="panel-footer">
+        Validité Abonnement: du {{today | date}} au {{(this.today + (this.dataImpression.infotransaction.client.duree*2592000000) - 1000000) | date}}<br>
+      </div>
+    </div>
+  </div>
+
+
   <div class="panel-heading" *ngIf="dataImpression.apiservice=='postecash' && dataImpression.service=='rechargementespece'">
     <div class="panel panel-default"  id="postecashrecuimpressionrechargementespece">
       <img src="../../assets/bbs.png" class="img-rounded"   height="100"/>

@@ -11,15 +11,15 @@ import { AdminmultipdvServiceWeb } from '../../webServiceClients/Adminmultipdv/a
 })
 export class AdminmultipdvStatusReclamationComponent implements OnInit {
 
-    public filterQuery = "";
-    public rowsOnPage = 10;
-    public sortBy = "datereclamation";
-    public sortOrder = "asc";
+  public filterQuery = "";
+  public rowsOnPage = 10;
+  public sortBy = "datereclamation";
+  public sortOrder = "asc";
 
-    public adminmultipdvReclamation: AdminmultipdvReclamation[];
-  	loading = false ;
+  public adminmultipdvReclamation: AdminmultipdvReclamation[];
+  loading = false ;
 
-	constructor(private adminmultipdvServiceWeb: AdminmultipdvServiceWeb) { }
+  constructor(private adminmultipdvServiceWeb: AdminmultipdvServiceWeb) { }
 
   ngOnInit() {
     this.loading = true ;
@@ -40,13 +40,13 @@ export class AdminmultipdvStatusReclamationComponent implements OnInit {
 
   }
 
-	public toInt(num: string) {
-        return +num;
-    }
+  public toInt(num: string) {
+    return +num;
+  }
 
-    public sortByWordLength = (a: any) => {
-        return a.etatreclamation.length;
-    }
+  public sortByWordLength = (a: any) => {
+    return a.etatreclamation.length;
+  }
 
 
 

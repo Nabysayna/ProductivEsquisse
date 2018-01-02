@@ -56,6 +56,46 @@ img{
     border-radius: 0 0 1rem 1rem;
 }
 
+.descripteur{
+    color: #36A9E0;
+    font-weight: bolder;
+    font-size: large;
+    margin-bottom: 2rem;
+    text-align: -webkit-left;
+}
+
+.prizer{
+    color: #F39200;
+    font-weight: bolder;
+    font-size: large;
+    margin-bottom: 2rem;
+    text-align: -webkit-left;
+}
+.commandeur {
+	text-align: -webkit-left ;
+}
+
+.commandeur input{
+    border: solid 3px #F39200;
+    border-radius: 2rem 0rem 2rem 2rem;
+    width: 6rem;
+}
+
+.commandeur button{
+    border: solid 3px #36A9E0;
+    background-color: #36A9E0 !important;
+    color: white !important;
+    border-radius: 2rem 0rem 2rem 2rem;
+}
+
+.commandeur button:hover{
+    border: solid 3px #36A9E0 !important;
+    background-color: white !important;
+    color: #36A9E0 !important;
+    border-radius: 2rem 0rem 2rem 2rem;
+}
+
+
 #infosclient{
 	background-color: white ;
 	position: absolute;

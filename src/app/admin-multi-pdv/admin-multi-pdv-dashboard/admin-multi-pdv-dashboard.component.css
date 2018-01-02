@@ -1,7 +1,32 @@
 .legends div{
-	display: inline-block; 
+  display: inline-block;
 }
 
-.panel{
-	margin-top: 0 !important;
+
+div.adminmultpdvDashboardNbreReclVente {
+  background-color: white;
+  color: #337ab7;
+  border: 3px #337ab7 solid;
+}
+
+div.adminmultpdvDashboardTitle {
+  border-radius: 30px 0 10px 30px;
+  background-color: #f39200;
+  color: white;
+  text-align:center; /* centrage horizontal */
+  width: 95%;
+}
+
+label.adminmultpdvDashboardBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #337ab7;
+  color: white;
+  text-align:center; /* centrage horizontal */
+}
+
+p.adminmultpdvDashboardBorder {
+  border-radius: 10px 0 10px 10px;
+  background-color: #f39200;
+  color: white;
+  text-align: center;
 }
