@@ -284,7 +284,7 @@ export class ComptabiliteComponent implements OnInit {
   exploitation:Exploitation[];
   exploitationaveccommission:Exploitationaveccommission[];
   exploitationbilan:any[]=[];
-  bilanexploitationaveccommission = [{service:'tnt', cashin:0, cashout:0, commission:0},{service:'postcash', cashin:0, cashout:0, commission:0},{service:'wizall', cashin:0, cashout:0, commission:0},{service:'orngemoney', cashin:0, cashout:0, commission:0},]
+  bilanexploitationaveccommission = [{service:'tnt', cashin:0, cashout:0, commission:0},{service:'postcash', cashin:0, cashout:0, commission:0},{service:'wizall', cashin:0, cashout:0, commission:0},{service:'orangemoney', cashin:0, cashout:0, commission:0},]
 
   listeruserexploitation(){
     this.loading = true ;
@@ -348,7 +348,7 @@ export class ComptabiliteComponent implements OnInit {
         {service:'tnt', cashin:0, cashout:0, commission:0},
         {service:'postcash', cashin:0, cashout:0, commission:0},
         {service:'wizall', cashin:0, cashout:0, commission:0},
-        {service:'orngemoney', cashin:0, cashout:0, commission:0},
+        {service:'orangemoney', cashin:0, cashout:0, commission:0},
         {service:'Total', cashin:0, cashout:0, commission:0},
       ];
       this.exploitationbilan = this.exploitationaveccommission;
@@ -406,7 +406,7 @@ export class ComptabiliteComponent implements OnInit {
           {service:'tnt', cashin:0, cashout:0, commission:0},
           {service:'postcash', cashin:0, cashout:0, commission:0},
           {service:'wizall', cashin:0, cashout:0, commission:0},
-          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'orangemoney', cashin:0, cashout:0, commission:0},
           {service:'Total', cashin:0, cashout:0, commission:0},
         ];
         this.exploitationbilan = this.exploitationaveccommission;
@@ -482,7 +482,7 @@ export class ComptabiliteComponent implements OnInit {
           {service:'tnt', cashin:0, cashout:0, commission:0},
           {service:'postcash', cashin:0, cashout:0, commission:0},
           {service:'wizall', cashin:0, cashout:0, commission:0},
-          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'orangemoney', cashin:0, cashout:0, commission:0},
           {service:'Total', cashin:0, cashout:0, commission:0},
         ];
         this.exploitationbilan = this.exploitationaveccommission;
@@ -559,7 +559,7 @@ export class ComptabiliteComponent implements OnInit {
             {service:'tnt', cashin:0, cashout:0, commission:0},
             {service:'postcash', cashin:0, cashout:0, commission:0},
             {service:'wizall', cashin:0, cashout:0, commission:0},
-            {service:'orngemoney', cashin:0, cashout:0, commission:0},
+            {service:'orangemoney', cashin:0, cashout:0, commission:0},
             {service:'Total', cashin:0, cashout:0, commission:0},
           ];
           this.exploitationbilan = this.exploitationaveccommission;
@@ -635,7 +635,7 @@ export class ComptabiliteComponent implements OnInit {
           {service:'tnt', cashin:0, cashout:0, commission:0},
           {service:'postcash', cashin:0, cashout:0, commission:0},
           {service:'wizall', cashin:0, cashout:0, commission:0},
-          {service:'orngemoney', cashin:0, cashout:0, commission:0},
+          {service:'orangemoney', cashin:0, cashout:0, commission:0},
           {service:'Total', cashin:0, cashout:0, commission:0},
         ];
         this.exploitationbilan = this.exploitationaveccommission;
@@ -712,7 +712,7 @@ export class ComptabiliteComponent implements OnInit {
             {service:'tnt', cashin:0, cashout:0, commission:0},
             {service:'postcash', cashin:0, cashout:0, commission:0},
             {service:'wizall', cashin:0, cashout:0, commission:0},
-            {service:'orngemoney', cashin:0, cashout:0, commission:0},
+            {service:'orangemoney', cashin:0, cashout:0, commission:0},
             {service:'Total', cashin:0, cashout:0, commission:0},
           ];
           this.exploitationbilan = this.exploitationaveccommission;
