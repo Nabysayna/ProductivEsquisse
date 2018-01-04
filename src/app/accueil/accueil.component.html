@@ -8,7 +8,7 @@
         <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
             <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
                 <ul id="gauche" class="nav in" id="side-menu">
-                  <li *ngFor="let api of registredAPIs; let i = index" ><a [routerLink]="['/accueil', api]"> <img src="assets/icoservice-{{i+1}}.png" />{{api}}</a></li>
+                  <li *ngFor="let api of registredAPIs; let i = index" ><a [routerLink]="['/accueil', api]"> <img style="max-width: 7rem" src="assets/pavikon-{{i+1}}.png" />{{api}}</a></li>
                   <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" ><i class="fa fa-calculator fa-2x pull-left"></i> GESTION REPORTING</a></li>
                   <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
                   <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
