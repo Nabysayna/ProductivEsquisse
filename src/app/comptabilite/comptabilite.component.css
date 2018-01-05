@@ -1,4 +1,8 @@
 
+a{
+  color: white !important ;
+}
+
 .loader .ball-pulse-rise > div {
    background-color: #f39200 !important ;
 }
@@ -75,6 +79,11 @@
   border-radius: 10px 0 10px 10px;
   color : white;
   text-decoration: none;
+}
+
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
 }
 
 th.comptabiliteBorder {

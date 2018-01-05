@@ -1,12 +1,14 @@
 <div id="page-wrapper" class="text-center">
-    <div class="row" style="margin-bottom: 1rem">
-      <div class="col-sm-12">
+
+    <div class="row" style="margin-bottom: 1rem ; ">
+      <div class="col-sm-12" style="margin-top: -8rem ;">
         <div class="panel-heading" style="background-color: #337ab7; color: white">
           <h1>Dashboard</h1>
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="adminpdvDashboardNbreReclVente" style="margin-bottom: 3rem">
+
+    <div class="row" *ngIf="adminpdvDashboardNbreReclVente" style="margin-bottom: 3rem ;  margin-top: 19rem ;">
         <div class="col-sm-4">
             <div class="panel adminpdvDashboardNbreReclVente">
                 <div class="panel-heading">
@@ -54,11 +56,11 @@
         </div>
     </div>
 
-    <div class="row" style="margin-bottom: 3rem">
+    <div class="row" style="margin-bottom: 3rem ;">
       <div class="col-sm-12">
         <div class="panel"  style="border: none;">
-          <div class="panel-heading adminpdvDashboardTitle center-block">
-            <h4><i class="fa fa-bar-chart-o fa-fw"></i>Activités des transactions</h4>
+          <div class="panel-heading adminpdvDashboardTitle center-block" style="margin-top: 8rem">
+            <h4><i class="fa fa-bar-chart-o fa-fw"></i>Niveau d'activité par Service</h4>
           </div>
           <div class="panel-body" *ngIf="adminpdvDashboardNbreReclVente && adminpdvDashboardNbreReclVente.activitesoperateur">
             <canvas baseChart  class="table-responsive"
@@ -74,7 +76,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-xs-12">
-            <div class="panel" style="border: none;" >
+            <div class="panel" style="border: none; margin-top: 0rem ">
                 <div class="panel-heading  adminpdvDashboardTitle center-block">
                     <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('journee')">La journée</label>&nbsp;
                     <label class="btn adminpdvDashboardBorder" (click)="estcheckPerformance('semaine')" >La semaine</label>&nbsp;
@@ -86,7 +88,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <div class="panel panel-default table-responsive">
+                            <div class="panel panel-default table-responsive" style="margin-top: 0">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -111,7 +113,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6" *ngIf="detailperformancepdv">
                             <h3><strong>{{ performancepdv.fullname }}</strong></h3>
-                            <div class="panel panel-default table-responsive">
+                            <div class="panel panel-default table-responsive" style="margin-top: 0">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>

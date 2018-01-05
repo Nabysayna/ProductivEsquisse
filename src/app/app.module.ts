@@ -68,6 +68,8 @@ import {DemandepretServiceWeb} from './webServiceClients/Demandepret/demandepret
 import {CrmServiceWeb} from './webServiceClients/Crm/crm.service';
 
 import {OrangeMoneyService} from './webServiceClients/Orangemoney/orangemoney.service';
+import {UtilServiceWeb} from './webServiceClients/utils/Util.service';
+
 
 
 /*-----------------*/
@@ -116,6 +118,9 @@ import { AdmincoursierComponent } from './admincoursier/admincoursier.component'
 
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
+
+// { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
+
 import { MoneyGramComponentComponent } from './money-gram-component/money-gram-component.component';
 import { CrmComponent } from './crm/crm.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -193,10 +198,14 @@ import { FirstlogComponent } from './firstlog/firstlog.component';
 import {FiltreexploitationaveccommissionPipe} from "./pipes/filtreexploitationaveccommission.pipe";
 import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.component";
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
+import { WizallComponent } from './wizall/wizall.component';
 import {UtilService} from "./services/util.service";
 import {CrmDoorServiceWeb} from "./webServiceClients/CrmDoor/crmdoor.service";
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
+import { CommissionnementComponent } from './commissionnement/commissionnement.component';
+import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
 
 
 
@@ -314,6 +323,9 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
+    WizallComponent,
+    CommissionnementComponent,
+    ChallengeresultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -348,6 +360,7 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
       CashOutService,
       CashInService,
       OrangeMoneyService,
+      UtilServiceWeb,
       SoldeService,
       RetraitEspeceService,
       AchatCreditTelService,
@@ -380,10 +393,9 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
       AuthenticationService,
       CrmServiceWeb,
       DemandepretServiceWeb,
-
       CrmDoorServiceWeb,
-
       UtilService,
+      WizallWebService,
   ],
   bootstrap: [AppComponent]
 })

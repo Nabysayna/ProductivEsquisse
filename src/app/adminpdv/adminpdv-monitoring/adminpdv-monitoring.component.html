@@ -35,21 +35,22 @@
           <h3>IBAN</h3>
         </div>
         <ul class="nav nav-tabs nav-justified" style="text-align: center; display: block; margin: 0 auto">
-          <li class="activeatag"><a href="#retraitiban" data-toggle="tab">Retrait</a></li>
-          <li class="activeatag active"><a href="#depotiban" data-toggle="tab">Dépot</a></li>
+          <li class="activeatag active"><a href="#retraitiban" data-toggle="tab">Retrait</a></li>
+<!--           <li class="activeatag active"><a href="#depotiban" data-toggle="tab">Dépot</a></li> -->
+          <li class="activeatag"><a data-toggle="tab">Dépot</a></li>
         </ul>
         <div class="tab-content"  style="margin-top: 2rem">
           <div class="tab-pane fade in center-block" id="retraitiban">
             <button class="btn btn-success text-center" (click)="this.selectdemanretrait=true">Demander un retrait</button>
             <div class="row" *ngIf="selectdemanretrait"  style="margin-top: 1rem">
               <input name="montant" type="number" placeholder="Entrez le montant à retirer" [(ngModel)]="montant" class="form-control col-sm-3" required="" />
-              <button class=" col-sm-3 btn btn-success" *ngIf="selectdemanretrait" [disabled]="!montant" (click)="validerdmde()" >Valider</button>
+              <button class="col-sm-3 btn btn-success" *ngIf="selectdemanretrait" [disabled]="!montant" (click)="validerdmde()" >Valider</button>
               <div *ngIf="ibanExcessif" class="alert col-sm-3">Le Montant que vous demandé est supèrieur au solde de votre deposit. Veuiller revoir la saisie!</div>
             </div>
             <h2 class="alert" *ngIf="euppna"> Vous ne pouvez retirer un montant supèrieur à votre déposit</h2>
           </div>
           <div class="tab-pane fade in active text-center" id="depotiban" >
-            <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button>
+<!--             <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button> -->
             <div class="row"  style="margin-top: 1rem" *ngIf="listedeposit">
               <table class="table table-hover">
                 <thead>

@@ -127,6 +127,8 @@ label{
 #om-options a{
     border-radius: 1rem 0rem 1rem 1rem;
     padding: 1.3rem;
+    padding-right:  0.8rem;
+    padding-left: 0.8rem;
     color : #F39200 ;
     margin-right: 0.5rem ;
     background-color: white ;
@@ -150,3 +152,8 @@ label{
 }
 
 
+@media only screen and (max-width: 400px) {
+    #om-options{
+        width: max-content !important;
+    }
+}  

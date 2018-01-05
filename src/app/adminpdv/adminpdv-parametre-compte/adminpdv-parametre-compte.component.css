@@ -2,6 +2,12 @@
     border-style: hidden ;
 }
 
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -17rem !important;
+}
+
+
 p.adminpdvparametrecompteBorder, button.adminpdvparametrecompteBorder {
   border-radius: 10px 0 10px 10px;
   background-color: #f39200;
@@ -24,4 +30,3 @@ label.adminpdvparametrecompteText{
   color: #f39200;
   text-align: center;
 }
-

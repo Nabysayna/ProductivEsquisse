@@ -18,6 +18,8 @@ import { AdminmultipdvStatusPdvComponent } from './admin-multi-pdv/admin-multi-p
 import { AdminmultipdvStatusReclamationComponent } from './admin-multi-pdv/admin-multi-pdv-status-reclamation/admin-multi-pdv-status-reclamation.component';
 import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-multi-pdv-update-caution/admin-multi-pdv-update-caution.component';
 
+import { CommissionnementComponent } from './commissionnement/commissionnement.component';
+
 
 import { ManagerComponent } from './manager/manager.component';
 import { AuthComponentComponent } from './auth-component/auth-component.component';
@@ -33,6 +35,10 @@ import { MoneyGramComponentComponent } from './money-gram-component/money-gram-c
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
 import { PostcashComponent } from './postcash/postcash.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
+import { WizallComponent } from './wizall/wizall.component';
+
+//import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
+
 import { CrmComponent } from './crm/crm.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
@@ -52,6 +58,7 @@ import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
 import { ConsulterpretComponent } from './consulterpret/consulterpret.component';
 import { FirstlogComponent } from './firstlog/firstlog.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
+import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 
 
 import { AdminpdvparametrecompteComponent } from './adminpdv/adminpdv-parametre-compte/adminpdv-parametre-compte.component';
@@ -69,10 +76,13 @@ const appRoutes: Routes = [
     { path: 'accueil', component: AccueilComponent, canActivate: [AuthGuardcais],
            children:[
                 {path: '', component: ECommerceComponent},
+                {path: 'commissionnement', component: CommissionnementComponent},
+                {path: 'challenge', component: ChallengeresultsComponent },
                 {path: 'MONEYGRAM', component: SoapserverComponent},
-    			      {path: 'ORANGE MONEY', component: OrangeMoneyComponentComponent},
+    			{path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
                 {path: 'POSTECASH', component: PostcashComponent},
-                {path: 'TIGO CASH', component: TigoCashComponentComponent},
+                {path: 'TIGOCASH', component: TigoCashComponentComponent},
+                {path: 'WIZALL', component: WizallComponent},
                 {path: 'ADMINCOURSIER', component: AdmincoursierComponent},
                 {path: 'CRM', component: CrmComponent},
                 {path: 'DASHBOARD', component: DashboardComponent},
@@ -169,6 +179,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 children: [
+                    { path: 'challenge', component: ChallengeresultsComponent },
+                    { path: 'commissionnement', component: CommissionnementComponent },
                     { path: 'dashboard', component: AdminpdvDashboardComponent },
                     { path: 'monitoring', component: AdminpdvMonitoringComponent },
                     { path: 'parametrecompte', component: AdminpdvparametrecompteComponent },

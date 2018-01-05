@@ -10,17 +10,6 @@
 
         <div class="panel-body">
 
-<!--             <ul class="nav nav-pills">
-                <li class="active"><a href="#rechargementespece-pills" data-toggle="tab" (click)="reinitialiser()">Rechargement Espece</a>
-                </li>
-                <li><a href="#achatjula-pills" (click)="reinitialiser()" data-toggle="tab">Achat Jula</a>
-                </li>
-                <li><a href="#reglementsenelec-pills" (click)="reinitialiser()" data-toggle="tab">Réglement Senelec</a>
-                </li>
-                <li><a href="#achatcodewoyofal-pills" (click)="reinitialiser()" data-toggle="tab">Achat Code Woyofal</a>
-                </li>
-            </ul>
- -->
             <div id="om-options">
                 <a href="#rechargementespece-pills" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialiser()"  data-toggle="tab">Rechargement Espece</a>
                 
@@ -29,7 +18,11 @@
                 <a href="#reglementsenelec-pills" (click)="reinitialiser()" data-toggle="tab">Réglement Senelec</a>
 
                 <a href="#achatcodewoyofal-pills" (click)="reinitialiser()" data-toggle="tab">Achat Code Woyofal</a>
-                                
+
+<!--                <a href="#rapido-pills" (click)="reinitialiser()" data-toggle="tab">RAPIDO</a>
+ -->                                
+
+               <a href="#oolu-pills" (click)="reinitialiser()" data-toggle="tab">Oolu Solar</a>
             </div>
 
             <!-- Tab panes -->
@@ -62,7 +55,7 @@
                         <button type="reset" class="btn btn-danger" [disabled]="!rechargementespece.form.valid" >Annuler</button>
                       </div>
                     </form>
-                    </div>
+                </div>
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="retraitespece-pills">
 
@@ -223,6 +216,71 @@
 
                     </form>
                 </div>
+
+              <div class="tab-pane fade col-sm-12 col-xs-12 in " id="rapido-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h2> Recharge Badge RAPIDO</h2>
+                    </fieldset>
+                    <form (ngSubmit)="validrechargementrapido()" #rechargementRAPIDO="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Téléphone client</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Montant à recharger</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montantrechargementespece" class="form-control" placeholder="montant à recharger" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Badge</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.badge"   name="montant" id="badge" class="form-control" placeholder="Badge" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="!rechargementRAPIDO.form.valid">Valider</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!rechargementRAPIDO.form.valid" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+
+
+              <div class="tab-pane fade col-sm-12 col-xs-12 in " id="oolu-pills">
+                    <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">
+                        <h2> Paiement Oolu Solar</h2>
+                    </fieldset>
+                    <form (ngSubmit)="payeroolusolar()" #payeroolusolarform="ngForm" autocomplete="on">
+                      <div class="form-group row">
+                        <label for="telephonerechargementespece" class="col-sm-3 col-form-label">Téléphone </label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.telephone"   name="telephone" id="telephonerechargementespece" class="form-control" placeholder="téléphone client" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">N° Compte</label>
+                        <div class="col-sm-8">
+                          <input type="string" [(ngModel)]="this.compte"   name="compte" id="compte" class="form-control" placeholder="Numéro Compte" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="montantrechargementespece" class="col-sm-3 col-form-label">Montant à recharger</label>
+                        <div class="col-sm-8">
+                          <input type="number" [(ngModel)]="this.montant"   name="montant" id="montant" class="form-control" placeholder="montant à recharger" required>
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="!payeroolusolarform.form.valid">Valider</button>
+                        <button type="reset" class="btn btn-danger" [disabled]="!payeroolusolarform.form.valid" >Annuler</button>
+                      </div>
+                    </form>
+                </div>
+
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcredittelephone-pills">
                     <fieldset style="margin-top: 2rem;margin-bottom: 2rem;">

@@ -2,6 +2,11 @@
     border-style: hidden ;
 }
 
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -11rem !important;
+}
+
 
 div.adminpdvDashboardNbreReclVente {
   background-color: white;

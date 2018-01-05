@@ -164,8 +164,8 @@ select:focus{
 }
 
 .navbar-default{
-/*  background-color: white ; */
-  border-bottom: 1px solid #0F70B7 ;
+/*  background-color: transparent ;*/
+/*  border-bottom: 1px solid #0F70B7 ;*/
   background-image: url('/assets/head.png') ;
   height: 42rem ;
  }
@@ -226,6 +226,10 @@ select:focus{
 #authcomponent{ 
 }
 
+#nav{
+  margin-top: -74rem;
+}
+
 #nav img{
   max-height: 6rem ;
 }
@@ -246,5 +250,9 @@ select:focus{
   margin-left: 1rem ;
 }
 
-
+@media only screen and (max-width: 500px) {
+  #nav{
+    margin-top: -28.5rem;
+  }
+}
 

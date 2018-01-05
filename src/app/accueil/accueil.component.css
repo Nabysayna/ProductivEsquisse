@@ -5,6 +5,8 @@ body {
 
 
 
+
+
 .icon-bar{
     background-color : white !important;
     width: 100% ;
@@ -124,7 +126,7 @@ body {
 }
 
 #wrapper{
-	background-color: white ;
+	background-color: transparent ;
 	height: 100%;
 }
 
@@ -159,7 +161,6 @@ body {
 }
 
 #side-menu a:hover{
-    background-color: #fff;
     border-color: #36A9E0;
     color : #337ab7 !important ;
 }
@@ -228,7 +229,7 @@ body {
 }
 
 #wrapper{
-	background-color: white ;
+	background-color: transparent ;
 	height: 100%;
 }
 
@@ -277,6 +278,20 @@ body {
     color : #337ab7 !important ;
 }
 
+#side-menu li{
+    background-color: white ;
+}
+
+#side-menu li:first-child{
+ border-radius: 3rem 0 0 0 ;
+}
+
+#side-menu li:last-child{
+ background-color: transparent;
+ border-radius: 0 0 3rem 3rem ;
+}
+
+
 #leftsidemenu{
     margin-top: 5rem;
 /*    height: 70rem;*/
@@ -294,7 +309,12 @@ body {
 }
 
 #routeContainDisplayer{
-    margin-top: 3rem ;
+    margin-top: -68rem ;
+}
+
+#encours{
+    text-align: center ; 
+    padding-top: 5.5rem ;
 }
 
 @media screen and (max-width:640px) {
@@ -304,5 +324,22 @@ body {
  }
    
 }
+
+    
+@media only screen and (max-width: 400px) {
+    #encours{
+    position: relative;
+    top: 84rem;
+    }
+    #routeContainDisplayer{
+        margin-top: 2rem;
+    }
+    #om-options{
+        width: max-content !important;
+    }
+}  
+
+
+
        
        

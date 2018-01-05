@@ -7,6 +7,11 @@
     border-style: hidden ;
 }
 
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
+}
+
 
 div.aidedecisionadminpdvTitle {
   z-index: 3;

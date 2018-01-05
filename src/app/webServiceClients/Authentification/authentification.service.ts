@@ -141,6 +141,9 @@ export class AuthentificationServiceWeb {
 
   }
 
+
+
+
   public setParameters( tryLogin: string, tryPwd: string):{}[] {
       var parameters:{}[] = [] ;
       var user = {login:tryLogin, pwd:tryPwd} ;

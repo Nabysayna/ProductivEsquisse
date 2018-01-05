@@ -7,18 +7,31 @@
     </button>
     
 </div>
+
+<!-- <div style="background-color: white ; color : black ; text-align: center ;"> 
+    <marquee> 
+        <h1>Le message à faire passer!</h1>
+    </marquee> 
+</div>
+ -->
+
 <ul class="nav navbar-top-links navbar-right">
+
+    <li class="dropdown">
+        <marquee style="height: 5rem; background-color: white;"> 
+<!--             <h3 style="color : #36A9E0 ; text-transform: capitalize;">{{message}}</h3> -->
+            <h3 style="color : black; text-transform: capitalize;">{{message}}</h3>
+        </marquee> 
+    </li>
+
     <li class="dropdown">
         <a class="dropdown-toggle" id="currentUser" data-toggle="dropdown" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> 
         {{currentUser.username}} 
         </a>
         <ul class="dropdown-menu dropdown-user">
-<!--             <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile Utilisateur</a>
-            </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Réglages</a>
-            </li>
- -->        <li class="divider"></li>
-            <li><a class="btn" id="disconnect-btn" (click)="deconnexion()" ><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
+            <li class="divider"></li>
+            <li>
+            <a class="btn" id="disconnect-btn" (click)="deconnexion()" ><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
             </li>
         </ul>
     </li>

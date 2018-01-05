@@ -120,3 +120,9 @@ th.adminpdvcrmTitleTable, mfDefaultSorter.adminpdvcrmTitleTable{
   border: 2px solid #f39200;
 }
 
+
+
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
+}

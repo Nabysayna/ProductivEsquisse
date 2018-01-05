@@ -155,11 +155,11 @@ export class AdminmultipdvServiceWeb {
 
   }
 
-  public modifymajcaution(type : string, idadminpdv : number, modifycaution : number): Promise<any>  {
+  public modifymajcaution(type : string, idadminpdv : number, modifycaution : number, categorie : string ): Promise<any>  {
     var method:string = 'modifymajcaution';
     var parameters:{}[] = [];
 
-    var reEspParams = {token: this.token, type: type, idadminpdv: idadminpdv, modifycaution: modifycaution} ;
+    var reEspParams = {token: this.token, type: type, idadminpdv: idadminpdv, modifycaution: modifycaution, categorie:categorie} ;
     var params:{}[] = [] ;
     params["params"] = reEspParams ;
 

@@ -41,7 +41,7 @@ export class OrangeMoneyComponentComponent implements OnInit {
   date:string;
   verifretraitcode=[false,false,false,false];
 
-  constructor(private omService : OrangeMoneyService,) { 
+  constructor(private omService : OrangeMoneyService) { 
   }
   @ViewChild('modaldepot') public modal:ModalDirective;
   @ViewChild('modalretrait') public modalretrait:ModalDirective;
@@ -528,16 +528,18 @@ export class OrangeMoneyComponentComponent implements OnInit {
 /***********************************************************/
 
   retraitAvecCode(){
-    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Orange money retrait','operateur':2,'operation':3,'coderetrait':this.coderetrait,'prenom':this.prenom,'nomclient':this.nom,'num':this.numclient,'date':this.date,'cni':this.cni}));
-
-    let requete = "3/"+this.coderetrait+"/"+this.prenom+"/"+this.nom+"/"+this.date+"/"+this.cni+"/"+this.numclient;
+    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Orange money retrait','operateur':2,'operation':3,'coderetrait':this.coderetrait,'prenom':this.prenom,'nomclient':this.nom,'num':this.numclient,'date':this.date,'cni':this.cni,'montant':this.mnt}));
+    this.hidemodalretraitcode() ;
+//    let requete = "3/"+this.coderetrait+"/"+this.prenom+"/"+this.nom+"/"+this.date+"/"+this.cni+"/"+this.numclient;
    
     this.numclient = undefined ;
     this.mnt = undefined; 
     this.coderetrait=undefined;
     this.nom=undefined;
     this.prenom=undefined;
+    this.date=undefined;
     this.cni=undefined;
+    this.mnt=undefined;
 
    /* console.log(requete);
     this.omService.requerirControllerOM(requete).then( resp => {
@@ -605,11 +607,12 @@ export class OrangeMoneyComponentComponent implements OnInit {
 /*********************************************************/
 
   acheterCredit(){
-    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Orange money retrait','operateur':2,'operation':5,'numclient':this.numclient,'montant':this.mnt}));
+    this.hidemodalventecredit()
+    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'OrangeMoney Vente Crédit','operateur':2,'operation':5,'numclient':this.numclient,'montant':this.mnt}));
     this.loading = false ;
     this.numclient = undefined ;
     this.mnt = undefined; 
-    this.modalretraitinter.hide();
+//    this.modalretraitinter.hide();
    
   }
 
@@ -645,10 +648,10 @@ export class OrangeMoneyComponentComponent implements OnInit {
     this.modalretraitinter.show();
   }
   public showmodalventecredit(){
-    this.modalretraitinter.show();
+    this.modalventecredit.show();
   }
   public hidemodalventecredit(){
-    this.modalretraitinter.hide();
+    this.modalventecredit.hide();
   }
 
 }

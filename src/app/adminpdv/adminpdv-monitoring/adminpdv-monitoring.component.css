@@ -3,6 +3,11 @@
 }
 
 
+#page-wrapper{
+    background-color: transparent !important;
+    margin-top: -19rem !important;
+}
+
 /*
 .cover{
   border : 2px solid #36A9E0 ;

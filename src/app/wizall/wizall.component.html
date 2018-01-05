@@ -1,0 +1,243 @@
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            
+            <h2>Wizall</h2>
+
+        </div>
+        <!-- /.panel-heading -->
+
+        <div class="cover"></div>
+
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <div id="om-options">
+                <a href="#depot" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialise()"  data-toggle="tab">Depôt</a>
+                
+                <a href="#retrait" style="padding-left: 4rem; padding-right: 4rem;" (click)="reinitialise()" data-toggle="tab">Retrait </a>
+                
+                <a href="#sde" (click)="reinitialise()" data-toggle="tab">Paiement SDE</a>
+
+                <a href="#senelec" (click)="reinitialise()" data-toggle="tab">Paiement Senelec </a>
+                                
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade col-sm-12 col-xs-12 in active" id="depot">
+                        <h2>Dépôt</h2>
+                        <form name="transnat" (ngSubmit)="depotmodal()" #formdepot="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+							<div class="form-inline">
+							 <label>Numéro du client  :</label>
+                             <input autocomplete="off" type="number" autocomplete="off" pattern="[0-9]*" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" autofocus>
+                            </div>
+                            <div class="form-inline">
+							 <label>Montant du dépôt :</label>
+                             <input type="number" autocomplete="off" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                            </div>
+                            <button style="margin-top: 1rem;"  type="submit" class="btn btn-success" [disabled]="!formdepot.form.valid">Valider</button>
+                        </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="retrait">
+                        <h2>Retrait</h2>
+                        <form name="transnat" (ngSubmit)="retirermodal()" #formretrait="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+						  <div class="form-inline">
+							<label>Numéro du client :</label>
+                            <input type="number" autocomplete="off" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                          </div>
+                          <div class="form-inline">
+							<label>Montant à retirer :</label>
+                            <input type="number" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                          </div>
+                            <button style="margin-top: 1rem;"  type="submit" class="btn btn-success" [disabled]="!formretrait.form.valid">Valider</button>
+                        </form>
+                </div>
+
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="sde">
+                        <h2>Paiement Facture SDE</h2>
+                        <form name="transnat" #formsde="ngForm" (ngSubmit)="sdemodal()" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+						  <div class="form-inline">
+							<label>Réfèrence client :</label>
+                            <input type="number" autocomplete="off" [(ngModel)]="this.refclientsde" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                            <button style="margin-top: 1rem;"  type="submit" class="btn btn-success" [disabled]="!formsde.form.valid">Valider</button>
+                          </div>
+                        </form>
+                </div>
+                <div class="tab-pane fade col-sm-12 col-xs-12" id="senelec">
+                        <h2>Paiement Facture Senelec</h2>
+                        <form name="transnat" #formsenelec="ngForm" (ngSubmit)="senelecmodal()" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
+						  <div class="form-inline">
+							<label>Numéro de Police:</label>
+                            <input type="number" autocomplete="off" [(ngModel)]="this.numpolice" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" required autofocus>
+                            <button style="margin: 1rem;" type="submit" class="btn btn-success" [disabled]="!formsenelec.form.valid">Valider</button>
+                          </div>
+                        </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #modaldepot="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="fermermodaldepot()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation Dépôt.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Numèro Du Client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Montant Transaction : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="deposer()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="fermermodaldepot()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+	    
+</div>
+
+<div bsModal #modalretrait="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="fermermodalretrait()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation Retrait.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Numèro Du Client : {{this.numclient}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Montant Transaction : {{this.mnt}}</label>
+						 </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="retirer()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="fermermodalretrait()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+	    
+</div>
+
+
+<div bsModal #modalsde="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="fermersdemodal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Informations Facture SDE</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Status : IMPAYEE</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Montant : 15548</label>
+						 </div>
+			             <div class="form-group">
+			               	  <label >Date D'Echéance : 10/07/2017</label>
+			             </div>
+						 <div class="form-group">
+							 <label >Réf. Client : {{refclientsde}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Réf. Facture: {{refFactureSDE}}</label>
+						 </div>
+			             <div class="form-group">
+			               <label >Client : Moutapha Sall</label>
+			             </div>
+					 </form>
+					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="payerSDE()" class="btn btn-success" />
+				  <input type="button" value="annuler" (click)="fermersdemodal()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+<div bsModal #modalsenelec="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-sm">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="fermersenelecmodal()">
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Information Facture Senelec.</h4>
+		     </div>
+		     <div class="modal-body">
+		
+				 <div>
+					 <form class="form">
+						 <div class="form-group">
+							 <label >Status : IMPAYEE</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Montant : 3760</label>
+						 </div>
+			             <div class="form-group">
+			               	  <label >Date D'Echéance : 2017-10-21</label>
+			             </div>
+						 <div class="form-group">
+							 <label >Numèro Facture : {{numFactureSenelec}}</label>
+						 </div>
+						 <div class="form-group">
+							 <label >Numèro Police: {{numpolice}}</label>
+						 </div>
+			             <div class="form-group">
+			               <label >Client : ALIOU DIOP</label>
+			             </div>
+					 </form>					
+				 </div>
+		     </div>
+		     <div class="modal-footer">
+				  <input type="button" value="valider" (click)="payerSenelec()" class="btn btn-success" />
+				  <input type="button" value="fermer" (click)="fermersenelecmodal()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>    
+</div>

@@ -2,6 +2,7 @@
 label{
     color : #36A9E0;
     text-transform : capitalize ;
+    margin-top: 2rem;
 }
 
 .tab-content{
@@ -49,7 +50,7 @@ label{
     z-index: 0 ;
     position: relative;
     top : -8rem ;
-    width: 88rem ;
+    width: 94rem ;
     height: 10rem ;
 }
 
@@ -73,7 +74,9 @@ label{
     border-radius: 1rem 0rem 1rem 1rem;
     padding: 1.3rem;
     color : #F39200 ;
-    margin-right: 2rem ;
+    padding-right: 0.8rem ;
+    padding-left: 0.8rem ;
+    margin-right: 0.5rem ;
     background-color: white ;
     border : 2px solid #F39200;
 }
@@ -97,3 +100,9 @@ label{
 #paiefact select{
     margin-left: 1rem ;
 }
+
+@media only screen and (max-width: 400px) {
+    #om-options{
+        width: max-content !important;
+    }
+}  

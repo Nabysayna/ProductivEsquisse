@@ -1,0 +1,7 @@
+.legends div{
+	display: inline-block; 
+}
+
+.panel{
+	margin-top: 0 !important;
+}

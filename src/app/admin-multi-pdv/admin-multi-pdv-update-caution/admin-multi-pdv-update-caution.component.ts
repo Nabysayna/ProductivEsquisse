@@ -14,15 +14,15 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
   public filterQuery = "";
-  public rowsOnPage = 10;
-  public sortBy = "adminpdv";
-  public sortOrder = "desc";
+    public rowsOnPage = 10;
+    public sortBy = "adminpdv";
+    public sortOrder = "desc";
+    public categoriepoint='---' ;
+    public adminmultipdvMajcaution: AdminmultipdvMajcaution[];
+    loading = false ;
 
-  public adminmultipdvMajcaution: AdminmultipdvMajcaution[];
-  loading = false ;
-
-  inputCaution: number;
-  majcaution:AdminmultipdvMajcaution;
+    inputCaution: number;
+    majcaution:AdminmultipdvMajcaution;
   constructor(private adminmultipdvServiceWeb: AdminmultipdvServiceWeb) { }
 
   ngOnInit() {
@@ -72,11 +72,12 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
 
   public validermaj(item):void {
     this.loading = true ;
-    this.adminmultipdvServiceWeb.modifymajcaution('azrrtt', this.majcaution.idcaution, this.inputCaution).then(adminmultipdvServiceWebList => {
+    this.adminmultipdvServiceWeb.modifymajcaution('azrrtt', this.majcaution.idcaution, this.inputCaution, this.categoriepoint).then(adminmultipdvServiceWebList => {
       console.log(adminmultipdvServiceWebList);
       this.closeModal();
       this.loading = false ;
       this.listmajcautions();
+      this.categoriepoint = '---' ;
     });
   }
 

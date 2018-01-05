@@ -38,6 +38,7 @@ export class CatalogueComponent implements OnInit {
 
   token : string = JSON.parse(sessionStorage.getItem('currentUser')).baseToken ;
   loading = false ;
+  currentArticle : any ;
   p : any ;
   listarticles : any[] ;
   
@@ -55,6 +56,8 @@ export class CatalogueComponent implements OnInit {
   montant:number = 0;
   alert: boolean = false;
 
+  @ViewChild('viewMore') public addChildModal:ModalDirective;
+
 
   constructor(public ecomCaller: EcomServiceWeb) { 
     this.dataSource = Observable
@@ -68,6 +71,7 @@ export class CatalogueComponent implements OnInit {
     this.loading = true ;
     this.ecomCaller.listeArticles(this.token, 'catalogue').then( response => {
       this.listarticles = response.reverse();
+      console.log(this.listarticles) ;
       this.loading = false ;
     }); 
   }
@@ -188,5 +192,23 @@ export class CatalogueComponent implements OnInit {
     this.filterQuery = this.asyncSelected = "";
     this.typeaheadNoResults = this.typeaheadLoading = false;
   }
+
+  getFormatted( designation) : string {
+    if(designation.length>16)
+      return designation.substring(0, 13)+'...' ;
+
+    return designation ;
+  }
+
+ 
+  public showAddChildModal(article):void {
+    this.currentArticle=article ;
+    this.addChildModal.show();
+  }
+ 
+  public hideAddChildModal():void {
+    this.addChildModal.hide();
+  }
+
 
 }
