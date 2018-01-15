@@ -80,6 +80,18 @@ export class EspacePersoComponent implements OnInit {
   orderedArticles : string ;
   nbrePieds : number ;
   smart : string ;
+  descriptions=[{'description':'Cosmetiques','value':['provenance','marque','couleur','origine']},
+                {'description':'Vêtements','value':['origine','matière','taille','sexe/genre','tendances','couleur']},
+                {'description':'Chaussures','value':['tendances', 'genre/sexe', 'taille', 'pointure', 'couleur', 'origine','matière']},
+                {'description':'Sac',value:['matière', 'couleur', 'origine', 'genre', 'tendances']},
+                {'description':'Electronique','value':['mode', 'dimensions', 'origine', 'fonctions', 'couleur', 'marque']},
+                {'description':'Accessoires',value:['origine', 'matière', 'genre/sexe', 'qualité', 'poids']},
+                {'description':'Outils de bureau',value:['mode', 'dimensions', 'origine', 'fonctions', 'couleur', 'marque']},
+                {'description':'Electroménager',value:['modèle','origine','marque', 'capacité','utilisation']},
+                {'description':'Articles de maison',value:['origine','marque','utilisation','fonctions','modèle']},
+                {'description':'Autre',value:['autre description']}
+                ];
+  descriptionsvalues=[];
 
   uploadProgress: number;
   zone: NgZone;
@@ -335,6 +347,7 @@ export class EspacePersoComponent implements OnInit {
   @ViewChild('addChildModal') public addChildModal:ModalDirective;
  
   public showAddChildModal():void {
+    this.descriptionsvalues=[];
     this.addChildModal.show();
   }
  
@@ -444,6 +457,18 @@ export class EspacePersoComponent implements OnInit {
   roundedValueOf(decimal){
     return Math.round(decimal) ;
   }
-
+  descriptionarticle(categorie:string){
+   if(categorie=="--- Catégorie ---"){
+      this.descriptionsvalues=[];
+   }
+   for(let i=0;i<this.descriptions.length;i++){
+      if(this.descriptions[i].description==categorie){
+         this.descriptionsvalues=this.descriptions[i].value;
+         break;
+      }
+      
+   }
+    
+  }
 
 }

@@ -41,6 +41,7 @@ export class CatalogueComponent implements OnInit {
   currentArticle : any ;
   p : any ;
   listarticles : any[] ;
+  panier:Article[];
   
   public asyncSelected: string;
   public typeaheadLoading: boolean;
@@ -207,6 +208,16 @@ export class CatalogueComponent implements OnInit {
   }
  
   public hideAddChildModal():void {
+    this.addChildModal.hide();
+  }
+  
+  public ajouter_au_panier(article){
+    let articl=new Article();
+    articl.prix=article.prix;
+    articl.designation=article.designation;
+    articl.description=article.description;
+    articl.nomImg=article.nomImg;
+    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Mon Panier','operateur':5,'prix':articl.prix,'quantite':1,'nomImg':articl.nomImg,'designation':articl.designation,'description':articl.description}));
     this.addChildModal.hide();
   }
 

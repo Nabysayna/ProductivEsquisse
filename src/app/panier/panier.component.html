@@ -1,0 +1,123 @@
+
+<div class="panel-body" >
+                <p *ngIf="commandevalidee" class="alert alert-success">commande validée</p>
+                 <div style="background-color:blue;border-radius:10px;height:50px" >
+						<div class="row">
+                             <h4 class="card-title col-md-offset-4 col-md-3"><b><i style="color:white">Mon Panier</i></b></h4>
+                        </div>
+                  </div>
+                 <div  class="col-lg-offset-1 col-lg-offset-1 col-sm-12 col-md-12 col-lg-12" class="height:200px" *ngFor="let article of articles;let i=index"  >
+					 
+	                 <div class="well-sm row" >
+                          <div *ngIf="i%2==0" class="row" >  
+                            <p class="" style="color:blue"><b><i>{{article.data.designation}}</i></b></p>
+	                        <div class="col-md-9 col-lg-9 col-md-9 backgroundivleft" >
+							  <div class="row" >
+								   <div class="col-md-1 col-lg-1">
+										<img  class="" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.data.nomImg}}" alt="Card image cap" height="150px" width="50">
+								   </div>
+								   <div class="col-lg-offset-4 col-md-offset-4 col-md-7 col-lg-7" style="margin-top:2px" >
+									   <div class="row" >
+										   <p  class="col-md-10 col-lg-10 couleur"><b><i>Designation : {{article.data.designation}}</i></b></p>
+									   </div>
+									   <div class="row" >
+										   <p  class="col-md-10 col-lg-10 couleur"><b><i>Prix : {{currency(article.data.prix)}}.FCFA</i></b></p>
+									   </div>
+									   <div class="row" >
+										   <p  class="col-md-10 col-lg-10 couleur"><b><i>Quantite : 1</i></b></p>
+									   </div>
+									   <div class="row"> 
+										   <p   class="col-md-10 col-lg-10 couleur"><b><i>Prix Total: {{currency(article.data.prix)}}.FCFA</i></b></p>
+									   </div>
+								   </div>
+							  </div>
+                            </div>
+                          </div>
+                          <div *ngIf="i%2!=0" class="row" >
+	                        <p class="col-lg-offset-1" style="color:blue"><b><i>{{article.data.designation}}</i></b></p>
+	                        <div class="col-lg-offset-2 col-md-offset-2 col-md-8 col-lg-8 backgroundiv" >
+							 <div class="row">
+								 <div class="col-md-10 col-lg-10" style="margin-top:2px">
+								   <div class="row" >
+									   <p  class="col-md-10 col-lg-10 couleur"><b><i>Designation : {{article.data.designation}}</i></b></p>
+								   </div>
+								   <div class="row" >
+									   <p  class="col-md-10 col-lg-10 couleur"><b><i>Prix : {{currency(article.data.prix)}}.FCFA</i></b></p>
+								   </div>
+								   <div class="row" > 
+									   <p  class="col-md-10 col-lg-10 couleur"><b><i>Quantite : 1</i></b></p>
+								   </div>
+								   <div class="row"> 
+									   <p   class="col-md-10 col-lg-10 couleur"><b><i>Prix Total: {{currency(article.data.prix)}}.FCFA</i></b></p>
+								   </div>
+							   </div>
+							   <div class="pull-right col-lg-1">
+                                  <img  class="card-img-top" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.data.nomImg}}" alt="Card image cap" height="150px" width="50px">
+                               </div>
+							  </div>
+                            </div>
+                            
+                          </div>
+	                  </div>
+                        
+	              </div><br>
+	              <p *ngIf="articles.length<1" class="alert alert-danger">Votre panier est vide veuillez choisir des produits</p>
+	              <form *ngIf="articles.length>=1" style="width:80%" class="form-inline pull-left">
+					  <label style="color:blue;margin-right:50px">Total Panier : {{currency(totalpanier())}}</label>
+					  <button (click)="showmodalcommande()"  class="btn btn-success">valider</button>
+					  <button  (click)="viderpanier()" class="btn btn-danger">annuler</button>
+					   
+	              </form>
+	    
+    
+</div>
+<div bsModal #modalcommande="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+		 <div class="modal-dialog modal-md">
+		    <div class="modal-content" >
+		      <div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" >
+				    <span aria-hidden="true">&times;</span>
+		        </button>
+	            <h4 class="modal-title" id="myModalLabel">Fenêtre de confirmation.</h4>
+		     </div>
+		     <div class="modal-body">
+				 <form class="form-inline">
+					 <fieldset>
+							 <label>Telephone :</label>
+							 <input type="tel" [(ngModel)]="telephone" name="tel" id="tel" class="form-control" />
+						 <input type="button" class="btn btn-primery" (click)="chercherclient(telephone)" value="chercher" />
+					 </fieldset>
+				 </form>
+		         <form *ngIf="estclient">
+					 <fieldset>
+						 <legend>Informations client</legend>
+						 <div class="form-group ">
+							 <label class="pull-left">Prenom</label>
+							 <input type="text" [(ngModel)]="prenom" name="prenom" id="prenom" class="form-control" />
+						 </div>
+						 <div class="form-group">
+							 <label class="pull-left">Nom</label>
+							 <input type="text" [(ngModel)]="nom" name="nom" id="nom" class="form-control" />
+						 </div>
+						 <div class="form-group">
+							 <label class="pull-left" >Telephone</label>
+							 <input type="text" [(ngModel)]="telephone" name="tel" id="tel" class="form-control" />
+						 </div>
+						 <div class="form-group">
+							 <label class="pull-left" >Adresse :</label>
+							 <input type="text" [(ngModel)]="adress" name="adresse" id="adresse" class="form-control" />
+						 </div>
+					 </fieldset>
+		         </form>
+				
+		     </div>
+		     <div class="modal-footer" style="background-color:blue">
+				  <input type="button" value="valider" (click)="validercommande()"  class="btn btn-success" />
+				  <input type="button" value="annuler" (click)="hidemodalcommande()" class="btn btn-danger" />
+		     </div>
+		  </div> 
+	    </div>
+
+  
+     </div>
