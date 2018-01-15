@@ -67,7 +67,7 @@ export class AccueilComponent implements OnInit {
       }
       let sesion={'data':JSON.parse(sessionStorage.getItem('curentProcess')),'etats':infoOperation,'dataI':''};
      // var newprocess={'operation':sesion.operation,'montant':sesion.montant,'num':sesion.num};
-<<<<<<< HEAD
+
       if(sesion.data.operateur==5){
         this.articles.push(sesion);
         sessionStorage.setItem('panier',JSON.stringify(this.articles));
@@ -83,10 +83,8 @@ export class AccueilComponent implements OnInit {
          
       }
      
-=======
-
       this.process.push(sesion);
->>>>>>> 7a7e2e957414abea501e003259d563fc59f89c91
+
       console.log(sesion.etats.id);
       sessionStorage.removeItem('curentProcess');
       var operateur=sesion.data.operateur;
