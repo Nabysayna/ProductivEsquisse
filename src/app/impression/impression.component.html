@@ -109,7 +109,7 @@
         </p>
       </div>
       <div class="panel-body">
-        Numéro Transaction Sentool: {{dataImpression.infotransaction.client.transactionBBS}}<br>
+        Numéro Transaction Sentool: {{dataImpression.infotransaction.transactionBBS}}<br>
         <table>
           <tr class="text-uppercase">
             <td>
@@ -128,7 +128,67 @@
         </table>
       </div>
       <div class="panel-footer">
-        Validité Abonnement: du {{today | date}} au {{(this.today + (this.dataImpression.infotransaction.client.duree*2592000000) - 1000000) | date}}<br>
+        Validité Abonnement: du {{dataImpression.infotransaction.dateoperation | date}} au {{dataImpression.infotransaction.echeance | date}}<br>
+      </div>
+    </div>
+  </div>
+  <div class="panel-heading" *ngIf="dataImpression.apiservice=='postecashreimpression' && dataImpression.service=='achatcodewayafal'">
+    <div class="panel panel-default"  id="postecashreimpressionrecuimpressionachatcodewayafal">
+      <img src="../../assets/bbs.png" class="img-rounded"   height="100"/>
+      <h2 style="text-align: center"> POSTECASH - ACHAT WOYOFAL </h2>
+      <div class="panel-heading">
+        <p align="right" >
+          <strong>Entreprise:</strong> {{ operateur.nometps }}<br>
+          <strong>Guichetier(e):</strong> {{ operateur.prenom }} {{ operateur.nom }}<br>
+          <strong>Service clientèle:</strong><br>
+          77 226 12 27 - 77 398 18 31 - 77 398 18 58.<br>
+        </p>
+      </div>
+      <div class="panel-body">
+        Numéro Transaction Postecash: {{dataImpression.infotransaction.transactionPostCash}}<br>
+        <table>
+          <tr class="text-uppercase">
+            <td colspan="3">
+              Numéro Transaction Sentool: {{dataImpression.infotransaction.transactionBBS}}<br>
+              Date effectuée: {{dataImpression.infotransaction.dateoperation | date}}<br>
+            </td>
+            <td width="200px">&nbsp;&nbsp;</td>
+            <td>
+              Code Woyofal: {{dataImpression.infotransaction.client.codewoyafal}}<br>
+              Montant Payé: {{dataImpression.infotransaction.client.montant}}<br>
+              Compteur: {{dataImpression.infotransaction.client.compteur}}<br>
+              Frais : 500 Fcfa<br>
+            </td>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-heading" *ngIf="dataImpression.apiservice=='postecashreimpression' && dataImpression.service=='retraitespece'">
+    <div class="panel panel-default"  id="postecashreimpressionrecuimpressionretraitespece">
+      <img src="../../assets/bbs.png" class="img-rounded"   height="100"/>
+      <h2 style="text-align: center"> POSTECASH - RETRAIT ESPECE </h2>
+      <div class="panel-heading">
+        <p align="right" >
+          <strong>Entreprise:</strong> {{ operateur.nometps }}<br>
+          <strong>Guichetier(e):</strong> {{ operateur.prenom }} {{ operateur.nom }}<br>
+          <strong>Service clientèle:</strong><br>
+          77 226 12 27 - 77 398 18 31 - 77 398 18 58.<br>
+        </p>
+      </div>
+      <div class="panel-body">
+        Numéro Transaction Postecash: {{dataImpression.infotransaction.transactionPostCash}}<br>
+        <table>
+          <tr class="text-uppercase">
+            <td colspan="3">
+              Numéro Transaction Sentool: {{dataImpression.infotransaction.transactionBBS}}<br>
+              Date effectuée: {{dataImpression.infotransaction.dateoperation | date}}<br>
+            </td>
+            <td width="200px">&nbsp;&nbsp;</td>
+            <td>
+              Téléphone Destinataire: {{dataImpression.infotransaction.client.telephone}}<br>
+              Montant Retrait : {{dataImpression.infotransaction.client.montant}}<br>
+            </td>
+        </table>
       </div>
     </div>
   </div>
@@ -200,16 +260,18 @@
       </div>
       <div class="panel-body">
         Numéro Transaction Postecash: {{dataImpression.infotransaction.client.transactionPostCash}}<br>
-        Numéro Transaction Sentool: {{dataImpression.infotransaction.client.transactionBBS}}<br>
         <table>
           <tr class="text-uppercase">
+            <td colspan="3">
+              Numéro Transaction Sentool: {{dataImpression.infotransaction.client.transactionBBS}}<br>
+            </td>
+            <td width="200px">&nbsp;&nbsp;</td>
             <td>
               Code Woyofal: {{dataImpression.infotransaction.client.codewoyafal}}<br>
               Montant Payé: {{dataImpression.infotransaction.client.montant}}<br>
               Compteur: {{dataImpression.infotransaction.client.compteur}}<br>
               Frais : 500 Fcfa<br>
             </td>
-          </tr>
         </table>
       </div>
     </div>

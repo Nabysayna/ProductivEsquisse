@@ -117,7 +117,7 @@ import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-mul
 import { AdmincoursierComponent } from './admincoursier/admincoursier.component';
 
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
-import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component'; 
+import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
 
 // { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 
@@ -206,6 +206,7 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
 import { CommissionnementComponent } from './commissionnement/commissionnement.component';
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
 
 
 
@@ -396,6 +397,7 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
       DemandepretServiceWeb,
       CrmDoorServiceWeb,
       UtilService,
+      WizallWebService,
   ],
   bootstrap: [AppComponent]
 })

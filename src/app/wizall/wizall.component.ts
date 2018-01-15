@@ -6,8 +6,8 @@ import { ModalDirective,ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
   templateUrl: './wizall.component.html',
   styleUrls: ['./wizall.component.css']
 })
-export class WizallComponent implements OnInit {  
-	
+export class WizallComponent implements OnInit {
+
    mnt : number;
    mntSDE : number = 15548;
    mntSENELEC : number = 3760;
@@ -33,10 +33,10 @@ export class WizallComponent implements OnInit {
   @ViewChild('modalsde') public modalsde:ModalDirective;
   @ViewChild('modalsenelec') public modalsenelec:ModalDirective;
 
-    public depotmodal(){ 
+    public depotmodal(){
        this.modaldepot.show();
     }
-    public retirermodal(){  
+    public retirermodal(){
        this.modalretrait.show();
     }
 
@@ -48,10 +48,10 @@ export class WizallComponent implements OnInit {
       this.modalretrait.hide();
     }
 
-    public sdemodal(){ 
+    public sdemodal(){
        this.modalsde.show();
     }
-    public senelecmodal(){  
+    public senelecmodal(){
        this.modalsenelec.show();
     }
 
@@ -70,17 +70,17 @@ export class WizallComponent implements OnInit {
 
     retirer(){
       this.fermermodalretrait() ;
-      sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall retrait','operateur':5,'operation':2,'montant':this.mnt,'num':this.numclient}));    
+      sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall retrait','operateur':5,'operation':2,'montant':this.mnt,'num':this.numclient}));
     }
 
     payerSDE(){
       this.fermersdemodal() ;
-      sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall SDE','operateur':5,'operation':3,'montant':this.mntSDE,'refclient':this.refclientsde,'refFacture':this.refFactureSDE}));        
+      sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall SDE','operateur':5,'operation':3,'montant':this.mntSDE,'refclient':this.refclientsde,'refFacture':this.refFactureSDE}));
     }
 
     payerSenelec(){
        this.fermersenelecmodal() ;
-       sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall Senelec','operateur':5,'operation':3,'montant':this.mntSENELEC,'police':this.numpolice, 'numfacture':this.numFactureSenelec}));       
+       sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Wizall Senelec','operateur':5,'operation':4,'montant':this.mntSENELEC,'police':this.numpolice, 'numfacture':this.numFactureSenelec}));
     }
 
 }

@@ -85,8 +85,9 @@
                                     <td>{{currencyFormat(gestionreporting.montant)}}</td>
                                     <td>
                                       <a *ngIf="gestionreporting.operateur=='orangemoney'">{{ trimer(gestionreporting.infoclient) }} </a>
-                                      <a *ngIf="gestionreporting.operateur!='orangemoney' && gestionreporting.operateur!='TNT' && gestionreporting.operateur!='POSTCASH'"> -- </a>
-                                        <button type="button" class="btn btn-success btn-sm" *ngIf="gestionreporting.operateur=='TNT' || gestionreporting.operateur=='POSTCASH'" (click)="reimprimerhistop(gestionreporting)"> Réimprimer </button>
+                                      <a *ngIf="gestionreporting.operateur!='orangemoney' && gestionreporting.operateur!='TNT' && gestionreporting.operateur!='POSTCASH'"> &#45;&#45; </a>
+                                      <button type="button" class="btn btn-success btn-sm" *ngIf="gestionreporting.operateur=='TNT' || gestionreporting.operateur=='POSTCASH'" (click)="reimprimerhistop(gestionreporting)"> Réimprimer </button>
+                                      <!--<button type="button" class="btn btn-success btn-sm" (click)="reimprimerhistop(gestionreporting)"> Réimprimer </button>-->
                                     </td>
                                 </tr>
                                 </tbody>
