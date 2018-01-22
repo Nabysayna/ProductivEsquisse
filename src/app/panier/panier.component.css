@@ -110,3 +110,17 @@ img{
 .color {
 color: rgb(225,145,00);
 }
+.couleur{
+    text-align:left;
+    color:white
+}
+.backgroundiv{
+    background-image:linear-gradient(to right,orange,white);
+    border-radius:10px;
+    height:150px
+}
+.backgroundivleft{
+    background-image:linear-gradient(to left,orange,white);
+    border-radius:10px;
+    height:150px
+}

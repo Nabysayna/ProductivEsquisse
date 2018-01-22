@@ -37,6 +37,7 @@ import { OrangeMoneyComponentComponent } from './orange-money-component/orange-m
 import { PostcashComponent } from './postcash/postcash.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
 import { WizallComponent } from './wizall/wizall.component';
+import { panierComponent } from './panier/panier.component';
 
 //import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 
@@ -70,6 +71,7 @@ import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.compon
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
 
   //
 
@@ -100,6 +102,7 @@ const appRoutes: Routes = [
                 {path: 'Guide_utilisation', component: GuideUserCaisseComponent},
                 {path: 'gestionnaire', component: GestionnaireComponent},
                 {path: 'annonce', component: AnnoncesComponent},
+                {path: 'panier', component: panierComponent},
     		]
     },
     { path: 'accueiladmmpdv', component: AccueilAdminMultiPdvComponent, canActivate: [AuthGuard],
@@ -186,7 +189,7 @@ const appRoutes: Routes = [
                 children: [
                     { path: 'challenge', component: ChallengeresultsComponent },
                     { path: 'commissionnement', component: CommissionnementComponent },
-                    { path: 'dashboard', component: AdminpdvDashboardComponent },
+                    { path: 'dashboard', component: AdminpdvDashboardTestComponent },
                     { path: 'monitoring', component: AdminpdvMonitoringComponent },
                     { path: 'parametrecompte', component: AdminpdvparametrecompteComponent },
                     { path: 'reclamation', component: AdminpdvStatusReclamationComponent },

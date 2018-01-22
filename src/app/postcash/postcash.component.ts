@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { PostCashWebService } from '../webServiceClients/Postcash/postcash.service';
+import { PostCashWebService } from '../webServiceClients/PostCash/postcash.service';
 
 @Component({
   selector: 'app-postcash',

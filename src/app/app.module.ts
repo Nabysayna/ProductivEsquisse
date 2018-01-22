@@ -117,7 +117,7 @@ import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-mul
 import { AdmincoursierComponent } from './admincoursier/admincoursier.component';
 
 import { OrangeMoneyComponentComponent } from './orange-money-component/orange-money-component.component';
-import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component'; 
+import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
 
 // { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 
@@ -144,6 +144,7 @@ import { CoursierComponent } from './coursier/coursier.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
+import { panierComponent } from './panier/panier.component';
 
 import { GeomapComponentComponent } from './geomap-component/geomap-component.component';
 
@@ -205,10 +206,12 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
 import { CommissionnementComponent } from './commissionnement/commissionnement.component';
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+
 import { ZoningComponent } from './zoning/zoning.component';
 import { AnnoncesComponent } from './annonces/annonces.component';
 import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesuperviseur.component';
-
+import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
+import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
 
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -234,6 +237,7 @@ import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesupervi
     DemandepretComponent,
     GestionreportingComponent,
     SoldecompteComponent,
+    panierComponent,
 
     ImpressionComponent,
     ImpressionadminpdvComponent,
@@ -321,7 +325,7 @@ import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesupervi
     FiltresouszonesupplierPipe,
     FiltrezonesupplierPipe,
     FirstlogComponent,
-
+    AdminpdvDashboardTestComponent,
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
@@ -400,6 +404,7 @@ import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesupervi
       DemandepretServiceWeb,
       CrmDoorServiceWeb,
       UtilService,
+      WizallWebService,
   ],
   bootstrap: [AppComponent]
 })

@@ -182,6 +182,7 @@ export class GestionreportingComponent implements OnInit {
     this.selectionintervalleddatefinal = undefined;
     this.gestionreportingServiceWeb.reportingdate(this.token,10, 'jour', this.selectionjour).then(gestreportserviceList => {
       console.log('reportingdate jour');
+      console.log(gestreportserviceList);
       this.gestionreporting = gestreportserviceList;
       this.loading = false ;
     });
@@ -212,10 +213,11 @@ export class GestionreportingComponent implements OnInit {
     this.gestionreportingServiceWeb.reimpression(this.token,10, JSON.stringify(operation), operation.operateur).then(gestreportserviceList => {
       console.log('reimpression');
       let getdataimpression = gestreportserviceList;
+      console.log(getdataimpression)
+      let dataImpression = null;
+      let infos = JSON.parse(getdataimpression.infosoperation);
       if(operation.operateur=="TNT"){
-        let dataImpression = null;
         if(getdataimpression.typeoperation=="abonnement"){
-          let infos = JSON.parse(getdataimpression.infosoperation);
           let typebouquet = "";
           if (infos.id_typeabonnement==1){
             typebouquet = "Maanaa";
@@ -230,8 +232,10 @@ export class GestionreportingComponent implements OnInit {
             apiservice:'tntreimpression',
             service:'abonnement',
             infotransaction:{
+              dateoperation:getdataimpression.dateOperation.date.split('.')[0],
+              echeance:getdataimpression.echeance.date.split('.')[0],
+              transactionBBS: getdataimpression.idoperation,
               client:{
-                transactionBBS: getdataimpression.idoperation,
                 prenom:infos.prenom,
                 nom:infos.nom,
                 telephone:infos.tel,
@@ -239,11 +243,12 @@ export class GestionreportingComponent implements OnInit {
                 chip:infos.n_chip,
                 typebouquet:typebouquet,
                 montant: infos.montant,
-                duree:infos.duree
+                duree:infos.duree,
               },
-
             },
           }
+          sessionStorage.setItem('dataImpression', JSON.stringify(dataImpression));
+          this.router.navigate(['accueil/impression']);
         }
         if(getdataimpression.typeoperation=="decodeur"){
           let infos = JSON.parse(getdataimpression.infosoperation);
@@ -309,13 +314,46 @@ export class GestionreportingComponent implements OnInit {
            },
            }*/
         }
-        sessionStorage.setItem('dataImpression', JSON.stringify(dataImpression));
-        this.router.navigate(['accueil/impression']);
       }
       if(operation.operateur=="POSTCASH"){
-        console.log('POSTCASH');
+        if(operation.traitement=="RETRAIT CASH"){
+          console.log('RETRAIT CASH');
+          dataImpression = {
+            apiservice:'postecashreimpression',
+            service:'retraitespece',
+            infotransaction:{
+              dateoperation:getdataimpression.dateOperation.date.split('.')[0],
+              transactionBBS: getdataimpression.idoperation,
+              transactionPostCash: infos.transactionId,
+              client:{
+                montant: infos.montant_reel,
+                telephone:'00221??',
+              },
+            },
+          }
+          sessionStorage.setItem('dataImpression', JSON.stringify(dataImpression));
+          this.router.navigate(['accueil/impression']);
+        }
+        if(operation.traitement=="ACHAT DE CODE WOYOFAL"){
+          console.log("ACHAT DE CODE WOYOFAL");
+          dataImpression = {
+            apiservice:'postecashreimpression',
+            service:'achatcodewayafal',
+            infotransaction:{
+              dateoperation:getdataimpression.dateOperation.date.split('.')[0],
+              transactionBBS: getdataimpression.idoperation,
+              transactionPostCash: infos.transactionId,
+              client:{
+                montant: infos.montant_reel,
+                codewoyafal: infos.code,
+                compteur: '??',
+              },
+            },
+          }
+          sessionStorage.setItem('dataImpression', JSON.stringify(dataImpression));
+          this.router.navigate(['accueil/impression']);
+        }
       }
-
     });
   }
 

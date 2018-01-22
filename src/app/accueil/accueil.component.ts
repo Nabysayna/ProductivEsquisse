@@ -4,37 +4,48 @@ import { OrangeMoneyService } from '../webServiceClients/Orangemoney/orangemoney
 import { PostCashWebService } from '../webServiceClients/PostCash/postcash.service';
 import { TntServiceWeb, TntResponse } from '../webServiceClients/Tnt/Tnt.service';
 import { TigoCashService } from '../webServiceClients/Tigocash/tigocash.service';
+import {WizallWebService} from "../webServiceClients/Wizall/wizall.service";
+
+class Article {
+  public id:number;
+  public nomImg:string;
+  public designation:string;
+  public description:string;
+  public prix:number;
+  public quantite:number;
+}
 
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css'],
-  providers: [PostCashWebService]
+  providers: [PostCashWebService, WizallWebService]
 })
 export class AccueilComponent implements OnInit {
+  articles=[];
   process=[];
-   quinzeMinutes = 900000; 
-//  quinzeMinutes = 15000;	
-  registredAPIs : string [] = ['POSTECASH', 'ORANGEMONEY', 'TIGOCASH', 'TNT BY EXCAF'] ;
+   quinzeMinutes = 900000;
+//  quinzeMinutes = 15000;
+  registredAPIs : string [] = ['POSTECASH', 'ORANGEMONEY', 'TIGOCASH', 'TNT BY EXCAF', 'WIZALL'] ;
   //registredAPIs : string [] = ['POSTECASH', 'TNT BY EXCAF'] ;
   authorisedToUseCRM = false ;
   load="loader";
   private tntCaller: TntServiceWeb ;
   actif = -1 ;
   dataImpression:any;
-  constructor(private router: Router,private omService : OrangeMoneyService,private postcashwebservice: PostCashWebService) {}
+  constructor(private router: Router,private omService : OrangeMoneyService,private postcashwebservice: PostCashWebService,private wizallwebservice: WizallWebService) {}
 
 /******************************************************************************************************/
 
 
   ngOnInit() {
-    
+
     localStorage.removeItem('om-depot') ;
     localStorage.removeItem('om-retrait') ;
 
-    if (!sessionStorage.getItem('currentUser')) 
-       this.router.navigate(['']);  
-    this.processus(); 
+    if (!sessionStorage.getItem('currentUser'))
+       this.router.navigate(['']);
+    this.processus();
     this.tntCaller = new TntServiceWeb();
   }
 
@@ -42,15 +53,38 @@ export class AccueilComponent implements OnInit {
 
 
   processus(){
-  
+
     setInterval(()=>{
-     
+
     if(sessionStorage.getItem('curentProcess')!="" && sessionStorage.getItem('curentProcess')!=undefined){
-      let infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':'', 'errorCode':'*'};
+      let mag=JSON.parse(sessionStorage.getItem('curentProcess')).operateur;
+      let infoOperation:any;
+     if(mag==5){
+          infoOperation={'etat':false,'id':this.process.length,'load':'fa fa-shopping-cart fa-2x pull-left','color':'', 'errorCode':'*'};
+      }
+     else{
+           infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':'', 'errorCode':'*'};
+      }
       let sesion={'data':JSON.parse(sessionStorage.getItem('curentProcess')),'etats':infoOperation,'dataI':''};
      // var newprocess={'operation':sesion.operation,'montant':sesion.montant,'num':sesion.num};
-      
+
+      if(sesion.data.operateur==5){
+        this.articles.push(sesion);
+        sessionStorage.setItem('panier',JSON.stringify(this.articles));
+        console.log(this.articles);
+        if(this.articles.length==1){
+          this.process.push(sesion);
+          
+        }
+      }
+      else{
+        
+           this.process.push(sesion);
+         
+      }
+     
       this.process.push(sesion);
+
       console.log(sesion.etats.id);
       sessionStorage.removeItem('curentProcess');
       var operateur=sesion.data.operateur;
@@ -76,9 +110,9 @@ export class AccueilComponent implements OnInit {
                   }
                   default:break;
                 }
-                   break ;              
+                   break ;
         }
-        
+
         case 2:{
              var operation=sesion.data.operation;
 
@@ -104,8 +138,8 @@ export class AccueilComponent implements OnInit {
                        break;
                 }
                 default :break;
-              }  
-               break ;                
+              }
+               break ;
         }
 
        case 4:{
@@ -133,7 +167,8 @@ export class AccueilComponent implements OnInit {
 
        case 5:{
              var operation=sesion.data.operation;
-
+         console.log(sesion);
+         console.log('Willa');
              switch(operation){
               case 1:{
                    this.cashInWizall(sesion);
@@ -167,16 +202,22 @@ export class AccueilComponent implements OnInit {
 
 /******************************************************************************************************/
 
-
+   totalpanier(){
+		  let total=0;
+		  for(let i=0;i<this.articles.length;i++){
+			 total+=this.articles[i].data.prix*this.articles[i].data.quantite;
+			 }
+			return total;
+      }
   deposer(objet:any){
 
-    let requete = "1/"+objet.data.montant+"/"+objet.data.num ;  
+    let requete = "1/"+objet.data.montant+"/"+objet.data.num ;
 
     if (this.repeatedInLastFifteen('om-depot', requete)==1){
       objet.etats.etat=true;
       objet.etats.load='terminated';
       objet.etats.color='red';
-      objet.etats.errorCode='r'; 
+      objet.etats.errorCode='r';
       return 0 ;
     }
 
@@ -188,16 +229,16 @@ export class AccueilComponent implements OnInit {
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='0'; 
+               objet.etats.errorCode='0';
             }else
             if(resp._body.match('-12')){
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='-12'; 
-            } 
+               objet.etats.errorCode='-12';
+            }
             else
-           
+
            setTimeout(()=>{
               this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
                 var donnee=rep._body.trim().toString();
@@ -211,8 +252,8 @@ export class AccueilComponent implements OnInit {
                   if(donnee!='-1'){
                      objet.etats.etat=true;
                      objet.etats.load='terminated';
-                     objet.etats.color='red'; 
-                     objet.etats.errorCode=donnee; 
+                     objet.etats.color='red';
+                     objet.etats.errorCode=donnee;
                    }else{
                         var periodicVerifier = setInterval(()=>{
                         this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
@@ -229,21 +270,21 @@ export class AccueilComponent implements OnInit {
                              objet.etats.etat=true;
                              objet.etats.load='terminated';
                              objet.etats.color='red';
-                             objet.etats.errorCode=donnee; 
+                             objet.etats.errorCode=donnee;
                              clearInterval(periodicVerifier) ;
                             }
                           }
                         });
                         },2000);
-                   } 
+                   }
                 }
               });
 
            },5000);
       }
       else{
-        console.log("error") ; 
-        
+        console.log("error") ;
+
         }
     });
 
@@ -253,35 +294,35 @@ export class AccueilComponent implements OnInit {
 /******************************************************************************************************/
 
    retirer(objet:any){
-    let requete = "2/"+objet.data.numclient+"/"+objet.data.montant ;    
+    let requete = "2/"+objet.data.numclient+"/"+objet.data.montant ;
 
     if (this.repeatedInLastFifteen('om-retrait', requete)==1){
       objet.etats.etat=true;
       objet.etats.load='terminated';
       objet.etats.color='red';
-      objet.etats.errorCode='r'; 
-      return 0 ;    
+      objet.etats.errorCode='r';
+      return 0 ;
     }
 
     this.omService.requerirControllerOM(requete).then( resp => {
       if (resp.status==200){
 
         console.log("For this 'retrait', we just say : "+resp._body) ;
-      
+
         if(resp._body.trim()=='0'){
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
-           objet.etats.errorCode='0'; 
+           objet.etats.errorCode='0';
         }else
             if(resp._body.match('-12')){
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='-12'; 
-            } 
+               objet.etats.errorCode='-12';
+            }
             else
-            
+
            setTimeout(()=>{
 
               this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
@@ -298,7 +339,7 @@ export class AccueilComponent implements OnInit {
                    objet.etats.etat=true;
                    objet.etats.load='terminated';
                    objet.etats.color='red';
-                   objet.etats.errorCode=donnee; 
+                   objet.etats.errorCode=donnee;
                    clearInterval(periodicVerifier) ;
                   }else{
                       var periodicVerifier = setInterval(()=>{
@@ -316,7 +357,7 @@ export class AccueilComponent implements OnInit {
                            objet.etats.etat=true;
                            objet.etats.load='terminated';
                            objet.etats.color='red';
-                           objet.etats.errorCode=donnee; 
+                           objet.etats.errorCode=donnee;
                            clearInterval(periodicVerifier) ;
                           }
                         }
@@ -329,13 +370,13 @@ export class AccueilComponent implements OnInit {
            },20000);
       }
       else{
-        console.log("error") ; 
-        
+        console.log("error") ;
+
         }
     });
 
   }
-  
+
 /******************************************************************************************************/
 
 
@@ -353,14 +394,14 @@ export class AccueilComponent implements OnInit {
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
-           objet.etats.errorCode='0'; 
+           objet.etats.errorCode='0';
         }else
             if(resp._body.match('-12')){
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='-12'; 
-            } 
+               objet.etats.errorCode='-12';
+            }
             else
 
            setTimeout(()=>{
@@ -379,7 +420,7 @@ export class AccueilComponent implements OnInit {
                    objet.etats.etat=true;
                    objet.etats.load='terminated';
                    objet.etats.color='red';
-                   objet.etats.errorCode=donnee; 
+                   objet.etats.errorCode=donnee;
                    clearInterval(periodicVerifier) ;
                   }else
                 var periodicVerifier = setInterval(()=>{
@@ -396,7 +437,7 @@ export class AccueilComponent implements OnInit {
                      objet.etats.etat=true;
                      objet.etats.load='terminated';
                      objet.etats.color='red';
-                     objet.etats.errorCode=donnee; 
+                     objet.etats.errorCode=donnee;
                      clearInterval(periodicVerifier) ;
                   }
                 });
@@ -405,8 +446,8 @@ export class AccueilComponent implements OnInit {
              },5000);
         }
       else{
-        console.log("error") ; 
-        
+        console.log("error") ;
+
         }
     });
 
@@ -418,7 +459,7 @@ export class AccueilComponent implements OnInit {
 
   retraitCpteRecep(objet:any){
 
-    let requete = "4/"+objet.data.numclient+"/"+objet.data.montant;  
+    let requete = "4/"+objet.data.numclient+"/"+objet.data.montant;
     if (this.repeatedInLastFifteen('om-retraitcptercpt', requete)==1)
            requete = requete+'R' ;
 
@@ -432,7 +473,7 @@ export class AccueilComponent implements OnInit {
         }
       }
       else
-        console.log("error") ; 
+        console.log("error") ;
     });
   }
 
@@ -454,14 +495,14 @@ export class AccueilComponent implements OnInit {
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='0'; 
+               objet.etats.errorCode='0';
             }else
             if(resp._body.trim()=='-12'){
                objet.etats.etat=true;
                objet.etats.load='terminated';
                objet.etats.color='red';
-               objet.etats.errorCode='-12'; 
-            } 
+               objet.etats.errorCode='-12';
+            }
             else
            setTimeout(()=>{
               this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
@@ -476,8 +517,8 @@ export class AccueilComponent implements OnInit {
                   if(donnee!='-1'){
                      objet.etats.etat=true;
                      objet.etats.load='terminated';
-                     objet.etats.color='red'; 
-                     objet.etats.errorCode=donnee; 
+                     objet.etats.color='red';
+                     objet.etats.errorCode=donnee;
                    }else{
                         var periodicVerifier = setInterval(()=>{
                         this.omService.verifierReponseOM(resp._body.trim().toString()).then(rep =>{
@@ -494,21 +535,21 @@ export class AccueilComponent implements OnInit {
                              objet.etats.etat=true;
                              objet.etats.load='terminated';
                              objet.etats.color='red';
-                             objet.etats.errorCode=donnee; 
+                             objet.etats.errorCode=donnee;
                              clearInterval(periodicVerifier) ;
                             }
                           }
                         });
                         },2000);
-                   } 
+                   }
                 }
               });
 
            },5000);
       }
       else{
-        console.log("error") ; 
-        
+        console.log("error") ;
+
         }
     });
 
@@ -520,7 +561,7 @@ export class AccueilComponent implements OnInit {
 
   validrechargementespece(objet:any){
     this.postcashwebservice.rechargementespece('00221'+objet.data.telephone+'',''+objet.data.montant).then(postcashwebserviceList => {
-      
+
       if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
             objet.etats.etat=true;
             objet.etats.load='terminated';
@@ -537,14 +578,14 @@ export class AccueilComponent implements OnInit {
               },
 
             },
-          } ;        
+          } ;
       }else{
             objet.etats.etat=true;
             objet.etats.load='terminated';
             objet.etats.color='red';
       }
     });
-    
+
   }
 
 
@@ -552,7 +593,7 @@ export class AccueilComponent implements OnInit {
 
 
   validateachatjula(objet:any){
-     this.postcashwebservice.achatjula(objet.data.montant+'',objet.data.nbcarte+'').then(postcashwebserviceList => {        
+     this.postcashwebservice.achatjula(objet.data.montant+'',objet.data.nbcarte+'').then(postcashwebserviceList => {
         if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
         let montant = objet.data.nbcarte * objet.data.montant ;
          objet.dataI = {
@@ -578,7 +619,7 @@ export class AccueilComponent implements OnInit {
              objet.etats.color='red';
         }
       });
-      
+
   }
 
 
@@ -605,11 +646,11 @@ export class AccueilComponent implements OnInit {
      objet.etats.color='green';
       /*this.detailfacturepostcash = null;
       console.log('Police et Numero Facture : '+objet.data.police+'-'+objet.data.numfacture);
-      this.postcashwebservice.detailfacturesenelec(objet.data.police,objet.data.numfacture.toString()).then(postcashwebserviceList => { 
+      this.postcashwebservice.detailfacturesenelec(objet.data.police,objet.data.numfacture.toString()).then(postcashwebserviceList => {
         this.detailfacturepostcash = postcashwebserviceList;
         console.log(postcashwebserviceList);
-      }); 
-      */   
+      });
+      */
   }
 
 
@@ -617,7 +658,7 @@ export class AccueilComponent implements OnInit {
 
 
   validateachatcodewoyofal(objet:any){
-      
+
       this.postcashwebservice.achatcodewoyofal(objet.data.montant+'',objet.data.compteur+'').then(postcashwebserviceList => {
         if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
         objet.dataI = {
@@ -636,7 +677,7 @@ export class AccueilComponent implements OnInit {
           objet.etats.etat=true;
           objet.etats.load='terminated';
           objet.etats.color='green';
-          
+
         }else{
           objet.etats.etat=true;
           objet.etats.load='terminated';
@@ -649,15 +690,20 @@ export class AccueilComponent implements OnInit {
 
 
   finprocess(etat:any,imprime:any){
+      if(etat.data.operateur==5){
+          this.router.navigate(['/accueil','panier']);
+        }
      if(etat.etats.etat==true){ 
+       
+     if(etat.etats.etat==true){
 
        if(etat.data.operateur!=2 && etat.etats.color=='green'){
-        
+
   			 sessionStorage.setItem('dataImpression', JSON.stringify(imprime));
   			 this.router.navigate(['accueil']);
   			 setTimeout(()=>this.router.navigate(['accueil/impression']),100);
         }
-  		 
+
      	   this.process.splice(etat.etats.id,1);
          for (let i=0 ; i<this.process.length ; i++){
           if(this.process[i].etats.id > etat.etats.id)
@@ -665,6 +711,7 @@ export class AccueilComponent implements OnInit {
          }
     	   console.log(etat.etats.id);
     }
+  }
   }
 
 
@@ -680,7 +727,7 @@ export class AccueilComponent implements OnInit {
         let typedebouquet = "" ;
         console.log(response);
         if(response.response=="ok"){
-         
+
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='green';
@@ -721,11 +768,11 @@ export class AccueilComponent implements OnInit {
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
-           objet.etats.errorCode='0'; 
+           objet.etats.errorCode='0';
       }
 
       });
-      
+
   }
 
 /******************************************************************************************************/
@@ -758,15 +805,15 @@ export class AccueilComponent implements OnInit {
           objet.etats.etat=true;
           objet.etats.load='terminated';
           objet.etats.color='green';
-          
+
         }else{
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
-           objet.etats.errorCode='0'; 
+           objet.etats.errorCode='0';
         }
 
-      }); 
+      });
   }
 
 
@@ -799,7 +846,7 @@ export class AccueilComponent implements OnInit {
            objet.etats.etat=true;
            objet.etats.load='terminated';
            objet.etats.color='red';
-           objet.etats.errorCode='0'; 
+           objet.etats.errorCode='0';
         }
     });
   }
@@ -808,15 +855,31 @@ export class AccueilComponent implements OnInit {
 /******************************************************************************************************/
 
     cashInWizall(objet : any){
+      console.log('cashInWizall');
+      this.wizallwebservice.intouchCashin("test 1", objet.data.num, objet.data.montant).then( response =>{
+        console.log(response)
+      });
     }
 
     cashOutWizall(objet : any){
+      console.log('cashOutWizall');
+      this.wizallwebservice.intouchCashout("test 1", objet.data.num, objet.data.montant).then( response =>{
+        console.log(response)
+      });
     }
 
     payerSDEWizall(objet : any){
+      console.log('payerSDEWizall');
+      this.wizallwebservice.intouchPayerFactureSde(objet.data.montant, objet.data.refclient, objet.data.refFacture).then( response =>{
+        console.log(response)
+      });
     }
 
     payerSenelecWizall(objet : any){
+      console.log('payerSenelecWizall');
+      this.wizallwebservice.intouchPayerFactureSenelec(objet.data.montant, objet.data.police, objet.data.numfacture).then( response =>{
+        console.log(response)
+      });
     }
 
 
@@ -836,7 +899,7 @@ export class AccueilComponent implements OnInit {
       for (let i=0 ; i<omOps.length ; i++){
         if (omOps[i].requete==incomingRequest){
           let ilYa15Minutes = today - this.quinzeMinutes;
-          
+
           let diff =  today - omOps[i].tstamp  ;
 
 //          console.log("Diff vaut "+diff) ;
@@ -845,13 +908,13 @@ export class AccueilComponent implements OnInit {
             return 1 ;
           }else{
             omOps[i].tstamp = today ;
-            localStorage.setItem(operation, JSON.stringify(omOps) );            
+            localStorage.setItem(operation, JSON.stringify(omOps) );
             return 0;
           }
         }
       }
       omOps.push({requete:incomingRequest, tstamp:today}) ;
-      localStorage.setItem(operation, JSON.stringify(omOps) );            
+      localStorage.setItem(operation, JSON.stringify(omOps) );
       return 0 ;
     }
   }
@@ -911,7 +974,24 @@ export class AccueilComponent implements OnInit {
   annulerOperation(){
     console.log("Opèration annulée ...") ;
   }
+  color(i:number):string{
+     if(i%2==0){
+       return "border-left:2px solid green";
+     }
+     else{
+       return "border-left:2px solid blue";
+     }
+  }
+  getFormatted( designation) : string {
+    if(designation.length>16)
+      return designation.substring(0, 13)+'...' ;
+
+    return designation ;
+  }
+  currency(prix:number){
+   return Number(prix).toLocaleString();
+  }
 
 
 }
-  
+
