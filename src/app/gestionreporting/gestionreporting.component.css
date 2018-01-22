@@ -67,12 +67,12 @@ label{
     text-transform : capitalize ;
 }
 
-.tab-content{
+/*.tab-content{
     position: relative;
     left: 2rem;
     top: 14rem;
 }
-
+*/
 .form-inline{
     text-align:center;
 }

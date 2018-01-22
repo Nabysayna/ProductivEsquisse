@@ -1,12 +1,13 @@
 
 import {Injectable} from '@angular/core';
 import {SoapService} from "../../soap.service";
+import {Http, Headers, RequestOptions} from "@angular/http";
+
+
 
 export class Demandepret{
-                              plafond:number;
-                        }
-
-
+      plafond:number;
+}
 
 @Injectable()
 export class DemandepretServiceWeb {
@@ -20,8 +21,14 @@ export class DemandepretServiceWeb {
   public resp : string ;
   public filtre : string ;
   private soapService:SoapService;
+  link:string = "http://51.254.200.129/backendprod/horsSentiersBattus/scripts/pretcofina.php";
+  private headers:Headers;
 
-  constructor() {
+  private token : string = JSON.parse(sessionStorage.getItem('currentUser')).baseToken ;
+
+  constructor(private _http: Http) {
+
+        this.headers = new Headers();
 
         this.soapService = new SoapService();
 
@@ -54,7 +61,14 @@ export class DemandepretServiceWeb {
             });
   }
 
-
+   envoyerDemandeDepretCofina(requete:any): Promise<any>{
+        let url = this.link;
+        let reqPara = JSON.stringify( {requestParam : requete, tokenParam : this.token} ) ;
+        let body='requestParam='+reqPara;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
+        let options = new RequestOptions({ headers: headers });
+        return this._http.post( url,body, options).toPromise().then( res => {return res} ).catch(error => {return 'bad' });
+    }
 
 
   public ajoutdemandepret(token:string, montantdemande: number): Promise<any>  {

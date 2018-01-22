@@ -205,6 +205,9 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
 import { CommissionnementComponent } from './commissionnement/commissionnement.component';
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+import { ZoningComponent } from './zoning/zoning.component';
+import { AnnoncesComponent } from './annonces/annonces.component';
+import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesuperviseur.component';
 
 
 
@@ -325,6 +328,9 @@ import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi
     WizallComponent,
     CommissionnementComponent,
     ChallengeresultsComponent,
+    ZoningComponent,
+    AnnoncesComponent,
+    AnnoncesuperviseurComponent,
   ],
   imports: [
     BrowserModule,

@@ -30,14 +30,14 @@
         <div class="monitorindepositetatadminpdvCover"></div>
       </div>
 
-      <div class="panel panel-primary" style="border: none; margin-top: 2rem; display: block; text-align: center">
+      <div class="panel panel-primary" style="border: none; margin-top: -9rem; display: block; text-align: center">
         <div class="panel-heading monitorindepositetatadminpdvTitle center-block" style="margin-bottom: 2rem">
           <h3>IBAN</h3>
         </div>
         <ul class="nav nav-tabs nav-justified" style="text-align: center; display: block; margin: 0 auto">
-          <li class="activeatag active"><a href="#retraitiban" data-toggle="tab">Retrait</a></li>
-<!--           <li class="activeatag active"><a href="#depotiban" data-toggle="tab">Dépot</a></li> -->
-          <li class="activeatag"><a data-toggle="tab">Dépot</a></li>
+          <li class="activeatag"><a href="#retraitiban" data-toggle="tab">Retrait</a></li>
+          <li class="activeatag active"><a href="#depotiban" data-toggle="tab">Dépot</a></li>
+<!--           <li class="activeatag"><a data-toggle="tab">Dépot</a></li>  -->
         </ul>
         <div class="tab-content"  style="margin-top: 2rem">
           <div class="tab-pane fade in center-block" id="retraitiban">
@@ -50,7 +50,7 @@
             <h2 class="alert" *ngIf="euppna"> Vous ne pouvez retirer un montant supèrieur à votre déposit</h2>
           </div>
           <div class="tab-pane fade in active text-center" id="depotiban" >
-<!--             <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button> -->
+            <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button>
             <div class="row"  style="margin-top: 1rem" *ngIf="listedeposit">
               <table class="table table-hover">
                 <thead>
@@ -105,7 +105,7 @@
           </div>
         </div>
         <div>
-          Vous voulez faire un dépot de {{ montantdeposit?currencyFormat(montantdeposit):'?' }} FCFA
+          Vous voulez faire un dépot de <b>{{ montantdeposit?currencyFormat(montantdeposit):'?' }} FCFA </b>
         </div>
       </div>
       <div class="modal-footer">
@@ -268,8 +268,8 @@
           </thead>
           <tbody>
           <tr *ngFor="let item of listedepositsvalide; let i = index " [ngStyle]="{'text-align': 'right', 'color': 'black', 'background-color': item.accepteur=='attente'?'red':(item.accepteur!='attente' && item.etatdemande==0)?'orange':(item.etatdemande==1)?'blue':(item.etatdemande==2)?'pink':'green'}">
-            <td scope="row">{{item.datedemande}}</td>
-            <td style="text-align: right">{{currencyFormat(item.montantdemande)}}</td>
+            <td scope="row" style="text-align: left">{{item.datedemande}}</td>
+            <td style="text-align: left">{{currencyFormat(item.montantdemande)}}</td>
             <td style="text-align: left">{{item.representantbbs}} <span class="pull-right" (click)="imprimerdecharge(item)"><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Imprimer décharge" ><i class="fa fa-print"></i></button></span></td>
           </tr>
           </tbody>

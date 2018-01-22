@@ -674,7 +674,7 @@ export class AccueilComponent implements OnInit {
 
   validnabon(objet:any){
 
-    this.tntCaller.abonner(objet.data.token, objet.data.prenom,objet.data.nom, objet.data.tel,objet.data.cni, objet.data.chip, objet.data.carte, objet.data.duree, objet.data.typedebouquet).then( response =>
+    this.tntCaller.abonner(objet.data.token, objet.data.prenom,objet.data.nomclient, objet.data.tel,objet.data.cni, objet.data.chip, objet.data.carte, objet.data.duree, objet.data.typedebouquet).then( response =>
       {
 
         let typedebouquet = "" ;
@@ -706,7 +706,7 @@ export class AccueilComponent implements OnInit {
               client:{
                 transactionBBS: response.idtransactionbbs,
                 prenom:objet.data.prenom,
-                nom:objet.data.nom,
+                nom:objet.data.nomclient,
                 telephone:objet.data.tel,
                 carte:objet.data.carte,
                 chip:objet.data.chip,
@@ -733,7 +733,7 @@ export class AccueilComponent implements OnInit {
 
    vendreDecodeur(objet:any){
  
-    this.tntCaller.vendreDecodeur('2455668745', objet.data.prenom,objet.data.nomclient,objet.data.tel, objet.data.adresse, objet.data.region, objet.data.cni,objet.data.chip,objet.data.carte, objet.data.duree, objet.data.typedebouquet, objet.data.montant).then( response =>
+    this.tntCaller.vendreDecodeur(objet.data.token, objet.data.prenom,objet.data.nomclient,objet.data.tel, objet.data.adresse, objet.data.region, objet.data.cni,objet.data.chip,objet.data.carte, objet.data.duree, objet.data.typedebouquet, objet.data.montant).then( response =>
       {
         if(response=="ok"){
 

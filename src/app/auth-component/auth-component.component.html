@@ -1,30 +1,33 @@
 
 <div>
     <nav id="nav" class="nav navbar-default" >
-            <img src="assets/Logo-officiel-Sentool.png"/>
-             <form class="form form-inline pull-right" (ngSubmit)="authentificate()" #loginForm="ngForm" *ngIf="phase1">
-                <div class="form-group" style="color: white" *ngIf="!this.fakevalues">Login ou Mot de pass invalide! Veuillez reprendre la saisie.</div>
+
+            <img src="assets/head.png" style="position: absolute; z-index: -1; width: -webkit-fill-available;"/>
+            <img src="assets/logo-sentool.png" style="max-height: 7rem ;" />
+             <form class="form form-inline pull-right" style="position: relative;z-index: 1;" (ngSubmit)="authentificate()" #loginForm="ngForm" *ngIf="phase1">
+                <div class="form-group" style="color: white ;" *ngIf="!this.fakevalues">Login ou Mot de pass invalide! Veuillez reprendre la saisie.</div>
                     <input class="form-group form-control" type="text" [(ngModel)]="this.userName" required autofocus id="userName" name="userName"  placeholder="identifiant"/>
                     <input class="form-group form-control" type="password" [(ngModel)]="this.userPwd" required id="userPwd" name="userPwd" placeholder="password"/>
                     <button class="btn btn-success" [disabled]="!loginForm.valid"><i class="fa fa-check" style="color : white" aria-hidden="true"></i> Valider</button>
 
               </form>
 
-            <form class="form form-inline pull-right" (ngSubmit)="authentificateBySMS()" #loginNextForm="ngForm" *ngIf="!phase1">
-                <div class="form-group" style="color: red" *ngIf="!this.phase2fakevalues">Le code que vous avez saisi est incorrect! Veuillez reprendre la saisie.</div>
+            <form class="form form-inline pull-right" style="position: relative;z-index: 1;" (ngSubmit)="authentificateBySMS()" #loginNextForm="ngForm" *ngIf="!phase1">
+                <div class="form-group" style="color: red ;" *ngIf="!this.phase2fakevalues">Le code que vous avez saisi est incorrect! Veuillez reprendre la saisie.</div>
 
                 <input type="text" [(ngModel)]="this.fromSMS" name="fromSMS" id="fromSMS"  class="form-group form-control" placeholder="SMS code" required autofocus>
 
                 <input class="btn btn-success" value="Se connecter" type="button" type="submit" [disabled]="!loginNextForm.form.valid"  />
             </form>
 
-            <div class="col-sm-6 col-md-6 col-xs-12" style="text-align: center;  margin-top: 7rem ;">
-               <video width="320" height="240" controls>
-                      <source src="nossssss.mp4" type="video/mp4">
+            <div class="col-sm-6 col-md-6 col-xs-12">
+                <video style="width: 100%" controls autoplay>                    
+                      <source src="sentool_annonce.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
                 </video>
             </div>
 
-            <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="col-sm-6 col-md-6 col-xs-12" id="sentooler">
                 <h1 style="color: white ; text-align: center ; margin-top: 7rem ; font-size: 10rem ;">SENTOOL</h1>
                 <h4 style="color: white ; text-align: center ; font-size: 3rem ;"> 
                     <a style="color: white ; cursor: pointer ;" (click)="diagnostiquer()">REINITIALISER <i class="fa fa-refresh" aria-hidden="true"></i> </a> 

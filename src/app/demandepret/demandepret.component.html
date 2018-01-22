@@ -1,22 +1,102 @@
 
 <div class="col-lg-12" >
                         <div class="panel">
-                        <div class="panel-heading">
+<!--                         <div class="panel-heading">
                             DEMANDE DE PRÊT
                         </div>
                         
-                         <div class="col-sm-6 col-xs-12" >
+                          <div class="col-sm-6 col-xs-12" >
                                            <div *ngFor="let demande of demandepret">
                                             Le montant demandé doit être inférieur à  {{demande.plafond}}.FCFA  
                                             </div>
-                                            <input type="number" [(ngModel)]="montantdemande"   name="montantdemande" id="montantdemande" class="form-control" placeholder="Montant demandé" required>
+                                            <input type="number" [(ngModel)]="montantdemande"   name="montantdemande" 
+                                            id="montantdemande" class="form-control" placeholder="Montant demandé" required>
                                             <button (click)="demandeprt()" id="validcharge"  class="btn btn-success" >Demander</button>
                                             <button  class="btn btn-danger" type="reset" >Annuler</button>
                     
                     
+                        </div>
+ -->                    
+
+                        <h3 > <img src="assets/cofina.jpg"> <div style="background-color: cadetblue ; color: black ; text-align: left">FORMULAIRE DEMANDE DE PRET PERSONNE MORALE</div> </h3>
+
+                        <form name="submitForm" (ngSubmit)="envoyerDemande()" #registrationForm="ngForm" >
+
+                          <div style="border : 1px solid black ;">
+                            <div class="form-inline">
+                              <label>Intitulé du compte:</label>
+                              <input type="text" [(ngModel)]="this.intitule" class="form-control" name="intitule">
+                            </div>
+
+                            <div class="form-inline">
+                              <label>Numéro du compte:</label>
+                              <input type="text" class="form-control" [(ngModel)]="this.numcompte" name="numcompte">
+                            </div>
+
+                            <div class="form-inline">
+                              <label>Nom/Prénom du signataire:</label>
+                              <input type="text" class="form-control" [(ngModel)]="this.infoperso" style="width:74% ;" name="infoperso">
+                            </div>
+
+                            <div class="form-inline">
+                              <label>Forme juridique:</label>
+                              <input type="radio" name="formejuridiq" [(ngModel)]="this.formejuridiq" value="entreprise Individuelle">Entreprise Individuelle
+                              <input type="radio" name="formejuridiq" [(ngModel)]="this.formejuridiq" value="sarl">SARL
+                              <input type="radio" name="formejuridiq" [(ngModel)]="this.formejuridiq" value="sa">SA
+                              <input type="radio" name="formejuridiq" [(ngModel)]="this.formejuridiq" value="gie">GIE
+                              <input type="radio" name="formejuridiq" [(ngModel)]="this.formejuridiq" value="autres">Autre(préciser)
+                            </div>
+
+                            <div class="form-inline">
+                              <label>Siége social:</label>
+                              <input type="text" class="form-control"  [(ngModel)]="this.siegesoc" style="width:74% ;" name="siegesoc">
+                            </div>
+
+                            <div class="form-inline">
+                              <label>Portable:</label>
+                              <input type="text" class="form-control"  [(ngModel)]="this.numport" name="numport">
+                              <label>Fixe:</label>
+                              <input type="text" class="form-control"  [(ngModel)]="this.numfixe" name="numfixe">
+                              <label>Email:</label>
+                              <input type="email" class="form-control"  [(ngModel)]="this.email" name="email">
+                            </div>
+                          </div>
+
+                          <div class="row" style="padding-top: 2rem">
+                            <div class="col-sm-6" style="text-align: left ; border:1px solid black ; height: 28rem;">
+                                <h3 style="background-color: red ; color: white">TYPE DE CREDIT</h3>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="Fond de roulement">Fond de roulement <br>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="Investissement">Investissement <br>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="Spot">Spot <br>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="Engagement par signature (caution,...)">Engagement par signature (caution,...) <br>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="Avance sur marché/Avance sur facture/Avance sur bon de commande">Avance sur marché/Avance sur facture/Avance sur bon de commande  <br>
+                                <input type="radio" name="typcredit" [(ngModel)]="this.typcredit" value="autres">Autres 
+                            </div>
+
+                            <div class="col-sm-6" style="border:1px solid black ; height: 28rem;">
+                                <h3 style="background-color: red ; color: white">DEMANDE DE CREDIT</h3>
+                                <div class="form-inline">
+                                  <label>Montant Demandé (FCFA):</label>
+                                  <input type="text"  [(ngModel)]="this.mntdemande" class="form-control" name="mntdemande">
+                                  <label>Durée Demandée (MOIS):</label>
+                                  <input type="text"  [(ngModel)]="this.dureedemande" class="form-control" name="dureedemande">
+                                </div>
+                            </div>
+
+                          </div>
+
+<!--                           <h3 style="background-color: cadetblue ; color: black ; text-align: left">DETAILS SUR LA DEMANDE DE CREDIT</h3> -->
+
+                          <div class="row" style="padding-top: 2rem; border:1px solid black ; height: 28rem;">
+                            <img src="assets/fraispret.png" >
+                          </div>
+
+                          <input class="btn btn-success" value="Envoyer Demande" type="button" type="submit" [disabled]="!registrationForm.form.valid"  />
+
+                        </form>
+
                     </div>
-                    </div>
-                </div>    
+</div>    
 
 <div *ngIf="this.loading">
     <app-loader></app-loader>    

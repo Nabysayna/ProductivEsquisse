@@ -46,8 +46,13 @@ export class AdminpdvMonitoringComponent implements OnInit {
     });
     this.killsetinterval = setInterval(() => {
       this.getEtatDepot();
+
+      this.adminpdvServiceWeb.bilandeposit('azrrtt').then(adminpdvServiceWebList => {
+        this.monitoringAdminpdvDeposit = adminpdvServiceWebList.response;
+      });
+
       console.log('step');
-    }, 10000);
+    }, 5000);
   }
 
   ngOnDestroy() {
