@@ -36,6 +36,7 @@ import { OrangeMoneyComponentComponent } from './orange-money-component/orange-m
 import { PostcashComponent } from './postcash/postcash.component';
 import { TigoCashComponentComponent } from './tigo-cash-component/tigo-cash-component.component';
 import { WizallComponent } from './wizall/wizall.component';
+import { panierComponent } from './panier/panier.component';
 
 //import { WesternUnionComponentComponent } from './western-union-component/western-union-component.component';
 
@@ -97,6 +98,7 @@ const appRoutes: Routes = [
                 {path: 'impression', component: ImpressionComponent},
                 {path: 'Guide_utilisation', component: GuideUserCaisseComponent},
                 {path: 'gestionnaire', component: GestionnaireComponent},
+                {path: 'panier', component: panierComponent},
     		]
     },
     { path: 'accueiladmmpdv', component: AccueilAdminMultiPdvComponent, canActivate: [AuthGuard],

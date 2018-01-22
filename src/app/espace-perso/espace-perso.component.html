@@ -291,8 +291,7 @@
  					</div>			
 
 					<div class="col-sm-6 col-xs-12">
-
-		                <select *ngIf="categoriea!='Autre'" class="form-control input-sm" style="margin-left: 1rem ;" [(ngModel)]="categoriea" >
+		                <select *ngIf="categoriea!='Autre'" (change)="descriptionarticle(categoriea)" class="form-control input-sm" style="margin-left: 1rem ;" [(ngModel)]="categoriea" >
 		                    <option >--- Catégorie ---</option>
 		                    <option *ngFor="let categorie of categories">{{categorie}}</option>
 		                    <option >Autre</option>
@@ -300,16 +299,18 @@
 						<input type="text" *ngIf="categoriea=='Autre'" class="form-control input-sm" placeholder="Entrez la catégorie de l'article" required>
 
 						<input type="text" [(ngModel)]="this.designationa"   name="designationa" id="designationa" class="form-control" placeholder="designation de l'article" required>
-
-						<input type="text" [(ngModel)]="this.descriptiona"   name="descriptiona" id="descriptiona" class="form-control" placeholder="Petite description de l'article" required>
-
-			            <input type="number" style="display : initial; max-width: 19rem;" [(ngModel)]="this.prixa"   name="prixa" id="prixa" class="form-control" placeholder="prix de l'article" required><button (click)="reduirePrix(prixa)" class="btn btn-success">Appliquer tarif réductionnel</button>
+                        <div class="row">
+							<div class="col-md-4 col-xs-4" *ngFor="let descrip of descriptionsvalues">
+								<input type="text" placeholder="{{descrip}}" class="form-control" />
+							</div>
+                        </div>
+			            <input type="number" style="display : initial; max-width: 19rem;pull-left" [(ngModel)]="this.prixa"   name="prixa" id="prixa" class="form-control" placeholder="prix de l'article" required><!--<button (click)="reduirePrix(prixa)" class="btn btn-success">Appliquer tarif réductionnel</button>-->
 
 			            <input type="number" [(ngModel)]="this.stocka"   name="stocka" id="stocka" class="form-control" placeholder="Quantité en stock" required>	            
 
 						 <a class="btn btn-success" type="button" (click)="ajouter()">Ajouter</a>
 
-						  <a type="reset" class="btn btn-danger"  (click)="annuler()">Annuler</a>
+						 <a type="reset" class="btn btn-danger"  (click)="annuler()">Annuler</a>
 					</div>		
 				</div>		
 				 <div  *ngIf="addtype=='ptiteannonce'">

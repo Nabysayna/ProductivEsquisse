@@ -138,10 +138,25 @@
       	<div class="col-sm-8" style="padding-left: 12rem ;">
       		<div class="row descripteur">{{currentArticle.description}}</div>
       		<div class="row prizer">Prix: {{currentArticle.prix}} fcfa</div>
-      		<div class="row commandeur" > <input type="number" name="qtecmd"/> <button>Commander</button> </div>
-      		<div class="row designateur">{{currentArticle.designation}}</div>
-      		<div class="row sharer">Partager ce produit</div>
-      		<div class="row"></div>
+      		<div class="row commandeur" > <input  type="number" value="1" min="1" name="qtecmd"/> <button (click)="ajouter_au_panier(currentArticle)">Ajouter Au Panier</button> </div>
+      	    <div class="row">
+			
+				<img style="margin-top:10px;width:100%" class="col-lg-8 col-md-8" src=".././assets/bar-mag.png" alt="image" />
+				  <div style="margin-top:5px;margin-bottom:5px;color:#1071B7;text-align:center" class="row designateur col-md-12 col-lg-12"><b style="">{{currentArticle.designation}}</b></div>
+				<img style="width:100%" class="col-lg-8 col-md-8" src="../../assets/bar-mag.png" alt="image" />
+				<div style="margin-top:30px;text-align:left" class="row sharer col-md-10 col-lg-10"><i style="color:#0033ff">Partager ce produit</i></div>
+				<div class="col-md-offset-3 col-lg-offset-3 col-lg-7 col-md-7">
+					<div class="row" style="margin-top:20px">
+						<a title="facebook" style="margin:5px" href="#" ><i class="fa fa-facebook-official color"  aria-hidden="true"></i></a>
+						<a title="twitter" style="margin:5px" href="#" ><i class="fa fa-twitter color" aria-hidden="true"></i></a>
+						<a title="google+" style="margin:5px" href="#" ><i class="fa fa-google-plus-square color" aria-hidden="true"></i></a>
+						<a title="linkedin"style="margin:5px" href="#" ><i class="fa fa-linkedin color" aria-hidden="true"></i></a>
+						<!--4837 lastone 4831 next =>4838-->
+						
+					 </div>
+				</div>
+			
+      		</div>
         </div>
 
       </div>

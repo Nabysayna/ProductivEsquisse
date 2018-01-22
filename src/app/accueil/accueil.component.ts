@@ -6,6 +6,15 @@ import { TntServiceWeb, TntResponse } from '../webServiceClients/Tnt/Tnt.service
 import { TigoCashService } from '../webServiceClients/Tigocash/tigocash.service';
 import {WizallWebService} from "../webServiceClients/Wizall/wizall.service";
 
+class Article {
+  public id:number;
+  public nomImg:string;
+  public designation:string;
+  public description:string;
+  public prix:number;
+  public quantite:number;
+}
+
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
@@ -13,6 +22,7 @@ import {WizallWebService} from "../webServiceClients/Wizall/wizall.service";
   providers: [PostCashWebService, WizallWebService]
 })
 export class AccueilComponent implements OnInit {
+  articles=[];
   process=[];
    quinzeMinutes = 900000;
 //  quinzeMinutes = 15000;
@@ -47,11 +57,34 @@ export class AccueilComponent implements OnInit {
     setInterval(()=>{
 
     if(sessionStorage.getItem('curentProcess')!="" && sessionStorage.getItem('curentProcess')!=undefined){
-      let infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':'', 'errorCode':'*'};
+      let mag=JSON.parse(sessionStorage.getItem('curentProcess')).operateur;
+      let infoOperation:any;
+     if(mag==5){
+          infoOperation={'etat':false,'id':this.process.length,'load':'fa fa-shopping-cart fa-2x pull-left','color':'', 'errorCode':'*'};
+      }
+     else{
+           infoOperation={'etat':false,'id':this.process.length,'load':'loader','color':'', 'errorCode':'*'};
+      }
       let sesion={'data':JSON.parse(sessionStorage.getItem('curentProcess')),'etats':infoOperation,'dataI':''};
      // var newprocess={'operation':sesion.operation,'montant':sesion.montant,'num':sesion.num};
 
+      if(sesion.data.operateur==5){
+        this.articles.push(sesion);
+        sessionStorage.setItem('panier',JSON.stringify(this.articles));
+        console.log(this.articles);
+        if(this.articles.length==1){
+          this.process.push(sesion);
+          
+        }
+      }
+      else{
+        
+           this.process.push(sesion);
+         
+      }
+     
       this.process.push(sesion);
+
       console.log(sesion.etats.id);
       sessionStorage.removeItem('curentProcess');
       var operateur=sesion.data.operateur;
@@ -169,7 +202,13 @@ export class AccueilComponent implements OnInit {
 
 /******************************************************************************************************/
 
-
+   totalpanier(){
+		  let total=0;
+		  for(let i=0;i<this.articles.length;i++){
+			 total+=this.articles[i].data.prix*this.articles[i].data.quantite;
+			 }
+			return total;
+      }
   deposer(objet:any){
 
     let requete = "1/"+objet.data.montant+"/"+objet.data.num ;
@@ -651,6 +690,11 @@ export class AccueilComponent implements OnInit {
 
 
   finprocess(etat:any,imprime:any){
+      if(etat.data.operateur==5){
+          this.router.navigate(['/accueil','panier']);
+        }
+     if(etat.etats.etat==true){ 
+       
      if(etat.etats.etat==true){
 
        if(etat.data.operateur!=2 && etat.etats.color=='green'){
@@ -667,6 +711,7 @@ export class AccueilComponent implements OnInit {
          }
     	   console.log(etat.etats.id);
     }
+  }
   }
 
 
@@ -928,6 +973,23 @@ export class AccueilComponent implements OnInit {
 
   annulerOperation(){
     console.log("Opèration annulée ...") ;
+  }
+  color(i:number):string{
+     if(i%2==0){
+       return "border-left:2px solid green";
+     }
+     else{
+       return "border-left:2px solid blue";
+     }
+  }
+  getFormatted( designation) : string {
+    if(designation.length>16)
+      return designation.substring(0, 13)+'...' ;
+
+    return designation ;
+  }
+  currency(prix:number){
+   return Number(prix).toLocaleString();
   }
 
 

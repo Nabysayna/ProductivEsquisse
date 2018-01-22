@@ -144,6 +144,7 @@ import { CoursierComponent } from './coursier/coursier.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
+import { panierComponent } from './panier/panier.component';
 
 import { GeomapComponentComponent } from './geomap-component/geomap-component.component';
 
@@ -233,6 +234,7 @@ import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/
     DemandepretComponent,
     GestionreportingComponent,
     SoldecompteComponent,
+    panierComponent,
 
     ImpressionComponent,
     ImpressionadminpdvComponent,
