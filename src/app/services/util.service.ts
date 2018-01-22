@@ -5,8 +5,8 @@ import {Http, Headers} from "@angular/http";
 export class UtilService {
 
   //private link = "https://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
-  private link = "http://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
-  //private link = "http://localhost/backup-sb-admin/backend-SB-Admin-BS4-Angular-4/index.php";
+  //private link = "http://abonnement.bbstvnet.com/crmbbs/backend-SB-Admin-BS4-Angular-4/index.php";
+  private link = "http://localhost/backup-sb-admin/backend-SB-Admin-BS4-Angular-4/index.php";
   private headers = new Headers();
   private basetoken:any;
 
@@ -88,6 +88,24 @@ export class UtilService {
     return this._http.post(url, params, {headers:this.headers})
       .map(res => res.json());
   }
+
+  getOnePointSuivicc(data:any){
+    let url = this.link+"/apiplatform/getdetailonepointsuivisentool";
+    let datas = JSON.stringify({token:this.basetoken, data:data});
+    let params = 'params='+datas;
+    return this._http.post(url, params, {headers:this.headers})
+      .map(res => res.json());
+  }
+
+  getDetailOnePointSuivicc(data:any){
+    let url = this.link+"/apiplatform/getdetailonepointsuivicc";
+    let datas = JSON.stringify({token:this.basetoken, data:data});
+    let params = 'params='+datas;
+    return this._http.post(url, params, {headers:this.headers})
+      .map(res => res.json());
+  }
+
+
 
 
 }

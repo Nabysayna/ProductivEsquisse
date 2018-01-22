@@ -67,6 +67,7 @@ import {GuideUserCaisseComponent} from "./guideusercaisse/guideusercaisse.compon
 import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersuperviseur.component";
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
 
   //
 
@@ -181,7 +182,7 @@ const appRoutes: Routes = [
                 children: [
                     { path: 'challenge', component: ChallengeresultsComponent },
                     { path: 'commissionnement', component: CommissionnementComponent },
-                    { path: 'dashboard', component: AdminpdvDashboardComponent },
+                    { path: 'dashboard', component: AdminpdvDashboardTestComponent },
                     { path: 'monitoring', component: AdminpdvMonitoringComponent },
                     { path: 'parametrecompte', component: AdminpdvparametrecompteComponent },
                     { path: 'reclamation', component: AdminpdvStatusReclamationComponent },
@@ -189,11 +190,10 @@ const appRoutes: Routes = [
                     { path: 'comptabilite', component: ComptabiliteComponent },
                     { path: 'CRM', component: CrmComponent },
                     { path: 'consulterpret', component: ConsulterpretComponent },
-                    { path: '', component: AdminpdvDashboardComponent },
-                    {path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
-                    {path: 'gestionnaire', component: GestionnaireComponent},
-                    {path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
-
+                    { path: '', component: AdminpdvDashboardTestComponent },
+                    { path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
+                    { path: 'gestionnaire', component: GestionnaireComponent},
+                    { path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
                 ]
             }
         ]

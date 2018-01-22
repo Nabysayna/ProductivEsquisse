@@ -1,0 +1,95 @@
+<div id="page-wrapper" class="text-center">
+
+    <div class="row" style="margin-bottom: 1rem ; ">
+      <div class="col-sm-12" style="margin-top: -8rem ;">
+        <div class="panel-heading" style="background-color: #337ab7; color: white">
+          <h1>Dashboard</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="adminpdvDashboardNbreReclVente" style="margin-bottom: 3rem ;  margin-top: 19rem ;">
+        <div class="col-sm-4">
+            <div class="panel adminpdvDashboardNbreReclVente">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-microphone fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminpdvDashboardNbreReclVente.nbreclamations}}</div>
+                            <div>Nouvelles Réclamations!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel adminpdvDashboardNbreReclVente">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-check-circle-o fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">{{adminpdvDashboardNbreReclVente.nboperations}}</div>
+                          <div>Opérations effectuées!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel adminpdvDashboardNbreReclVente">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">{{adminpdvDashboardNbreReclVente.nbarticlesvendus}}</div>
+                          <div>Articles vendus ecom!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="datapointrecup" style="background-color: white;">
+      <h5 class="card-header card-success adminpdvDashboardTitle">
+        <i class="fa fa-bar-chart-o fa-fw"></i>Montant des Transactions par intervalle
+        <input type="date" [(ngModel)]="suivionepointSelectionintervalledateinit" style="margin-right: 0.5rem"/> à <input type="date" [(ngModel)]="suivionepointSelectionintervalledatefinal"  style="margin-left: 0.5rem; margin-right: 1rem" />
+        <button type="button" class="btn btn-primary btn-sm" (click)="suivionepointIntervalle()" [disabled]="suivionepointSelectionintervalledateinit>suivionepointSelectionintervalledatefinal || suivionepointSelectionintervalledateinit==undefined || suivionepointSelectionintervalledatefinal==undefined " ><i class="fa fa-search" aria-hidden="true"></i></button>
+      </h5>
+      <div class="col-sm-4">
+        <a style="cursor: pointer; text-align: left" [ngClass]="{'list-group-item': true, 'list-group-item-action': true, 'active': id_gerant_selectionne==-1}" (click)="suivionepointSelectionGerant(-1)">
+          All ({{touslesgerants.length}} Gérants)
+        </a>
+        <li *ngFor="let item of touslesgerants; let i = index " [ngClass]="{'list-group-item': true, 'list-group-item-action': true, 'active': id_gerant_selectionne==item.id_gerant}">
+          <p style="cursor: pointer; text-align: left" (click)="test(); suivionepointSelectionGerant(item.id_gerant)">
+            Gérant: {{item.nom_gerant}}, {{item.telephone}}
+            <br>Last connection: {{item.last_connection}}.
+          </p>
+        </li>
+      </div>
+      <div class="col-sm-8">
+        <div *ngIf="touslesjours.length!=0 && lineChartData.length!=0 && lineChartLabels.length!=0">
+          <canvas baseChart #baseChart="base-chart"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType" ></canvas>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div *ngIf="this.loading">
+    <app-loader></app-loader>
+</div>
+
+
+

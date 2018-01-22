@@ -206,6 +206,7 @@ import { CommissionnementComponent } from './commissionnement/commissionnement.c
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
 import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
+import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
 
 
 
@@ -319,7 +320,7 @@ import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
     FiltresouszonesupplierPipe,
     FiltrezonesupplierPipe,
     FirstlogComponent,
-
+    AdminpdvDashboardTestComponent,
     GestionnaireComponent,
     GuideUserCaisseComponent,
     GuideUserSuperviseurComponent,
