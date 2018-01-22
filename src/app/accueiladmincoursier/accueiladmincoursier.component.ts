@@ -7,10 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccueiladmincoursierComponent implements OnInit {
 
-	 registredAPIs : string [] = ['ADMIN COURSIER'] ;
-  	 authorisedToUseCRM = false ;
-
-
   constructor() { }
 
   ngOnInit() {

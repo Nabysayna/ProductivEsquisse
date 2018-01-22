@@ -164,9 +164,9 @@ select:focus{
 }
 
 .navbar-default{
-/*  background-color: transparent ;*/
+  background-color: transparent ;
 /*  border-bottom: 1px solid #0F70B7 ;*/
-  background-image: url('/assets/head.png') ;
+ /* background-image: url('/assets/head.png') ;*/
   height: 42rem ;
  }
 
@@ -203,6 +203,10 @@ select:focus{
     border-radius: 2rem;
 }
 
+#inscription {
+  margin-top: 4rem ;
+}
+
 
 #inscription div img{
 /*  margin-top: 12rem ; */
@@ -226,12 +230,12 @@ select:focus{
 #authcomponent{ 
 }
 
-#nav{
+/*#nav{
   margin-top: -74rem;
-}
+}*/
 
 #nav img{
-  max-height: 6rem ;
+
 }
 
 #nav input{
@@ -250,9 +254,13 @@ select:focus{
   margin-left: 1rem ;
 }
 
+#sentooler{
+  margin-top: -5rem ;
+}
+
 @media only screen and (max-width: 500px) {
-  #nav{
+/*  #nav{
     margin-top: -28.5rem;
-  }
+  }*/
 }
 

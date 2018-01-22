@@ -1,0 +1,37 @@
+
+<div id="page-wrapper">
+
+    <div class="row">
+	    <div class="col-xs-12 col-md-12 col-lg-12">
+
+	        <div class="panel panel-default table-responsive" style="margin-top: 6rem;">
+	            <table class="table table-striped" >
+	                <thead>
+	                <tr>
+	                    <th>Date de la demande</th>
+	                    <th>Admin pdv</th>
+	                    <th>Telephone</th>
+	                    <th>Adresse</th>
+	                    <th>Montant demandé</th>
+	                    <th>Etat</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+		                <tr *ngFor="let item of jsonData">
+		                    <td>{{item.date}}</td>
+		                    <td>{{item.admin}}</td>
+		                    <td>{{item.tel}}</td>
+		                    <td>{{item.adresse}}</td>
+		                    <td>{{item.mnt}}</td>
+		                    <td>{{item.etat}}</td>
+		                </tr> 
+	                </tbody>
+
+	                <tfoot>
+	                </tfoot>
+	            </table>
+	        </div>
+	    </div>
+	</div>
+</div>
+

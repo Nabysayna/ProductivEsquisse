@@ -206,9 +206,12 @@ import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminp
 import { CommissionnementComponent } from './commissionnement/commissionnement.component';
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
+
+import { ZoningComponent } from './zoning/zoning.component';
+import { AnnoncesComponent } from './annonces/annonces.component';
+import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesuperviseur.component';
 import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
 import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
-
 
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -329,6 +332,9 @@ import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/
     WizallComponent,
     CommissionnementComponent,
     ChallengeresultsComponent,
+    ZoningComponent,
+    AnnoncesComponent,
+    AnnoncesuperviseurComponent,
   ],
   imports: [
     BrowserModule,

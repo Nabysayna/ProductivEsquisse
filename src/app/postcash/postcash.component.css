@@ -50,7 +50,7 @@ label{
     z-index: 0 ;
     position: relative;
     top : -8rem ;
-    width: 94rem ;
+    width: 98rem ;
     height: 10rem ;
 }
 
@@ -67,6 +67,7 @@ label{
 
 #om-options{
     position: relative;
+    width: 98rem;
     top: -4.7rem;
 }
 

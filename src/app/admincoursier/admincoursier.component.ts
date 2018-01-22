@@ -47,7 +47,8 @@ export class AdmincoursierComponent implements OnInit {
 		this.ecomCaller.listerCoursier(this.token).then( response =>
 		  {
 		    this.loading = false ;
-		    this.coursiers = response; 
+//		    this.coursiers = response; 
+			console.log(response) ;
 		  });     
 
 	}
@@ -106,9 +107,12 @@ export class AdmincoursierComponent implements OnInit {
 		this.loading = true ;
 		this.ecomCaller.listerCommandes(this.token, typeListe).then( response =>
 		  {
+
 		    this.commandealivrer = JSON.parse(response) ;
 		    for(var i =  this.commandealivrer.length - 1; i >= 0; i--){
 		    	let orderedarticles = JSON.parse(this.commandealivrer[i].orderedArticles) ;
+				console.log(orderedarticles) ;
+
 			    for(var j = orderedarticles.length - 1; j >= 0; j--){ 
 			    	this.mergedTabs.push( {cmdid:this.commandealivrer[i].id, fullName:this.commandealivrer[i].fullName, dateCommande:this.commandealivrer[i].dateCommande, tel:this.commandealivrer[i].tel, article : orderedarticles[j]} ) ;
 			    }

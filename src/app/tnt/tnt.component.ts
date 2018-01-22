@@ -12,6 +12,7 @@ import {LAbonnement} from '../tnt/tntmodels';
 import {EFinancierService} from '../tnt/tntservices';
 import {EFinancier} from '../tnt/tntmodels';
 import { TntServiceWeb, TntResponse } from '../webServiceClients/Tnt/Tnt.service';
+import { UtilServiceWeb } from '../webServiceClients/utils/Util.service' ;
 
 @Pipe({name: 'dataToArray'})
 export class DataToArray implements PipeTransform{
@@ -32,7 +33,7 @@ export class TntComponent implements OnInit {
   verifierNumInputValide:boolean = true;
   token : string = JSON.parse(sessionStorage.getItem('currentUser')).baseToken ;
   loading = false ;
-
+  message : string ;
   erreur = false ;
   errorMessage : string ;
 
@@ -100,9 +101,12 @@ export class TntComponent implements OnInit {
   	  	 private nAbonnementService: NAbonnementService,
   		   private location: Location,
          private route:ActivatedRoute,
+         private utilService : UtilServiceWeb,
   	     private router: Router) { }
 
   ngOnInit():void {
+
+    this.retrieveAlerteMessage() ;
 
     this.tntCaller = new TntServiceWeb();
     this.route.params.subscribe( (params : Params) => {
@@ -220,7 +224,7 @@ export class TntComponent implements OnInit {
       typedebouquet=3;
       prix = 28000 ;
     }
-    sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Tnt vente decodeur','operateur':4,'operation':2,'prenom':this.prenomNewClient,'tel':this.telNewClient,adresse:this.adresseNewClient, region:this.regionNewClient, cni:this.cniNewClient,'chip':this.nchipNewClient,'carte':this.ncarteNewClient,'nomclient':this.nomNewClient,'typedebouquet':typedebouquet,'montant':prix}));
+    sessionStorage.setItem('curentProcess',JSON.stringify({'token':this.token,'nom':'Tnt vente decodeur','operateur':4,'operation':2,'prenom':this.prenomNewClient,'tel':this.telNewClient,adresse:this.adresseNewClient, region:this.regionNewClient, cni:this.cniNewClient,'chip':this.nchipNewClient,'carte':this.ncarteNewClient,'nomclient':this.nomNewClient,'typedebouquet':typedebouquet,'montant':prix}));
     this.hidemodaldecodeur();
     this.reinitialiserVariables() ;
 
@@ -231,6 +235,16 @@ export class TntComponent implements OnInit {
        this.modalcarte.hide();
        this.reinitialiserVariables() ;
   
+  }
+
+  retrieveAlerteMessage(){
+    var periodicVerifier = setInterval(()=>{
+    this.utilService.consulterLanceurDalerte().then(rep =>{
+      var donnee=rep._body.trim().toString();
+      if (donnee!='-')
+        this.message=donnee ;
+    });
+    },5000);
   }
 
 

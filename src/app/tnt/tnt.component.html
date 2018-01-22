@@ -44,7 +44,13 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade col-sm-6 col-xs-12 in active" id="home-pills">
-                    <div class="row" *ngIf="this.verifierNumInputValide" >
+
+                      <div class="row" *ngIf="this.verifierNumInputValide" >
+
+                        <marquee style="height: 5rem; background-color: white;">  
+                          <h3 style="color : black; text-transform: capitalize;">{{message}}</h3>
+                        </marquee>  
+
                         <form name="validVerifierNum" (ngSubmit)="validVerifierNum()" #verifiernum="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem; text-align: -webkit-left;">
                             <label for="verifiernuminput"> Numéro chip, Numéro carte ou Téléphone </label>
                             <div class="col-md-8">
@@ -72,7 +78,7 @@
                             <input type="number" [(ngModel)]="this.telNewClient"   name="telNewClient" id="telNewClient" class="form-control" placeholder="téléphone client" required>
 
                             <label for="nchip">Numéro chip</label>
-                            <input type="number" [(ngModel)]="this.nchipNewClient"   name="nchipNewClient" id="nchipNewClient" class="form-control" placeholder="numéro chip" required>
+                            <input type="number"  [(ngModel)]="this.nchipNewClient"   name="nchipNewClient" id="nchipNewClient" class="form-control" placeholder="numéro chip" required>
 
                             <label for="ncarte">Numéro carte</label>
                             <input type="number" [(ngModel)]="this.ncarteNewClient"   name="ncarteNewClient" id="ncarteNewClient" class="form-control" placeholder="numéro carte" required>

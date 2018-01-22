@@ -20,6 +20,7 @@ import { AdminmultipdvUpdateCautionComponent } from './admin-multi-pdv/admin-mul
 
 import { CommissionnementComponent } from './commissionnement/commissionnement.component';
 
+import { ZoningComponent } from './zoning/zoning.component';
 
 import { ManagerComponent } from './manager/manager.component';
 import { AuthComponentComponent } from './auth-component/auth-component.component';
@@ -60,6 +61,8 @@ import { ConsulterpretComponent } from './consulterpret/consulterpret.component'
 import { FirstlogComponent } from './firstlog/firstlog.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { ChallengeresultsComponent } from './challengeresults/challengeresults.component';
+import { AnnoncesComponent } from './annonces/annonces.component';
+import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesuperviseur.component';
 
 
 import { AdminpdvparametrecompteComponent } from './adminpdv/adminpdv-parametre-compte/adminpdv-parametre-compte.component';
@@ -98,6 +101,7 @@ const appRoutes: Routes = [
                 {path: 'impression', component: ImpressionComponent},
                 {path: 'Guide_utilisation', component: GuideUserCaisseComponent},
                 {path: 'gestionnaire', component: GestionnaireComponent},
+                {path: 'annonce', component: AnnoncesComponent},
                 {path: 'panier', component: panierComponent},
     		]
     },
@@ -112,7 +116,8 @@ const appRoutes: Routes = [
                     { path: 'statusreclamation', component: AdminmultipdvStatusReclamationComponent },
                     { path: 'crediterccc', component: AdminmultipdvCreditationCCComponent  },
                     { path: 'demanderetrait', component: AdminmultipdvDemandeRetraitComponent },
-                    { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent }
+                    { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent },
+                    { path: 'zoning', component: ZoningComponent }
                 ]
             }
         ]
@@ -137,7 +142,7 @@ const appRoutes: Routes = [
             {
                 path: '',
                 children: [
-                    {path: 'ADMIN COURSIER', component: AdmincoursierComponent},
+                    {path: '', component: AdmincoursierComponent},
                     {path: 'E-COMMERCE', component: ECommerceComponent},
                     {path: 'DEMANDEPRET', component: DemandepretComponent},
                     {path: 'GESTIONREPORTING', component: GestionreportingComponent},
@@ -193,9 +198,11 @@ const appRoutes: Routes = [
                     { path: 'CRM', component: CrmComponent },
                     { path: 'consulterpret', component: ConsulterpretComponent },
                     { path: '', component: AdminpdvDashboardTestComponent },
-                    { path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
-                    { path: 'gestionnaire', component: GestionnaireComponent},
-                    { path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
+                    {path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
+                    {path: 'gestionnaire', component: GestionnaireComponent},
+                    {path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
+                    {path: 'annonce', component: AnnoncesuperviseurComponent},
+
                 ]
             }
         ]

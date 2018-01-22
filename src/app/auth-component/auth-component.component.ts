@@ -78,6 +78,8 @@ export class AuthComponentComponent implements OnInit {
     this.loading = true ;
     this.authenticationService.loginPhase2(this.fromSMS+"#"+sessionStorage.getItem('headToken') ).then( access=>
       { 
+        console.log(access) ;
+
        if ( access === 3 ){
           this.router.navigate(['/accueil']); 
         }else 
@@ -105,10 +107,7 @@ export class AuthComponentComponent implements OnInit {
             if ( access === 7 ){
               this.router.navigate(['/accueilcommercial']);              
             }
-             else
-                if ( access === 4 ){
-                  this.router.navigate(['/ADMINCOURSIER']);              
-                }else{
+             else{
                   this.phase2fakevalues = false ;
                   this.fromSMS = ''  ; 
               }  

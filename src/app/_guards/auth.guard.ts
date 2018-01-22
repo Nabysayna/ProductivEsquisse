@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate() {
-         if ( JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==1 ) {
+         if ( JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==1 || JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==4 ) {
             return true;
          }
          sessionStorage.removeItem('currentUser') ;

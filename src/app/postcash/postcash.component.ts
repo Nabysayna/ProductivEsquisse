@@ -339,7 +339,8 @@ export class PostcashComponent implements OnInit {
 
     this.postcashwebservice.rechargerapido('00221'+this.telephone+'',''+this.montant, this.badge).then(postcashwebserviceList => {
       this.loading = false ;
-/*
+      console.log(postcashwebserviceList) ;
+      
       if( (typeof postcashwebserviceList.errorCode != "undefined") && postcashwebserviceList.errorCode == "0" && postcashwebserviceList.errorMessage == ""){
         this.dataImpression = {
           apiservice:'postecash',
@@ -359,8 +360,9 @@ export class PostcashComponent implements OnInit {
       }else{
         this.erreur = true ;
         this.errorMessage = postcashwebserviceList.errorMessage;
+        console.log("Erreur de connexion aux serveurs du réseau partenaire !!") ;
       }
-*/
+
     });
   }
 
