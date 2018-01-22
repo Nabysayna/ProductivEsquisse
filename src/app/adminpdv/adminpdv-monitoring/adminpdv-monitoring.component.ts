@@ -6,6 +6,7 @@ import { AdminpdvServiceWeb } from '../../webServiceClients/Adminpdv/adminpdv.se
 import {UtilService} from "../../services/util.service";
 import {CrmDoorServiceWeb} from "../../webServiceClients/CrmDoor/crmdoor.service";
 import {stringify} from "querystring";
+import {BaseChartDirective} from "ng2-charts";
 
 
 
@@ -43,11 +44,14 @@ export class AdminpdvMonitoringComponent implements OnInit {
     this.adminpdvServiceWeb.bilandeposit('azrrtt').then(adminpdvServiceWebList => {
       this.monitoringAdminpdvDeposit = adminpdvServiceWebList.response;
       this.getEtatDepot();
+    }).then( () => {
+      this.getAlldepotsSup();
     });
     this.killsetinterval = setInterval(() => {
       this.getEtatDepot();
       console.log('step');
     }, 10000);
+
   }
 
   ngOnDestroy() {
@@ -109,13 +113,11 @@ export class AdminpdvMonitoringComponent implements OnInit {
     this._utilService.recupererInfosCC()
       .subscribe(
         data => {
-          console.log(data);
-          console.log('-------');
           this.agentcc = data.response;
         },
         error => alert(error),
         () => {
-          console.log('est testé init getInitDeposit')
+          console.log('est')
         }
       );
   }
@@ -123,11 +125,11 @@ export class AdminpdvMonitoringComponent implements OnInit {
     this._utilService.demandedeposit(data)
       .subscribe(
         data => {
-          console.log(data);
+          console.log('--');
         },
         error => alert(error),
         () => {
-          console.log('est testé init demandedeposit')
+          console.log('est')
         }
       );
   }
@@ -144,7 +146,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
   }
   public validerdeposite(){
     this._crmdoorServiceWeb.validerDemandeDepot(this.montantdeposit, JSON.stringify(this.agentcc), 'attente').then(adminpdvServiceWebList => {
-      console.log(adminpdvServiceWebList);
+      console.log('---------');
       if(adminpdvServiceWebList.errorCode == 0){
         this.demndedeposit({infocc:this.agentcc, infocom:'attente', date:adminpdvServiceWebList.result});
       }
@@ -164,7 +166,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
 
   public showapercudechargeModal(detail:any):void {
     this.viewonedetaildeposit = detail;
-    console.log(this.viewonedetaildeposit);
+    console.log('------------');
     this.apercudechargeModal.show();
     console.log('showapercudechargeModal')
   }
@@ -175,7 +177,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
   }
 
   imprimerdecharge(decharge:any){
-    console.log(decharge);
+    console.log('-----------');
     this.dataImpression = {
       apiservice:'adminpdv',
       service:'faireundepot',
@@ -183,7 +185,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
         client:decharge,
       },
     };
-    console.log(this.dataImpression);
+    console.log('--------');
     sessionStorage.setItem('dataImpression', JSON.stringify(this.dataImpression));
     this.router.navigate(['accueiladmpdv/impressionadminpdv']);
   }
@@ -204,7 +206,72 @@ export class AdminpdvMonitoringComponent implements OnInit {
     console.log('hidevoirplusdedemandeModal')
   }
 
+///////////////////////// LIST DEPOTS //////////////////////////////////////
+  public touslesdepots:any[] = [];
+  public affichelesdepots:any = {jours:[], montant:[]};
 
+  @ViewChild("baseChart3")  chart3: BaseChartDirective;
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels:string[] = [];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
 
+  public barChartData:any[] = [];
+
+  public suiviDepots(depots){
+    this.touslesdepots = depots.map(function(type){
+      return {
+        date_depot: type.daterenflu.date.split('.')[0],
+        date_depot_jour: type.daterenflu.date.split('.')[0].split(' ')[0],
+        montant_depot: JSON.parse(type.infosup).montant,
+      }
+    });
+    let depotjours = this.touslesdepots.map(type => type.date_depot_jour);
+    depotjours.sort();
+
+    let tabjours:string[] = [];
+    let jour:string = depotjours[0];
+    tabjours.push(jour);
+    depotjours.forEach(type => { if(type!=jour){
+      tabjours.push(type);
+      jour = type;
+    }});
+
+    let tabjoursmontant:number[] = [];
+    tabjours.forEach(date => {
+      let montant:number = 0
+      this.touslesdepots.forEach( type=> { if(type.date_depot_jour==date){ montant  += Number(type.montant_depot); } });
+      tabjoursmontant.push(montant);
+    });
+
+    this.affichelesdepots.jours = tabjours;
+    this.affichelesdepots.montant = tabjoursmontant;
+
+    this.barChartLabels = tabjours;
+    this. barChartData = [{data: tabjoursmontant, label: 'Dépots'}];
+  }
+
+  getAlldepotsSup(){
+    this._utilService.getOnePointSuivicc({infoinit:'initmonitoringsup', type:'depots'})
+      .subscribe(
+        data => {
+          if(data.errorCode){
+            console.log('--------')
+            this.suiviDepots(data.message);
+          }
+        },
+        error => alert(error),
+        () => {
+          if(this.chart3 !== undefined){
+            this.chart3.chart.config.data.labels = this.barChartLabels;
+          }
+          this.loading = false;
+        }
+      );
+
+  }
 
 }

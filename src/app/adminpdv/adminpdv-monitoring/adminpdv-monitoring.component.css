@@ -1,5 +1,5 @@
 #page-wrapper{
-    border-style: hidden ;
+//    border-style: hidden ;
 }
 
 
@@ -56,4 +56,9 @@ strong.monitorindepositetatadminpdvText {
   vertical-align:middle;
   display:inline-block;
   line-height:25px; /* on rétablit le line-height */
+}
+
+.panel{
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
 }
