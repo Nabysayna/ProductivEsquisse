@@ -315,6 +315,7 @@ body {
 #encours{
     text-align: center ; 
     padding-top: 5.5rem ;
+    margin-top: 7rem ;
 }
 
 @media screen and (max-width:640px) {
