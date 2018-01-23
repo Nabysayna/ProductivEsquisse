@@ -74,17 +74,12 @@ export class AccueilComponent implements OnInit {
         console.log(this.articles);
         if(this.articles.length==1){
           this.process.push(sesion);
-          
         }
       }
       else{
-        
            this.process.push(sesion);
-         
       }
      
-      this.process.push(sesion);
-
       console.log(sesion.etats.id);
       sessionStorage.removeItem('curentProcess');
       var operateur=sesion.data.operateur;
