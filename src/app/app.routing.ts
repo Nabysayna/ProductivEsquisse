@@ -197,7 +197,7 @@ const appRoutes: Routes = [
                     { path: 'comptabilite', component: ComptabiliteComponent },
                     { path: 'CRM', component: CrmComponent },
                     { path: 'consulterpret', component: ConsulterpretComponent },
-                    { path: '', component: AdminpdvDashboardComponent },
+                    { path: '', component: AdminpdvDashboardTestComponent },
                     {path: 'Guide_utilisation', component: GuideUserSuperviseurComponent},
                     {path: 'gestionnaire', component: GestionnaireComponent},
                     {path: 'impressionadminpdv', component: ImpressionadminpdvComponent},
