@@ -42,6 +42,9 @@ export class CrmComponent implements OnInit {
   checkerRelance : any[] = [] ;
   checkerPromo : any[] = []  ;
 
+  public menuHead = {menuHead1:true, menuHead2:false, menuHead3:false, menuHead4:false, menuHead5:false};
+
+
   constructor(
   		   private location: Location,
          private route:ActivatedRoute,
@@ -51,7 +54,7 @@ export class CrmComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loading = true ;     
+    this.loading = true ;
       this.crmServiceWeb.servicepoint(this.token).then(serviceptserviceList => {
         this.servicepoint = serviceptserviceList;
         this.crmServiceWeb.portefeuille(this.token).then(crmserviceList => {
@@ -60,6 +63,46 @@ export class CrmComponent implements OnInit {
           });
       });
   }
+
+
+  public menuHeadClick(option: number){
+    if(option == 1){
+      this.menuHead.menuHead1 = true;
+      this.menuHead.menuHead2 = false;
+      this.menuHead.menuHead3 = false;
+      this.menuHead.menuHead4 = false;
+      this.menuHead.menuHead5 = false;
+    }
+    if(option == 2){
+      this.menuHead.menuHead1 = false;
+      this.menuHead.menuHead2 = true;
+      this.menuHead.menuHead3 = false;
+      this.menuHead.menuHead4 = false;
+      this.menuHead.menuHead5 = false;
+    }
+    if(option == 3){
+      this.menuHead.menuHead1 = false;
+      this.menuHead.menuHead2 = false;
+      this.menuHead.menuHead3 = true;
+      this.menuHead.menuHead4 = false;
+      this.menuHead.menuHead5 = false;
+    }
+    if(option == 4){
+      this.menuHead.menuHead1 = false;
+      this.menuHead.menuHead2 = false;
+      this.menuHead.menuHead3 = false;
+      this.menuHead.menuHead4 = true;
+      this.menuHead.menuHead5 = false;
+    }
+    if(option == 5){
+      this.menuHead.menuHead1 = false;
+      this.menuHead.menuHead2 = false;
+      this.menuHead.menuHead3 = false;
+      this.menuHead.menuHead4 = false;
+      this.menuHead.menuHead5 = true;
+    }
+  }
+
 
 
   relanceMeth(){
@@ -93,7 +136,7 @@ export class CrmComponent implements OnInit {
   	return JSON.parse(infosop).tel;
   }
 
-  prospect(){ 
+  prospect(){
       this.loading = true ;
 
        this.crmServiceWeb.prospection(this.token).then(crmserviceList => {
@@ -123,7 +166,7 @@ export class CrmComponent implements OnInit {
     if(isChecked){
       this.checkerRelance.push( {unicity :index, customer} ) ;
     }else
-    if ( _.find( this.checkerRelance, { 'unicity': index } ) ) 
+    if ( _.find( this.checkerRelance, { 'unicity': index } ) )
       this.checkerRelance = _.filter( this.checkerRelance, function(o) { return (o.unicity!=index) } );
   }
 
@@ -131,7 +174,7 @@ export class CrmComponent implements OnInit {
     if(isChecked){
       this.checkerPromo.push( {unicity :index, customer} ) ;
     }else
-    if ( _.find( this.checkerPromo, { 'unicity': index } ) ) 
+    if ( _.find( this.checkerPromo, { 'unicity': index } ) )
       this.checkerPromo = _.filter( this.checkerPromo, function(o) { return (o.unicity!=index) } );
   }
 
@@ -142,7 +185,7 @@ export class CrmComponent implements OnInit {
    mail(){}
 
    sms(telephone){
-    let destinataire = '+221'+telephone ; 
+    let destinataire = '+221'+telephone ;
     this.crmServiceWeb.sendSms(this.token, destinataire, this.message).then(crmserviceList => {
       this.childModal.hide();
       //console.log("SMS Sent with status "+crmserviceList) ;
@@ -154,11 +197,11 @@ export class CrmComponent implements OnInit {
 
   detail(){}
 
-  envoyersmsPromo(){   
+  envoyersmsPromo(){
     let destinataires : string ;
     destinataires = '+221'+this.checkerPromo[0].customer.telephone ;
-    
-    for( var i=1 ; i<this.checkerPromo.length ; i++ ){  
+
+    for( var i=1 ; i<this.checkerPromo.length ; i++ ){
       destinataires = destinataires+'#+221'+this.checkerPromo[i].customer.telephone ;
     }
 
@@ -169,7 +212,7 @@ export class CrmComponent implements OnInit {
 
   }
 
-  envoyersmsRelance(){   
+  envoyersmsRelance(){
     let destinataires : string ;
     destinataires = '+221'+this.checkerRelance[0].customer.telephone ;
     for( var i=1 ; i<this.checkerRelance.length ; i++ ){
@@ -189,14 +232,14 @@ export class CrmComponent implements OnInit {
 
 
   @ViewChild('childModal') public childModal:ModalDirective;
- 
+
   public showChildModal(typeSuivi, tel):void {
     this.categMsg = typeSuivi ;
     if (typeSuivi=='single')
       this.choosedCustomerPhone = tel ;
     this.childModal.show();
   }
- 
+
   public hideChildModal():void {
     this.message = '' ;
     this.childModal.hide();

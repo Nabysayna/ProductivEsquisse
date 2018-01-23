@@ -7,12 +7,11 @@
 
           <div class="row" style="margin-bottom: 3rem;">
               <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                  <a class="activeatag active" href="#portefeuille" data-toggle="tab" (click)="prtflle()">Portefeuille</a>
-                  <!--<a class="activeatag" href="#suivi" data-toggle="tab">Suivi</a>-->
-                  <a class="activeatag" href="#relance" data-toggle="tab" (click)="relanceMeth()">Relance</a>
-                  <a class="activeatag" href="#suivi" data-toggle="tab">Promotion</a>
-                  <a class="activeatag" href="#prospection" data-toggle="tab" (click)="prospect()">Prospection</a>
-                  <a class="activeatag" href="#suivicommande" data-toggle="tab" (click)="commandes()">Suivi Commandes</a>
+                  <a href="#portefeuille" data-toggle="tab" [ngClass]="{'activeatag': true, 'active': menuHead.menuHead1}" (click)="menuHeadClick(1); prtflle()">Portefeuille</a>
+                  <a href="#relance" data-toggle="tab" [ngClass]="{'activeatag': true, 'active': menuHead.menuHead2}" (click)="menuHeadClick(2); relanceMeth()">Relance</a>
+                  <a href="#promotion" data-toggle="tab" [ngClass]="{'activeatag': true, 'active': menuHead.menuHead3}" (click)="menuHeadClick(3); promotionMeth()">Promotion</a>
+                  <a href="#prospection" data-toggle="tab" [ngClass]="{'activeatag': true, 'active': menuHead.menuHead4}" (click)="menuHeadClick(4); prospect()">Prospection</a>
+                  <a href="#suivicommande" data-toggle="tab" [ngClass]="{'activeatag': true, 'active': menuHead.menuHead5}" (click)="menuHeadClick(5); commandes()">Suivi Commandes</a>
               </div>
           </div>
 
@@ -50,163 +49,106 @@
                     </tfoot>
 		            </table>
              </div>
-             <!--<div class="tab-pane fade in col-sm-12 col-xs-3" id="suivi">
-                  <div style="margin-left: 30rem; margin-bottom: 3rem;" class="col-xs-6 col-xs-12">
-                     <button  href="#relance" data-toggle="tab" class="btn btn-primary" (click)="relanceMeth()">Relance</button>
-                     <button href="#promotion" data-toggle="tab" class="btn btn-primary" (click)="promotionMeth()">Promotion</button>
-                  </div>
-                  <div class="tab-content">
-                        <div class="tab-pane fade in col-sm-12 col-xs-12" id="relance">
-                            <div class="badge">Relance</div>
-                            <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="relance|filtrerelance:filtre" #frla="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th colspan="3" style="padding-right: 3rem ;">
-                                            Rechercher: <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
-                                        </th>
-                                        <th colspan="2" style="padding-right: 3rem ;">
-                                            <button  class="btn btn-primary" (click)="showChildModal('relancegroupe','')">Envoyer sms</button>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                       <th><p class="adminpdvcrmBorder">Choisir</p></th>
-                                        <th><p class="adminpdvcrmBorder">Nom</p></th>
-                                        <th><p class="adminpdvcrmBorder">Prénom</p></th>
-                                        <th><p class="adminpdvcrmBorder">Téléphone</p></th>
-                                        <th><p class="adminpdvcrmBorder">Service</p></th>
-                                        <th><p class="adminpdvcrmBorder">Echéance</p></th>
-                                        <th><p class="adminpdvcrmBorder">Action</p></th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="this.relance">
-                                    <tr *ngFor="let relance of frla.data ; let i = index " style="color: #337ab7;">
-                                        <td>
-                                            <input type="checkbox" #checkbox (change)="checkThisForRelance(checkbox.checked,relance,i)">
-                                        </td>
-                                        <td>{{ relance.prenom }}</td>
-                                        <td>{{ relance.nom }}</td>
-                                        <td>{{ relance.telephone }}</td>
-                                        <td>{{relance.nomservice}}</td>
-                                        <td>{{relance.echeance.date}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary btn-sm" (click)="showChildModal('single',relance.telephone)">SMS</button>
-                                            <button type="button" class="btn btn-primary btn-sm" (click)="appel()">APPEL</button>
-                                            <button type="button" class="btn btn-primary btn-sm" (click)="mail()">EMAIL</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">
-                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade in col-sm-12 col-xs-12" id="promotion">
-                            <div class="badge">Promotion</div>
-                            <div style="margin-bottom: 3rem;">
-                                <label>Filtrer Par :&lt;!&ndash;  <select class="form-control input-sm" >
-                                  <option>périodicité</option>
-                                  <option >fidélité</option>
-                                  </select> &ndash;&gt;
-                                </label>
-                                <label>Service :
-                                    <select class="form-control input-sm" [(ngModel)]="filtreService">
-                                        <option></option>
-                                        <option  *ngFor="let srv of servicepoint">{{srv.nom}}</option>
-                                    </select>
-                                </label>
-                                <button  class="btn btn-primary" (click)="showChildModal('promogroupe','')">Envoyer sms</button>
-                            </div>
-                            <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="promotion|filtrepromotion:filtre" #fpr="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th colspan="3" style="padding-right: 3rem ;">
-                                            Rechercher: <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th><p class="adminpdvcrmBorder">Choisir</p></th>
-                                        <th><p class="adminpdvcrmBorder">Prénom</p></th>
-                                        <th><p class="adminpdvcrmBorder">Nom</p></th>
-                                        <th><p class="adminpdvcrmBorder">Téléphone</p></th>
-                                        <th><p class="adminpdvcrmBorder">Périodicité/Fidélité</p></th>
-                                        <th><p class="adminpdvcrmBorder">Service</p></th>
+             <div class="tab-pane fade in col-sm-12 col-xs-3" id="relance">
+                  <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="relance|filtrerelance:filtre" #frla="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                      <thead>
+                      <tr>
+                        <th colspan="3" style="padding-right: 3rem ;">
+                          Rechercher: <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
+                        </th>
+                        <th colspan="2" style="padding-right: 3rem ;">
+                          <button  class="btn btn-primary" (click)="showChildModal('relancegroupe','')">Envoyer sms</button>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th><p class="adminpdvcrmBorder">Choisir</p></th>
+                        <th><p class="adminpdvcrmBorder">Nom</p></th>
+                        <th><p class="adminpdvcrmBorder">Prénom</p></th>
+                        <th><p class="adminpdvcrmBorder">Téléphone</p></th>
+                        <th><p class="adminpdvcrmBorder">Service</p></th>
+                        <th><p class="adminpdvcrmBorder">Echéance</p></th>
+                        <th><p class="adminpdvcrmBorder">Action</p></th>
+                      </tr>
+                      </thead>
+                      <tbody *ngIf="this.relance">
+                      <tr *ngFor="let relance of frla.data ; let i = index " style="color: #337ab7;">
+                        <td>
+                          <input type="checkbox" #checkbox (change)="checkThisForRelance(checkbox.checked,relance,i)">
+                        </td>
+                        <td>{{ relance.prenom }}</td>
+                        <td>{{ relance.nom }}</td>
+                        <td>{{ relance.telephone }}</td>
+                        <td>{{relance.nomservice}}</td>
+                        <td>{{relance.echeance.date}}</td>
+                        <td>
+                          <button type="button" class="btn btn-primary btn-sm" (click)="showChildModal('single',relance.telephone)">SMS</button>
+                          <!--<button type="button" class="btn btn-primary btn-sm" (click)="appel()">APPEL</button>
+                          <button type="button" class="btn btn-primary btn-sm" (click)="mail()">EMAIL</button>-->
+                        </td>
+                      </tr>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <td colspan="4">
+                          <mfBootstrapPaginator ></mfBootstrapPaginator>
+                        </td>
+                      </tr>
+                      </tfoot>
+                    </table>
+              </div>
+             <div class="tab-pane fade in col-sm-12 col-xs-12" id="promotion">
+                <div style="margin-bottom: 3rem;">
+                  <label>Filtrer Par :  <select class="form-control input-sm" >
+                    <option>périodicité</option>
+                    <option >fidélité</option>
+                  </select>
+                  </label>
+                  <label>Service :
+                    <select class="form-control input-sm" [(ngModel)]="filtreService">
+                      <option></option>
+                      <option  *ngFor="let srv of servicepoint">{{srv.nom}}</option>
+                    </select>
+                  </label>
+                  <button  class="btn btn-primary" (click)="showChildModal('promogroupe','')">Envoyer sms</button>
+                </div>
+                <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="promotion|filtrepromotion:filtre" #fpr="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
+                  <thead>
+                  <tr>
+                    <th colspan="3" style="padding-right: 3rem ;">
+                      Rechercher: <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th><p class="adminpdvcrmBorder">Choisir</p></th>
+                    <th><p class="adminpdvcrmBorder">Prénom</p></th>
+                    <th><p class="adminpdvcrmBorder">Nom</p></th>
+                    <th><p class="adminpdvcrmBorder">Téléphone</p></th>
+                    <th><p class="adminpdvcrmBorder">Périodicité/Fidélité</p></th>
+                    <th><p class="adminpdvcrmBorder">Service</p></th>
 
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="this.promotion">
-                                    <tr *ngFor="let promotion of fpr.data ; let i = index "  style="color: #337ab7;">
-                                        <td>
-                                            <input type="checkbox" #checkboxprom (change)="checkThisForPromo(checkboxprom.checked,promotion,i)">
-                                        </td>
-                                        <td>{{promotion.prenom}}</td>
-                                        <td>{{promotion.nom}}</td>
-                                        <td>{{promotion.telephone}}</td>
-                                        <td>{{promotion.periofidel}}</td>
-                                        <td>{{promotion.service}}</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">
-                                            <mfBootstrapPaginator ></mfBootstrapPaginator>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-             </div>-->
-            <div class="tab-pane fade in col-sm-12 col-xs-3" id="relance">
-                <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="relance|filtrerelance:filtre" #frla="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="nom" [(mfSortOrder)]="asc" style="width: 100%;">
-                    <thead>
-                    <tr>
-                      <th colspan="3" style="padding-right: 3rem ;">
-                        Rechercher: <input class="form-control adminpdvcrmBorder" [(ngModel)]="filtre"/>
-                      </th>
-                      <th colspan="2" style="padding-right: 3rem ;">
-                        <button  class="btn btn-primary" (click)="showChildModal('relancegroupe','')">Envoyer sms</button>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th><p class="adminpdvcrmBorder">Choisir</p></th>
-                      <th><p class="adminpdvcrmBorder">Nom</p></th>
-                      <th><p class="adminpdvcrmBorder">Prénom</p></th>
-                      <th><p class="adminpdvcrmBorder">Téléphone</p></th>
-                      <th><p class="adminpdvcrmBorder">Service</p></th>
-                      <th><p class="adminpdvcrmBorder">Echéance</p></th>
-                      <th><p class="adminpdvcrmBorder">Action</p></th>
-                    </tr>
-                    </thead>
-                    <tbody *ngIf="this.relance">
-                    <tr *ngFor="let relance of frla.data ; let i = index " style="color: #337ab7;">
-                      <td>
-                        <input type="checkbox" #checkbox (change)="checkThisForRelance(checkbox.checked,relance,i)">
-                      </td>
-                      <td>{{ relance.prenom }}</td>
-                      <td>{{ relance.nom }}</td>
-                      <td>{{ relance.telephone }}</td>
-                      <td>{{relance.nomservice}}</td>
-                      <td>{{relance.echeance.date}}</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="showChildModal('single',relance.telephone)">SMS</button>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="appel()">APPEL</button>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="mail()">EMAIL</button>
-                      </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                      <td colspan="4">
-                        <mfBootstrapPaginator ></mfBootstrapPaginator>
-                      </td>
-                    </tr>
-                    </tfoot>
-                  </table>
-            </div>
+                  </tr>
+                  </thead>
+                  <tbody *ngIf="this.promotion">
+                  <tr *ngFor="let promotion of fpr.data ; let i = index "  style="color: #337ab7;">
+                    <td>
+                      <input type="checkbox" #checkboxprom (change)="checkThisForPromo(checkboxprom.checked,promotion,i)">
+                    </td>
+                    <td>{{promotion.prenom}}</td>
+                    <td>{{promotion.nom}}</td>
+                    <td>{{promotion.telephone}}</td>
+                    <td>{{promotion.periofidel}}</td>
+                    <td>{{promotion.service}}</td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <td colspan="4">
+                      <mfBootstrapPaginator ></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
 
              <div class="tab-pane fade in col-sm-12 col-xs-3" id="prospection" >
 
