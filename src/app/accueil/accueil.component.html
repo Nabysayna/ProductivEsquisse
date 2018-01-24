@@ -1,193 +1,179 @@
 <div id="wrapper">
 
-    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: transparent !important; border-style: hidden ;" role="navigation">
+  <div class="row  navbar-fixed-top">
+    <app-navbar-top></app-navbar-top>
+  </div>
+  <div class="row" style="margin-top: 10rem;">
+    <div class="col-sm-2">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color: transparent !important; border-style: hidden ; margin-top: 5rem" role="navigation">
+        <ul class="nav in" style="position: fixed; background-color: white">
+              <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'annonce']" >VIDEO ANNONCE</a></li>
+              <li><a [routerLink]="['/accueil', registredAPIs[0]]"> <img src="assets/icoservice-postecash.png" />{{registredAPIs[0]}}</a></li>
+              <li><a [routerLink]="['/accueil', registredAPIs[1]]"> <img src="assets/icoservice-2.png" />{{registredAPIs[1]}}</a></li>
+              <li><a [routerLink]="['/accueil', registredAPIs[2]]"> <img src="assets/icoservice-3.png" />{{registredAPIs[2]}}</a></li>
+              <li><a [routerLink]="['/accueil', registredAPIs[4]]"> <img src="assets/icoservice-wizall.png" />{{registredAPIs[4]}}</a></li>
+              <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" ><i class="fa fa-calculator fa-2x pull-left"></i> GESTION REPORTING</a></li>
+              <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
+              <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
+              <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" ><i class="fa fa-book fa-2x pull-left"></i> Guide d'utilisation</a></li>
+              <li role="presentation" ><a [routerLink]="['/accueil', 'panier']" ><i class="fa fa-book fa-2x pull-left"></i>ecom</a></li>
+              <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
+        </ul>
+      </nav>
+      <div id="encours"  style="position: fixed; margin-top: 30rem">
+        <h3 style="color: orange; background-color: white ;">Vos opèrations</h3>
+        <div  (click)="finprocess(item,item.dataI)"  [ngStyle]="{'background-color':item.data.operateur==5?'orange':item.etats.color}" *ngFor="let item of process"    class="row pendingTask" [popover]="popTemplate" popoverTitle="{{item.data.nom}}" triggers="mouseenter:mouseleave">
+          <div  class="{{item.etats.load}}" style="text-align: end ;">
+            <i *ngIf="item.etats.etat&&item.etats.color=='green'" class="fa fa-check fa-2x" aria-hidden="true"></i>
+            <i *ngIf="item.etats.etat&&item.etats.color=='red'" class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+          </div>
+          <div>{{item.data.nom}}</div>
+          <ng-template #popTemplate >
+            <!-- OM -->
+            <div *ngIf="item.data.operateur==2" style="background-color: white; z-index: 10">
 
-        <div  id="navbHead" >
-                <app-navbar-top></app-navbar-top>
-        </div>
-        <div class="navbar-inverse sidebar" role="navigation" id="leftsidemenu" style="background-color: transparent !important;">
-            <div class="sidebar-nav navbar-collapse" style="background-color: transparent ;">
-                <ul id="gauche" class="nav in" id="side-menu">
-
-                  <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'annonce']" >VIDEO ANNONCE</a></li>
-                  <li *ngFor="let api of registredAPIs; let i = index" ><a [routerLink]="['/accueil', api]"> <img src="assets/icoservice-{{i+1}}.png" />{{api}}</a></li>
-
-                  <li role="presentation"><a [routerLink]="['/accueil', 'GESTIONREPORTING']" ><i class="fa fa-calculator fa-2x pull-left"></i> GESTION REPORTING</a></li>
-                  <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
-                  <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
-                  <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" ><i class="fa fa-book fa-2x pull-left"></i> Guide d'utilisation</a></li>
-                  <li role="presentation" ><a [routerLink]="['/accueil', 'panier']" ><i class="fa fa-book fa-2x pull-left"></i>ecom</a></li>
-                  <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-
-<!--771153153 28500             <div id="encours" style="text-align: center ; padding-top: 2.5rem ;"> -->
-            <div id="encours" >
-
-              <h3 style="color: orange ; font-weight: 600 ; background-color: white ;">Vos opèrations</h3>
-
-              <div  (click)="finprocess(item,item.dataI)"  [ngStyle]="{'background-color':item.data.operateur==5?'orange':item.etats.color}" *ngFor="let item of process"    class="row pendingTask" [popover]="popTemplate" popoverTitle="{{item.data.nom}}" triggers="mouseenter:mouseleave">
-
-              <div  class="{{item.etats.load}}" style="text-align: end ;">
-				  
-                <i *ngIf="item.etats.etat&&item.etats.color=='green'" class="fa fa-check fa-2x" aria-hidden="true"></i>
-                <i *ngIf="item.etats.etat&&item.etats.color=='red'" class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+              <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
+                {{retrieveOperationInfo(item)}}
               </div>
 
-              <div>
-                {{item.data.nom}}
+              <div *ngIf="item.data.operation==1">
+                <div>Montant : {{item.data.montant}}</div><br>
+                <div>Numéro Client :{{item.data.num}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==2">
+                <div>Montant : {{item.data.montant}}</div><br>
+                <div>Numéro Client :{{item.data.numclient}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==3">
+                <div>Code Retrait: {{item.data.coderetrait}}</div><br>
+                <div>Prènom : {{item.data.prenom}}</div><br>
+                <div>Nom : {{item.data.nomclient}}</div><br>
+                <div>Date De Naiss. : {{item.data.date}}</div><br>
+                <div>N° CNI :{{item.data.cni}}</div><br>
+                <div>Numéro Client :{{item.data.num}}</div><br>
+                <div>Montant:{{item.data.montant}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==5">
+                <div>Montant : {{item.data.montant}}</div><br>
+                <div>Numéro Client :{{item.data.numclient}}</div><br>
+              </div>
+
+            </div>
+            <!--E-commerce -->
+            <div *ngIf="item.data.operateur==5;let j=index" class="row" style="border-radius:10px 0 10px 10px;width:300px;">
+              <div  *ngFor="let article of articles let i=index"  class="col-lg-5 col-md-5 col-xs-5 col-sm-5" [ngStyle]="{'border-right':i%2==0?'4px solid orange':'2px solid white','border-top':i>=2?'4px solid orange':'2px solid white','border-bottom':(i==articles.length-2 && articles.length%2!=0)?'4px solid orange':'2px solid white'}" style="height:180px;border-radius:0px">
+                <div class="row">
+                  <p style="color:blue;font-size:0.8em;text-align:center">{{getFormatted(article.data.designation)}}</p>
+                </div>
+                <div class="row"  style="background-image:url(../../assets/mag-rondell.png);background-repeat:no-repeat;">
+                  <img class="card-img-top  col-lg-8 col-md-8 col-xs-8 col-sm-8 img-circle" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.data.nomImg}}" style="width:90px;height:90px;margin-left:6%;margin-top:5px" alt="Card image cap">
+                </div>
+                <div class="row">
+                  <p class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="max-width:150px"><b style="color:blue;font-size:0.9em">{{currency(article.data.prix)}} fcfa</b></p>
                 </div>
 
-                 <ng-template #popTemplate >
-                    <!-- OM -->
-                    <div *ngIf="item.data.operateur==2">
-
-                      <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
-                           {{retrieveOperationInfo(item)}}
-                      </div>
-
-                        <div *ngIf="item.data.operation==1">
-                          <div>Montant : {{item.data.montant}}</div><br>
-                          <div>Numéro Client :{{item.data.num}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==2">
-                          <div>Montant : {{item.data.montant}}</div><br>
-                          <div>Numéro Client :{{item.data.numclient}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==3">
-                          <div>Code Retrait: {{item.data.coderetrait}}</div><br>
-                          <div>Prènom : {{item.data.prenom}}</div><br>
-                          <div>Nom : {{item.data.nomclient}}</div><br>
-                          <div>Date De Naiss. : {{item.data.date}}</div><br>
-                          <div>N° CNI :{{item.data.cni}}</div><br>
-                          <div>Numéro Client :{{item.data.num}}</div><br>
-                          <div>Montant:{{item.data.montant}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==5">
-                          <div>Montant : {{item.data.montant}}</div><br>
-                          <div>Numéro Client :{{item.data.numclient}}</div><br>
-                        </div>
-
-                    </div>
-                    <!--E-commerce -->
-                    <div *ngIf="item.data.operateur==5;let j=index" class="row" style="border-radius:10px 0 10px 10px;width:300px;">
-						  <div  *ngFor="let article of articles let i=index"  class="col-lg-5 col-md-5 col-xs-5 col-sm-5" [ngStyle]="{'border-right':i%2==0?'4px solid orange':'2px solid white','border-top':i>=2?'4px solid orange':'2px solid white','border-bottom':(i==articles.length-2 && articles.length%2!=0)?'4px solid orange':'2px solid white'}" style="height:180px;border-radius:0px">
-							  <div class="row">
-								  <p style="color:blue;font-size:0.8em;text-align:center">{{getFormatted(article.data.designation)}}</p>
-							  </div>
-							  <div class="row"  style="background-image:url(../../assets/mag-rondell.png);background-repeat:no-repeat;"> 
-							    <img class="card-img-top  col-lg-8 col-md-8 col-xs-8 col-sm-8 img-circle" src="http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/uploads/{{article.data.nomImg}}" style="width:90px;height:90px;margin-left:6%;margin-top:5px" alt="Card image cap">
-							  </div>
-							  <div class="row">
-							     <p class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="max-width:150px"><b style="color:blue;font-size:0.9em">{{currency(article.data.prix)}} fcfa</b></p>
-							  </div>	
-							   
-						  </div>
-						  
-						  	
-                          <div class="row">
-							  <b class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="color:blue">Total : {{currency(totalpanier())}}</b>
-                          </div>
-                         
-                    </div>
-
-                    <!-- TNT -->
-                    <div *ngIf="item.data.operateur==4">
-                      <div *ngIf="item.etats.errorCode=='*'">
-                        <div *ngIf="item.data.operation==1">
-                          <div>Prénom client: {{item.data.prenom}}</div><br>
-                          <div>Nom Client :{{item.data.nom}}</div><br>
-                          <div>Téléphone :{{item.data.tel}}</div><br>
-                          <div>Numéro CNI  :{{item.data.cni}}</div><br>
-                          <div>Numéro CHIP :{{item.data.chip}}</div><br>
-                          <div>Numéro CARTE:{{item.data.carte}}</div><br>
-                          <div>Durée :{{item.data.duree}} mois</div><br>
-                          <div>Bouquet : <a *ngIf="item.data.typedebouquet==1"> Maanaa</a>
-                                        <a *ngIf="item.data.typedebouquet==2"> Boul Khool</a>
-                                        <a *ngIf="item.data.typedebouquet==3"> Maana + Boul Khool</a>
-                          </div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==2">
-                          <div>Prénom client: {{item.data.prenom}}</div><br>
-                          <div>Nom Client :{{item.data.nomclient}}</div><br>
-                          <div>Téléphone :{{item.data.tel}}</div><br>
-                          <div>Numéro CHIP :{{item.data.chip}}</div><br>
-                          <div>Numéro CARTE:{{item.data.carte}}</div><br>
-                          <div>Bouquet : <a *ngIf="item.data.typedebouquet==0"> Sans Abonnement</a>
-                                        <a *ngIf="item.data.typedebouquet==1"> + 1 mois</a>
-                                        <a *ngIf="item.data.typedebouquet==3"> + 3 mois</a>
-                          </div><br>
-                        </div>
-
-                        <div *ngIf="item.data.operation==3">
-                          <div>Prénom client: {{item.data.prenom}}</div><br>
-                          <div>Nom Client :{{item.data.nomclient}}</div><br>
-                          <div>Téléphone :{{item.data.tel}}</div><br>
-                          <div>Adresse :{{item.data.adresse}}</div><br>
-                          <div>Numéro CARTE:{{item.data.carte}}</div><br>
-                        </div>
-
-                      </div>
-                      <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold;">
-                           {{retrieveOperationInfo(item)}}
-                      </div>
-
-                  </div>
-
-
-                    <!-- OM -->
-                    <div *ngIf="item.data.operateur==5">
-
-                      <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
-                           {{retrieveOperationInfo(item)}}
-                      </div>
-
-                        <div *ngIf="item.data.operation==1">
-                          <div>Montant : {{item.data.montant}}</div><br>
-                          <div>Numéro Client :{{item.data.num}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==2">
-                          <div>Montant : {{item.data.montant}}</div><br>
-                          <div>Numéro Client :{{item.data.num}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==3">
-                          <div>Montant:{{item.data.montant}}</div><br>
-                          <div>Réfèrence Client: {{item.data.refclient}}</div><br>
-                          <div>Réfèrence Facture : {{item.data.refFacture}}</div><br>
-                        </div>
-                        <div *ngIf="item.data.operation==4">
-                          <div>Montant:{{item.data.montant}}</div><br>
-                          <div>Police: {{item.data.police}}</div><br>
-                          <div>Numéro Facture : {{item.data.numfacture}}</div><br>
-                        </div>
-
-                    </div>
-
-
-                 </ng-template>
-
               </div>
 
-             </div>
+
+              <div class="row">
+                <b class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="color:blue">Total : {{currency(totalpanier())}}</b>
+              </div>
+
+            </div>
+
+            <!-- TNT -->
+            <div *ngIf="item.data.operateur==4">
+              <div *ngIf="item.etats.errorCode=='*'">
+                <div *ngIf="item.data.operation==1">
+                  <div>Prénom client: {{item.data.prenom}}</div><br>
+                  <div>Nom Client :{{item.data.nom}}</div><br>
+                  <div>Téléphone :{{item.data.tel}}</div><br>
+                  <div>Numéro CNI  :{{item.data.cni}}</div><br>
+                  <div>Numéro CHIP :{{item.data.chip}}</div><br>
+                  <div>Numéro CARTE:{{item.data.carte}}</div><br>
+                  <div>Durée :{{item.data.duree}} mois</div><br>
+                  <div>Bouquet : <a *ngIf="item.data.typedebouquet==1"> Maanaa</a>
+                    <a *ngIf="item.data.typedebouquet==2"> Boul Khool</a>
+                    <a *ngIf="item.data.typedebouquet==3"> Maana + Boul Khool</a>
+                  </div><br>
+                </div>
+                <div *ngIf="item.data.operation==2">
+                  <div>Prénom client: {{item.data.prenom}}</div><br>
+                  <div>Nom Client :{{item.data.nomclient}}</div><br>
+                  <div>Téléphone :{{item.data.tel}}</div><br>
+                  <div>Numéro CHIP :{{item.data.chip}}</div><br>
+                  <div>Numéro CARTE:{{item.data.carte}}</div><br>
+                  <div>Bouquet : <a *ngIf="item.data.typedebouquet==0"> Sans Abonnement</a>
+                    <a *ngIf="item.data.typedebouquet==1"> + 1 mois</a>
+                    <a *ngIf="item.data.typedebouquet==3"> + 3 mois</a>
+                  </div><br>
+                </div>
+
+                <div *ngIf="item.data.operation==3">
+                  <div>Prénom client: {{item.data.prenom}}</div><br>
+                  <div>Nom Client :{{item.data.nomclient}}</div><br>
+                  <div>Téléphone :{{item.data.tel}}</div><br>
+                  <div>Adresse :{{item.data.adresse}}</div><br>
+                  <div>Numéro CARTE:{{item.data.carte}}</div><br>
+                </div>
+
+              </div>
+              <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold;">
+                {{retrieveOperationInfo(item)}}
+              </div>
+
+            </div>
+
+
+            <!-- OM -->
+            <div *ngIf="item.data.operateur==5">
+
+              <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
+                {{retrieveOperationInfo(item)}}
+              </div>
+
+              <div *ngIf="item.data.operation==1">
+                <div>Montant : {{item.data.montant}}</div><br>
+                <div>Numéro Client :{{item.data.num}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==2">
+                <div>Montant : {{item.data.montant}}</div><br>
+                <div>Numéro Client :{{item.data.num}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==3">
+                <div>Montant:{{item.data.montant}}</div><br>
+                <div>Réfèrence Client: {{item.data.refclient}}</div><br>
+                <div>Réfèrence Facture : {{item.data.refFacture}}</div><br>
+              </div>
+              <div *ngIf="item.data.operation==4">
+                <div>Montant:{{item.data.montant}}</div><br>
+                <div>Police: {{item.data.police}}</div><br>
+                <div>Numéro Facture : {{item.data.numfacture}}</div><br>
+              </div>
+
+            </div>
+          </ng-template>
 
         </div>
-        <!-- /.navbar-static-side -->
-    </nav>
-
-    <div id="page-wrapper" class="row" style="padding-top: 3rem;">
-        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" id="routeContainDisplayer">
-<!--             <img src="assets/nabs.png" style="position: relative ; left: -88px; top: -154px; z-index: 1000 ; width: 48%;"/>-->
-            <router-outlet></router-outlet>
-        </div>
+      </div>
     </div>
 
+    <div class="col-sm-8">
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="col-sm-2" style="background-color: white">
+          <ul class="nav in" style="position: fixed; background-color: white">
+            <li role="presentation" style="background-color: #f39200; color: white;"><a style="color: white;" [routerLink]="['/accueil', 'annonce']" >VIDEO ANNONCE</a></li>
+            <li role="presentation" ><a [routerLink]="['/accueil', registredAPIs[3]]"> <img src="assets/icoservice-tnt.png" style="max-width: 5rem !important;"/>&nbsp; {{registredAPIs[3]}}</a></li>
+            <li role="presentation" ><a> <img src="assets/icoservice-sde.png" style="max-width: 3rem !important;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SDE</a></li>
+            <li role="presentation" ><a> <img src="assets/icoservice-rapido.png" style="max-width: 5rem !important;"/>&nbsp; RAPIDO</a></li>
+            <li role="presentation" ><a> <img src="assets/icoservice-woyofal.png" style="max-width: 5rem !important;"/>&nbsp; WOYOFAL</a></li>
+            <li role="presentation" ><a> <img src="assets/icoservice-senelec.png" style="max-width: 5rem !important;"/>&nbsp; SENELEC</a></li>
+            <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
+          </ul>
+    </div>
+
+  </div>
 
 </div>
-    <!-- /#page-wrapper -->
-
-
-
-
-
-

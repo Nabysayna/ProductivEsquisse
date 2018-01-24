@@ -20,6 +20,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
   loading = false ;
   public monitoringAdminpdvDeposit: any;
   public montantdeposit:number;
+  public montantdepotdirect:number;
   agentcc:any;
   montant:number;
   ibanExcessif = false ;
@@ -31,6 +32,7 @@ export class AdminpdvMonitoringComponent implements OnInit {
 
   dataImpression:any;
 
+  @ViewChild('depotdirectModal') public depotdirectModal:ModalDirective;
   @ViewChild('depositeModal') public depositeModal:ModalDirective;
   @ViewChild('dechargeModal') public dechargeModal:ModalDirective;
   @ViewChild('apercudechargeModal') public apercudechargeModal:ModalDirective;
@@ -138,6 +140,12 @@ export class AdminpdvMonitoringComponent implements OnInit {
       );
   }
 
+  showdepotdirectModal():void {
+    this.montantdepotdirect=undefined;
+    //this.getInitDeposit();
+    this.depotdirectModal.show();
+    console.log('showdepotdirectModal')
+  }
   public showdepositeModal():void {
     this.montantdeposit=undefined;
     this.getInitDeposit();
