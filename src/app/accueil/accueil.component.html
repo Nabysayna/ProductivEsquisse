@@ -16,13 +16,11 @@
                   <li id="med" role="presentation"><a [routerLink]="['/accueil', 'DEMANDEPRET']" > <img src="assets/menuticker.png" />DEMANDE DE PRET</a></li>
                   <li role="presentation"><a [routerLink]="['/accueil', 'E-COMMERCE']" ><i class="fa fa-shopping-cart fa-2x pull-left"></i> E-COMMERCE</a></li>
                   <li role="presentation" ><a [routerLink]="['/accueil', 'Guide_utilisation']" ><i class="fa fa-book fa-2x pull-left"></i> Guide d'utilisation</a></li>
-<!--                   <li role="presentation" ><a [routerLink]="['/accueil', 'panier']" ><i class="fa fa-book fa-2x pull-left"></i>ecom</a></li> -->
+
                   <li role="presentation" style="border-bottom: hidden;">&nbsp;</li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
-
-<!--771153153 28500             <div id="encours" style="text-align: center ; padding-top: 2.5rem ;"> -->
             <div id="encours" >
 
               <h3 style="color: orange ; font-weight: 600 ; background-color: white ;">Vos opèrations</h3>
@@ -138,6 +136,33 @@
 
                     <!-- OM -->
                     <div *ngIf="item.data.operateur==5">
+
+                      <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
+                           {{retrieveOperationInfo(item)}}
+                      </div>
+
+                        <div *ngIf="item.data.operation==1">
+                          <div>Montant : {{item.data.montant}}</div><br>
+                          <div>Numéro Client :{{item.data.num}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==2">
+                          <div>Montant : {{item.data.montant}}</div><br>
+                          <div>Numéro Client :{{item.data.num}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==3">
+                          <div>Montant:{{item.data.montant}}</div><br>
+                          <div>Réfèrence Client: {{item.data.refclient}}</div><br>
+                          <div>Réfèrence Facture : {{item.data.refFacture}}</div><br>
+                        </div>
+                        <div *ngIf="item.data.operation==4">
+                          <div>Montant:{{item.data.montant}}</div><br>
+                          <div>Police: {{item.data.police}}</div><br>
+                          <div>Numéro Facture : {{item.data.numfacture}}</div><br>
+                        </div>
+                    </div>
+
+                    <!-- TC -->
+                    <div *ngIf="item.data.operateur==3">
 
                       <div *ngIf="item.etats.errorCode!='*'" style="color:red ; font-weight: bold ;">
                            {{retrieveOperationInfo(item)}}
