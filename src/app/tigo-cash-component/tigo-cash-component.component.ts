@@ -60,14 +60,14 @@ export class TigoCashComponentComponent implements OnInit {
   /***********************************/
   /********depot**********************/
       depot(){
-         sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Tigo cash depot','operateur':3,'operation':1,'telephone':this.telephone,'montant':this.montant}));
+         sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Tigo cash depot','operateur':3,'operation':1,'num':this.telephone,'montant':this.montant}));
          this.hidemodaldepot();
          this.reinitialiser();
       }
   /***********************************/
   /********retrait**********************/
       retrait(){
-         sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Tigo cash retrait','operateur':3,'operation':2,'telephone':this.telephone,'montant':this.montant}));
+         sessionStorage.setItem('curentProcess',JSON.stringify({'nom':'Tigo cash retrait','operateur':3,'operation':2,'num':this.telephone,'montant':this.montant}));
          this.hidemodalretrait();
          this.reinitialiser();
       }

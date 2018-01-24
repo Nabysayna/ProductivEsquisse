@@ -184,7 +184,8 @@ export class PostCashWebService {
 
     return new Promise( (resolve, reject) => {
       this.soapService.post(method, parameters, 'RechargeBadgeRapidoResponse').then(response=>{
-        console.log(response) ;
+
+        console.log( response['RechargeBadgeRapidoResponse'].return ) ;
         var reponse:any = JSON.parse(response['RechargeBadgeRapidoResponse'].return.$);
         resolve(reponse) ;
       });
