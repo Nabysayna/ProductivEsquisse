@@ -7,6 +7,14 @@
       <div class="panel panel-primary" style="border: none; margin-top: 5rem; display: block; text-align: center">
         <div class="panel-heading monitorindepositetatadminpdvTitle center-block">
           <h3>Bilan Déposit</h3>
+          <div style="background-color: white" *ngIf="barChartLabels.length!=0">
+            <canvas baseChart #baseChart3="base-chart" height="80"
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"></canvas>
+          </div>
         </div>
         <div class="panel-body">
           <div class="row"  *ngIf="monitoringAdminpdvDeposit">
