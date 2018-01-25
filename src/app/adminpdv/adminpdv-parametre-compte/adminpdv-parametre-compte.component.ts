@@ -56,6 +56,7 @@ export class AdminpdvparametrecompteComponent implements OnInit {
 
     this.adminpdvServiceWeb.listuserpdv('azrrtt').then(adminpdvServiceWebList => {
       this.monitoringAdminpdvUserpdv = adminpdvServiceWebList.response;
+      console.log(this.monitoringAdminpdvUserpdv);
       this.getRegionNewCaissier();
     });
 
@@ -188,5 +189,14 @@ export class AdminpdvparametrecompteComponent implements OnInit {
       }
     });
   }
+
+
+  public autoriseravoirdeposir(gerant, estautorise:number){
+      this.adminpdvServiceWeb.autoriservoirdepot(gerant.idpdv, estautorise).then(adminpdvServiceWebList => {
+        console.log(adminpdvServiceWebList.response);
+        console.log('--------------');
+      });
+  }
+
 
 }

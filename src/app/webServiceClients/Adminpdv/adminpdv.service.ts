@@ -51,6 +51,25 @@ export class AdminpdvServiceWeb {
 
   }
 
+  public autoriservoirdepot(idpdv: number, estautoriser: number): Promise<any>  {
+    var method:string = 'autoriservoirdepot';
+    var parameters:{}[] = [];
+
+    var reEspParams = {token: this.token, idpdv: idpdv, estautoriser: estautoriser};
+    var params:{}[] = [] ;
+    params["params"] = reEspParams ;
+
+    parameters['autoriservoirdepot xmlns="urn:adminpdvwsdl#"'] = params;
+
+    return new Promise( (resolve, reject) => {
+      this.soapService.post(method, parameters, 'autoriservoirdepotResponse').then(response=>{
+        var reponse = JSON.parse(response['autoriservoirdepotResponse'].return.$);
+        resolve(reponse) ;
+      });
+    });
+
+  }
+
   public detailperformancepdv(type: string, idpdv: number): Promise<any>  {
     var method:string = 'detailperformancepdv';
     var parameters:{}[] = [];

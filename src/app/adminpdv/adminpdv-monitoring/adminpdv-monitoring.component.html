@@ -58,7 +58,7 @@
             <h2 class="alert" *ngIf="euppna"> Vous ne pouvez retirer un montant supèrieur à votre déposit</h2>
           </div>
           <div class="tab-pane fade in active text-center" id="depotiban" >
-            <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button>
+            <button class="btn btn-success" (click)="showdepositeModal()">Faire un dépot</button><button class="btn btn-success" (click)="showdepotdirectModal()">Faire un dépot direct</button>
             <div class="row"  style="margin-top: 1rem" *ngIf="listedeposit">
               <table class="table table-hover">
                 <thead>
@@ -94,6 +94,37 @@
   </div>
 </div>
 
+
+<div bsModal #depotdirectModal="bs-modal"  class="modal fade in" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <p class="modal-title">DEPOT DIRECT</p>
+      </div>
+      <div class="modal-body container">
+        <div class="row">
+          <div class="col-xs-6" >
+            <div class="form-group">
+              <label>montant du depot :</label>
+              <input type="number" [(ngModel)]="montantdepotdirect" min="0" placeholder="montant" class="form-control" />
+            </div>
+          </div>
+          <div class="col-sm-offset-1 col-xs-3">
+            <img style="width:150px;height:150px" src="assets/bbs.png"  class="img-responsive" alt="photo de l'agent" />
+          </div>
+        </div>
+        <div>
+          Vous voulez faire un dépot direct de <b>{{ montantdepotdirect?currencyFormat(montantdepotdirect):'?' }} FCFA </b>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" [disabled]="montantdepotdirect==undefined || montantdepotdirect<1" class="btn btn-success pull-left">valider</button>
+        <button type="button" (click)="hidedepositeModal()" class="btn btn-danger">fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div bsModal #depositeModal="bs-modal"  class="modal fade in" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
@@ -124,7 +155,6 @@
   </div>
 </div>
 
-<!-- modal deposit -->
 <div bsModal #dechargeModal="bs-modal"  class="modal fade in" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
@@ -155,49 +185,7 @@
     </div>
   </div>
 </div>
-<!-- modal deposit
-<div bsModal #dechargeModal="bs-modal"  class="modal fade in" >
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" >
-      <div class="modal-header" *ngIf="agentcommercial">
-        <div class="row">
-          <img class="col-lg-3 ol-md-3 col-sm-3 col-xs-3" style="width:100px" src="assets/bbs.png" alt="logo bbs" />
-          <img class="pull-right col-lg-3 ol-md-3 col-sm-3 col-xs-3" style="width:100px" src="assets/bbs.png" alt="photo de l'agent" />
-        </div>
-        <p style="background-color:red" class="modal-title"><b style="position:absolute;left:275px">DECHARGE</b></p><br>
-      </div>
-      <div class="modal-body row">
-        <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10" >
-          <p>
-            Nous certifions,<br>
-            BBS Invest Sarl au capital de 7 000 000 FCFA, dont le siége social est situé aux HLM GRAND MEDINE Villa 159,immatriculé au registre du commerce sous le numero -SN DKR 2014 -NINEA : 004999978,
-            representé ici par {{agentcommercial}} en sa qualite de conseiller commercial(e), déclarons avoir reçu la somme de {{currencyFormat(montantdeposit)}} FCFA, de........... representé par Mme/Mlle/Mr ..............
-            <br><br>
-            Ce montant perçu en guise de caution,permet au point de vente d'utiliser les services proposée par la plateforme SENTOOL mise à la diposition par BBS Invest .
-            <br><br>
-            en foi de quoi, cette présente décharge à été établie pour servir et valoir ce que de droit .
-            <br><br>
-            NB :Merci d'envoyer une copie de cette presente décharge a l'adresse e-mail suivante :bbsinvest@bbstvnet.com pour un rechargement effectif .
-            <br>
-            Fait a Dakar le ................... en deux exemplaire.<br>
-            <span class="row">
-								 <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><b>Le point de Vente </b></span>
-								 <span class="col-lg-2 ol-md-2 col-sm-2 col-xs-2 pull-right"><b>BBS Invest</b></span>
-							 </span>
-          </p>
-          <input type="button" (click)="validerdeposite()" value="valider" class="btn btn-success form-control" />
-          <input type="button" value="annuler" class="btn btn-danger form-control"  />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <input type="button" value="fermer" (click)="hidedechargeModal()" class="btn btn-danger" />
-      </div>
-    </div>
-  </div>
-</div>
- -->
 
-<!-- modal deposit -->
 <div bsModal #apercudechargeModal="bs-modal"  class="modal fade in" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >

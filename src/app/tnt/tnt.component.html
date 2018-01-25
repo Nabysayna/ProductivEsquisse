@@ -22,22 +22,22 @@
               <li><a href="#vente-carte" id="vcart" data-toggle="tab" (click)="reinitialiserVariables()">Vente Carte</a></li>
               <li><a href="#vente-carte-liste" id="vcartlist" data-toggle="tab" (click)="listerVenteCarte()">Suivi Vente Carte</a></li>
 
-            </ul> 
+            </ul>
 -->
 
             <div id="om-options">
                 <a href="#home-pills" style="" (click)="reinitialiserVariables();verifierNumInputValide = true"  data-toggle="tab">Nouvel Abonnement</a>
-                
+
                 <a href="#profile-pills" style="" (click)="listerAbonnements()" data-toggle="tab">Suivi Abonnements</a>
-                
+
                 <a href="#vente-decodeur" (click)="reinitialiserVariables()" data-toggle="tab">Vente Décodeur</a>
 
-                <a href="#vente-deco-liste" (click)="listerVenteDeco()" data-toggle="tab">Suivi Vente Décodeur</a>
-                
+                <a href="#vente-deco-liste" (click)="listerVenteDeco()" data-toggle="tab">Suivi Décodeurs</a>
+
                 <a href="#vente-carte" style="" (click)="reinitialiserVariables()" data-toggle="tab">Vente Carte</a>
 
-                <a href="#vente-carte-liste" style="" (click)="listerVenteCarte()" data-toggle="tab">Suivi Vente Carte</a>
-                
+                <a href="#vente-carte-liste" style="" (click)="listerVenteCarte()" data-toggle="tab">Suivi Cartes</a>
+
             </div>
 
 
@@ -47,9 +47,9 @@
 
                       <div class="row" *ngIf="this.verifierNumInputValide" >
 
-                        <marquee style="height: 5rem; background-color: white;">  
+                        <marquee style="height: 5rem; background-color: white;">
                           <h3 style="color : black; text-transform: capitalize;">{{message}}</h3>
-                        </marquee>  
+                        </marquee>
 
                         <form name="validVerifierNum" (ngSubmit)="validVerifierNum()" #verifiernum="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem; text-align: -webkit-left;">
                             <label for="verifiernuminput"> Numéro chip, Numéro carte ou Téléphone </label>
@@ -155,7 +155,7 @@
                                 </tfoot>
 
                             </table>
- -->                
+ -->
                             <div class="row">
 
                               <table width="100%" class="table table-responsive table-bordered table-striped" [mfData]="retourTntWS | datafilter : filtre" #mfabo="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="orderByDate" [(mfSortOrder)]="sortDateOrder" style="width: 100%;">
@@ -426,7 +426,7 @@
 	            <h4 class="modal-title" id="myModalLabel">Confirmation Détails Abonnement</h4>
 		     </div>
 		     <div class="modal-body">
-		
+
 				 <div>
 					 <form class="form">
 						 <div class="form-group">
@@ -434,11 +434,11 @@
 						 </div>
 						 <div class="form-group">
 							 <label >Prènom client : {{this.prenoma}} </label>
-						 </div>     
+						 </div>
 						 <div class="form-group">
 							 <label >Telephone client : {{this.telNewClient}}</label>
 						 </div>
-						 <div class="form-group"> 
+						 <div class="form-group">
 							 <label >Numero chip : {{this.nchipNewClient}}</label>
 						 </div>
 						 <div class="form-group">
@@ -454,17 +454,17 @@
 							 <label > C.N.I : {{this.cni}}</label>
 						 </div>
 					 </form>
-					
+
 				 </div>
 		     </div>
 		     <div class="modal-footer">
 				  <input type="button" value="valider" (click)="validnabon()" class="btn btn-success" />
 				  <input type="button" value="fermer" (click)="modalabonnement.hide();" class="btn btn-danger" />
 		     </div>
-		  </div> 
+		  </div>
 	    </div>
 
-  
+
 </div>
 <div bsModal #modaldecodeur="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 
@@ -477,7 +477,7 @@
 	            <h4 class="modal-title" id="myModalLabel">Confirmation vente Décodeur</h4>
 		     </div>
 		     <div class="modal-body">
-		
+
 				 <div>
 					 <form class="form">
 						 <div class="form-group">
@@ -498,23 +498,23 @@
 						 <div class="form-group">
 							 <label >Numero carte : {{this.ncarteNewClient}}</label>
 						 </div>
-						 
+
 						 <div class="form-group">
 							 <label > Type bouquet : {{this.tbouquetNewClient}}</label>
 						 </div>
-						 
+
 					 </form>
-					
+
 				 </div>
 		     </div>
 		     <div class="modal-footer">
 				  <input type="button" value="valider" (click)="vendreDecodeur()" class="btn btn-success" />
 				  <input type="button" value="fermer" (click)="modaldecodeur.hide();" class="btn btn-danger" />
 		     </div>
-		  </div> 
+		  </div>
 	    </div>
 
-  
+
 </div>
 <div bsModal #modalcarte="bs-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 
@@ -527,7 +527,7 @@
 	            <h4 class="modal-title" id="myModalLabel">Confirmation vente carte</h4>
 		     </div>
 		     <div class="modal-body">
-		
+
 				 <div>
 					 <form class="form">
 						 <div class="form-group">
@@ -545,22 +545,22 @@
 						 <div class="form-group">
 							 <label >Numero carte : {{this.ncarteNewClient}}</label>
 						 </div>
-						 
+
 						 <div class="form-group">
 							 <label > C.N.I : {{this.cniNewClient}}</label>
 						 </div>
 					 </form>
-					
+
 				 </div>
 		     </div>
 		     <div class="modal-footer">
 				  <input type="button" value="valider" (click)="vendreCarte()" class="btn btn-success" />
 				  <input type="button" value="fermer" (click)="modalcarte.hide();" class="btn btn-danger" />
 		     </div>
-		  </div> 
+		  </div>
 	    </div>
 
-  
+
 </div>
 
 <div *ngIf="this.loading">

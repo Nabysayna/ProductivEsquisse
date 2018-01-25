@@ -11,7 +11,7 @@
       <div class="col-xs-12 col-md-12 col-lg-12">
 
          <div style="margin-bottom: 2rem; margin: 0 auto; margin-top: 1rem; text-align: right; ">
-           <button class="btn adminpdvparametrecompteBorder" data-toggle="modal" data-target="#modalNewCaissier" style="background-color: #ea8f43; margin-bottom: 2rem; margin-top: 1rem; text-align: center;">Créer un compte Caissier</button>
+           <button class="btn adminpdvparametrecompteBorder" data-toggle="modal" data-target="#modalNewCaissier" style="background-color: #ea8f43; margin-bottom: 2rem; margin-top: 1rem; text-align: center; margin-right: 10rem">Créer un compte Caissier</button>
          </div>
 
         <div class="panel panel-default table-responsive" style="margin-top: -7rem;">
@@ -36,7 +36,7 @@
               <th><p class="adminpdvparametrecompteBorder">Téléphone</p></th>
               <th><p class="adminpdvparametrecompteBorder">Option</p></th>
               <th><p class="adminpdvparametrecompteBorder">Status</p></th>
-              <th><p class="adminpdvparametrecompteBorder">Action</p></th>
+              <th><p class="adminpdvparametrecompteBorder">Voir Dépot</p></th>
             </tr>
             </thead>
             <tbody *ngIf="monitoringAdminpdvUserpdv">
@@ -47,15 +47,18 @@
                 <td>{{getAdress(item.adresse)}}</td>
                 <td>{{item.telephone}}</td>
                 <td><button type="button" class="btn btn-outline adminpdvparametrecompteBorder" (click)="modif(item)" data-toggle="modal" data-target="#myModalModifUser">Modifier</button></td>
-                <td>{{item.isconnect?'Connecté':'Deconnecté'}}</td>
-                <td><button type="button" *ngIf="item.isconnect" class="btn btn-outline adminpdvparametrecompteBorder" (click)="deconnexionsession(item,i)">Deconnecter</button></td>
+                <td>
+                  <span *ngIf="!item.isconnect">Est déconnecté</span>
+                  <button type="button" *ngIf="item.isconnect" class="btn btn-outline adminpdvparametrecompteBorder" (click)="deconnexionsession(item,i)">Deconnecter</button>
+                </td>
+                <td>
+                  <button type="button" class="btn adminpdvparametrecompteBorder" (click)="autoriseravoirdeposir(item, 1)">Autoriser</button>
+                </td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="5">
-                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50]"></mfBootstrapPaginator>
-                </td>
+                <td colspan="5"><mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50]"></mfBootstrapPaginator></td>
               </tr>
             </tfoot>
           </table>

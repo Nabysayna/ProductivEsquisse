@@ -51,7 +51,7 @@ body {
 .pendingTask{
     margin-left: 0rem ;
     margin-right: -3rem ;
-    background-color: #337ab7 ; 
+    background-color: #337ab7 ;
     padding-left: 2rem ;
     color: white;
     border-radius: 2rem 0rem 2rem 2rem ;
@@ -84,7 +84,7 @@ body {
 
 
 #page-wrapper{
-    padding-top: 3rem; 
+    padding-top: 3rem;
 /*    margin-top:25px;
 */
 }
@@ -140,7 +140,7 @@ body {
 	background-color: #337ab7 !important ;
     border-color: #0F70B7;
     color : white;
-	width : 100%;
+	/*width : 100%;*/
 }
 
 #navbHead a{
@@ -148,7 +148,7 @@ body {
     border-color: #e7e7e7;
     color : white;
 }
-#navbHead a:hover{  
+#navbHead a:hover{
     background-color: #fff;
     border-color: #337ab7;
     color : #337ab7 !important ;
@@ -169,7 +169,7 @@ body {
     margin-top: 5rem;
     height: 70rem;
 /*    background:  url(/assets/bga.png)   ; */
-    background-color: #337ab7 !important; 
+    background-color: #337ab7 !important;
 }
 
 #routeContainDisplayer{
@@ -178,16 +178,16 @@ body {
 }
 
 @media screen and (max-width:640px) {
- 
+
  #leftsidemenu{
     height:100%;
  }
-   
+
 }
 
 
 #page-wrapper{
-    padding-top: 3rem; 
+    padding-top: 3rem;
 /*    margin-top:25px;
 */
 }
@@ -252,7 +252,7 @@ body {
     border-color: #e7e7e7;
     color : white;
 }
-#navbHead a:hover{  
+#navbHead a:hover{
     background-color: #fff;
     border-color: #337ab7;
     color : #337ab7 !important ;
@@ -297,7 +297,7 @@ body {
 /*    height: 70rem;*/
     padding-left: 1rem ;
 /*    background:  url(/assets/bga.png)   ; */
-    background-color: white !important; 
+    background-color: white !important;
 }
 
 #mainrouteroutlet{
@@ -313,20 +313,20 @@ body {
 }*/
 
 #encours{
-    text-align: center ; 
+    text-align: center ;
     padding-top: 5.5rem ;
     margin-top: 7rem ;
 }
 
 @media screen and (max-width:640px) {
- 
+
  #leftsidemenu{
     height:100%;
  }
-   
+
 }
 
-    
+
 @media only screen and (max-width: 400px) {
     #encours{
     position: relative;
@@ -338,9 +338,9 @@ body {
     #om-options{
         width: max-content !important;
     }
-}  
+}
 
 
 
-       
-       
+
+

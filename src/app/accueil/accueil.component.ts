@@ -82,7 +82,7 @@ export class AccueilComponent implements OnInit {
       else{
            this.process.push(sesion);
       }
-     
+
       console.log(sesion.etats.id);
       sessionStorage.removeItem('curentProcess');
       var operateur=sesion.data.operateur;
@@ -709,8 +709,8 @@ export class AccueilComponent implements OnInit {
       if(etat.data.operateur==5){
           this.router.navigate(['/accueil','panier']);
         }
-     if(etat.etats.etat==true){ 
-       
+     if(etat.etats.etat==true){
+
      if(etat.etats.etat==true){
 
        if(etat.data.operateur!=2 && etat.etats.color=='green'){
@@ -795,7 +795,7 @@ export class AccueilComponent implements OnInit {
 
 
    vendreDecodeur(objet:any){
- 
+
     this.tntCaller.vendreDecodeur(objet.data.token, objet.data.prenom,objet.data.nomclient,objet.data.tel, objet.data.adresse, objet.data.region, objet.data.cni,objet.data.chip,objet.data.carte, objet.data.duree, objet.data.typedebouquet, objet.data.montant).then( response =>
       {
         if(response=="ok"){
@@ -868,11 +868,13 @@ export class AccueilComponent implements OnInit {
   }
 
 /******************************************************************************************************/
+///////////////////////////////////////// FOR WIIZALL  ////////////////////////////////////////////////
 /******************************************************************************************************/
 
     cashInWizall(objet : any){
       console.log('cashInWizall');
       this.wizallwebservice.intouchCashin("test 1", objet.data.num, objet.data.montant).then( response =>{
+        console.log('intouchCashin');
         console.log(response)
       });
     }
@@ -880,6 +882,7 @@ export class AccueilComponent implements OnInit {
     cashOutWizall(objet : any){
       console.log('cashOutWizall');
       this.wizallwebservice.intouchCashout("test 1", objet.data.num, objet.data.montant).then( response =>{
+        console.log('intouchCashout');
         console.log(response)
       });
     }
@@ -887,6 +890,7 @@ export class AccueilComponent implements OnInit {
     payerSDEWizall(objet : any){
       console.log('payerSDEWizall');
       this.wizallwebservice.intouchPayerFactureSde(objet.data.montant, objet.data.refclient, objet.data.refFacture).then( response =>{
+        console.log('intouchPayerFactureSde');
         console.log(response)
       });
     }
@@ -894,6 +898,7 @@ export class AccueilComponent implements OnInit {
     payerSenelecWizall(objet : any){
       console.log('payerSenelecWizall');
       this.wizallwebservice.intouchPayerFactureSenelec(objet.data.montant, objet.data.police, objet.data.numfacture).then( response =>{
+        console.log('intouchPayerFactureSenelec');
         console.log(response)
       });
     }
