@@ -18,7 +18,7 @@
                 
                 <a href="#retraitcode" (click)="reinitialiseRcode()" data-toggle="tab">Retrait avec code</a>
 
-                <a href="#retraitinter" (click)="reinitialise()" data-toggle="tab">Retrait sur compte </a>
+<!--                 <a href="#retraitinter" (click)="reinitialise()" data-toggle="tab">Retrait sur compte </a> -->
                 
                 <a href="#achatcred" style="padding-left: 1rem; padding-right: 1rem;" (click)="reinitialise()" data-toggle="tab">Vente crédit</a>
                 
@@ -99,23 +99,22 @@
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="achatcred">
 
-                         <h2>Achat crédit</h2>
-
-<!--                         
+                         <h2>Vente crédit</h2>
+                        
                         <form name="transnat" (ngSubmit)="showmodalventecredit()" #formachatcred="ngForm" autocomplete="on" style="margin-top: 2rem;margin-bottom: 2rem;">
-              <div class="form-inline">
-               <label>Numéro du client  :</label>
-                             <input autocomplete="off" type="text" (keyup)="verifNumber($event)" autocomplete="off" pattern="[0-9]*" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" autofocus>
-                             <p *ngIf="mag1" style="color:red">numero incorrect</p>
-                            </div>
-                            <div class="form-inline">
-               <label>Montant du crédit:</label>
-                             <input type="text" autocomplete="off" (keyup)="verifMontant($event)" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
-                             <p *ngIf="mag2" style="color:red">montant incorrect</p>
-                            </div>
-                            <button style="margin-top: 1rem;"   type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
-                        </form>
- -->
+                        <div class="form-inline">
+                         <label>Numéro du client  :</label>
+                                       <input autocomplete="off" type="text" (keyup)="verifNumber($event)" autocomplete="off" pattern="[0-9]*" [(ngModel)]="this.numclient" name="verifiernuminput" id="numclient"  class="form-control" placeholder="Numéro du client" autofocus>
+                                       <p *ngIf="mag1" style="color:red">numero incorrect</p>
+                                      </div>
+                                      <div class="form-inline">
+                         <label>Montant du crédit:</label>
+                                       <input type="text" autocomplete="off" (keyup)="verifMontant($event)" autocomplete="off" [(ngModel)]="this.mnt" name="verifiernuminput" id="mnttrans"  class="form-control" placeholder="Montant du transfert" required autofocus>
+                                       <p *ngIf="mag2" style="color:red">montant incorrect</p>
+                                      </div>
+                                      <button style="margin-top: 1rem;"   type="submit" class="btn btn-success" [disabled]="!buttondepot2">Valider</button>
+                          </form>
+
                 </div>
 
                 <div class="tab-pane fade col-sm-12 col-xs-12" id="retraitinter">
@@ -135,7 +134,7 @@
                 </div>
 
 
- <!--                <div class="tab-pane fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="retraitcode">
+                <div class="tab-pane fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="retraitcode">
 
 
                         <h2>Retrait avec code</h2>
@@ -179,7 +178,7 @@
  
 
                 </div>
- -->
+
 
             </div>
         </div>

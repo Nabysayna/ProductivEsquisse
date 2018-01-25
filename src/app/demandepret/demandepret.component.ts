@@ -93,7 +93,7 @@ export class DemandepretComponent implements OnInit {
 */        
   } 
   uploadFile: any;
-  apiEndPoint = 'http://localhost/server-backend-upload/cofinaUpload.php' ;
+  apiEndPoint = 'http://51.254.200.129/backendprod/EsquisseBackEnd/server-backend-upload/cofinaUpload.php' ;
   newImage = "imagevide.jpg" ;
 
   fileChange(event) {

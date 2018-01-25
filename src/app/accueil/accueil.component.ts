@@ -448,14 +448,14 @@ export class AccueilComponent implements OnInit {
                      objet.etats.load='terminated';
                      objet.etats.color='green';
                      clearInterval(periodicVerifier) ;
-                  }
-                  if(donnee!='-1'){
-                     objet.etats.etat=true;
-                     objet.etats.load='terminated';
-                     objet.etats.color='red';
-                     objet.etats.errorCode=donnee;
-                     clearInterval(periodicVerifier) ;
-                  }
+                  }else
+                    if(donnee!='-1'){
+                       objet.etats.etat=true;
+                       objet.etats.load='terminated';
+                       objet.etats.color='red';
+                       objet.etats.errorCode=donnee;
+                       clearInterval(periodicVerifier) ;
+                    }
                 });
                 },2000);
               });
