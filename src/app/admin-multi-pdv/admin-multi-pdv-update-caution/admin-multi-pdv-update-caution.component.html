@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-12 col-lg-12">
       <div class="panel panel-default table-responsive">
-        <table class="table table-striped" [mfData]="adminmultipdvMajcaution | dataFilterAdminmultipdvUpdateCaution : filterQuery" #mf="mfDataTable"
+        <table class="table table-striped" [mfData]="listepoints | dataFilterAdminmultipdvUpdateCaution : filterQuery" #mf="mfDataTable"
                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
           <thead>
           <tr>
@@ -20,9 +20,11 @@
             <th><mfDefaultSorter by="date_last_deposit">Date update</mfDefaultSorter></th>
             <th><mfDefaultSorter by="montantconsomme">Etat actuel</mfDefaultSorter></th>
             <th><mfDefaultSorter [by]="sortByWordLength">Option</mfDefaultSorter></th>
+            <th>Action</th>
           </tr>
           <tr>
             <th colspan="4"><label class="label-control">Recherche:</label><input class="form-control" [(ngModel)]="filterQuery"/></th>
+            <th>{{categorie}} : {{listepoints.length}}</th>
           </tr>
           <tr>
             <th colspan="8">
@@ -31,6 +33,18 @@
                 <span style="background-color: red;">  Caution <i class="fa fa-angle-left" aria-hidden="true"></i> à 25% de la caution init </span>&nbsp;&nbsp;
                 <span style="background-color: yellow;">  Caution entre 25 et 50% de la caution init </span>&nbsp;&nbsp;
                 <span style="background-color: green;">  Caution  <i class="fa fa-angle-right" aria-hidden="true"></i>  à 50% de la caution init </span>
+                <br/>
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th colspan="8">
+              <div style="color: black; text-align: center;">
+                <button type="button" (click)="getCategorie('Tous')" class="btn btn-dark btn-sm"> Tous </button>&nbsp;&nbsp;
+                <button type="button" (click)="getCategorie('Pas de depot')" class="btn btn-info btn-sm" style="background-color: blue;"> Pas de depot </button>&nbsp;&nbsp;
+                <button type="button" (click)="getCategorie('Faible')" class="btn btn-info btn-sm" style="background-color: red;"> Faible </button>&nbsp;&nbsp;
+                <button type="button" (click)="getCategorie('Passable')" class="btn btn-info btn-sm" style="background-color: orange;"> Passable </button>&nbsp;&nbsp;
+                <button type="button" (click)="getCategorie('Bien')" class="btn btn-info btn-sm" style="background-color: green;"> Bien </button>
                 <br/>
               </div>
             </th>
@@ -48,6 +62,9 @@
             <td>{{item.montantconsomme}}</td>
             <td class="text-center">
               <button type="button" class="btn btn-warning btn-sm" (click)="maj(item)" data-toggle="modal" data-target="#myModal">Mettre à jour</button>
+            </td>
+            <td>
+              <button type="button" *ngIf="item.categorie!='pas'" class="btn btn-info btn-sm" (click)="suivrepoint(item)">SUIVRE</button>
             </td>
           </tr>
           </tbody>

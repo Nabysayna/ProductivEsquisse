@@ -40,8 +40,10 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
             cautioninitiale:elt.cautioninitiale,
             date_last_deposit:elt.date_last_deposit.date.split('.')[0],
             idcaution:elt.idcaution,
+            iduser:elt.idUser,
             montantconsomme:elt.montantconsomme,
-            telephone:elt.telephone
+            telephone:elt.telephone,
+            categorie: (elt.cautioninitiale==0)?'pas':((100*elt.montantconsomme)/elt.cautioninitiale)<25?'faible':((100*elt.montantconsomme)/elt.cautioninitiale)>=25 && ((100*elt.montantconsomme)/elt.cautioninitiale)<=50?'passable':'bien',
           }
         })
         console.log(this.adminmultipdvMajcaution);
@@ -49,7 +51,8 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
       else{
         this.adminmultipdvMajcaution = [];
       }
-      this.loading = false ;
+    }).then( () => {
+      this.getCategorie('Tous');
     });
   }
 
@@ -80,5 +83,49 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
       this.categoriepoint = '---' ;
     });
   }
+
+  // -------------- Categorisations
+  public categorie:string = 'Tous';
+  public listepoints:any[] = [];
+
+  getCategorie(categorie: string){
+    console.log(categorie)
+    if(categorie=='Tous'){
+      this.categorie = 'Tous';
+      this.listepoints = this.adminmultipdvMajcaution;
+    }
+    if(categorie=='Pas de depot'){
+      this.categorie = 'Pas de depot';
+      this.listepoints = this.adminmultipdvMajcaution.filter(type => type.categorie=='pas');
+    }
+    if(categorie=='Faible'){
+      this.categorie = 'Faible';
+      this.listepoints = this.adminmultipdvMajcaution.filter(type => type.categorie=='faible');
+    }
+    if(categorie=='Passable'){
+      this.categorie = 'Passable';
+      this.listepoints = this.adminmultipdvMajcaution.filter(type => type.categorie=='passable');
+    }
+    if(categorie=='Bien'){
+      this.categorie = 'Bien';
+      this.listepoints = this.adminmultipdvMajcaution.filter(type => type.categorie=='bien');
+    }
+    this.loading = false ;
+  }
+
+/////////////////////// SUIVRE POINT /////////////////
+  public point:any;
+
+  suivrepoint(pdv:any){
+    let datenow = ((new Date()).toJSON()).split("T",2)[0];
+    this.point = pdv;
+    console.log(pdv);
+    //this.menuHeadClick(2);
+    this.adminmultipdvServiceWeb.activiteservices("suivre point init "+pdv.iduser+" "+datenow+" "+datenow).then(adminpdvServiceWebList =>{
+      this.point = adminpdvServiceWebList.response;
+      console.log(this.point);
+    });
+  }
+
 
 }
