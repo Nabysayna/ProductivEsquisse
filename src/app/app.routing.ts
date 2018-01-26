@@ -84,7 +84,7 @@ const appRoutes: Routes = [
                 {path: 'commissionnement', component: CommissionnementComponent},
                 {path: 'challenge', component: ChallengeresultsComponent },
                 {path: 'MONEYGRAM', component: SoapserverComponent},
-    			{path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
+    			      {path: 'ORANGEMONEY', component: OrangeMoneyComponentComponent},
                 {path: 'POSTECASH', component: PostcashComponent},
                 {path: 'TIGOCASH', component: TigoCashComponentComponent},
                 {path: 'WIZALL', component: WizallComponent},
@@ -107,19 +107,15 @@ const appRoutes: Routes = [
     },
     { path: 'accueiladmmpdv', component: AccueilAdminMultiPdvComponent, canActivate: [AuthGuard],
         children: [
-            {
-                path: '',
-                children: [
-                    { path: 'dashboard', component: AdminmultipdvDashboardComponent },
-                    { path: 'monitoring', component: AdminmultipdvMonitoringComponent },
-                    { path: 'statuspdv', component: AdminmultipdvStatusPdvComponent },
-                    { path: 'statusreclamation', component: AdminmultipdvStatusReclamationComponent },
-                    { path: 'crediterccc', component: AdminmultipdvCreditationCCComponent  },
-                    { path: 'demanderetrait', component: AdminmultipdvDemandeRetraitComponent },
-                    { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent },
-                    { path: 'zoning', component: ZoningComponent }
-                ]
-            }
+            { path: '', component: AdminmultipdvDashboardComponent },
+            { path: 'dashboard', component: AdminmultipdvDashboardComponent },
+            { path: 'monitoring', component: AdminmultipdvMonitoringComponent },
+            { path: 'statuspdv', component: AdminmultipdvStatusPdvComponent },
+            { path: 'statusreclamation', component: AdminmultipdvStatusReclamationComponent },
+            { path: 'crediterccc', component: AdminmultipdvCreditationCCComponent  },
+            { path: 'demanderetrait', component: AdminmultipdvDemandeRetraitComponent },
+            { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent },
+            { path: 'zoning', component: ZoningComponent }
         ]
     },
     { path: 'accueilcoursier', component: AccueilcoursierComponent, canActivate: [AuthGuard],

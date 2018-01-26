@@ -68,6 +68,52 @@
     </div>
   </div>
 
+  <div class="row" *ngIf="lineChartData.length!=0 && lineChartLabels.length!=0">
+    <div class="col-dm-12 col-sm-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading" style="color: black">
+          <h4>Activités des services
+            <br/><i class="fa fa-bar-chart-o fa-fw"></i>Montant des Transactions par intervalle
+            <input type="date" [(ngModel)]="suiviserviceSelectionintervalledateinit" style="margin-right: 0.5rem"/> à <input type="date" [(ngModel)]="suiviserviceSelectionintervalledatefinal"  style="margin-left: 0.5rem; margin-right: 1rem" />
+            <button type="button" class="btn btn-primary btn-sm" (click)="suiviserviceIntervalle()" [disabled]="suiviserviceSelectionintervalledateinit>suiviserviceSelectionintervalledatefinal || suiviserviceSelectionintervalledateinit==undefined || suiviserviceSelectionintervalledatefinal==undefined " ><i class="fa fa-search" aria-hidden="true"></i></button>
+          </h4>
+        </div>
+        <div class="panel-body" >
+          <canvas baseChart height="100"  #baseChart="base-chart"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+          ></canvas>
+        </div>
+        <div class="panel-body">
+          <table width="100%" class="table table-responsive table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Service</th>
+              <th>Total Entrée</th>
+              <th>Total Sortie</th>
+              <th>Total commissions</th>
+              <th>Option</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr *ngFor="let bilan of bilantouslescommissionsbyGerant; let i = index">
+              <td>{{bilan.service}}</td>
+              <td>{{tocurrency(bilan.cashin)}}</td>
+              <td>{{tocurrency(bilan.cashout)}}</td>
+              <td>{{tocurrency(bilan.commission)}}</td>
+              <td><span style="cursor: pointer; color: blue; text-decoration: underline dotted blue; text-align: center" >Voir détail</span></td>
+            </tr>-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--
   <div class="row">
     <div class="col-dm-12 col-sm-12" >
       <div class="panel panel-primary" *ngIf="adminmultipdvActiviteservices">
@@ -98,6 +144,7 @@
       </div>
     </div>
   </div>
+-->
 
   <div class="row">
     <div class="col-lg-12 col-md-12">

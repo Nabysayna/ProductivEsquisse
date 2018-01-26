@@ -55,6 +55,7 @@ export class AuthenticationService {
       return new Promise( (resolve, reject)=> {
             this.authentiService.authentifierParCodeSMS(smsCode).then( response => {
                 var resp:AuthResponse=response ;
+                console.log(resp) ;
                 if( resp.reponse.toString()== "true" ){
                     this.baseToken = sessionStorage.getItem('headToken')+sha1(resp.baseToken+sha1("bay3k00_f1_n10un") );
                     this.email = resp.prenom;

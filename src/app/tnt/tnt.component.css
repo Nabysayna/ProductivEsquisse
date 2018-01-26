@@ -20,7 +20,7 @@ fieldset h4{
 {
 
     border-right: 2px dotted #ccc;
-    
+
 }
 .panel-body{
 	overflow-x: auto ;
@@ -92,7 +92,7 @@ label{
     width : 68rem ;
     padding: 2rem ;
     z-index: 1 ;
-}   
+}
 
 .panel-body{
     position: relative;
@@ -104,7 +104,7 @@ label{
     z-index: 0 ;
     position: relative;
     top : -8rem ;
-    width: 94rem ;
+    /*width: 94rem ;*/
     height: 10rem ;
 }
 
@@ -156,4 +156,4 @@ label{
     #om-options{
         width: max-content !important;
     }
-}  
+}
