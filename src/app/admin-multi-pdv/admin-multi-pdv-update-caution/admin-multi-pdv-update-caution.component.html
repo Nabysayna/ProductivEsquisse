@@ -103,3 +103,63 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+
+<div bsModal #childModalSuivipoint="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Suivi point</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModalSuivipoint()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="point">
+      <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
+        Entreprise
+      </h3>
+      <div class="row">
+        <div class="col-sm-6" style="background-color: greenyellow">
+          Entreprise 1
+        </div>
+        <div class="col-sm-6" style="background-color: yellowgreen">
+          Entreprise 2
+        </div>
+      </div>
+      <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
+        Déposit
+      </h3>
+      <div class="row">
+        <div class="col-sm-12" style="background-color: greenyellow">
+          Graphe
+        </div>
+        <div class="col-sm-12" style="background-color: yellowgreen">
+          Detail
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2rem">
+        <div class="col-sm-4" style="background-color: blue">
+          Gerants
+        </div>
+        <div class="col-sm-8">
+          <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
+            Activité
+          </h3>
+          <div class="row">
+            <div class="col-sm-12" style="background-color: red">
+              Graphe
+            </div>
+            <div class="col-sm-12" style="background-color: yellow">
+              details
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModalSuivipoint()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  </div>
+</div>

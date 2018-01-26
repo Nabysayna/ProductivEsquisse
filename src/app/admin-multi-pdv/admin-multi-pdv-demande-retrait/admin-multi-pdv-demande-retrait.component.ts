@@ -29,13 +29,15 @@ export class AdminmultipdvDemandeRetraitComponent implements OnInit {
         return {
           adresse:JSON.parse(elt.adresse).address,
           agent:elt.agent,
-          datedemanderetrait:elt.datedemanderetrait,
+          datedemanderetrait:elt.datedemanderetrait.date.split('.')[0],
           etatdemande:elt.etatdemande,
           iddemanderetrait:elt.iddemanderetrait,
           montantdemande:elt.montantdemande,
           telephone:elt.telephone,
         }
       });
+      console.log('--------------3------------')
+      this.loading = false;
     });
   }
 
@@ -55,7 +57,7 @@ export class AdminmultipdvDemandeRetraitComponent implements OnInit {
             return {
               adresse:JSON.parse(elt.adresse).address,
               agent:elt.agent,
-              datedemanderetrait:elt.datedemanderetrait,
+              datedemanderetrait:elt.datedemanderetrait.date.split('.')[0],
               etatdemande:elt.etatdemande,
               iddemanderetrait:elt.iddemanderetrait,
               montantdemande:elt.montantdemande,

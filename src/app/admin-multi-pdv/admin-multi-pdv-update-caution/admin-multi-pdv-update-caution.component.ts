@@ -2,6 +2,7 @@ import { ViewChild, ElementRef, Component, OnInit } from '@angular/core';
 
 import { AdminmultipdvMajcaution }    from '../../models/adminmultipdv-majcaution';
 import { AdminmultipdvServiceWeb } from '../../webServiceClients/Adminmultipdv/adminmultipdv.service';
+import {ModalDirective} from "ng2-bootstrap";
 
 
 @Component({
@@ -53,6 +54,7 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
       }
     }).then( () => {
       this.getCategorie('Tous');
+      this.loading = false;
     });
   }
 
@@ -115,15 +117,23 @@ export class AdminmultipdvUpdateCautionComponent implements OnInit {
 
 /////////////////////// SUIVRE POINT /////////////////
   public point:any;
+  @ViewChild('childModalSuivipoint') public childModalSuivipoint:ModalDirective;
+
+  public hideChildModalSuivipoint():void {
+    this.childModalSuivipoint.hide();
+  }
+
 
   suivrepoint(pdv:any){
+    this.loading = true ;
     let datenow = ((new Date()).toJSON()).split("T",2)[0];
-    this.point = pdv;
     console.log(pdv);
-    //this.menuHeadClick(2);
-    this.adminmultipdvServiceWeb.activiteservices("suivre point init "+pdv.iduser+" "+datenow+" "+datenow).then(adminpdvServiceWebList =>{
+    console.log('----------------------------')
+    this.adminmultipdvServiceWeb.activiteservices("suivre points init "+pdv.iduser+" "+datenow+" "+datenow).then(adminpdvServiceWebList =>{
       this.point = adminpdvServiceWebList.response;
       console.log(this.point);
+      this.childModalSuivipoint.show();
+      this.loading = false;
     });
   }
 
