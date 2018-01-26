@@ -30,11 +30,18 @@ export class DemandepretComponent implements OnInit {
     email: string ;
     mntdemande: string ;
     dureedemande : string ;
-
+    document
     typcredit :string ;
     formejuridiq : string ;
-
-
+    documentContratLocation : string;
+    documentRelevesProduits : string;
+    documentReleveCompte  : string;
+    documentContratDistribution : string;
+    documentCautionMorale : string;
+    documentCNI : string;
+    documentCertificatDomicile: string;
+    documentJustificatifactivite : string;
+   
 
 
 
@@ -59,7 +66,29 @@ export class DemandepretComponent implements OnInit {
 
     this.loading = true ;
 
-    let requete = JSON.stringify( {"intitule":this.intitule, "numcompte":this.numcompte, "infoperso":this.infoperso, "siegesoc":this.siegesoc, "numport":this.numport, "numfixe":this.numfixe, "email":this.email, "mntdemande":this.mntdemande, "dureedemande":this.dureedemande, "typcredit":this.typcredit, "formejuridiq":this.formejuridiq} ) ;
+    let requete = JSON.stringify( 
+      {
+        "intitule":this.intitule, 
+        "numcompte":this.numcompte, 
+        "infoperso":this.infoperso, 
+        "siegesoc":this.siegesoc, 
+        "numport":this.numport, 
+        "numfixe":this.numfixe, 
+        "email":this.email, 
+        "mntdemande":this.mntdemande, 
+        "dureedemande":this.dureedemande, 
+        "typcredit":this.typcredit, 
+        "formejuridiq":this.formejuridiq,
+        "documentContratLocation":this.documentContratLocation,
+        "documentRelevesProduits":this.documentRelevesProduits,
+        "documentReleveCompte":this.documentReleveCompte,
+        "documentContratDistribution": this.documentContratDistribution,
+        "documentCautionMorale": this.documentCautionMorale,
+        "this.documentCNI":this.documentCNI,
+        "documentCertificatDomicile":this.documentCertificatDomicile,
+        "documentJustificatifactivite":this.documentJustificatifactivite
+      }
+    ) ;
 
     this.demandepretServiceWeb.envoyerDemandeDepretCofina(requete).then(gestionreportingServiceWeb => {
         this.loading = false ;
@@ -75,6 +104,14 @@ export class DemandepretComponent implements OnInit {
         this.dureedemande = undefined ;
         this.typcredit= undefined ;
         this.formejuridiq= undefined ;
+        this.documentContratLocation= undefined;
+        this.documentRelevesProduits= undefined;
+        this.documentReleveCompte= undefined;
+        this.documentContratDistribution= undefined;
+        this.documentCautionMorale= undefined;
+        this.documentCNI= undefined;
+        this.documentCertificatDomicile= undefined;
+        this.documentJustificatifactivite= undefined;
     });
 
   }
@@ -129,9 +166,10 @@ export class DemandepretComponent implements OnInit {
                   data => { 
                            let newData = data;
                            this.uploadFile = newData;
-                           this.newImage = this.uploadFile.generatedName ;
                            span.classList.remove('glyphicon-transfer');
                            span.classList.add('glyphicon-ok');
+                           return  "http://localhost/server-backend-upload/uploads/" + this.uploadFile.generatedName ;
+
                         },
                   error => { 
                         span.classList.remove('glyphicon-ok');
