@@ -72,6 +72,7 @@ import {GuideUserSuperviseurComponent} from "./guideusersuperviseur/guideusersup
 import {ImpressionadminpdvComponent} from "./impressionadminpdv/impressionadminpdv.component";
 import {AdminmultipdvCreditationCCComponent} from "./admin-multi-pdv/admin-multi-pdv-creditation-cc/admin-multi-pdv-creditation-cc.component";
 import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
+import {AdminmultipdvSuivipointComponent} from "./admin-multi-pdv/admin-multi-pdv-suivipoint/admin-multi-pdv-suivipoint.component";
 
   //
 
@@ -114,6 +115,7 @@ const appRoutes: Routes = [
             { path: 'statusreclamation', component: AdminmultipdvStatusReclamationComponent },
             { path: 'crediterccc', component: AdminmultipdvCreditationCCComponent  },
             { path: 'demanderetrait', component: AdminmultipdvDemandeRetraitComponent },
+            { path: 'suivipoints', component: AdminmultipdvSuivipointComponent },
             { path: 'updatecaution', component: AdminmultipdvUpdateCautionComponent },
             { path: 'zoning', component: ZoningComponent }
         ]

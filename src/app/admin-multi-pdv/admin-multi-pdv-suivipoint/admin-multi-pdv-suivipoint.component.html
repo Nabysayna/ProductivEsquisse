@@ -1,7 +1,7 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Mise à jour cautions</h1>
+      <h1 class="page-header">SUIVI POINTS</h1>
     </div>
   </div>
 
@@ -19,8 +19,7 @@
             <th><mfDefaultSorter by="cautioninitiale">Caution initiale</mfDefaultSorter></th>
             <th><mfDefaultSorter by="date_last_deposit">Date update</mfDefaultSorter></th>
             <th><mfDefaultSorter by="montantconsomme">Etat actuel</mfDefaultSorter></th>
-            <th><mfDefaultSorter [by]="sortByWordLength">Option</mfDefaultSorter></th>
-            <!--<th>Action</th>-->
+            <th>Action</th>
           </tr>
           <tr>
             <th colspan="4"><label class="label-control">Recherche:</label><input class="form-control" [(ngModel)]="filterQuery"/></th>
@@ -60,12 +59,9 @@
             <td>{{item.cautioninitiale}}</td>
             <td>{{item.date_last_deposit}}</td>
             <td>{{item.montantconsomme}}</td>
-            <td class="text-center">
-              <button type="button" class="btn btn-warning btn-sm" (click)="maj(item)" data-toggle="modal" data-target="#myModal">Mettre à jour</button>
-            </td>
-            <!--<td>
+            <td>
               <button type="button" *ngIf="item.categorie!='pas'" class="btn btn-info btn-sm" (click)="suivrepoint(item)">SUIVRE</button>
-            </td>-->
+            </td>
           </tr>
           </tbody>
           <tfoot>
@@ -83,27 +79,6 @@
 </div>
 
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content"  *ngIf="majcaution">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Mettre à jour la caution de {{majcaution.adminpdv}}</h4>
-      </div>
-      <div class="modal-body">
-        <label for="inputCaution">Nouvelle caution</label>
-        <input id="inputCaution" name="inputCaution" type="number" min="0" placeholder="Nouvelle caution" class="form-control" required [(ngModel)]="inputCaution" #Caution="ngModel">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="idmodalferme" data-dismiss="modal" #closeBtn>Annuler</button>
-        <button type="button" (click)="validermaj(inputCaution)" [disabled]="!Caution.valid" class="btn btn-primary">Valider</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
 
 <div bsModal #childModalSuivipoint="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-content">

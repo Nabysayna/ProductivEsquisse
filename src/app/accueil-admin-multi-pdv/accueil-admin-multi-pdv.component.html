@@ -30,16 +30,18 @@
 	                </li>
 
                   <li *ngIf="autoriserpourcettefonctionnalie">
-<!--                   <li> -->
                     <a [routerLink]="['/accueiladmmpdv', 'crediterccc']" ><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Acrédité compte CC</a>
                   </li>
                   <li>
                     <a [routerLink]="['/accueiladmmpdv', 'demanderetrait']" ><i class="fa fa-money" aria-hidden="true"></i> Demande de Retrait</a>
                   </li>
-                  <li>
-	                    <a [routerLink]="['/accueiladmmpdv', 'updatecaution']" ><i class="fa fa-refresh" aria-hidden="true"></i> Mise à jour cautions</a>
-	                </li>
-                  <li>
+                <li>
+                  <a [routerLink]="['/accueiladmmpdv', 'suivipoints']" ><i class="fa fa-refresh" aria-hidden="true"></i> Suivi points</a>
+                </li>
+                <li *ngIf="autoriserpourcettefonctionnalie">
+                  <a [routerLink]="['/accueiladmmpdv', 'updatecaution']" ><i class="fa fa-refresh" aria-hidden="true"></i> Mise à jour cautions</a>
+                </li>
+                <li>
                     <a [routerLink]="['/accueiladmmpdv', 'zoning']" ><i class="fa fa-globe" aria-hidden="true"></i> Zoning </a>
                   </li>
 

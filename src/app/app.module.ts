@@ -212,6 +212,7 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { AnnoncesuperviseurComponent } from './annoncesuperviseur/annoncesuperviseur.component';
 import {WizallWebService} from "./webServiceClients/Wizall/wizall.service";
 import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/adminpdv-dashboard-test.component";
+import {AdminmultipdvSuivipointComponent} from "./admin-multi-pdv/admin-multi-pdv-suivipoint/admin-multi-pdv-suivipoint.component";
 
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -252,7 +253,7 @@ import {AdminpdvDashboardTestComponent} from "./adminpdv/adminpdv-dashboardTest/
     AdminmultipdvStatusReclamationComponent,
     AdminmultipdvUpdateCautionComponent,
     AdminmultipdvCreditationCCComponent,
-
+    AdminmultipdvSuivipointComponent,
     AdminpdvAidedecisionComponent,
     AdminpdvDashboardComponent,
     AdminpdvMonitoringComponent,
