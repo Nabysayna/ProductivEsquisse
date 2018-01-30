@@ -22,7 +22,15 @@ export class NavbarTopComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.retrieveAlerteMessage() ;
+    if( JSON.parse(sessionStorage.getItem('currentUser')).prenom=='ABDAH' && JSON.parse(sessionStorage.getItem('currentUser')).telephone=='22177519869' && JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==1 ) {
+      console.log('manager');
+    }
+    else if( JSON.parse(sessionStorage.getItem('currentUser')).prenom=='assane' && JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==1 ) {
+      console.log('dev');
+    }
+    else{
+      this.retrieveAlerteMessage() ;
+    }
   }
 
   retrieveAlerteMessage(){
@@ -44,7 +52,7 @@ export class NavbarTopComponent implements OnInit {
   	 } else
   	 	console.log("Echec deconnexion!") ;
 
-  	 }) ; 
+  	 }) ;
   }
 
 }

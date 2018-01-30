@@ -82,7 +82,8 @@
 
 </div>
 
-<!-- Modal -->
+
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content"  *ngIf="majcaution">
@@ -104,52 +105,107 @@
   <!-- /.modal-dialog -->
 </div>
 
-
 <div bsModal #childModalSuivipoint="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-content">
-    <div class="modal-header">
+    <div class="modal-header" style="background-color: #f39200">
       <h4 class="modal-title pull-left">Suivi point</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModalSuivipoint()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body" *ngIf="point">
-      <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
-        Entreprise
-      </h3>
       <div class="row">
-        <div class="col-sm-6" style="background-color: greenyellow">
-          Entreprise 1
+        <div class="col-sm-6" *ngIf="superviseurpoint">
+          <h3 style="border-radius: 10px 0 10px 10px; background-color: #337ab7;">Info Entreprise</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nom de l'entreprise: {{superviseurpoint.info_point.nometps}}</li>
+            <li class="list-group-item">Nom boutique:  {{superviseurpoint.info_point.nomshop}}</li>
+            <li class="list-group-item">Date création: {{superviseurpoint.date_ajout}}</li>
+          </ul>
         </div>
-        <div class="col-sm-6" style="background-color: yellowgreen">
-          Entreprise 2
+        <div class="col-sm-6">
+          <h3 style="border-radius: 10px 0 10px 10px; background-color: #337ab7;">Info Propriétaire</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nom : {{superviseurpoint.fullname}}, {{superviseurpoint.tel}}</li>
+            <li class="list-group-item">Email: {{superviseurpoint.email}}</li>
+            <li class="list-group-item">Adresse: {{superviseurpoint.adressecomplet.address}},</li>
+            <li class="list-group-item">{{superviseurpoint.adressecomplet.souszone}}, {{superviseurpoint.adressecomplet.zone}}, {{superviseurpoint.adressecomplet.region}}.</li>
+            <li class="list-group-item">Derniere connexion: {{superviseurpoint.date_last_connection}}</li>
+          </ul>
         </div>
       </div>
-      <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
-        Déposit
-      </h3>
       <div class="row">
-        <div class="col-sm-12" style="background-color: greenyellow">
-          Graphe
+        <div class="col-sm-12">
+          <h3 style="border-radius: 10px 0 10px 10px; background-color: #337ab7;">Info Dépots</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <canvas baseChart #baseChart2="base-chart" height="50"
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType" ></canvas>
+            </li>
+            <li class="list-group-item">Etat actuel Caution:  {{pointasuivre.montantconsomme}} FCFA    ;   Total Dépot: {{montanttotaldepot}} FCFA</li>
+          </ul>
         </div>
-        <div class="col-sm-12" style="background-color: yellowgreen">
-          Detail
-        </div>
+      </div>
+      <div class="panel-heading" style="border-radius: 30px 0 10px 30px; background-color: #f39200;">
+        <h4>Activités des services
+          <br/><i class="fa fa-bar-chart-o fa-fw"></i>Montant des Transactions par intervalle
+          <input type="date" [(ngModel)]="suiviserviceSelectionintervalledateinit" style="margin-right: 0.5rem"/> à <input type="date" [(ngModel)]="suiviserviceSelectionintervalledatefinal"  style="margin-left: 0.5rem; margin-right: 1rem" />
+          <button type="button" class="btn btn-primary btn-sm" (click)="suivionepointIntervalle()" [disabled]="suiviserviceSelectionintervalledateinit>suiviserviceSelectionintervalledatefinal || suiviserviceSelectionintervalledateinit==undefined || suiviserviceSelectionintervalledatefinal==undefined " ><i class="fa fa-search" aria-hidden="true"></i></button>
+        </h4>
       </div>
       <div class="row" style="margin-top: 2rem">
-        <div class="col-sm-4" style="background-color: blue">
-          Gerants
+        <div class="col-sm-4">
+          <a style="cursor: pointer" [ngClass]="{'list-group-item': true, 'list-group-item-action': true, 'active': id_gerant_selectionne==-1}" (click)="suivionepointSelectionGerant(-1)">
+            All ({{touslesgerants.length}} Gérants)
+          </a>
+          <li *ngFor="let item of touslesgerants; let i = index">
+            <a [ngClass]="{'list-group-item': true, 'list-group-item-action': true, 'active': id_gerant_selectionne==item.id_gerant}" style="cursor: pointer" (click)="suivionepointSelectionGerant(item.id_gerant)">
+              Gérant: {{item.nom_gerant}}, {{item.telephone}}
+              <br>Last connection: {{item.last_connection}}.
+            </a>
+          </li>
         </div>
         <div class="col-sm-8">
-          <h3 class="row text-center" style="background-color: green; margin-top: 2rem">
-            Activité
-          </h3>
           <div class="row">
-            <div class="col-sm-12" style="background-color: red">
-              Graphe
+            <div class="col-sm-12">
+              <h4  style="border-radius: 10px 0 10px 10px; background-color: #337ab7;">
+                Montant des Transactions ({{touslescommissionsbyGerant.length}} Transactions)
+              </h4>
+              <div *ngIf="touslesjours.length!=0 && lineChartData.length!=0 && lineChartLabels.length!=0 && suiviserviceSelectionintervalledateinit!=suiviserviceSelectionintervalledatefinal">
+                <canvas baseChart height="100" #baseChart1="base-chart"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType" ></canvas>
+              </div>
             </div>
-            <div class="col-sm-12" style="background-color: yellow">
-              details
+            <div class="col-sm-12">
+              <h4  style="border-radius: 10px 0 10px 10px; background-color: #337ab7;">
+                Détail
+              </h4>
+              <table width="100%" class="table table-responsive table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Total Entrée</th>
+                  <th>Total Sortie</th>
+                  <th>Total commissions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let bilan of bilantouslescommissionsbyGerant; let i = index">
+                  <td>{{bilan.service}}</td>
+                  <td>{{tocurrency(bilan.cashin)}}</td>
+                  <td>{{tocurrency(bilan.cashout)}}</td>
+                  <td>{{tocurrency(bilan.commission)}}</td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -162,4 +218,36 @@
     </div>
 
   </div>
+</div>
+
+<div class="modal fade" id="myModalDepot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Nombre de dépot: <strong>{{affichelesdepots.jours.length}}</strong></h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Date dépot</th>
+            <th style="text-align: right">Montant dépot</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of affichelesdepots.jours; let i = index " style="text-align: center">
+            <th>{{i+1}}</th>
+            <th>{{item}}</th>
+            <th style="text-align: right">{{affichelesdepots.montant[i]}}</th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal-dialog -->
 </div>

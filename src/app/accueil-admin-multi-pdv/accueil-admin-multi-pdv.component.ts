@@ -11,7 +11,6 @@ export class AccueilAdminMultiPdvComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(JSON.parse(sessionStorage.getItem('currentUser')));
     if( JSON.parse(sessionStorage.getItem('currentUser')).prenom=='ABDAH' && JSON.parse(sessionStorage.getItem('currentUser')).telephone=='22177519869' && JSON.parse(sessionStorage.getItem('currentUser')).accessLevel==1 ) {
       this.autoriserpourcettefonctionnalie = true;
     }

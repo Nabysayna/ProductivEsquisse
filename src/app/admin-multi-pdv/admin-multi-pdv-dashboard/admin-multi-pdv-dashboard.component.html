@@ -72,11 +72,10 @@
     <div class="col-dm-12 col-sm-12">
       <div class="panel panel-primary">
         <div class="panel-heading" style="color: black">
-          <h4>Activités des services
-            <br/><i class="fa fa-bar-chart-o fa-fw"></i>Montant des Transactions par intervalle
+          <h5><i class="fa fa-bar-chart-o fa-fw"></i>Montant des Transactions par intervalle
             <input type="date" [(ngModel)]="suiviserviceSelectionintervalledateinit" style="margin-right: 0.5rem"/> à <input type="date" [(ngModel)]="suiviserviceSelectionintervalledatefinal"  style="margin-left: 0.5rem; margin-right: 1rem" />
             <button type="button" class="btn btn-primary btn-sm" (click)="suiviserviceIntervalle()" [disabled]="suiviserviceSelectionintervalledateinit>suiviserviceSelectionintervalledatefinal || suiviserviceSelectionintervalledateinit==undefined || suiviserviceSelectionintervalledatefinal==undefined " ><i class="fa fa-search" aria-hidden="true"></i></button>
-          </h4>
+          </h5>
         </div>
         <div class="panel-body" >
           <canvas baseChart height="75"  #baseChart="base-chart"
